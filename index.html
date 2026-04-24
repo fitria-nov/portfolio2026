@@ -1,0 +1,254 @@
+<!DOCTYPE html>
+<html lang="en" data-theme="dark">
+<head>
+  <meta charset="UTF-8"/><meta name="viewport" content="width=device-width,initial-scale=1.0"/>
+  <title>Fitria Indah Novitasari – Portfolio</title>
+  <meta name="description" content="Portfolio of Fitria Indah Novitasari"/>
+  <link rel="preconnect" href="https://fonts.googleapis.com"/>
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin/>
+  <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@300;400;500;600;700;800&display=swap" rel="stylesheet"/>
+  <link rel="stylesheet" href="style.css"/>
+</head>
+<body>
+<aside class="sidebar" id="sidebar">
+  <div class="sidebar-accent-line"></div>
+  <div class="sidebar-top">
+    <div class="sidebar-profile">
+      <div class="avatar-ring"><svg class="ring-svg" viewBox="0 0 88 88"><circle cx="44" cy="44" r="40" stroke-width="3" fill="none" class="ring-bg"/><circle cx="44" cy="44" r="40" stroke-width="3" fill="none" class="ring-fill" stroke-dasharray="251" stroke-dashoffset="25"/></svg><img src="img/avatar.png?v=2" alt="Fitria" class="sidebar-avatar"/></div>
+      <h2>Fitria Indah N.</h2>
+      <span class="sidebar-role">Digital Product Builder</span>
+      <div class="sidebar-location">📍 Surabaya, Indonesia</div>
+    </div>
+    <nav class="sidebar-nav">
+      <a href="#overview" class="nav-item active" data-section="overview"><span class="nav-icon"><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="3" y="3" width="7" height="7" rx="1"/><rect x="14" y="3" width="7" height="7" rx="1"/><rect x="3" y="14" width="7" height="7" rx="1"/><rect x="14" y="14" width="7" height="7" rx="1"/></svg></span>Overview</a>
+      <a href="#experience" class="nav-item" data-section="experience"><span class="nav-icon"><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="2" y="7" width="20" height="14" rx="2"/><path d="M16 7V5a2 2 0 00-2-2h-4a2 2 0 00-2 2v2"/></svg></span>Experience</a>
+      <a href="#achievements" class="nav-item" data-section="achievements"><span class="nav-icon"><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M12 2l3.09 6.26L22 9.27l-5 4.87 1.18 6.88L12 17.77l-6.18 3.25L7 14.14 2 9.27l6.91-1.01L12 2z"/></svg></span>Achievements</a>
+      <a href="#skills" class="nav-item" data-section="skills"><span class="nav-icon"><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M12 20V10"/><path d="M18 20V4"/><path d="M6 20v-4"/></svg></span>Skills</a>
+      <a href="#education" class="nav-item" data-section="education"><span class="nav-icon"><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M22 10v6M2 10l10-5 10 5-10 5z"/><path d="M6 12v5c0 1.66 2.69 3 6 3s6-1.34 6-3v-5"/></svg></span>Education</a>
+      <a href="#contact" class="nav-item" data-section="contact"><span class="nav-icon"><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M4 4h16c1.1 0 2 .9 2 2v12c0 1.1-.9 2-2 2H4c-1.1 0-2-.9-2-2V6c0-1.1.9-2 2-2z"/><polyline points="22,6 12,13 2,6"/></svg></span>Contact</a>
+    </nav>
+  </div>
+  <div class="sidebar-bottom">
+
+    <div class="theme-toggle" id="themeToggle" title="Toggle theme"><span class="toggle-icon light-icon">☀️</span><span class="toggle-icon dark-icon">🌙</span><div class="toggle-thumb"></div></div>
+  </div>
+</aside>
+<header class="mobile-header" id="mobileHeader">
+  <button class="menu-btn" id="menuBtn" aria-label="Menu"><span></span><span></span><span></span></button>
+  <span class="mobile-logo">FIN.</span>
+  <div class="theme-toggle-sm" id="themeToggleSm">🌙</div>
+</header>
+
+<main class="main" id="main">
+
+<!-- ===== OVERVIEW ===== -->
+<section id="overview" class="panel active">
+  <!-- FLOATING GLASS BLOBS -->
+  <div class="glass-container">
+    <div class="glass-blob gb1"></div>
+    <div class="glass-blob gb2"></div>
+    <div class="glass-blob gb3"></div>
+    <div class="glass-blob gb4"></div>
+  </div>
+
+  <!-- BENTO HERO -->
+  <div class="bento">
+    <div class="bento-main anim-scale">
+      <div class="oh-bg"><div class="oh-circle c1"></div><div class="oh-circle c2"></div><div class="oh-circle c3"></div></div>
+      <div class="cat-walk"><div class="cat"><div class="cat-body"><div class="cat-head"><div class="cat-ear-l"></div><div class="cat-ear-r"></div><div class="cat-eye-l"></div><div class="cat-eye-r"></div></div><div class="cat-tail"></div><div class="cat-leg cat-leg1"></div><div class="cat-leg cat-leg2"></div><div class="cat-leg cat-leg3"></div><div class="cat-leg cat-leg4"></div></div></div></div>
+      <div class="bento-main-inner hero-split">
+        <div class="hero-left">
+          <span class="oh-greeting" id="greeting"></span>
+          <h1 class="oh-name">Fitria Indah<br/><span class="accent">Novitasari</span></h1>
+          <p class="oh-tagline">Building <span class="typed" id="typed"></span><span class="cursor-blink">|</span></p>
+          <div class="oh-actions"><a href="#contact" class="btn btn-primary" onclick="navigateTo('contact')">Let's Collaborate</a><a href="https://www.linkedin.com/in/fitrindahn" target="_blank" class="btn btn-outline">LinkedIn ↗</a></div>
+        </div>
+        <div class="hero-right">
+          <div class="code-window">
+            <div class="cw-bar"><span class="cw-dot red"></span><span class="cw-dot yellow"></span><span class="cw-dot green"></span><span class="cw-title">portfolio.js</span></div>
+            <pre class="cw-code"><span class="ck">const</span> <span class="cv">developer</span> = {
+  <span class="cp">name</span>: <span class="cs">"Fitria Indah"</span>,
+  <span class="cp">role</span>: <span class="cs">"Digital Product Builder"</span>,
+  <span class="cp">skills</span>: [<span class="cs">"React"</span>, <span class="cs">"Laravel"</span>,
+    <span class="cs">"Node.js"</span>, <span class="cs">"Python"</span>, <span class="cs">"Figma"</span>],
+  <span class="cp">passion</span>: <span class="cs">"Building things"</span>,
+};
+<span class="ck">export default</span> <span class="cv">developer</span>;</pre>
+          </div>
+        </div>
+      </div>
+    </div>
+    <div class="bento-avatar anim">
+      <img src="img/avatar.png?v=2" alt="Fitria" class="oh-avatar"/>
+      <div class="oh-status"><span class="status-dot"></span> Open to work</div>
+      <p class="bento-avatar-sub">Informatics Engineering<br/>Universitas Airlangga</p>
+    </div>
+    <div class="bento-stat anim hover-wiggle"><div class="stat-icon">💼</div><div class="stat-num">6+</div><div class="stat-lbl">Work<br/>Experiences</div></div>
+    <div class="bento-stat anim hover-wiggle"><div class="stat-icon">🏆</div><div class="stat-num">15+</div><div class="stat-lbl">Awards<br/>Won</div></div>
+    <div class="bento-stat anim hover-wiggle"><div class="stat-icon">🎓</div><div class="stat-num">3.60</div><div class="stat-lbl">GPA<br/>/ 4.00</div></div>
+    <div class="bento-stat anim hover-wiggle"><div class="stat-icon">🌏</div><div class="stat-num">1</div><div class="stat-lbl">International<br/>Exchange</div></div>
+  </div>
+
+  <!-- MARQUEE -->
+  <div class="marquee-wrap anim">
+    <div class="marquee">
+      <span>✦ Fullstack Development</span><span>✦ UI/UX Design</span><span>✦ SEO Writing</span><span>✦ React</span><span>✦ Node.js</span><span>✦ Laravel</span><span>✦ Python</span><span>✦ Figma</span><span>✦ Content Creation</span><span>✦ MikroTik MTCNA</span><span>✦ Project Management</span>
+      <span>✦ Fullstack Development</span><span>✦ UI/UX Design</span><span>✦ SEO Writing</span><span>✦ React</span><span>✦ Node.js</span><span>✦ Laravel</span><span>✦ Python</span><span>✦ Figma</span><span>✦ Content Creation</span><span>✦ MikroTik MTCNA</span><span>✦ Project Management</span>
+    </div>
+  </div>
+
+  <!-- WHAT I DO -->
+  <h2 class="section-label">What I Do</h2>
+  <div class="what-grid">
+    <div class="what-card what-large anim hover-wiggle"><div class="what-icon"><svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="var(--accent2)" stroke-width="1.8"><polyline points="16 18 22 12 16 6"/><polyline points="8 6 2 12 8 18"/><line x1="14" y1="4" x2="10" y2="20"/></svg></div><h3>Fullstack Development</h3><p>Building multi-role web apps with modern frameworks — from React frontends to Node.js and Laravel backends.</p><div class="what-tags"><span>React</span><span>Node.js</span><span>Laravel</span><span>Python</span><span>MySQL</span></div></div>
+    <div class="what-card anim hover-wiggle"><div class="what-icon"><svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="var(--accent2)" stroke-width="1.8"><path d="M12 19l7-7 3 3-7 7-3-3z"/><path d="M18 13l-1.5-7.5L2 2l3.5 14.5L13 18l5-5z"/><path d="M2 2l7.586 7.586"/><circle cx="11" cy="11" r="2"/></svg></div><h3>UI/UX Design</h3><p>Creating user-centered interfaces through research, wireframing, and prototyping in Figma.</p></div>
+    <div class="what-card anim hover-wiggle"><div class="what-icon"><svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="var(--accent2)" stroke-width="1.8"><line x1="18" y1="20" x2="18" y2="10"/><line x1="12" y1="20" x2="12" y2="4"/><line x1="6" y1="20" x2="6" y2="14"/></svg></div><h3>SEO &amp; Content</h3><p>Writing optimized content with keyword research and ranking strategies.</p></div>
+    <div class="what-card anim hover-wiggle"><div class="what-icon"><svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="var(--accent2)" stroke-width="1.8"><circle cx="12" cy="12" r="10"/><path d="M2 12h20M12 2a15.3 15.3 0 014 10 15.3 15.3 0 01-4 10 15.3 15.3 0 01-4-10 15.3 15.3 0 014-10z"/></svg></div><h3>Global Mindset</h3><p>Student exchange in Philippines — expanding cross-cultural perspectives.</p></div>
+  </div>
+</section>
+
+<!-- ===== EXPERIENCE ===== -->
+<section id="experience" class="panel">
+  <div class="panel-header"><div><h1 class="panel-title">Experience</h1><p class="panel-sub">My professional work journey</p></div></div>
+
+  <div class="exp-card anim"><div class="exp-top"><div class="exp-info"><span class="badge badge-full">Full Time</span><h3>Full Stack Engineer</h3><p class="exp-company">PT Cerdas Anak Indonesia · Depok</p><span class="exp-date">Dec 2025 – Mar 2026</span></div></div>
+    <p class="exp-desc">Developing a full-stack multi-role website for <strong>cerindo.id</strong>, covering both frontend and backend system implementation.</p>
+    <div class="exp-tags"><span>Full Stack</span><span>Frontend</span><span>Backend</span></div>
+    <div class="media-section"><h4>📎 Project Media</h4><div class="media-grid"><a href="https://www.cerindo.id" target="_blank" class="media-item media-link"><img src="img/project-cerindo.png" alt="Cerindo"/><span>Cerindo Dashboard ↗</span></a></div></div></div>
+
+  <div class="exp-card anim"><div class="exp-top"><div class="exp-info"><span class="badge badge-full">Full Time</span><h3>Content Creator</h3><p class="exp-company">PT Pop Jasa Indonesia · Surabaya</p><span class="exp-date">Jul 2025 – Mar 2026</span></div></div>
+    <p class="exp-desc">Planned and produced social media content end-to-end, creating engaging visuals and copy for 4 brands.</p>
+    <div class="exp-tags"><span>Social Media</span><span>Copywriting</span><span>Marketing</span></div>
+    <div class="media-section"><h4>📎 Brand Accounts</h4><div class="brand-links">
+      <a href="https://www.instagram.com/popjasaofficial" target="_blank" class="brand-link"><img src="img/brand-popjasa.jpg" alt="Popjasa" class="brand-avatar"/><div class="brand-info"><strong>Popjasa</strong><span>@popjasaofficial</span></div><span class="cl-arrow">→</span></a>
+      <a href="https://www.instagram.com/jasamuraofficial" target="_blank" class="brand-link"><img src="img/brand-jasamura.jpg" alt="Jasamura" class="brand-avatar"/><div class="brand-info"><strong>Jasamura</strong><span>@jasamuraofficial</span></div><span class="cl-arrow">→</span></a>
+      <a href="https://www.instagram.com/saftindonesia" target="_blank" class="brand-link"><img src="img/brand-saft.jpg" alt="SAFT" class="brand-avatar"/><div class="brand-info"><strong>SAFT</strong><span>@saftindonesia</span></div><span class="cl-arrow">→</span></a>
+      <a href="https://www.instagram.com/upgradeskill.id" target="_blank" class="brand-link"><img src="img/brand-upgradeskill.jpg" alt="Upgrade Skill" class="brand-avatar"/><div class="brand-info"><strong>Upgrade Skill</strong><span>@upgradeskill.id</span></div><span class="cl-arrow">→</span></a>
+    </div></div></div>
+
+  <div class="exp-card anim"><div class="exp-top"><div class="exp-info"><span class="badge badge-intern">Internship</span><h3>UI/UX Designer</h3><p class="exp-company">Start Franchise · Surabaya</p><span class="exp-date">Dec 2025 – Feb 2026</span></div></div>
+    <p class="exp-desc">Designed user-focused web and app interfaces through wireframing, prototyping, and developer collaboration.</p>
+    <div class="exp-tags"><span>UI/UX</span><span>Wireframing</span><span>Prototyping</span></div>
+    <div class="media-section"><h4>📎 Project Media</h4><div class="media-grid"><div class="media-item" onclick="openLightbox('img/sf-portfolio1.png')"><img src="img/sf-portfolio1.png" alt="Start Franchise Website"/><span>Website Design</span></div><div class="media-item" onclick="openLightbox('img/sf-portfolio2.png')"><img src="img/sf-portfolio2.png" alt="Start Franchise Awards"/><span>Awards Page</span></div></div></div></div>
+
+  <div class="exp-card anim"><div class="exp-top"><div class="exp-info"><span class="badge badge-intern">Internship</span><h3>SEO Writer</h3><p class="exp-company">DSID, Universitas Airlangga</p><span class="exp-date">Feb 2025 – Dec 2025</span></div></div>
+    <p class="exp-desc">Wrote SEO-optimized articles with keyword research, proper formatting, and ranking optimization.</p>
+    <div class="exp-tags"><span>SEO</span><span>Content</span><span>Keywords</span></div>
+    <div class="media-section"><h4>📎 Project Media</h4><div class="brand-links"><a href="img/seo-articles.pdf" target="_blank" class="brand-link"><span class="brand-avatar" style="background:linear-gradient(135deg,#ef4444,#dc2626);color:#fff;display:flex;align-items:center;justify-content:center;font-size:.65rem;font-weight:800">PDF</span><div class="brand-info"><strong>SEO Articles Collection</strong><span>View published articles →</span></div><span class="cl-arrow">→</span></a></div></div></div>
+
+  <div class="exp-card anim"><div class="exp-top"><div class="exp-info"><span class="badge badge-intern">Internship</span><h3>UI/UX Designer</h3><p class="exp-company">PT Utero Indonesia · Malang</p><span class="exp-date">Jul 2022 – Dec 2022</span></div></div>
+    <p class="exp-desc">Created website prototypes, developed a digital museum project, and produced Instagram content.</p>
+    <div class="exp-tags"><span>UI/UX</span><span>Prototyping</span><span>Branding</span></div>
+    <div class="media-section"><h4>📎 Project Media</h4><div class="brand-links"><a href="img/utero-portfolio.pdf" target="_blank" class="brand-link"><span class="brand-avatar" style="background:linear-gradient(135deg,#ef4444,#dc2626);color:#fff;display:flex;align-items:center;justify-content:center;font-size:.65rem;font-weight:800">PDF</span><div class="brand-info"><strong>UI/UX Design Portfolio</strong><span>View full portfolio →</span></div><span class="cl-arrow">→</span></a></div></div></div>
+</section>
+
+<!-- ===== ACHIEVEMENTS ===== -->
+<section id="achievements" class="panel">
+  <div class="panel-header anim"><div><h1 class="panel-title">Achievements</h1><p class="panel-sub">Awards, competitions & certifications</p></div></div>
+
+  <div class="ach-featured">
+    <div class="ach-feature-card anim-scale">
+      <div class="ach-feature-badge">🥇 International</div>
+      <h3>1st Place – Tech-Poster-Play</h3>
+      <p>CSPC, Philippines · 2024</p>
+      <div class="media-section mini"><div class="media-grid"><div class="media-item" onclick="openLightbox('img/cert-techplay-new.jpg')"><img src="img/cert-techplay-new.jpg" alt="Tech-Play Certificate"/><span>Certificate</span></div></div></div>
+    </div>
+    <div class="ach-feature-card anim-scale">
+      <div class="ach-feature-badge">🏆 University</div>
+      <h3>Top 10 Outstanding Student</h3>
+      <p>Mahasiswa Berprestasi, UNAIR · 2025</p>
+      <div class="media-section mini"><div class="media-grid"><div class="media-item" onclick="openLightbox('img/cert-mawapres.jpg')"><img src="img/cert-mawapres.jpg" alt="Mawapres"/><span>Certificate</span></div></div></div>
+    </div>
+  </div>
+
+  <h2 class="section-label">Competition Awards</h2>
+  <div class="ach-list">
+    <div class="ach-row anim-left"><span class="ach-yr">2024</span><div><strong>Top 3 Outstanding Student – Faculty Level</strong><p>Universitas Airlangga</p></div><div class="media-item sm" onclick="openLightbox('img/cert-mawapres-table.jpg')"><img src="img/cert-mawapres-table.jpg" alt="Mawapres"/></div></div>
+    <div class="ach-row anim-left"><span class="ach-yr">2024</span><div><strong>Top 20 Best Team – Hackfest</strong><p>GDSC Indonesia</p></div><div class="media-item sm" onclick="openLightbox('img/cert-gdsc-new.jpg')"><img src="img/cert-gdsc-new.jpg" alt="GDSC"/></div></div>
+    <div class="ach-row anim-left"><span class="ach-yr">2023</span><div><strong>Best Discipline Student</strong><p>SMK Telkom Sidoarjo</p></div><div class="media-item sm" onclick="openLightbox('img/cert-discipline.jpg')"><img src="img/cert-discipline.jpg" alt="Discipline"/></div></div>
+    <div class="ach-row anim-left"><span class="ach-yr">2023</span><div><strong>1st Runner Up – Entrepreneur Business 4.0</strong><p>UKWM</p></div><div class="media-item sm" onclick="openLightbox('img/cert-ukwm-new.png')"><img src="img/cert-ukwm-new.png" alt="UKWM"/></div></div>
+    <div class="ach-row anim-left"><span class="ach-yr">2022</span><div><strong>1st Winner – OCEANO Paper & Poster</strong><p>ITS</p></div><div class="media-item sm" onclick="openLightbox('img/cert-oceano.png')"><img src="img/cert-oceano.png" alt="OCEANO"/></div></div>
+    <div class="ach-row anim-left"><span class="ach-yr">2022</span><div><strong>1st Runner Up – Compfest 14</strong><p>University of Indonesia</p></div><div class="media-item sm" onclick="openLightbox('img/cert-compfest.png')"><img src="img/cert-compfest.png" alt="Compfest"/></div></div>
+    <div class="ach-row anim-left"><span class="ach-yr">2022</span><div><strong>1st Winner – Business Plan</strong><p>Muhammadiyah Ponorogo Univ.</p></div><div class="media-item sm" onclick="openLightbox('img/cert-bizplan.png')"><img src="img/cert-bizplan.png" alt="Business Plan"/></div></div>
+    <div class="ach-row anim-left"><span class="ach-yr">2022</span><div><strong>1st Winner – Playbox Season II</strong><p>ITTS</p></div><div class="media-item sm" onclick="openLightbox('img/cert-playbox.png')"><img src="img/cert-playbox.png" alt="Playbox"/></div></div>
+  </div>
+
+  <h2 class="section-label" style="margin-top:32px">Certifications</h2>
+  <div class="cert-card anim-left"><span class="cert-icon">📜</span><div><strong>MikroTik Certified Network Associate (MTCNA)</strong><p>Network Associate License · 2023</p></div></div>
+</section>
+
+<!-- ===== SKILLS ===== -->
+<section id="skills" class="panel">
+  <div class="panel-header"><div><h1 class="panel-title">Skills & Expertise</h1><p class="panel-sub">Technologies and tools I work with</p></div></div>
+  <div class="skills-layout">
+    <div class="skill-main">
+      <h3>💻 Fullstack Development</h3>
+      <div class="skill-bars">
+        <div class="skill-bar-item"><span class="sb-label">HTML / CSS</span><div class="sb-track"><div class="sb-fill" style="width:92%"></div></div></div>
+        <div class="skill-bar-item"><span class="sb-label">JavaScript</span><div class="sb-track"><div class="sb-fill" style="width:85%"></div></div></div>
+        <div class="skill-bar-item"><span class="sb-label">React</span><div class="sb-track"><div class="sb-fill" style="width:78%"></div></div></div>
+        <div class="skill-bar-item"><span class="sb-label">Node.js</span><div class="sb-track"><div class="sb-fill" style="width:75%"></div></div></div>
+        <div class="skill-bar-item"><span class="sb-label">PHP / Laravel</span><div class="sb-track"><div class="sb-fill" style="width:80%"></div></div></div>
+        <div class="skill-bar-item"><span class="sb-label">MySQL</span><div class="sb-track"><div class="sb-fill" style="width:82%"></div></div></div>
+        <div class="skill-bar-item"><span class="sb-label">Python</span><div class="sb-track"><div class="sb-fill" style="width:70%"></div></div></div>
+      </div>
+    </div>
+    <div class="skill-side">
+      <div class="skill-bubble-card anim"><h4>🎨 UI/UX Design</h4><div class="pills"><span>Figma</span><span>Wireframing</span><span>Prototyping</span><span>User Research</span><span>Design Systems</span><span>Interaction Design</span></div></div>
+      <div class="skill-bubble-card anim"><h4>📈 Digital Marketing</h4><div class="pills"><span>SEO Writing</span><span>Content Creation</span><span>Social Media</span><span>Keyword Research</span><span>Copywriting</span></div></div>
+      <div class="skill-bubble-card anim"><h4>💡 Soft Skills</h4><div class="pills"><span>Leadership</span><span>Public Speaking</span><span>Project Management</span><span>Critical Thinking</span><span>Team Collaboration</span><span>Time Management</span></div></div>
+    </div>
+  </div>
+</section>
+
+<!-- ===== EDUCATION ===== -->
+<section id="education" class="panel">
+  <div class="panel-header"><div><h1 class="panel-title">Education</h1><p class="panel-sub">Academic background & organizations</p></div></div>
+  <div class="edu-list">
+    <div class="edu-card anim"><div class="edu-icon">🎓</div><div><h3>D4 Informatics Engineering</h3><p class="edu-place">Universitas Airlangga · Surabaya</p><p class="edu-date">Aug 2023 – Present</p><div class="edu-gpa">GPA <strong>3.60</strong> / 4.00</div><p>Applied software development, data processing, and practical IT implementation.</p></div></div>
+    <div class="edu-card anim"><div class="edu-icon">🏫</div><div><h3>High School Diploma</h3><p class="edu-place">SMK Telkom Sidoarjo</p><p class="edu-date">Jun 2020 – Jul 2023</p><div class="edu-gpa">Score <strong>88.00</strong> / 100</div><p>Telecommunications, network engineering, and technical troubleshooting.</p></div></div>
+    <div class="edu-card anim"><div class="edu-icon">🌏</div><div><h3>International Student Exchange</h3><p class="edu-place">Camarines Sur Polytechnic Colleges · Philippines</p><p class="edu-date">2024</p><p>Airlangga Full-Time International Student Faculty Mobility Program.</p>
+      <div class="media-section"><h4>📎 Exchange Media</h4><div class="media-grid"><div class="media-item" onclick="openLightbox('img/exchange-1.jpg')"><img src="img/exchange-1.jpg" alt="Student Mobility Program"/><span>Mobility Program</span></div><div class="media-item" onclick="openLightbox('img/exchange-2.jpg')"><img src="img/exchange-2.jpg" alt="Exchange Certificate"/><span>Certificate</span></div></div></div>
+    </div></div>
+  </div>
+
+  <h2 class="section-label">Organizations</h2>
+  <div class="org-list">
+    <div class="org-card-v2"><div class="org-info"><strong>🏛️ Vice Chairman</strong><span>HIMTI, Universitas Airlangga</span><span class="org-date">Jan – Dec 2025</span></div></div>
+    <div class="org-card-v2"><div class="org-info"><strong>🔵 UI/UX Designer</strong><span>GDSC Airlangga – Google Solution Challenge & Hackfest</span><span class="org-date">Oct 2023 – 2024</span></div></div>
+    <div class="org-card-v2 anim-left"><div class="org-info"><strong>🌐 UI/UX Staff</strong><span>BEM UNAIR – MEDINFO Division & Airlangga Creative Fest</span><span class="org-date">May 2024 – Jan 2025</span></div></div>
+    <div class="org-card-v2 anim-left"><div class="org-info"><strong>🎤 Web Development</strong><span>TEDx Universitas Airlangga – UI/UX & Prototyping</span><span class="org-date">2025</span></div>
+      <div class="media-section mini"><div class="media-grid"><div class="media-item" onclick="openLightbox('img/tedx-portfolio.png')"><img src="img/tedx-portfolio.png" alt="TEDx UI/UX"/><span>TEDx UI/UX</span></div></div></div></div>
+  </div>
+</section>
+
+<!-- ===== CONTACT ===== -->
+<section id="contact" class="panel">
+  <div class="panel-header"><div><h1 class="panel-title">Get In Touch</h1><p class="panel-sub">Open to opportunities, collaborations, or a friendly chat</p></div></div>
+  <div class="contact-hero compact">
+    <div class="contact-left">
+      <h2>Let's build<br/>something <span class="accent">great</span><br/>together.</h2>
+      <p>I'm always excited to discuss new projects, creative ideas, or opportunities to be part of your vision.</p>
+      <div class="contact-details">
+        <div class="cd-item"><span>📍</span><span>Surabaya, Indonesia</span></div>
+        <div class="cd-item"><span class="status-dot"></span><span>Available for work</span></div>
+      </div>
+    </div>
+    <div class="contact-right">
+      <a href="mailto:hello.fitria15@gmail.com" class="contact-link anim"><div class="cl-icon">✉️</div><div><h4>Email</h4><p>hello.fitria15@gmail.com</p></div><span class="cl-arrow">→</span></a>
+      <a href="https://www.linkedin.com/in/fitrindahn" target="_blank" class="contact-link anim"><div class="cl-icon">💼</div><div><h4>LinkedIn</h4><p>fitrindahn</p></div><span class="cl-arrow">→</span></a>
+      <a href="tel:085755105248" class="contact-link anim"><div class="cl-icon">📱</div><div><h4>Phone</h4><p>085755105248</p></div><span class="cl-arrow">→</span></a>
+
+    </div>
+  </div>
+  <div class="contact-quote anim">
+    <blockquote>"The best way to predict the future is to create it."</blockquote>
+    <span>— Peter Drucker</span>
+  </div>
+</section>
+
+</main>
+<div class="lightbox" id="lightbox" onclick="closeLightbox()"><img id="lightboxImg" src="" alt=""/><button class="lb-close" onclick="closeLightbox()">✕</button></div>
+<script src="script.js"></script>
+</body>
+</html>
