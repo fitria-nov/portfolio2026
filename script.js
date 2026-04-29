@@ -42,6 +42,35 @@ document.querySelectorAll('a[href="#contact"]').forEach(a=>{a.addEventListener('
 window.addEventListener('DOMContentLoaded',()=>{
   const overview=document.getElementById('overview');
   if(overview) animatePanel(overview);
+
+  // Project filters
+  document.querySelectorAll('.proj-filter').forEach(btn=>{
+    btn.addEventListener('click',()=>{
+      document.querySelectorAll('.proj-filter').forEach(b=>b.classList.remove('active'));
+      btn.classList.add('active');
+      const filter=btn.dataset.filter;
+      const cards=document.querySelectorAll('.proj-card');
+      cards.forEach(card=>{
+        card.classList.remove('show','hidden');
+        card.style.opacity='0';
+        card.style.transform='translateY(20px)';
+      });
+      let visibleIdx=0;
+      cards.forEach(card=>{
+        if(filter==='all'||card.dataset.category===filter){
+          card.classList.remove('hidden');
+          setTimeout(()=>{
+            card.style.opacity='1';
+            card.style.transform='translateY(0)';
+            card.classList.add('show');
+          },60+visibleIdx*100);
+          visibleIdx++;
+        } else {
+          card.classList.add('hidden');
+        }
+      });
+    });
+  });
 });
 
 // Greeting
