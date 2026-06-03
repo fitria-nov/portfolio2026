@@ -3,329 +3,631 @@
 <head>
   <meta charset="UTF-8"/>
   <meta name="viewport" content="width=device-width,initial-scale=1.0"/>
-  <title>SRS: Well-Be Application – Fitria Indah Novitasari</title>
-  <link rel="preconnect" href="https://fonts.googleapis.com"/>
-  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin/>
-  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet"/>
+  <title>SRS: Well-Be Application</title>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet"/>
   <style>
     :root {
       --bg-primary: #ffffff;
-      --bg-secondary: #f5f5f7;
-      --bg-tertiary: #ebebeb;
-      --border-color: #d2d2d7;
+      --bg-secondary: #f9f9fb;
+      --border-color: #e5e5ea;
       --text-primary: #1d1d1f;
-      --text-secondary: #86868b;
-      --accent: #0066cc; /* Apple Blue */
-      --accent-dim: rgba(0, 102, 204, 0.1);
-      --radius: 12px;
+      --text-secondary: #515154;
+      --accent: #0066cc;
+      --radius: 8px;
     }
     
     * { margin: 0; padding: 0; box-sizing: border-box; }
-    body { font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "Helvetica Neue", Arial, sans-serif; background: var(--bg-primary); color: var(--text-primary); line-height: 1.6; font-size: 16px; -webkit-font-smoothing: antialiased; letter-spacing: -0.01em;}
-    a { text-decoration: none; color: inherit; }
-    ul { list-style-position: inside; }
+    body { font-family: 'Inter', -apple-system, sans-serif; background: var(--bg-primary); color: var(--text-primary); line-height: 1.6; font-size: 16px; }
+    a { text-decoration: none; color: var(--accent); }
+    ul, ol { margin-left: 20px; margin-bottom: 16px; color: var(--text-secondary); }
+    li { margin-bottom: 8px; }
     
-    /* Layout */
-    .container { max-width: 980px; margin: 0 auto; padding: 0 40px; }
-    .section { padding: 80px 0; border-bottom: 1px solid var(--border-color); }
-    .section:last-of-type { border-bottom: none; }
+    .container { max-width: 900px; margin: 0 auto; padding: 40px; }
+    .nav { position: sticky; top: 0; background: rgba(255, 255, 255, 0.9); backdrop-filter: blur(10px); border-bottom: 1px solid var(--border-color); z-index: 100; padding: 16px 40px; }
+    .nav-link { font-size: 0.9rem; font-weight: 500; color: var(--text-primary); display: flex; align-items: center; gap: 8px; }
     
-    /* Navigation */
-    .nav { position: sticky; top: 0; background: rgba(255, 255, 255, 0.8); backdrop-filter: saturate(180%) blur(20px); border-bottom: 1px solid rgba(0,0,0,0.1); z-index: 100; padding: 14px 0; }
-    .nav .container { display: flex; justify-content: space-between; align-items: center; }
-    .nav-link { display: inline-flex; align-items: center; gap: 8px; color: var(--text-primary); font-size: 0.85rem; font-weight: 500; transition: opacity 0.2s; }
-    .nav-link:hover { opacity: 0.7; }
-    .nav-title { font-size: 0.85rem; font-weight: 600; letter-spacing: 0.5px; }
+    /* Cover */
+    .cover { text-align: center; padding: 80px 0; border-bottom: 1px solid var(--border-color); }
+    .cover h1 { font-size: 2.5rem; margin-bottom: 20px; }
+    .cover h2 { font-size: 1.5rem; font-weight: 500; color: var(--text-secondary); margin-bottom: 40px; }
     
     /* Typography */
-    h1 { font-size: 3rem; font-weight: 700; line-height: 1.1; letter-spacing: -0.04em; margin-bottom: 16px; color: #1d1d1f; }
-    h2 { font-size: 2rem; font-weight: 600; letter-spacing: -0.02em; margin-bottom: 32px; color: #1d1d1f; }
-    h3 { font-size: 1.25rem; font-weight: 600; margin-bottom: 12px; color: #1d1d1f; }
-    h4 { font-size: 0.95rem; font-weight: 600; margin-bottom: 8px; text-transform: uppercase; letter-spacing: 0.05em; color: var(--text-secondary); }
-    p { color: #515154; margin-bottom: 24px; font-size: 1.05rem;}
+    h1, h2, h3, h4, h5 { color: var(--text-primary); margin-top: 32px; margin-bottom: 16px; font-weight: 600; }
+    h1 { font-size: 2rem; border-bottom: 2px solid var(--border-color); padding-bottom: 8px; }
+    h2 { font-size: 1.5rem; }
+    h3 { font-size: 1.25rem; }
+    h4 { font-size: 1.1rem; }
+    p { margin-bottom: 16px; color: var(--text-secondary); text-align: justify; }
     
-    /* Hero */
-    .hero { padding: 120px 0 100px; text-align: center; }
-    .hero-meta { display: flex; justify-content: center; flex-wrap: wrap; gap: 48px; margin-top: 60px; }
-    .meta-item h4 { font-size: 0.75rem; }
-    .meta-item p { margin: 0; color: var(--text-primary); font-weight: 500; font-size: 1.1rem; }
-    .cover-img { width: 100%; border-radius: 20px; margin-top: 60px; box-shadow: 0 20px 40px rgba(0,0,0,0.1); border: 1px solid var(--border-color); }
+    /* Tables */
+    table { width: 100%; border-collapse: collapse; margin-bottom: 32px; font-size: 0.95rem; }
+    th, td { border: 1px solid var(--border-color); padding: 12px; text-align: left; vertical-align: top; }
+    th { background: var(--bg-secondary); font-weight: 600; }
     
-    /* Cards & Grids */
-    .grid-2 { display: grid; grid-template-columns: 1fr 1fr; gap: 32px; }
-    .grid-3 { display: grid; grid-template-columns: repeat(3, 1fr); gap: 32px; }
-    .card { background: var(--bg-secondary); border-radius: var(--radius); padding: 32px; transition: transform 0.3s ease; }
+    /* Images */
+    .img-container { text-align: center; margin: 32px 0; padding: 20px; background: var(--bg-secondary); border-radius: var(--radius); border: 1px solid var(--border-color); }
+    .img-container img { max-width: 100%; height: auto; border-radius: 4px; box-shadow: 0 4px 12px rgba(0,0,0,0.1); }
+    .img-caption { font-size: 0.9rem; color: var(--text-secondary); margin-top: 12px; font-style: italic; }
     
-    /* Images & Diagrams */
-    .diagram-container { background: var(--bg-secondary); padding: 40px; border-radius: var(--radius); margin-bottom: 32px; text-align: center; }
-    .diagram-container h3 { margin-bottom: 24px; font-size: 1.2rem; }
-    .diagram-container img { max-width: 100%; height: auto; border-radius: 8px; box-shadow: 0 10px 30px rgba(0,0,0,0.05); border: 1px solid var(--border-color); margin-bottom: 20px; }
-    .diagram-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 24px; }
-    .diagram-grid-4 { display: grid; grid-template-columns: repeat(2, 1fr); gap: 24px; }
-    
-    /* Use Cases */
-    .use-case { margin-bottom: 40px; padding: 32px; background: var(--bg-secondary); border-radius: var(--radius); }
-    .uc-header { display: flex; justify-content: space-between; align-items: baseline; margin-bottom: 24px; border-bottom: 1px solid var(--border-color); padding-bottom: 16px;}
-    .uc-badge { font-size: 0.75rem; font-weight: 600; text-transform: uppercase; letter-spacing: 0.05em; padding: 6px 12px; border-radius: 20px; background: #e8f0fe; color: #1967d2; }
-    .uc-row { display: flex; padding: 12px 0; border-top: 1px solid var(--border-color); }
-    .uc-row:first-of-type { border-top: none; }
-    .uc-label { width: 160px; font-weight: 600; font-size: 0.95rem; color: var(--text-primary); flex-shrink: 0; }
-    .uc-value { flex: 1; font-size: 1rem; color: #515154; }
-    .uc-list { list-style: none; }
-    .uc-list li { margin-bottom: 12px; display: flex; gap: 12px; }
-    .uc-list li::before { content: counter(item) "."; counter-increment: item; color: var(--text-secondary); font-weight: 600;}
-    .uc-list { counter-reset: item; }
-    
-    /* Footer */
-    .footer { padding: 60px 0; text-align: center; color: var(--text-secondary); font-size: 0.9rem; background: var(--bg-secondary); }
-    
-    /* Responsive */
-    @media (max-width: 768px) {
-      .grid-2, .grid-3, .diagram-grid, .diagram-grid-4 { grid-template-columns: 1fr; }
-      h1 { font-size: 2.2rem; }
-      .uc-row { flex-direction: column; gap: 4px; padding: 16px 0; }
-      .uc-label { width: 100%; font-size: 0.85rem; text-transform: uppercase; letter-spacing: 0.05em; color: var(--text-secondary);}
-    }
+    .grid-2 { display: grid; grid-template-columns: 1fr 1fr; gap: 20px; }
   </style>
 </head>
 <body>
 
-  <!-- Navigation -->
   <nav class="nav">
-    <div class="container">
-      <a href="index.html" class="nav-link">
-        <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M19 12H5M12 19l-7-7 7-7"/></svg>
-        Back to Portfolio
-      </a>
-      <span class="nav-title">Well-Be SRS</span>
+    <div style="max-width: 900px; margin: 0 auto; display: flex; justify-content: space-between;">
+      <a href="index.html" class="nav-link">← Back to Portfolio</a>
+      <span style="font-size: 0.9rem; font-weight: 600;">Well-Be SRS</span>
     </div>
   </nav>
 
-  <!-- Hero Section -->
-  <header class="hero">
-    <div class="container">
-      <h4>System Requirement Specification</h4>
-      <h1>Well-Be Application</h1>
-      <p style="margin: 0 auto 24px; max-width: 700px;">Platform proaktif untuk memonitor lansia penderita Alzheimer melalui pemantauan lokasi real-time dan manajemen memori digital, dirancang dengan fokus pada keamanan dan kemudahan penggunaan.</p>
-      
-      <div class="hero-meta">
-        <div class="meta-item">
-          <h4>Role</h4>
-          <p>System Analyst</p>
-        </div>
-        <div class="meta-item">
-          <h4>Timeline</h4>
-          <p>2025</p>
-        </div>
-        <div class="meta-item">
-          <h4>Category</h4>
-          <p>Healthcare & IoT</p>
-        </div>
-        <div class="meta-item">
-          <h4>Platform</h4>
-          <p>iOS & Android</p>
-        </div>
-      </div>
-      
-      <!-- Cover Image from PDF page 0 -->
-      <img src="img/srs_diagrams/page0_img1.png" alt="Well-Be Cover" class="cover-img" onerror="this.style.display='none'"/>
-    </div>
-  </header>
-
-  <!-- Section: Overall Description -->
-  <section class="section">
-    <div class="container">
-      <h2>Overall Description</h2>
-      
-      <div class="grid-2" style="margin-bottom: 48px;">
-        <div>
-          <h3>System Purpose</h3>
-          <p>Aplikasi Well-Be hadir sebagai respons terhadap kebutuhan kritis dalam perawatan lansia penderita demensia dan Alzheimer. Sistem yang ada saat ini seringkali reaktif, bukan proaktif. Well-Be dirancang untuk tidak hanya memantau secara fisik melalui GPS tracking, tetapi juga memberikan dukungan emosional melalui fitur linimasa memori digital.</p>
-        </div>
-        <div>
-          <h3>Operating Environment</h3>
-          <p>Mendukung minimal Android 8.0+ dan iOS 12.0+. Membutuhkan koneksi internet aktif untuk sinkronisasi data lokasi dan notifikasi real-time dari perangkat <em>smartwatch</em> yang terhubung via Bluetooth/Wi-Fi.</p>
-        </div>
-      </div>
-      
-      <h3>System Architecture & Overall Diagrams</h3>
-      <p>Berikut adalah representasi visual dari arsitektur keseluruhan sistem dan interaksinya.</p>
-      
-      <div class="diagram-grid">
-        <div class="diagram-container">
-          <img src="img/srs_diagrams/page4_img1.png" alt="Architecture Diagram 1" onerror="this.style.display='none'"/>
-          <h4>System Context</h4>
-        </div>
-        <div class="diagram-container">
-          <img src="img/srs_diagrams/page5_img1.png" alt="Architecture Diagram 2" onerror="this.style.display='none'"/>
-          <h4>Process Flow</h4>
-        </div>
-      </div>
-
-    </div>
-  </section>
-
-  <!-- Section: Use Case & Scenarios -->
-  <section class="section">
-    <div class="container">
-      <h2>Use Case & Analysis</h2>
-      <p>Dokumentasi fungsionalitas utama yang dapat dilakukan oleh berbagai aktor di dalam sistem, beserta dengan diagram pendukung.</p>
-      
-      <div class="diagram-container" style="margin-bottom: 60px;">
-        <h3>Use Case Diagram</h3>
-        <p style="font-size: 0.95rem; margin-bottom: 24px;">Gambaran interaksi antara Pengasuh, Keluarga, Pasien, dan Admin terhadap sistem.</p>
-        <img src="img/srs_diagrams/page18_img1.png" alt="Use Case Diagram" onerror="this.style.display='none'"/>
-      </div>
-
-      <div class="use-case">
-        <div class="uc-header">
-          <h3 style="margin:0;">UC-01: Melacak Lokasi Secara Real-time</h3>
-          <span class="uc-badge">Critical Function</span>
-        </div>
-        <div class="uc-row">
-          <div class="uc-label">Primary Actor</div>
-          <div class="uc-value">Keluarga, Pengasuh</div>
-        </div>
-        <div class="uc-row">
-          <div class="uc-label">Summary</div>
-          <div class="uc-value">Melacak koordinat pasien secara langsung menggunakan GPS dari smartwatch yang terintegrasi.</div>
-        </div>
-        <div class="uc-row">
-          <div class="uc-label">Basic Flow</div>
-          <div class="uc-value">
-            <ol class="uc-list">
-              <li>Pasien memakai smartwatch yang berstatus terhubung.</li>
-              <li>Pengasuh membuka halaman pemantauan di aplikasi seluler.</li>
-              <li>Sistem menarik data koordinat secara berkala.</li>
-              <li>Peta interaktif menampilkan pin lokasi pasien saat ini.</li>
-              <li>Jika pasien keluar dari zona aman (Geofence), sistem langsung mengirim push-notification darurat.</li>
-            </ol>
-          </div>
-        </div>
-      </div>
-
-      <div class="use-case">
-        <div class="uc-header">
-          <h3 style="margin:0;">UC-02: Mengelola Memori (Linimasa)</h3>
-          <span class="uc-badge" style="background: #e6f4ea; color: #137333;">Therapy</span>
-        </div>
-        <div class="uc-row">
-          <div class="uc-label">Primary Actor</div>
-          <div class="uc-value">Keluarga, Pasien</div>
-        </div>
-        <div class="uc-row">
-          <div class="uc-label">Summary</div>
-          <div class="uc-value">Fasilitas unggah dan kelola foto/video momen bahagia sebagai instrumen terapi ingatan pasien.</div>
-        </div>
-        <div class="uc-row">
-          <div class="uc-label">Basic Flow</div>
-          <div class="uc-value">
-            <ol class="uc-list">
-              <li>Anggota keluarga masuk ke modul 'Memories'.</li>
-              <li>Memilih fungsi unggah (foto/video/teks).</li>
-              <li>Menambahkan deskripsi dan tanggal momen tersebut.</li>
-              <li>Data tersimpan dan disinkronisasi ke perangkat pasien.</li>
-              <li>Pasien dapat menelusuri memori secara kronologis di aplikasinya.</li>
-            </ol>
-          </div>
-        </div>
-      </div>
-      
-      <h3 style="margin-top: 60px;">Activity Diagrams</h3>
-      <div class="diagram-grid">
-        <img src="img/srs_diagrams/page19_img1.png" alt="Activity Diagram 1" onerror="this.style.display='none'"/>
-        <img src="img/srs_diagrams/page20_img1.png" alt="Activity Diagram 2" onerror="this.style.display='none'"/>
+  <div class="container">
+    <div class="cover">
+      <h1>SYSTEM REQUIREMENT SPECIFICATION<br>OF WELL-BE APPLICATION</h1>
+      <h2>Mata Kuliah: RKPL Praktikum<br>Disusun Oleh: Kelompok 4</h2>
+      <div style="margin-top: 40px; color: var(--text-secondary); font-size: 1.1rem;">
+        <p style="text-align: center;">Anggota:</p>
+        <p style="text-align: center; margin-bottom: 4px;">Elia Sari (434231023)</p>
+        <p style="text-align: center; margin-bottom: 4px;">Fitria Indah Novitasari (434231055)</p>
+        <p style="text-align: center; margin-bottom: 4px;">Muhammad Zaki Fikri Hariyadi (434231096)</p>
+        <p style="text-align: center; margin-bottom: 40px;">Naurah Dila Fitriah (434231113)</p>
+        <p style="text-align: center; font-weight: 600; color: var(--text-primary);">FAKULTAS VOKASI<br>UNIVERSITAS AIRLANGGA<br>2023/2024</p>
       </div>
     </div>
-  </section>
 
-  <!-- Section: Data Flow Diagrams (DFD) -->
-  <section class="section">
-    <div class="container">
-      <h2>Data Flow Diagrams (DFD)</h2>
-      <p>Visualisasi aliran data dari input ke output dalam sistem pemantauan dan pengelolaan medis.</p>
-      
-      <div class="diagram-grid">
-        <div class="diagram-container">
-          <h3>DFD Level 0 (Context Diagram)</h3>
-          <img src="img/srs_diagrams/page22_img1.png" alt="DFD Level 0" onerror="this.style.display='none'"/>
-        </div>
-        <div class="diagram-container">
-          <h3>DFD Level 1</h3>
-          <img src="img/srs_diagrams/page23_img1.png" alt="DFD Level 1" onerror="this.style.display='none'"/>
-        </div>
-        <div class="diagram-container">
-          <h3>DFD Level 2 - Process 1</h3>
-          <img src="img/srs_diagrams/page24_img1.png" alt="DFD Level 2" onerror="this.style.display='none'"/>
-        </div>
-        <div class="diagram-container">
-          <h3>DFD Level 2 - Process 2</h3>
-          <img src="img/srs_diagrams/page25_img1.png" alt="DFD Level 2" onerror="this.style.display='none'"/>
-        </div>
+    <!-- Chapter 1 -->
+    <h1>1. INTRODUCTION</h1>
+    
+    <h2>1.1 PURPOSE</h2>
+    <h3>1.1.1 Ringkasan Keseluruhan Dokumen</h3>
+    <p>Aplikasi Will-be adalah inovasi teknologi yang proaktif dalam memonitor lansia penderita demensia, Alzheimer, dan penurunan daya ingat. aplikasi Will-be ini memiliki fitur-fitur yang mendukung dalam peningkatan kualitas hidup pasien Alzheimer dan mengurangi beban pengasuh, seperti fitur linimasa yaitu fitur untuk menyimpan momen hangat dan bahagia lansia, dan fitur monitoring pelacak keberadaan lansia melalui GPS Tracking.</p>
+    
+    <h3>1.1.2 Tujuan Penulisan Dokumen</h3>
+    <p>Dokumen ini berfungsi untuk mendefinisikan dengan jelas persyaratan sistem dan memberikan panduan terperinci mengenai fitur-fitur aplikasi. Selain itu, dokumen ini memfasilitasi koordinasi antara pengasuh, keluarga, dan tim jaminan kualitas. Juga penting untuk memastikan bahwa aplikasi mematuhi regulasi terkait keamanan dan privasi data, sehingga aplikasi dapat dikembangkan dan diimplementasikan secara efektif dan sesuai dengan kebutuhan yang telah ditetapkan. Aplikasi Will-be dirancang untuk memberikan solusi pemantauan kesehatan yang komprehensif dengan fitur utama yaitu Linimasa, Pelacak Lokasi. Fitur tersebut memfasilitasi koordinasi antara pasien, pengasuh, dan keluarga. Ekspektasi sistem mencakup kinerja yang responsif, keamanan data yang ketat, antarmuka yang intuitif, dan kompatibilitas dengan berbagai perangkat serta platform.</p>
+    
+    <h3>1.1.3 Audiens yang Dituju dan Pembaca yang Disarankan</h3>
+    <p>Audiens yang dituju untuk aplikasi Will-be mencakup manajer proyek, investor dan organisasi kesehatan yang berfokus pada perawatan Alzheimer, serta pengembang dan insinyur yang bertanggung jawab untuk desain, pengembangan, dan pengujian aplikasi. Selain itu, tim jaminan kualitas yang terdiri dari analis QA dan penguji perangkat lunak harus memahami semua persyaratan untuk melakukan pengujian menyeluruh dan memastikan bahwa aplikasi memenuhi standar yang ditetapkan. Personel regulasi dan kepatuhan, seperti ahli hukum dan spesialis kepatuhan, perlu memastikan bahwa aplikasi mematuhi peraturan privasi dan keamanan data yang relevan. Terakhir, pengasuh dan penyedia layanan kesehatan sebagai pengguna akhir aplikasi, akan berinteraksi dengan aplikasi dalam peran sehari-hari mereka dan memanfaatkan fitur-fitur untuk memantau dan mengelola perawatan pasien Alzheimer.</p>
+
+    <h2>1.2 SCOPE</h2>
+    <h3>1.2.1 System Description</h3>
+    <p>Aplikasi <strong>Will-be</strong> adalah solusi inovatif yang dirancang untuk memantau dan mendukung pasien Alzheimer melalui fitur-fitur yang memudahkan pengasuh dan keluarga dalam memberikan perawatan. Fitur utama yang disediakan mencakup pelacakan lokasi secara real-time menggunakan GPS, manajemen catatan kondisi kesehatan pasien, serta memori yang dapat diakses oleh pengasuh dan keluarga. Aplikasi ini bertujuan untuk meningkatkan kualitas hidup pasien Alzheimer dan memberikan ketenangan bagi keluarga serta pengasuh.</p>
+
+    <h3>1.2.2 Product Scope</h3>
+    <p>Aplikasi <strong>Will-be</strong> adalah solusi komprehensif yang dirancang untuk mendukung perawatan pasien Alzheimer melalui fitur pelacakan lokasi real-time, manajemen catatan kesehatan, dan integrasi dengan perangkat smartwatch. Fitur-fitur ini mempermudah pengelolaan data pasien, memantau kondisi kesehatan, dan memberikan notifikasi terkait perkembangan pasien. Aplikasi ini bertujuan meningkatkan efisiensi perawatan, menjaga keselamatan pasien, dan mengurangi beban pengasuh.</p>
+
+    <h3>1.2.3 Operating Environment</h3>
+    <p>Aplikasi <strong>Will-be</strong> akan beroperasi pada platform mobile yang mendukung sistem operasi Android dan iOS, dengan minimal OS Android 8.0 (Oreo) ke atas. Sistem membutuhkan koneksi internet untuk layanan GPS, notifikasi real-time, dan sinkronisasi dengan perangkat smartwatch. Lingkungan operasional meliputi perangkat mobile (smartphone dan tablet) dan integrasi dengan perangkat cloud untuk penyimpanan data yang aman.</p>
+
+    <h3>1.2.4 General Constraint</h3>
+    <p>Untuk mengevaluasi efektivitas aplikasi Will-be dalam meningkatkan kualitas hidup pasien Alzheimer dan mengurangi beban pengasuh, kami akan mengadopsi pendekatan evaluasi yang menggabungkan metode kuantitatif dan kualitatif selama periode waktu yang ditargetkan. Yang memiliki manfaat relevan sebagai berikut:</p>
+    <ul>
+      <li><strong>Peningkatan Kualitas Hidup Pasien</strong> akan diukur melalui pengumpulan data rutin terkait kesehatan pasien, termasuk aktivitas fisik, pola tidur, serta perubahan dalam perilaku, suasana hati, dan fungsi kognitif. Data ini akan diperoleh dari laporan pengasuh dan tenaga kesehatan serta hasil survei dan wawancara dengan pasien untuk mengumpulkan pengalaman subjektif mereka dalam menggunakan aplikasi.</li>
+      <li><strong>Peningkatan Koordinasi Perawatan:</strong> Aplikasi ini memfasilitasi komunikasi yang lebih baik antara pengasuh, keluarga, dan tenaga medis. Fitur-fitur seperti notifikasi real-time dan integrasi dengan perangkat wearable memastikan bahwa semua pihak terlibat dalam perawatan pasien secara efektif dan dapat mengakses informasi kesehatan yang relevan dengan mudah.</li>
+    </ul>
+
+    <h2>1.3 DEFINITION, ACRONYMS, AND ABBREVIATION</h2>
+    <table>
+      <thead>
+        <tr>
+          <th>Term/Acronym</th>
+          <th>Definition</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr>
+          <td>Software Requirements Specifications (SRS)</td>
+          <td>Dokumen yang menjelaskan seluruh fungsi-fungsi sistem yang dibuat dan batasan-batasannya.</td>
+        </tr>
+        <tr>
+          <td>GPS</td>
+          <td>Global Positioning System: Sistem pelacakan lokasi yang digunakan oleh aplikasi.</td>
+        </tr>
+        <tr>
+          <td>OS</td>
+          <td>Perangkat lunak sistem yang mengelola perangkat keras komputer dan menyediakan layanan umum untuk program komputer.</td>
+        </tr>
+        <tr>
+          <td>Memories</td>
+          <td>Catatan dan kenangan digital pasien yang dapat diakses keluarga dan pengasuh.</td>
+        </tr>
+        <tr>
+          <td>Realtime</td>
+          <td>Sistem yang memberikan informasi langsung secara waktu nyata.</td>
+        </tr>
+      </tbody>
+    </table>
+
+    <!-- Chapter 2 -->
+    <h1>1. OVERALL DESCRIPTION</h1>
+    
+    <h2>2.1 PRODUCT PERSPECTIVE (ARCHITECTURE DIAGRAM)</h2>
+    <div class="img-container">
+      <img src="img/srs_diagrams/page4_img1.png" alt="Architecture Diagram" onerror="this.style.display='none'"/>
+      <div class="img-caption">Product Perspective Architecture</div>
+    </div>
+
+    <h2>2.2 PRODUCT FUNCTION</h2>
+    <h3>2.2.1 USE CASE DIAGRAM</h3>
+    <div class="img-container">
+      <img src="img/srs_diagrams/page5_img1.png" alt="Use Case Diagram" onerror="this.style.display='none'"/>
+      <div class="img-caption">Use Case Diagram</div>
+    </div>
+
+    <h3>2.2.2 USE CASE SPESIFICATION</h3>
+    
+    <!-- Use Case 1 -->
+    <table>
+      <tr><th colspan="2" style="text-align: center;">Melacak Lokasi dengan GPS</th></tr>
+      <tr><td style="width: 25%;"><strong>Aktor Utama</strong></td><td>Keluarga, Pengasuh, Smartwatch</td></tr>
+      <tr><td><strong>Summary Description</strong></td><td>Akan melacak lokasi pasien secara real time dengan GPS lewat Smartwatch yang sudah diintegrasikan</td></tr>
+      <tr><td><strong>Priority</strong></td><td>Critical</td></tr>
+      <tr><td><strong>Status</strong></td><td>Draft</td></tr>
+      <tr><td><strong>Precondition</strong></td><td>
+        · Pasien harus menggunakan smartwatch yang terhubung ke aplikasi Well-Be.<br>
+        · Keluarga atau pengasuh harus memiliki akses ke aplikasi Well-Be dan terhubung dengan akun pasien.
+      </td></tr>
+      <tr><td><strong>Post-Conditions</strong></td><td>
+        · Keluarga dan pengasuh mendapatkan informasi terkini mengenai lokasi pasien secara real-time.<br>
+        · Keselamatan pasien lebih terjamin dengan pemantauan terus menerus.
+      </td></tr>
+      <tr><td><strong>Basic path</strong></td><td>
+        · Pasien memakai smartwatch yang memantau lokasi secara real-time.<br>
+        · Keluarga atau pengasuh masuk ke sistem Well-Be.<br>
+        · Sistem secara otomatis memantau lokasi pasien menggunakan GPS yang terintegrasi.<br>
+        · Keluarga atau pengasuh dapat melihat lokasi pasien secara real-time di aplikasi.<br>
+        · Notifikasi diberikan kepada keluarga atau pengasuh jika pasien berada di lokasi berbahaya atau keluar dari zona yang ditentukan
+      </td></tr>
+      <tr><td><strong>Alternative path</strong></td><td>Jika GPS tidak terhubung, sistem akan memberikan notifikasi kegagalan pelacakan kepada keluarga dan pengasuh.</td></tr>
+    </table>
+
+    <!-- Use Case 2 -->
+    <table>
+      <tr><th colspan="2" style="text-align: center;">Login</th></tr>
+      <tr><td style="width: 25%;"><strong>Aktor Utama</strong></td><td>Admin, Pasien, Pengasuh, Keluarga</td></tr>
+      <tr><td><strong>Summary Description</strong></td><td>Semua pengguna masuk ke aplikasi Well-Be dengan kredensial masing-masing.</td></tr>
+      <tr><td><strong>Priority</strong></td><td>High</td></tr>
+      <tr><td><strong>Status</strong></td><td>Draft</td></tr>
+      <tr><td><strong>Precondition</strong></td><td>Pengguna memiliki akun di aplikasi Well-Be.</td></tr>
+      <tr><td><strong>Post-Conditions</strong></td><td>Pengguna berhasil masuk dan dapat menggunakan fitur sesuai peran.</td></tr>
+      <tr><td><strong>Basic path</strong></td><td>
+        .Pengguna memasukkan username dan password.<br>
+        Sistem memverifikasi kredensial.<br>
+        Pengguna berhasil masuk ke aplikasi.
+      </td></tr>
+      <tr><td><strong>Alternative path</strong></td><td>Bisa meminta tolong login dengan admin jika mengalami kesusahan.</td></tr>
+    </table>
+
+    <!-- Use Case 3 -->
+    <table>
+      <tr><th colspan="2" style="text-align: center;">Mengintegrasikan Smartwatch</th></tr>
+      <tr><td style="width: 25%;"><strong>Aktor Utama</strong></td><td>Keluarga, Smartwatch</td></tr>
+      <tr><td><strong>Summary Description</strong></td><td>Menghubungkan smartwatch pasien ke sistem Well-Be untuk pemantauan.</td></tr>
+      <tr><td><strong>Priority</strong></td><td>Critical</td></tr>
+      <tr><td><strong>Status</strong></td><td>Draft</td></tr>
+      <tr><td><strong>Precondition</strong></td><td>Pasien memiliki smartwatch yang kompatibel.</td></tr>
+      <tr><td><strong>Post-Conditions</strong></td><td>Smartwatch berhasil terhubung ke sistem Well-Be.</td></tr>
+      <tr><td><strong>Basic path</strong></td><td>
+        1. Admin atau pasien menghubungkan smartwatch ke sistem.<br>
+        2. Sistem memverifikasi perangkat.<br>
+        3. Smartwatch terintegrasi dengan sistem.
+      </td></tr>
+      <tr><td><strong>Alternative path</strong></td><td>Jika integrasi gagal, sistem menampilkan pesan kesalahan.</td></tr>
+    </table>
+
+    <!-- Use Case 4 -->
+    <table>
+      <tr><th colspan="2" style="text-align: center;">Melakukan setting GPS</th></tr>
+      <tr><td style="width: 25%;"><strong>Aktor Utama</strong></td><td>Keluarga, Smartwatch</td></tr>
+      <tr><td><strong>Summary Description</strong></td><td>Menyetel GPS pada smartwatch untuk pemantauan lokasi.</td></tr>
+      <tr><td><strong>Priority</strong></td><td>High</td></tr>
+      <tr><td><strong>Status</strong></td><td>Draft</td></tr>
+      <tr><td><strong>Precondition</strong></td><td>Smartwatch terhubung ke sistem Well-Be.</td></tr>
+      <tr><td><strong>Post-Conditions</strong></td><td>GPS pada smartwatch berfungsi dan terhubung dengan sistem.</td></tr>
+      <tr><td><strong>Basic path</strong></td><td>
+        1. Admin atau pasien membuka pengaturan GPS di smartwatch.<br>
+        2. GPS diaktifkan dan dihubungkan dengan sistem Well-Be.<br>
+        3. Sistem mulai memantau lokasi pasien secara real-time.
+      </td></tr>
+      <tr><td><strong>Alternative path</strong></td><td>Jika pengaturan GPS gagal, sistem memberikan notifikasi.</td></tr>
+    </table>
+
+    <!-- Use Case 5 -->
+    <table>
+      <tr><th colspan="2" style="text-align: center;">Memunculkan Biodata Singkat Pasien</th></tr>
+      <tr><td style="width: 25%;"><strong>Aktor Utama</strong></td><td>Admin, Keluarga, Pengasuh</td></tr>
+      <tr><td><strong>Summary Description</strong></td><td>Menampilkan biodata singkat pasien yang mencakup informasi dasar seperti nama, umur, dan riwayat kesehatan.</td></tr>
+      <tr><td><strong>Priority</strong></td><td>High</td></tr>
+      <tr><td><strong>Status</strong></td><td>Draft</td></tr>
+      <tr><td><strong>Precondition</strong></td><td>Sistem memiliki data pasien yang terverifikasi.</td></tr>
+      <tr><td><strong>Post-Conditions</strong></td><td>Biodata singkat pasien muncul dalam antarmuka pengguna</td></tr>
+      <tr><td><strong>Basic path</strong></td><td>
+        .Aktor masuk ke aplikasi Well-Be.<br>
+        Aktor memilih menu biodata pasien.<br>
+        Sistem menampilkan biodata singkat pasien.
+      </td></tr>
+      <tr><td><strong>Alternative path</strong></td><td>Jika data pasien tidak ditemukan, sistem menampilkan pesan kesalahan.</td></tr>
+    </table>
+
+    <!-- Use Case 6 -->
+    <table>
+      <tr><th colspan="2" style="text-align: center;">Input Data Pasien</th></tr>
+      <tr><td style="width: 25%;"><strong>Aktor Utama</strong></td><td>Keluarga</td></tr>
+      <tr><td><strong>Summary Description</strong></td><td>Memasukkan data pasien ke dalam sistem aplikasi Well-Be.</td></tr>
+      <tr><td><strong>Priority</strong></td><td>Critical</td></tr>
+      <tr><td><strong>Status</strong></td><td>Draft</td></tr>
+      <tr><td><strong>Precondition</strong></td><td>Keluarga memiliki akses ke fitur input data pasien.</td></tr>
+      <tr><td><strong>Post-Conditions</strong></td><td>Data pasien berhasil disimpan di sistem</td></tr>
+      <tr><td><strong>Basic path</strong></td><td>
+        1. Admin memilih menu input data pasien.<br>
+        2. Admin mengisi informasi pasien (nama, umur, alamat, riwayat kesehatan, dll).<br>
+        3. Admin menyimpan data ke dalam sistem.
+      </td></tr>
+      <tr><td><strong>Alternative path</strong></td><td>-</td></tr>
+    </table>
+
+    <!-- Use Case 7 -->
+    <table>
+      <tr><th colspan="2" style="text-align: center;">Mengelola Memories</th></tr>
+      <tr><td style="width: 25%;"><strong>Aktor Utama</strong></td><td>Pasien, Keluarga, Pengasuh</td></tr>
+      <tr><td><strong>Summary Description</strong></td><td>Menambah, mengedit, atau menghapus kenangan/memories yang disimpan dalam aplikasi Well-Be.</td></tr>
+      <tr><td><strong>Priority</strong></td><td>Critical</td></tr>
+      <tr><td><strong>Status</strong></td><td>Draft</td></tr>
+      <tr><td><strong>Precondition</strong></td><td>Pasien, Keluarga, Pengasuh memiliki akses ke fitur memories.</td></tr>
+      <tr><td><strong>Post-Conditions</strong></td><td>Memories berhasil dikelola sesuai perubahan yang dilakukan.</td></tr>
+      <tr><td><strong>Basic path</strong></td><td>
+        1. Aktor memilih menu memories di aplikasi Well-Be.<br>
+        2. Aktor dapat menambah, mengedit, atau menghapus memories.<br>
+        3. Sistem menyimpan perubahan yang dilakukan.
+      </td></tr>
+      <tr><td><strong>Alternative path</strong></td><td>Jika terjadi kegagalan penyimpanan, sistem menampilkan pesan kesalahan.</td></tr>
+    </table>
+
+    <!-- Use Case 8 -->
+    <table>
+      <tr><th colspan="2" style="text-align: center;">Notes Kondisi Kesehatan</th></tr>
+      <tr><td style="width: 25%;"><strong>Aktor Utama</strong></td><td>Admin, Pengasuh, Keluarga</td></tr>
+      <tr><td><strong>Summary Description</strong></td><td>Mencatat dan memperbarui informasi terkait kondisi kesehatan pasien.</td></tr>
+      <tr><td><strong>Priority</strong></td><td>Critical</td></tr>
+      <tr><td><strong>Status</strong></td><td>Draft</td></tr>
+      <tr><td><strong>Precondition</strong></td><td>Admin, Pengasuh, Keluarga memiliki akses ke fitur pencatatan kesehatan pasien.</td></tr>
+      <tr><td><strong>Post-Conditions</strong></td><td>Informasi kesehatan pasien berhasil disimpan dan diperbarui.</td></tr>
+      <tr><td><strong>Basic path</strong></td><td>
+        1. Aktor memilih fitur pencatatan kondisi kesehatan.<br>
+        2. Aktor memasukkan atau memperbarui informasi kesehatan pasien.<br>
+        3. Sistem menyimpan perubahan yang dilakukan.
+      </td></tr>
+      <tr><td><strong>Alternative path</strong></td><td>Jika data tidak dapat disimpan, sistem memberikan pesan kesalahan.</td></tr>
+    </table>
+
+    <!-- Use Case 9 -->
+    <table>
+      <tr><th colspan="2" style="text-align: center;">Notifikasi Notes Progress Kesehatan</th></tr>
+      <tr><td style="width: 25%;"><strong>Aktor Utama</strong></td><td>Keluarga, Pengasuh</td></tr>
+      <tr><td><strong>Summary Description</strong></td><td>Mengirimkan notifikasi kepada keluarga dan pengasuh terkait perkembangan kondisi kesehatan pasien.</td></tr>
+      <tr><td><strong>Priority</strong></td><td>High</td></tr>
+      <tr><td><strong>Status</strong></td><td>Draft</td></tr>
+      <tr><td><strong>Precondition</strong></td><td>Sistem menyimpan informasi kesehatan pasien</td></tr>
+      <tr><td><strong>Post-Conditions</strong></td><td>Keluarga dan pengasuh menerima notifikasi mengenai kondisi pasien.</td></tr>
+      <tr><td><strong>Basic path</strong></td><td>
+        1. Sistem memantau dan mencatat kondisi kesehatan pasien.<br>
+        2. Sistem mengirimkan notifikasi perubahan kondisi kesehatan.
+      </td></tr>
+      <tr><td><strong>Alternative path</strong></td><td>Jika terjadi kesalahan pengiriman notifikasi, sistem memberikan pesan peringatan.</td></tr>
+    </table>
+
+    <h2>2.3 Non-Functional Requirement</h2>
+    <table>
+      <thead>
+        <tr>
+          <th>NFR</th>
+          <th>KEBUTUHAN</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr>
+          <td><strong>Functional Suitability</strong></td>
+          <td>
+            - Kelengkapan Fungsional : Aplikasi Well-be mencakup semua fitur yang dibutuhkan oleh pengguna, seperti pelacakan lokasi real-time, dan integrasi dengan perangkat wearable.<br>
+            - Ketepatan Fungsional : Fitur-fitur yang disediakan oleh aplikasi Well-be bekerja dengan benar dan memberikan hasil yang akurat. Ini mencakup keakuratan lokasi pasien, pengiriman notifikasi tepat waktu, serta keandalan aplikasi dalam mengumpulkan dan menampilkan data pergerakan pasien tanpa kesalahan.<br>
+            - Kesesuaian Fungsional : Aplikasi Well-be menyediakan fungsi yang berguna dan relevan bagi pengasuh atau keluarga dalam tugas pemantauan pasien Alzheimer. Fitur yang disediakan memberikan informasi yang tepat waktu, dan membantu pengguna dalam mengambil tindakan yang diperlukan, seperti menemukan lokasi pasien dengan cepat atau menanggapi peringatan.
+          </td>
+        </tr>
+        <tr>
+          <td><strong>Performance</strong></td>
+          <td>
+            - Waktu Respons Cepat: Aplikasi Well-be mampu memproses dan menampilkan data lokasi pasien secara real-time, dengan waktu respons kurang dari 5 detik di jaringan 4G/LTE.<br>
+            - Dukungan Pengguna: Aplikasi Well-be mampu menangani hingga 10.000 pengguna aktif secara bersamaan tanpa penurunan performa.<br>
+            - Efisiensi Pemrosesan: Aplikasi Well-be dapat memproses data kesehatan dan lokasi pasien dengan penggunaan sumber daya CPU dan RAM yang minimal, serta tidak melebihi penggunaan memori sebesar 500MB pada perangkat seluler.
+          </td>
+        </tr>
+        <tr>
+          <td><strong>Compatibility</strong></td>
+          <td>
+            - Kompatibilitas Antar-Platform: Aplikasi Well-be dapat berjalan dengan baik di berbagai sistem operasi utama seperti Android (versi minimal 8.0) dan iOS (versi minimal 12.0).<br>
+            - Integrasi dengan Perangkat Wearable: Aplikasi Well-be kompatibel dengan perangkat wearable seperti jam tangan pintar yang mendukung pelacakan Lokasi pasien (misalnya, Apple Watch dan smartwatch).
+          </td>
+        </tr>
+        <tr>
+          <td><strong>Usability</strong></td>
+          <td>
+            - User-friendly Interface: Aplikasi Well-be memiliki antarmuka yang sederhana dan mudah digunakan oleh pengguna dari berbagai kelompok umur, termasuk pengasuh yang mungkin kurang berpengalaman dengan teknologi.<br>
+            - Aksesibilitas: Aplikasi Well-be mendukung fitur aksesibilitas, seperti teks besar dan ikon yang jelas dan sesuai fitur.
+          </td>
+        </tr>
+        <tr>
+          <td><strong>Security</strong></td>
+          <td>
+            - Keamanan Data: Semua data pengguna dienkripsi menggunakan standar AES-256 baik saat penyimpanan maupun saat transmisi data.<br>
+            - Autentikasi Ganda (Two-Factor Authentication): Pengguna harus melalui mekanisme autentikasi ganda untuk mengakses aplikasi guna melindungi informasi pribadi pelacakan lokasi dan catatan kesehatan pasien.
+          </td>
+        </tr>
+        <tr>
+          <td><strong>Reliability</strong></td>
+          <td>
+            - Uptime: Aplikasi Well-be memiliki tingkat ketersediaan 99.9% selama jam operasional, dengan minimal downtime.<br>
+            - Backup Berkala: Data yang disimpan dalam aplikasi Well-be dibackup secara otomatis setiap 12 jam untuk menghindari kehilangan data yang kritis.
+          </td>
+        </tr>
+        <tr>
+          <td><strong>Maintainability</strong></td>
+          <td>
+            - Kemudahan Pembaruan: Aplikasi Well-be dirancang agar dapat menerima pembaruan sistem tanpa mempengaruhi fungsionalitas yang sedang berjalan, dengan waktu henti maksimal 5 menit selama pembaruan.
+          </td>
+        </tr>
+        <tr>
+          <td><strong>Portability</strong></td>
+          <td>
+            - Migrasi Mudah: Aplikasi Well-be dapat dipindahkan atau diinstal ulang di perangkat lain tanpa kehilangan data pengguna, dengan mekanisme sinkronisasi berbasis cloud.<br>
+            - Adaptabilitas Lintas Jaringan: Aplikasi harus tetap berfungsi optimal pada jaringan yang lambat (seperti 3G) dengan degradasi fitur yang minim.
+          </td>
+        </tr>
+      </tbody>
+    </table>
+
+    <h2>2.4 USER CLASSES AND CHARACTERISTIC</h2>
+    <h3>2.4.1 ADMIN</h3>
+    <ol type="A">
+      <li>Tujuan: Mengelola keseluruhan sistem aplikasi, termasuk menambahkan pengguna baru, mengelola data pengguna, memantau kinerja sistem, dan melakukan konfigurasi sistem.</li>
+      <li>Keterampilan: Memiliki pengetahuan teknis yang baik, terutama dalam bidang manajemen database dan sistem informasi.</li>
+      <li>Kebutuhan:
+        <ol>
+          <li>Akses penuh ke semua fitur aplikasi.</li>
+          <li>Dashboard yang komprehensif untuk memantau aktivitas pengguna dan kinerja sistem.</li>
+          <li>Alat untuk menghasilkan laporan dan analisis data.</li>
+          <li>Antarmuka yang user-friendly untuk memudahkan pengelolaan sistem.</li>
+        </ol>
+      </li>
+    </ol>
+
+    <h3>2.4.2 PENGASUH</h3>
+    <ol type="A">
+      <li>Tujuan: Memberikan perawatan kepada lansia dengan menggunakan aplikasi Will-be untuk memantau kondisi pasien, berkomunikasi dengan keluarga, dan mengakses informasi medis pasien.</li>
+      <li>Keterampilan: Memiliki pengetahuan dasar tentang penggunaan perangkat mobile dan aplikasi.</li>
+      <li>Kebutuhan:
+        <ol>
+          <li>Antarmuka yang sederhana dan mudah digunakan.</li>
+          <li>Fitur pelacakan lokasi yang akurat untuk memantau keberadaan lansia.</li>
+          <li>Fitur komunikasi yang mudah dengan keluarga pasien.</li>
+          <li>Akses ke informasi medis pasien secara real-time.</li>
+        </ol>
+      </li>
+    </ol>
+
+    <h3>2.4.3 USER/PASIEN/KELUARGA</h3>
+    <ol type="A">
+      <li>Tujuan: Memantau kondisi lansia, berkomunikasi dengan pengasuh, dan mengakses informasi medis pasien.</li>
+      <li>Keterampilan: Memiliki pengetahuan dasar tentang penggunaan perangkat mobile.</li>
+      <li>Kebutuhan:
+        <ol>
+          <li>Aplikasi yang mudah digunakan, terutama untuk lansia atau orang yang kurang familiar dengan teknologi.</li>
+          <li>Fitur linimasa yang menarik untuk melihat perkembangan kondisi lansia.</li>
+          <li>Fitur konsultasi dengan ahli kesehatan secara real-time.</li>
+          <li>Notifikasi yang relevan, seperti peringatan jika lansia meninggalkan area yang ditentukan.</li>
+        </ol>
+      </li>
+    </ol>
+
+    <h2>2.5 DESIGN AND IMPLEMENTATION CONSTRAINT</h2>
+    <h3>2.5.1 Regulatory Policies</h3>
+    <p>Aplikasi Will-be harus mematuhi berbagai peraturan dan kebijakan yang berlaku terkait privasi dan keamanan data. Hal ini termasuk penggunaan data pasien yang sensitif dan perlindungan informasi kesehatan. Aplikasi harus memenuhi standar privasi dan keamanan data yang ditetapkan oleh organisasi kesehatan dan lembaga pemerintah terkait.</p>
+
+    <h3>2.5.2 Hardware Limitations</h3>
+    <p>Pengembangan aplikasi Will-be harus mempertimbangkan keterbatasan perangkat keras yang digunakan. Misalnya, aplikasi harus dapat beroperasi dengan baik pada berbagai jenis perangkat, termasuk smartphone, tablet, dan komputer desktop. Selain itu, aplikasi juga harus dapat mengintegrasikan dengan perangkat pelacak GPS untuk memantau lokasi lansia secara akurat.</p>
+
+    <h3>2.5.3 Interfaces to Other Applications</h3>
+    <p>Aplikasi Will-be harus dapat berintegrasi dengan aplikasi lain yang relevan dalam industri kesehatan. Contohnya, aplikasi harus dapat berinteraksi dengan sistem rekam medis elektronik (EMR) untuk memperbarui data pasien secara real-time. Integrasi ini akan memfasilitasi koordinasi antara pengasuh, keluarga, dan tenaga medis.</p>
+
+    <h3>2.5.4 Parallel Operation</h3>
+    <p>Aplikasi Will-be harus dapat beroperasi secara paralel dengan aplikasi lain yang digunakan oleh pengguna. Hal ini memungkinkan pengguna untuk mengakses berbagai fitur aplikasi secara bersamaan tanpa gangguan. Contohnya, pengguna dapat menggunakan fitur linimasa sambil melakukan konsultasi kesehatan secara real-time.</p>
+
+    <h3>2.5.5 Audit Functions</h3>
+    <p>Aplikasi Will-be harus dilengkapi dengan fungsi audit yang memungkinkan pengguna untuk memantau aktivitas penggunaan aplikasi. Fungsi audit ini akan membantu dalam memastikan bahwa aplikasi digunakan dengan benar dan memenuhi standar keamanan data. Selain itu, fungsi audit juga akan membantu dalam melakukan analisis data untuk meningkatkan kinerja aplikasi.</p>
+
+    <h3>2.5.6 Control Functions</h3>
+    <p>Aplikasi Will-be harus memiliki fungsi kontrol yang memungkinkan pengguna untuk mengatur akses dan izin penggunaan aplikasi. Contohnya, pengguna dapat mengatur izin akses untuk membatasi pengguna lain dari mengakses data pasien tertentu. Fungsi kontrol ini akan membantu dalam memastikan bahwa data pasien aman dan tidak dapat diakses oleh orang yang tidak berhak.</p>
+
+    <h3>2.5.7 Higher-Order Language Requirements</h3>
+    <p>Pengembangan aplikasi Will-be harus menggunakan bahasa pemrograman yang sesuai dengan kebutuhan aplikasi. Contohnya, aplikasi dapat menggunakan bahasa pemrograman seperti Java, Python, atau Swift untuk membangun aplikasi yang stabil dan efisien. Pemilihan bahasa pemrograman yang tepat akan memungkinkan pengembang untuk memenuhi kebutuhan aplikasi dengan lebih baik.</p>
+
+    <h3>2.5.8 Signal Handshake Protocols</h3>
+    <p>Aplikasi Will-be harus menggunakan protokol handshake signal yang sesuai untuk memastikan komunikasi data yang aman dan stabil. Contohnya, aplikasi dapat menggunakan protokol XON-XOFF atau ACK-NACK untuk mengatur komunikasi data antara perangkat. Protokol handshake signal ini akan membantu dalam memastikan bahwa data tidak terganggu atau hilang selama proses transmisi.</p>
+
+    <h3>2.5.9 Reliability Requirements</h3>
+    <p>Aplikasi Will-be harus memenuhi standar keandalan yang tinggi untuk memastikan bahwa aplikasi beroperasi dengan stabil dan tidak mengalami gangguan. Contohnya, aplikasi harus dapat beroperasi dengan baik dalam kondisi internet yang tidak stabil dan meminimalkan kesalahan yang dapat terjadi selama proses penggunaan.</p>
+
+    <h3>2.5.10 Criticality of the Application</h3>
+    <p>Aplikasi Will-be merupakan aplikasi yang sangat kritis karena digunakan untuk memantau kesehatan lansia yang menderita demensia, Alzheimer, dan penurunan daya ingat. Oleh karena itu, aplikasi harus dapat beroperasi dengan stabil dan memenuhi standar keamanan data yang tinggi untuk memastikan bahwa data pasien aman dan tidak dapat diakses oleh orang yang tidak berhak.</p>
+
+    <h3>2.5.11 Safety and Security Considerations</h3>
+    <p>Aplikasi Will-be harus mempertimbangkan aspek keamanan dan keselamatan yang sangat penting dalam pengembangan aplikasi. Contohnya, aplikasi harus dilengkapi dengan fitur keamanan seperti enkripsi data dan autentikasi pengguna untuk memastikan bahwa data pasien aman dan tidak dapat diakses oleh orang yang tidak berhak. Selain itu, aplikasi juga harus dilengkapi dengan fitur keselamatan seperti deteksi anomali untuk memantau aktivitas penggunaan aplikasi yang tidak biasa dan mengambil tindakan segera jika ditemukan aktivitas yang mencurigakan.</p>
+
+    <h2>2.6 ASSUMPTION AND DEPENDENCIES</h2>
+    <p>Dalam bagian ini, akan dijelaskan faktor-faktor yang dapat mempengaruhi persyaratan yang tercantum dalam SRS. Faktor-faktor ini tidak dianggap sebagai batasan desain perangkat lunak, tetapi perubahan pada faktor-faktor tersebut dapat mempengaruhi persyaratan sistem yang telah dijelaskan. Asumsi dan ketergantungan ini perlu dipertimbangkan selama proses pengembangan dan penerapan aplikasi Will-be.</p>
+
+    <h3>2.6.1 ASSUMPTIONS</h3>
+    <p>Asumsi berikut diambil sebagai dasar untuk pengembangan dan pengoperasian aplikasi Will-be:</p>
+    <ol>
+      <li>Akses ke Internet yang Stabil<br>Diasumsikan bahwa pengguna (pengasuh, pasien, keluarga, tenaga medis) memiliki akses yang stabil ke jaringan internet agar dapat menggunakan fitur-fitur seperti konsultasi real-time, pelacakan GPS, dan pencarian tenaga perawat.</li>
+      <li>Ketersediaan Perangkat Kompatibel:<br>Diasumsikan bahwa pengguna akan menggunakan perangkat yang kompatibel (seperti smartphone atau tablet) yang mendukung aplikasi Will-be untuk menjalankan fitur-fitur seperti pelacakan GPS dan konsultasi</li>
+      <li>Pengguna Memiliki Pemahaman Dasar Teknologi:<br>Diasumsikan bahwa pengguna, terutama pengasuh dan keluarga, memiliki tingkat literasi teknologi yang cukup untuk menggunakan aplikasi secara efektif.</li>
+      <li>Peraturan Privasi dan Keamanan Data Dapat Diakomodasi<br>Aplikasi diasumsikan akan mematuhi semua regulasi yang berlaku terkait privasi dan keamanan data pasien, termasuk peraturan GDPR dan HIPAA (jika berlaku)</li>
+      <li>Tenaga Perawat yang Tersedia:<br>Diasumsikan bahwa ada tenaga perawat yang cukup di pasar untuk memenuhi permintaan yang diciptakan oleh aplikasi terkait layanan perawatan bagi penderita Alzheimer.</li>
+      <li>Akses ke Layanan Medis<br>Diasumsikan bahwa aplikasi ini akan digunakan dalam wilayah di mana pengguna memiliki akses yang cukup terhadap layanan medis untuk mendukung fitur konsultasi dan pengelolaan kesehatan pasien.</li>
+    </ol>
+
+    <h3>2.6.2 DEPENDENCIES</h3>
+    <p>Pengembangan dan kinerja aplikasi Will-be bergantung pada beberapa faktor eksternal berikut:</p>
+    <ol>
+      <li>Ketergantungan pada Infrastruktur Pihak Ketiga:<br>Aplikasi ini bergantung pada layanan GPS pihak ketiga untuk pelacakan lokasi dan peta, serta layanan pihak ketiga untuk mengelola komunikasi real-time antara pengguna dan ahli kesehatan. Jika layanan ini tidak tersedia atau mengalami masalah, fungsionalitas aplikasi akan terpengaruh.</li>
+      <li>Pembaruan Sistem Operasi<br>Ketergantungan pada pembaruan sistem operasi perangkat pengguna (iOS dan Android). Perubahan besar pada sistem operasi dapat mempengaruhi kinerja atau kompatibilitas aplikasi.</li>
+      <li>Kepatuhan terhadap Regulasi Kesehatan dan Privasi:<br>Aplikasi ini bergantung pada perkembangan regulasi privasi dan kesehatan, seperti HIPAA atau GDPR. Setiap perubahan dalam undang-undang ini dapat mempengaruhi cara aplikasi menangani dan menyimpan data pengguna.</li>
+      <li>Ketergantungan pada Infrastruktur Server:<br>Sistem server yang digunakan untuk penyimpanan data dan proses aplikasi harus memiliki uptime yang tinggi untuk memastikan ketersediaan fitur seperti linimasa dan konsultasi real-time. Jika ada masalah server, fungsionalitas aplikasi akan tergang</li>
+      <li>Ketersediaan Tenaga Perawat:<br>Aplikasi ini bergantung pada ketersediaan tenaga perawat di area di mana aplikasi ini beroperasi. Jika ada kekurangan tenaga perawat, fitur pencarian perawat mungkin tidak berfungsi sebagaimana mestinya.</li>
+      <li>Integrasi dengan Sistem Kesehatan Lainnya<br>Aplikasi bergantung pada integrasi yang mulus dengan sistem kesehatan atau perangkat lunak lainnya yang digunakan oleh tenaga medis. Jika ada masalah integrasi, fitur konsultasi atau pelacakan kesehatan mungkin terganggu.</li>
+    </ol>
+
+    <h2>2.7 APPENDIX</h2>
+    <h3>2.7.1 Organisasi Specific Requirement</h3>
+    
+    <h4>2.7.1.1 DFD</h4>
+    <p><strong>Level 0:</strong></p>
+    <div class="img-container">
+      <img src="img/srs_diagrams/page18_img1.png" alt="DFD Level 0" onerror="this.style.display='none'"/>
+    </div>
+    
+    <p><strong>Level 1:</strong></p>
+    <div class="img-container">
+      <img src="img/srs_diagrams/page19_img1.png" alt="DFD Level 1" onerror="this.style.display='none'"/>
+    </div>
+    
+    <p><strong>Level 2:</strong><br>- Mengelola pengguna<br>- Notification</p>
+    <div class="grid-2">
+      <div class="img-container">
+        <img src="img/srs_diagrams/page20_img1.png" alt="DFD Level 2 Mengelola Pengguna" onerror="this.style.display='none'"/>
+      </div>
+      <div class="img-container">
+        <img src="img/srs_diagrams/page20_img2.png" alt="DFD Level 2 Notification" onerror="this.style.display='none'"/>
       </div>
     </div>
-  </section>
 
-  <!-- Section: Sequence Diagrams -->
-  <section class="section">
-    <div class="container">
-      <h2>Sequence Diagrams</h2>
-      <p>Representasi interaksi antar objek sistem berdasarkan urutan waktu untuk proses-proses kritikal.</p>
-      
-      <div class="diagram-container">
-        <img src="img/srs_diagrams/page26_img1.png" alt="Sequence Diagram" onerror="this.style.display='none'"/>
-        <img src="img/srs_diagrams/page27_img1.png" alt="Sequence Diagram" onerror="this.style.display='none'"/>
-        <img src="img/srs_diagrams/page28_img1.png" alt="Sequence Diagram" onerror="this.style.display='none'"/>
-        <img src="img/srs_diagrams/page29_img1.png" alt="Sequence Diagram" onerror="this.style.display='none'"/>
-      </div>
+    <h4>2.7.1.2 CDM & PDM</h4>
+    <p><strong>CDM</strong></p>
+    <div class="img-container">
+      <img src="img/srs_diagrams/page21_img1.png" alt="CDM" onerror="this.style.display='none'"/>
     </div>
-  </section>
-
-  <!-- Section: CDM & PDM -->
-  <section class="section">
-    <div class="container">
-      <h2>Data Models (CDM & PDM)</h2>
-      <p>Perancangan struktur basis data logikal dan fisikal untuk entitas Pasien, Pengasuh, Riwayat Lokasi, dan Memori.</p>
-      
-      <div class="diagram-grid">
-        <div class="diagram-container">
-          <h3>Conceptual Data Model (CDM)</h3>
-          <img src="img/srs_diagrams/page30_img1.png" alt="CDM Diagram 1" onerror="this.style.display='none'"/>
-          <img src="img/srs_diagrams/page31_img1.png" alt="CDM Diagram 2" onerror="this.style.display='none'"/>
-        </div>
-        <div class="diagram-container">
-          <h3>Physical Data Model (PDM)</h3>
-          <img src="img/srs_diagrams/page32_img1.png" alt="PDM Diagram 1" onerror="this.style.display='none'"/>
-          <img src="img/srs_diagrams/page33_img1.png" alt="PDM Diagram 2" onerror="this.style.display='none'"/>
-        </div>
-      </div>
+    <p><strong>PDM</strong></p>
+    <div class="img-container">
+      <img src="img/srs_diagrams/page21_img2.png" alt="PDM" onerror="this.style.display='none'"/>
     </div>
-  </section>
 
-  <!-- Section: UI Mockups -->
-  <section class="section">
-    <div class="container">
-      <h2>User Interface Mockups</h2>
-      <p>Desain visual antarmuka pengguna untuk aplikasi mobile Well-Be.</p>
-      
-      <div class="diagram-container">
-        <div class="diagram-grid-4">
-          <img src="img/srs_diagrams/page37_img1.jpeg" alt="UI Mockup 1" onerror="this.style.display='none'"/>
-          <img src="img/srs_diagrams/page37_img2.jpeg" alt="UI Mockup 2" onerror="this.style.display='none'"/>
-          <img src="img/srs_diagrams/page37_img3.jpeg" alt="UI Mockup 3" onerror="this.style.display='none'"/>
-          <img src="img/srs_diagrams/page37_img4.jpeg" alt="UI Mockup 4" onerror="this.style.display='none'"/>
-        </div>
-      </div>
-    </div>
-  </section>
+    <h4>2.7.1.3 Diagram Sequence</h4>
+    
+    <p><strong>1. Admin</strong><br>a. Mengelola memories pasien</p>
+    <div class="img-container"><img src="img/srs_diagrams/page22_img1.png" alt="Sequence Admin a" onerror="this.style.display='none'"/></div>
+    <p>b. Mengelola data pasien</p>
+    <div class="img-container"><img src="img/srs_diagrams/page23_img1.png" alt="Sequence Admin b" onerror="this.style.display='none'"/></div>
+    <p>c. Mengelola notes progress kondisi kesehatan</p>
+    <div class="img-container"><img src="img/srs_diagrams/page24_img1.png" alt="Sequence Admin c" onerror="this.style.display='none'"/></div>
+    <p>d. Mengelola log lokasi real time pasien</p>
+    <div class="img-container"><img src="img/srs_diagrams/page25_img1.png" alt="Sequence Admin d" onerror="this.style.display='none'"/></div>
 
-  <!-- Footer -->
-  <footer class="footer">
-    <div class="container">
-      <p>System Requirement Specification Document — Well-Be Application.<br>
-      Design and Analysis by Fitria Indah Novitasari (2025).</p>
-    </div>
-  </footer>
+    <p><strong>2. Keluarga</strong><br>a. Mengintegrasikan smartwatch (extend input data)</p>
+    <div class="img-container"><img src="img/srs_diagrams/page26_img1.png" alt="Sequence Keluarga a" onerror="this.style.display='none'"/></div>
+    <p>b. Mengintegrasikan smartwatch (extend setting GPS)</p>
+    <div class="img-container"><img src="img/srs_diagrams/page27_img1.png" alt="Sequence Keluarga b" onerror="this.style.display='none'"/></div>
+    <p>c. Mengelola memories</p>
+    <div class="img-container"><img src="img/srs_diagrams/page28_img1.png" alt="Sequence Keluarga c" onerror="this.style.display='none'"/></div>
+    <p>d. Mengelola notes kondisi kesehatan</p>
+    <div class="img-container"><img src="img/srs_diagrams/page29_img1.png" alt="Sequence Keluarga d" onerror="this.style.display='none'"/></div>
+    <p>e. Memantau lokasi real time</p>
+    <div class="img-container"><img src="img/srs_diagrams/page30_img1.png" alt="Sequence Keluarga e" onerror="this.style.display='none'"/></div>
+    <p>f. Menerima notifikasi</p>
+    <div class="img-container"><img src="img/srs_diagrams/page30_img2.png" alt="Sequence Keluarga f" onerror="this.style.display='none'"/></div>
 
+    <p><strong>3. Pengasuh</strong><br>a. Menerima notifikasi</p>
+    <div class="img-container"><img src="img/srs_diagrams/page31_img1.png" alt="Sequence Pengasuh a" onerror="this.style.display='none'"/></div>
+    <p>b. Melihat memories</p>
+    <div class="img-container"><img src="img/srs_diagrams/page31_img2.png" alt="Sequence Pengasuh b" onerror="this.style.display='none'"/></div>
+
+    <p><strong>4. Pasien</strong><br>a. Melihat memories</p>
+    <div class="img-container"><img src="img/srs_diagrams/page32_img1.png" alt="Sequence Pasien a" onerror="this.style.display='none'"/></div>
+
+    <p><strong>5. Smartwatch</strong><br>a. Memunculkan biodata singkat pasien</p>
+    <div class="img-container"><img src="img/srs_diagrams/page32_img2.png" alt="Sequence Smartwatch a" onerror="this.style.display='none'"/></div>
+    <p>b. Melacak lokasi real time dengan GPS</p>
+    <div class="img-container"><img src="img/srs_diagrams/page33_img1.png" alt="Sequence Smartwatch b" onerror="this.style.display='none'"/></div>
+
+    <h2>2.7 USER INTERFACE (USER STORY)</h2>
+    <h3>2.7.1 USER STORY (Deskripsi Role)</h3>
+    <p><strong>a. ADMIN</strong><br>Admin bertanggung jawab atas pengelolaan data dan sistem informasi pasien serta pengasuh. Peran ini mencakup memastikan bahwa data pasien, seperti kondisi kesehatan, catatan perkembangan, serta informasi identitas dan kebutuhan khusus, selalu terupdate dan akurat. Admin juga mengelola data pengasuh, memastikan ketersediaan informasi terbaru terkait kualifikasi, penjadwalan, dan catatan kehadiran pengasuh. Selain itu, admin berperan dalam pembuatan laporan perkembangan kesehatan bulanan untuk memudahkan pemantauan dan evaluasi kesehatan pasien secara berkala, sehingga dapat menjadi referensi untuk perbaikan perawatan.</p>
+    <p><strong>b. PASIEN</strong><br>Pasien adalah penerima utama layanan perawatan dan pemantauan kesehatan. Pasien memiliki akses ke sistem untuk menyimpan momen atau memori, baik berupa foto, catatan, maupun video, sebagai cara untuk mengabadikan momen penting. Pasien juga dapat dipantau kondisinya secara real-time, sehingga memastikan mereka selalu berada dalam pemantauan yang aman. Ini termasuk pemantauan lokasi, yang dapat membantu memastikan keamanan mereka di mana pun berada.</p>
+    <p><strong>c. PENGASUH</strong><br>Pengasuh adalah individu yang bertanggung jawab atas pemantauan dan perawatan kesehatan pasien secara langsung. Peran ini mencakup memantau kondisi fisik, mental, dan kesehatan pasien secara real-time agar perawatan yang diberikan selalu sesuai dengan kondisi dan kebutuhan pasien pada saat itu. Pengasuh juga memantau lokasi pasien secara real-time untuk memastikan keamanan dan memberikan notifikasi kepada admin atau keluarga jika ada perubahan signifikan pada kondisi atau lokasi pasien. Notifikasi ini memungkinkan pengasuh untuk mengambil tindakan cepat saat pasien membutuhkan bantuan atau dalam keadaan darurat.</p>
+    <p><strong>d. KELUARGA</strong><br>Keluarga pasien berperan sebagai pengawas eksternal yang peduli terhadap kondisi dan keamanan pasien. Mereka memiliki akses untuk memantau lokasi pasien secara real-time agar bisa mengetahui keberadaan pasien kapan pun diperlukan. Selain itu, keluarga dapat memantau perkembangan kesehatan pasien dan melihat catatan atau memori yang disimpan pasien, sehingga tetap dapat merasakan keterlibatan dalam kehidupan pasien. Keluarga juga akan menerima notifikasi terkait kondisi kesehatan dan keberadaan pasien untuk memastikan bahwa mereka selalu mendapatkan informasi terbaru tentang keadaan orang yang mereka sayangi.</p>
+
+    <h3>2.7.2 USER STORY</h3>
+    <p><strong>a. ADMIN</strong></p>
+    <ol>
+      <li>Saya ingin mengelola data pasien agar informasi pasien selalu terupdate dan akurat.</li>
+      <li>Saya ingin mengelola data pengasuh agar bisa memastikan informasi pengasuh selalu diperbarui.</li>
+      <li>Saya ingin melihat laporan perkembangan kesehatan bulanan agar bisa mengevaluasi kondisi kesehatan pasien secara berkala dan sebagai dokumentasi notes progress pasien.</li>
+    </ol>
+    <p><strong>b. PASIEN</strong></p>
+    <ol>
+      <li>Saya ingin mengingat semua memori agar saya dapat mengingat kembali momen saya.</li>
+      <li>Saya ingin kondisi dan keberadaan saya dipantau dengan realtime.</li>
+    </ol>
+    <p><strong>c. PENGASUH</strong></p>
+    <ol>
+      <li>Saya ingin memantau kondisi pasien saya agar bisa memberikan perawatan yang sesuai dengan kondisi pasien.</li>
+      <li>Saya ingin memantau keberadaan pasien saya dengan realtime dimanapun berada.</li>
+      <li>Saya ingin mendapatkan notifikasi keberadaan pasien saya dengan realtime dan notifikasi kondisi pasien saya.</li>
+    </ol>
+    <p><strong>d. KELUARGA</strong></p>
+    <ol>
+      <li>Saya ingin memantau lokasi real-time pasien agar saya bisa mengetahui keberadaan mereka secara langsung.</li>
+      <li>Saya ingin memantau kondisi pasien agar bisa terus mengetahui perkembangan kesehatan mereka.</li>
+      <li>Saya ingin melihat dan mengelola memori pasien agar dapat mengetahui momen terindah pasien.</li>
+      <li>Saya ingin mendapatkan notifikasi keberadaan dan notes kondisi pasien.</li>
+    </ol>
+
+    <h3>2.7.3 USER SCENARIO</h3>
+    
+    <table>
+      <tr><th colspan="2" style="text-align: center;">Aplikasi WELL-BE</th></tr>
+      <tr><td style="width: 20%;"><strong>Fitur</strong></td><td>Melacak Lokasi Secara Real-time</td></tr>
+      <tr><td><strong>Scenario</strong></td><td>
+        - Pengguna sudah login terlebih dahulu<br>
+        - Pengguna membuka halaman pemantauan pasien<br>
+        - Pengguna melihat lokasi pasien secara real-time yang sudah tersambung pada smartwatch<br>
+        - Lokasi pasien selalu terbarui
+      </td></tr>
+    </table>
+
+    <table>
+      <tr><th colspan="2" style="text-align: center;">Aplikasi WELL-BE</th></tr>
+      <tr><td style="width: 20%;"><strong>Fitur</strong></td><td>Mengelola linimasa aktivitas (memories) pasien</td></tr>
+      <tr><td><strong>Scenario</strong></td><td>
+        - Pengguna sudah login terlebih dahulu.<br>
+        - Pengguna membuka halaman linimasa.<br>
+        - Pengguna dapat mengupload memories pasien.<br>
+        - Pengguna bisa melihat semua memories pasien.
+      </td></tr>
+    </table>
+
+    <table>
+      <tr><th colspan="2" style="text-align: center;">Aplikasi WELL-BE</th></tr>
+      <tr><td style="width: 20%;"><strong>Fitur</strong></td><td>Mengakses catatan kesehatan pasien</td></tr>
+      <tr><td><strong>Scenario</strong></td><td>
+        - Pengguna sudah login terlebih dahulu<br>
+        - Pengguna membuka halaman catatan kesehatan pasien<br>
+        - Pengguna melihat catatan kesehatan pasien<br>
+        - Pengguna bisa mencari catatan kesehatan berdasarkan tanggal dan waktu
+      </td></tr>
+    </table>
+
+    <h2>2.8 GUI</h2>
+    <p><a href="https://www.figma.com/design/Aa6INxCDc2vmNrIezTfcsO/GUI-Will-be?node-id=0-1&t=ZgsoWkNLg5SAI5e6-1" target="_blank">Link Figma GUI Will-Be</a></p>
+
+  </div>
 </body>
 </html>
