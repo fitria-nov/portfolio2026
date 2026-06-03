@@ -1,0 +1,195 @@
+<!DOCTYPE html>
+<html lang="en" data-theme="dark">
+<head>
+  <meta charset="UTF-8"/>
+  <meta name="viewport" content="width=device-width,initial-scale=1.0"/>
+  <title>System Analyst Project: Well-Be App – Fitria</title>
+  <meta name="description" content="System Requirement Specification case study for Well-Be Application"/>
+  <link rel="preconnect" href="https://fonts.googleapis.com"/>
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin/>
+  <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@300;400;500;600;700;800&display=swap" rel="stylesheet"/>
+  <link rel="stylesheet" href="style.css"/>
+  <style>
+    body { padding-left: 0; }
+    .project-header {
+      padding: 100px 20px 40px;
+      text-align: center;
+      background: var(--bg-card);
+      border-bottom: 1px solid var(--border);
+    }
+    .project-header h1 {
+      font-size: 2.5rem;
+      margin-bottom: 15px;
+      background: linear-gradient(135deg, var(--text-main), var(--accent2));
+      -webkit-background-clip: text;
+      -webkit-text-fill-color: transparent;
+    }
+    .project-role {
+      display: inline-block;
+      padding: 6px 16px;
+      background: rgba(16, 185, 129, 0.1);
+      color: #10b981;
+      border-radius: 20px;
+      font-weight: 600;
+      font-size: 0.9rem;
+      border: 1px solid rgba(16, 185, 129, 0.2);
+      margin-bottom: 20px;
+    }
+    .project-content {
+      max-width: 800px;
+      margin: 0 auto;
+      padding: 40px 20px;
+    }
+    .section-box {
+      background: var(--bg-card);
+      border: 1px solid var(--border);
+      border-radius: 16px;
+      padding: 30px;
+      margin-bottom: 30px;
+    }
+    .section-box h3 {
+      color: var(--accent2);
+      margin-bottom: 15px;
+      font-size: 1.4rem;
+      border-bottom: 1px solid var(--border);
+      padding-bottom: 10px;
+    }
+    .section-box p, .section-box li {
+      color: var(--text-mut);
+      line-height: 1.7;
+      margin-bottom: 10px;
+    }
+    .grid-2 {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 20px;
+    }
+    .story-card {
+      background: rgba(255, 255, 255, 0.02);
+      padding: 15px;
+      border-radius: 12px;
+      border: 1px solid var(--border);
+    }
+    .story-card h4 {
+      color: var(--text-main);
+      margin-bottom: 8px;
+    }
+    .back-btn {
+      position: absolute;
+      top: 30px;
+      left: 30px;
+      display: inline-flex;
+      align-items: center;
+      gap: 8px;
+      color: var(--text-mut);
+      text-decoration: none;
+      font-weight: 500;
+      transition: color 0.3s;
+    }
+    .back-btn:hover { color: var(--accent2); }
+    @media (max-width: 768px) {
+      .grid-2 { grid-template-columns: 1fr; }
+      .back-btn { position: relative; top: 0; left: 0; margin-bottom: 20px; justify-content: center; width: 100%; }
+    }
+  </style>
+</head>
+<body>
+
+  <header class="project-header">
+    <a href="index.html#projects" class="back-btn">
+      <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M19 12H5M12 19l-7-7 7-7"/></svg>
+      Back to Portfolio
+    </a>
+    <div class="project-role">System Requirement Specification</div>
+    <h1>Well-Be Application</h1>
+    <p style="color: var(--text-mut); max-width: 600px; margin: 0 auto;">
+      A comprehensive healthcare monitoring application designed for Alzheimer's and Dementia patients, featuring real-time GPS tracking and timeline memories.
+    </p>
+    <div style="margin-top: 25px;">
+      <a href="img/srs-wellbe.pdf" target="_blank" class="btn btn-primary">Read Full SRS PDF</a>
+    </div>
+  </header>
+
+  <main class="project-content">
+    
+    <div class="section-box anim">
+      <h3>Project Overview</h3>
+      <p>
+        The <strong>Well-Be App</strong> serves as a proactive technology innovation to monitor elderly patients experiencing dementia and memory loss. The system acts as a bridge between the Patient, Caregiver, Family, and Admin, specifically utilizing Smartwatch integration.
+      </p>
+      <p><strong>My Role: System Analyst</strong></p>
+      <p>As part of the analysis team, I was specifically responsible for formulating the <em>User Interface (User Stories & Scenarios)</em>, establishing the <em>General & Design Constraints</em>, and mapping out the <em>Assumptions and Dependencies</em>.</p>
+    </div>
+
+    <div class="section-box anim">
+      <h3>User Stories & Persona Analysis</h3>
+      <p>Defined specific requirements from the perspective of four primary actors to ensure accurate functionality alignment.</p>
+      
+      <div class="grid-2" style="margin-top: 20px;">
+        <div class="story-card">
+          <h4>👤 Patient</h4>
+          <p>The primary receiver of care who requires safety monitoring.</p>
+          <ul style="padding-left: 20px; font-size: 0.9rem;">
+            <li>Wants to save and recall precious memories.</li>
+            <li>Requires real-time location monitoring for safety.</li>
+          </ul>
+        </div>
+        <div class="story-card">
+          <h4>🧑‍⚕️ Caregiver</h4>
+          <p>Responsible for direct physical and mental monitoring.</p>
+          <ul style="padding-left: 20px; font-size: 0.9rem;">
+            <li>Needs to monitor health conditions to provide appropriate care.</li>
+            <li>Requires real-time location notifications.</li>
+          </ul>
+        </div>
+        <div class="story-card">
+          <h4>👨‍👩‍👧‍👦 Family</h4>
+          <p>External supervisor wanting to remain involved in the patient's life.</p>
+          <ul style="padding-left: 20px; font-size: 0.9rem;">
+            <li>Wants remote access to the patient's location.</li>
+            <li>Wants to view and manage the patient's timeline memories.</li>
+          </ul>
+        </div>
+        <div class="story-card">
+          <h4>🛡️ Admin</h4>
+          <p>System manager maintaining data integrity.</p>
+          <ul style="padding-left: 20px; font-size: 0.9rem;">
+            <li>Manages caregiver scheduling and data.</li>
+            <li>Generates monthly health progress reports.</li>
+          </ul>
+        </div>
+      </div>
+    </div>
+
+    <div class="section-box anim">
+      <h3>Constraints & Dependencies</h3>
+      <p>Mapped out critical boundaries for the architecture to ensure system reliability and legal compliance.</p>
+      <ul style="padding-left: 20px; margin-top: 15px;">
+        <li><strong>Regulatory Policies:</strong> The app handles highly sensitive medical data and must comply with strict privacy regulations (e.g., GDPR, HIPAA).</li>
+        <li><strong>Hardware Limitations:</strong> Requires seamless integration with Smartwatch GPS modules while optimizing for battery consumption.</li>
+        <li><strong>Security:</strong> All user data is secured with AES-256 encryption for both storage and transmission, reinforced by Two-Factor Authentication.</li>
+        <li><strong>Dependencies:</strong> Relies on third-party GPS APIs, OS updates (iOS/Android), and constant server uptime for real-time tracking.</li>
+      </ul>
+    </div>
+
+  </main>
+
+  <script>
+    // Simple intersection observer for anim class
+    const observer = new IntersectionObserver((entries) => {
+      entries.forEach(entry => {
+        if(entry.isIntersecting) {
+          entry.target.style.opacity = 1;
+          entry.target.style.transform = 'translateY(0)';
+        }
+      });
+    });
+    document.querySelectorAll('.anim').forEach(el => {
+      el.style.opacity = 0;
+      el.style.transform = 'translateY(20px)';
+      el.style.transition = 'all 0.6s ease';
+      observer.observe(el);
+    });
+  </script>
+</body>
+</html>
