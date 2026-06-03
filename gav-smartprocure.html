@@ -1,0 +1,1529 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8"/>
+  <meta name="viewport" content="width=device-width,initial-scale=1.0"/>
+  <title>SRS: Well-Be Application</title>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet"/>
+  <style>
+    :root {
+      --bg-primary: #ffffff;
+      --bg-secondary: #f5f5f7;
+      --bg-card: #ffffff;
+      --border-color: #d2d2d7;
+      --text-primary: #1d1d1f;
+      --text-secondary: #86868b;
+      --accent: #0071e3;
+      --radius: 12px;
+      --shadow: 0 4px 24px rgba(0,0,0,0.04);
+    }
+    
+    * { margin: 0; padding: 0; box-sizing: border-box; }
+    body { font-family: 'Inter', -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif; background: var(--bg-secondary); color: var(--text-primary); line-height: 1.7; font-size: 16px; }
+    a { text-decoration: none; color: var(--accent); transition: color 0.2s; }
+    a:hover { color: #005bb5; }
+    ul, ol { margin-left: 20px; margin-bottom: 24px; color: var(--text-secondary); }
+    li { margin-bottom: 10px; }
+    
+    .container { max-width: 900px; margin: 40px auto; padding: 40px 60px; background: var(--bg-primary); border-radius: 16px; box-shadow: var(--shadow); }
+    .nav { position: sticky; top: 0; background: rgba(255, 255, 255, 0.8); backdrop-filter: saturate(180%) blur(20px); border-bottom: 1px solid var(--border-color); z-index: 100; padding: 16px 40px; }
+    .nav-link { font-size: 0.9rem; font-weight: 500; color: var(--text-primary); display: flex; align-items: center; gap: 8px; }
+    
+    /* Cover */
+    .cover { text-align: center; padding: 60px 0; border-bottom: 1px solid var(--border-color); margin-bottom: 40px; }
+    .cover h1 { font-size: 2.8rem; margin-bottom: 16px; font-weight: 700; letter-spacing: -0.02em; background: linear-gradient(90deg, #1d1d1f, #515154); -webkit-background-clip: text; -webkit-text-fill-color: transparent; border: none; }
+    
+    /* Typography */
+    h1, h2, h3, h4, h5 { color: var(--text-primary); margin-top: 40px; margin-bottom: 16px; font-weight: 600; letter-spacing: -0.01em; }
+    h1 { font-size: 2.2rem; border-bottom: 1px solid var(--border-color); padding-bottom: 12px; margin-top: 60px; }
+    h2 { font-size: 1.6rem; color: #000; }
+    h3 { font-size: 1.3rem; color: #1d1d1f; }
+    h4 { font-size: 1.1rem; color: var(--text-secondary); text-transform: uppercase; letter-spacing: 0.05em; margin-bottom: 8px; }
+    p { margin-bottom: 20px; color: var(--text-secondary); text-align: justify; }
+    
+    /* Tables */
+    table { width: 100%; border-collapse: collapse; margin-bottom: 32px; font-size: 0.95rem; border-radius: var(--radius); overflow: hidden; box-shadow: 0 2px 12px rgba(0,0,0,0.03); }
+    th, td { border: 1px solid var(--border-color); padding: 16px; text-align: left; vertical-align: top; }
+    th { background: #fbfbfd; font-weight: 600; color: var(--text-primary); }
+    td { background: var(--bg-primary); }
+    
+    /* Cards and Elements */
+    .card { background: #fbfbfd; border-radius: var(--radius); padding: 24px; margin-bottom: 24px; border: 1px solid var(--border-color); }
+    .card p:last-child { margin-bottom: 0; }
+    
+    /* Images */
+    .img-container { text-align: center; margin: 32px 0; padding: 24px; background: #fbfbfd; border-radius: var(--radius); border: 1px solid var(--border-color); transition: transform 0.3s ease; }
+    .img-container:hover { transform: scale(1.01); }
+    .img-container img { max-width: 100%; height: auto; border-radius: 6px; box-shadow: 0 8px 24px rgba(0,0,0,0.08); }
+    .img-caption { font-size: 0.9rem; color: var(--text-secondary); margin-top: 16px; font-weight: 500; }
+    
+    .grid-2 { display: grid; grid-template-columns: 1fr 1fr; gap: 24px; }
+    @media (max-width: 768px) {
+      .grid-2 { grid-template-columns: 1fr; }
+      .container { padding: 24px; margin: 20px; }
+      .cover h1 { font-size: 2rem; }
+    }
+  </style>
+</head>
+<body>
+
+  <nav class="nav">
+    <div style="max-width: 900px; margin: 0 auto; display: flex; justify-content: space-between;">
+      <a href="index.html" class="nav-link">← Back to Portfolio</a>
+      <span style="font-size: 0.9rem; font-weight: 600;">GAV SmartProcure</span>
+    </div>
+  </nav>
+  <div class="container">
+
+    <div class="cover">
+      <h1>GAV SMARTPROCURE<br>ENTERPRISE SYSTEM ANALYSIS</h1>
+      <p style="text-align: center; font-size: 1.2rem; color: var(--text-secondary); max-width: 650px; margin: 0 auto;">
+        A comprehensive business analysis case study detailing the digital transformation of an SAP-integrated procurement and inventory management system.
+      </p>
+    </div>
+<blockquote>
+<p><strong>NOTE:</strong>
+<strong>Disclaimer:</strong> This is a simulated case study based on real-world pain points observed during an internship at PT GMF AeroAsia Tbk. The data, processes, and specific pain points are generalized for portfolio purposes and do not represent confidential company information.</p>
+</blockquote>
+<h2>SECTION 1: EXECUTIVE SUMMARY</h2>
+<h3>1.1 Project Identity</h3>
+<table>
+<thead>
+<tr>
+<th style="text-align: left;">Attribute</th>
+<th style="text-align: left;">Detail</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td style="text-align: left;"><strong>Project Name</strong></td>
+<td style="text-align: left;">GAV SmartProcure (Simulated Case Study)</td>
+</tr>
+<tr>
+<td style="text-align: left;"><strong>Tagline</strong></td>
+<td style="text-align: left;">Digital Transformation of Aviation MRO Procurement &amp; Inventory Management</td>
+</tr>
+<tr>
+<td style="text-align: left;"><strong>Domain</strong></td>
+<td style="text-align: left;">Aviation MRO (Maintenance, Repair, and Overhaul) / Supply Chain</td>
+</tr>
+<tr>
+<td style="text-align: left;"><strong>Client Context</strong></td>
+<td style="text-align: left;">PT GMF AeroAsia Tbk (Garuda Indonesia Group)</td>
+</tr>
+<tr>
+<td style="text-align: left;"><strong>Project Type</strong></td>
+<td style="text-align: left;">Enterprise System Analysis &amp; Process Reengineering</td>
+</tr>
+<tr>
+<td style="text-align: left;"><strong>Period</strong></td>
+<td style="text-align: left;">2026</td>
+</tr>
+</tbody>
+</table>
+<h3>1.2 Background &amp; Context</h3>
+<p>The aviation Maintenance, Repair, and Overhaul (MRO) industry operates under exceptionally stringent regulatory frameworks (such as DGCA and EASA). In this environment, the procurement of aircraft spare parts is not merely a supply chain function; it is a critical safety and operational imperative. A missing part can lead to an Aircraft On Ground (AOG) situation, costing airlines tens of thousands of dollars per hour in lost revenue and disrupted schedules. </p>
+<p>Historically, MRO procurement processes have been heavily reliant on manual interventions, fragmented systems, and physical documentation. While SAP is often used as the core ERP, the peripheral processes—such as purchase request initiation, multi-tier approvals, and vendor communication—frequently occur via disjointed emails, spreadsheets, and paper forms. This fragmentation introduces significant latency, increases the risk of human error, and limits real-time visibility into inventory and budget utilization.</p>
+<p>Digital transformation in this sector is critical. GAV SmartProcure is conceived as a bridge solution—a streamlined, automated interface that digitizes the end-to-end procurement lifecycle while seamlessly integrating with the core SAP backend. By eliminating manual touchpoints, the system aims to drastically reduce PR-to-PO cycle times, ensure robust compliance with BUMN (State-Owned Enterprise) regulations, and provide stakeholders with actionable, real-time insights.</p>
+<h3>1.3 Problem Statement</h3>
+<table>
+<thead>
+<tr>
+<th style="text-align: left;">Problem ID</th>
+<th style="text-align: left;">Pain Point</th>
+<th style="text-align: left;">Root Cause</th>
+<th style="text-align: left;">Business Impact</th>
+<th style="text-align: left;">Affected Stakeholders</th>
+<th style="text-align: left;">Impact Level</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td style="text-align: left;"><strong>PRB-01</strong></td>
+<td style="text-align: left;">High latency in approval workflows (avg. 5-7 days)</td>
+<td style="text-align: left;">Approvals require physical signatures or disjointed email threads; lack of automated routing.</td>
+<td style="text-align: left;">Delayed procurement leading to potential AOG situations and delayed maintenance.</td>
+<td style="text-align: left;">Requestors, Managers, VP Procurement</td>
+<td style="text-align: left;"><strong>Critical</strong></td>
+</tr>
+<tr>
+<td style="text-align: left;"><strong>PRB-02</strong></td>
+<td style="text-align: left;">Discrepancies in inventory data</td>
+<td style="text-align: left;">Manual data entry during Goods Receipt (GR) and delayed sync with SAP.</td>
+<td style="text-align: left;">Over-purchasing or stockouts; inaccurate financial reporting.</td>
+<td style="text-align: left;">Warehouse, Finance, Procurement</td>
+<td style="text-align: left;"><strong>High</strong></td>
+</tr>
+<tr>
+<td style="text-align: left;"><strong>PRB-03</strong></td>
+<td style="text-align: left;">Lack of real-time budget visibility</td>
+<td style="text-align: left;">Budget checks are performed manually by Finance during the approval stage.</td>
+<td style="text-align: left;">Budget overruns; delayed approvals due to manual verification time.</td>
+<td style="text-align: left;">Finance, Managers</td>
+<td style="text-align: left;"><strong>High</strong></td>
+</tr>
+<tr>
+<td style="text-align: left;"><strong>PRB-04</strong></td>
+<td style="text-align: left;">High error rate in Purchase Requests</td>
+<td style="text-align: left;">Manual entry of Material Codes and specifications without system validation.</td>
+<td style="text-align: left;">PO amendments, wrong items purchased, wasted time.</td>
+<td style="text-align: left;">Requestors, Procurement Staff</td>
+<td style="text-align: left;"><strong>Medium</strong></td>
+</tr>
+<tr>
+<td style="text-align: left;"><strong>PRB-05</strong></td>
+<td style="text-align: left;">Poor vendor performance tracking</td>
+<td style="text-align: left;">Vendor data is siloed; performance evaluation is done manually and sporadically.</td>
+<td style="text-align: left;">Continued use of underperforming vendors; lack of leverage in negotiations.</td>
+<td style="text-align: left;">Procurement, Management</td>
+<td style="text-align: left;"><strong>Medium</strong></td>
+</tr>
+<tr>
+<td style="text-align: left;"><strong>PRB-06</strong></td>
+<td style="text-align: left;">Cumbersome audit trail generation</td>
+<td style="text-align: left;">Evidence of approvals and changes are scattered across emails and paper files.</td>
+<td style="text-align: left;">Compliance risks during internal/external audits; wasted effort compiling data.</td>
+<td style="text-align: left;">Internal Audit, Management</td>
+<td style="text-align: left;"><strong>High</strong></td>
+</tr>
+</tbody>
+</table>
+<h3>1.4 Project Objectives (SMART)</h3>
+<ol>
+<li><strong>Reduce PR-to-PO Cycle Time:</strong> Decrease the average time from Purchase Request creation to Purchase Order generation from 7 days to 2 days within 6 months of system launch.</li>
+<li><strong>Improve Inventory Accuracy:</strong> Increase real-time inventory data accuracy from an estimated 80% to 99% by implementing automated Goods Receipt scanning and SAP integration by Q3.</li>
+<li><strong>Eliminate Manual Approvals:</strong> Achieve 100% digital approval routing for all procurement requests within 3 months of implementation, eliminating paper-based forms.</li>
+<li><strong>Enhance Budget Control:</strong> Reduce instances of budget overruns to 0% by implementing hard-stop automated budget validation at the PR creation stage.</li>
+<li><strong>Standardize Vendor Evaluation:</strong> Implement automated vendor SLA tracking for 100% of active suppliers to support data-driven procurement decisions by year-end.</li>
+</ol>
+<h3>1.5 Scope &amp; Out of Scope</h3>
+<p><strong>In Scope:</strong>
+*   <strong>M1: PR Management:</strong> Digital PR creation, draft saving, item catalog integration, duplicate detection.
+*   <strong>M2: Approval Workflow:</strong> Dynamic routing based on cost thresholds, mobile-friendly approval/rejection, delegation.
+*   <strong>M3: PO Management:</strong> Automated PO generation from approved PRs, vendor assignment, PO tracking.
+*   <strong>M4: Inventory Management:</strong> Goods Receipt processing, stock-in/out tracking, minimum stock alerts.
+*   <strong>M5: Reporting Dashboard:</strong> Real-time metrics on procurement cycle, budget utilization, vendor performance.</p>
+<p><strong>Out of Scope:</strong>
+*   Core financial accounting and general ledger posting (handled by SAP FI/CO).
+*   Human Resources and Payroll systems.
+*   Direct maintenance execution tracking (handled by separate MRO software).
+*   Vendor portal for direct bidding (planned for future phase).</p>
+<h3>1.6 Assumptions &amp; Constraints</h3>
+<p><strong>Assumptions:</strong>
+1.  The existing SAP ERP system exposes necessary APIs/RFCs for integration.
+2.  All users have access to corporate devices (laptops/mobile) with internet connectivity.
+3.  Material master data in SAP is currently clean and standardized.
+4.  Management will enforce a mandate prohibiting outside-of-system procurement.
+5.  Vendors will accept auto-generated digital POs via email.</p>
+<p><strong>Constraints:</strong>
+1.  <strong>Regulatory:</strong> Must comply with strict BUMN procurement guidelines and aviation safety standards.
+2.  <strong>Technical:</strong> Must integrate seamlessly with legacy SAP infrastructure without causing performance degradation.
+3.  <strong>Budget:</strong> Development and implementation must not exceed the allocated IT transformation budget for FY26.
+4.  <strong>Change Management:</strong> High resistance to change expected from senior staff accustomed to paper processes.</p>
+<h3>1.7 Key Deliverables</h3>
+<ul>
+<li><strong>Business Documentation:</strong> BRD, Functional/Non-Functional Requirements, Use Cases.</li>
+<li><strong>Process Modeling:</strong> AS-IS and TO-BE Process Flows (BPMN), Swimlane Diagrams.</li>
+<li><strong>Data &amp; System Design:</strong> DFD, ERD, High-Level Architecture, API Specs.</li>
+<li><strong>Quality Assurance:</strong> UAT Strategy, Test Cases, Requirements Traceability Matrix (RTM).</li>
+<li><strong>Business Impact:</strong> Change Management Plan, ROI Projection, Risk Register.</li>
+</ul>
+<h3>1.8 Analyst Role &amp; Methodology</h3>
+<p><strong>Role:</strong> Lead Business Analyst (Simulated)
+<strong>Methodology:</strong> Aligned with BABOK (Business Analysis Body of Knowledge) v3.
+<strong>Techniques Utilized:</strong>
+*   <strong>Elicitation:</strong> Stakeholder interviews, document analysis (existing SOPs), observation of current warehouse practices.
+*   <strong>Analysis:</strong> Root Cause Analysis (Fishbone, 5 Whys), Process Modeling, Gap Analysis.
+*   <strong>Tools:</strong> draw.io (Process/UML), Lucidchart (ERD), Figma (Wireframing), Notion (Documentation).</p>
+<h3>1.9 Projected Business Impact</h3>
+<table>
+<thead>
+<tr>
+<th style="text-align: left;">Metric</th>
+<th style="text-align: left;">AS-IS (Current State)</th>
+<th style="text-align: left;">TO-BE (Projected Target)</th>
+<th style="text-align: left;">Impact</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td style="text-align: left;">PR-to-PO Cycle Time</td>
+<td style="text-align: left;">5 - 7 Days</td>
+<td style="text-align: left;">1 - 2 Days</td>
+<td style="text-align: left;"><strong>70% Faster</strong></td>
+</tr>
+<tr>
+<td style="text-align: left;">Approval Turnaround</td>
+<td style="text-align: left;">48 - 72 Hours</td>
+<td style="text-align: left;">&lt; 12 Hours</td>
+<td style="text-align: left;"><strong>75% Improvement</strong></td>
+</tr>
+<tr>
+<td style="text-align: left;">Manual Data Entry Errors</td>
+<td style="text-align: left;">~10%</td>
+<td style="text-align: left;">&lt; 1%</td>
+<td style="text-align: left;"><strong>90% Reduction</strong></td>
+</tr>
+<tr>
+<td style="text-align: left;">Compliance Audit Prep</td>
+<td style="text-align: left;">2-3 Weeks</td>
+<td style="text-align: left;">Real-time / 1 Click</td>
+<td style="text-align: left;"><strong>Massive Time Saving</strong></td>
+</tr>
+<tr>
+<td style="text-align: left;">Paper Usage</td>
+<td style="text-align: left;">High (Physical routing)</td>
+<td style="text-align: left;">Zero (100% Digital)</td>
+<td style="text-align: left;"><strong>Eco &amp; Cost Friendly</strong></td>
+</tr>
+</tbody>
+</table>
+<hr />
+<h2>SECTION 2: BUSINESS PROBLEM ANALYSIS</h2>
+<h3>2.1 Industry Context Analysis</h3>
+<p>Procurement in the aviation MRO sector is distinctively challenging. Unlike retail or standard manufacturing, aviation parts are heavily regulated. Every part must possess proper certification (e.g., EASA Form 1, FAA 8130-3). The lead times for these specialized parts can be exceptionally long, and the cost of delay is astronomical (AOG scenarios). Therefore, a procurement system in this industry cannot simply be efficient; it must be flawlessly accurate, highly traceable, and exceptionally fast when emergencies arise.</p>
+<h3>2.2 Current State Assessment</h3>
+<p>Currently, the procurement process is highly fragmented. A mechanic identifies a need and fills out a paper or Excel-based Purchase Request. This form is physically routed to a manager, who may be off-site, causing immediate delays. Finance manually checks budget spreadsheets. Procurement staff re-type the request into SAP, leading to frequent data entry errors. When items arrive, the warehouse relies on manual checking against paper POs, delaying the update of inventory systems. This creates a reactive environment where staff spend more time chasing approvals and correcting errors than analyzing vendor performance or optimizing stock levels.</p>
+<h3>2.3 Root Cause Analysis (Ishikawa / Fishbone)</h3>
+<ul>
+<li><strong>People:</strong><ul>
+<li>Resistance to adopting complex SAP interfaces.</li>
+<li>Lack of training on standardized material naming conventions.</li>
+<li>Managers unavailable to sign physical documents.</li>
+</ul>
+</li>
+<li><strong>Process:</strong><ul>
+<li>Sequential, manual approval routing.</li>
+<li>No standardized prioritization for emergency (AOG) vs. routine requests.</li>
+<li>Manual budget verification step slows down the flow.</li>
+</ul>
+</li>
+<li><strong>Technology:</strong><ul>
+<li>Lack of mobile approval capabilities.</li>
+<li>No real-time integration between front-end requests and SAP backend.</li>
+<li>Data trapped in unstructured formats (Emails, PDFs).</li>
+</ul>
+</li>
+<li><strong>Data / Information:</strong><ul>
+<li>Duplicate material codes in the master database.</li>
+<li>Inaccurate real-time inventory visibility.</li>
+</ul>
+</li>
+<li><strong>Management:</strong><ul>
+<li>Lack of visibility into process bottlenecks.</li>
+<li>Performance metrics (SLAs) for procurement are not tracked.</li>
+</ul>
+</li>
+<li><strong>Environment:</strong><ul>
+<li>Fast-paced operational environment clashes with slow administrative processes.</li>
+</ul>
+</li>
+</ul>
+<h3>2.4 5 Whys Analysis</h3>
+<p><strong>Problem:</strong> Frequent delays in issuing Purchase Orders for critical parts.
+1.  <strong>Why?</strong> Because Purchase Requests (PRs) sit pending approval for an average of 4 days.
+2.  <strong>Why?</strong> Because the approval requires physical signatures or explicit email confirmations from multiple directors.
+3.  <strong>Why?</strong> Because there is no digital workflow system to automatically route and notify approvers based on value thresholds.
+4.  <strong>Why?</strong> Because the company relies on legacy manual SOPs developed before mobile technology was prevalent.
+5.  <strong>Why (Root Cause)?</strong> Because there has been a lack of investment in a bridge system that connects user-friendly digital workflows with the rigid core ERP.</p>
+<h3>2.5 Impact Assessment Matrix</h3>
+<table>
+<thead>
+<tr>
+<th style="text-align: left;">Problem Area</th>
+<th style="text-align: left;">Frequency</th>
+<th style="text-align: left;">Severity (1-5)</th>
+<th style="text-align: left;">Business Impact</th>
+<th style="text-align: left;">Financial Implication</th>
+<th style="text-align: left;">Priority</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td style="text-align: left;">Manual Approvals</td>
+<td style="text-align: left;">Daily</td>
+<td style="text-align: left;">5</td>
+<td style="text-align: left;">Delayed parts, potential AOG</td>
+<td style="text-align: left;">High (Lost revenue)</td>
+<td style="text-align: left;"><strong>Critical</strong></td>
+</tr>
+<tr>
+<td style="text-align: left;">Data Entry Errors</td>
+<td style="text-align: left;">Weekly</td>
+<td style="text-align: left;">4</td>
+<td style="text-align: left;">Wrong parts ordered, rework</td>
+<td style="text-align: left;">Medium (Return costs, time)</td>
+<td style="text-align: left;"><strong>High</strong></td>
+</tr>
+<tr>
+<td style="text-align: left;">Budget Overruns</td>
+<td style="text-align: left;">Monthly</td>
+<td style="text-align: left;">4</td>
+<td style="text-align: left;">Cash flow issues</td>
+<td style="text-align: left;">High (Unplanned OPEX)</td>
+<td style="text-align: left;"><strong>High</strong></td>
+</tr>
+<tr>
+<td style="text-align: left;">Inventory Desync</td>
+<td style="text-align: left;">Daily</td>
+<td style="text-align: left;">3</td>
+<td style="text-align: left;">Stockouts or overstocking</td>
+<td style="text-align: left;">Medium (Holding costs)</td>
+<td style="text-align: left;"><strong>Medium</strong></td>
+</tr>
+<tr>
+<td style="text-align: left;">Poor Audit Trail</td>
+<td style="text-align: left;">Quarterly</td>
+<td style="text-align: left;">5</td>
+<td style="text-align: left;">Compliance violations</td>
+<td style="text-align: left;">High (Fines, reputation)</td>
+<td style="text-align: left;"><strong>Critical</strong></td>
+</tr>
+</tbody>
+</table>
+<h3>2.6 Cost of Inaction Analysis</h3>
+<p>If the current state is maintained, the organization faces:
+*   <strong>Operational Risk:</strong> Increased AOG times due to slow procurement, directly impacting airline schedules and passenger satisfaction.
+*   <strong>Compliance Risk:</strong> Potential failure in internal audits or DGCA/EASA regulatory audits due to untraceable part provenance and approval trails.
+*   <strong>Financial Waste:</strong> Continued high labor costs for administrative data entry, excess inventory holding costs due to poor visibility, and inability to leverage volume discounts due to fragmented vendor data.</p>
+<h3>2.7 Gap Analysis (AS-IS vs TO-BE)</h3>
+<table>
+<thead>
+<tr>
+<th style="text-align: left;">Dimension</th>
+<th style="text-align: left;">AS-IS State</th>
+<th style="text-align: left;">TO-BE State</th>
+<th style="text-align: left;">Gap / Opportunity</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td style="text-align: left;"><strong>Automation</strong></td>
+<td style="text-align: left;">Highly manual, paper/email based</td>
+<td style="text-align: left;">100% system-driven workflows</td>
+<td style="text-align: left;">Automate routing and notifications</td>
+</tr>
+<tr>
+<td style="text-align: left;"><strong>Data Integration</strong></td>
+<td style="text-align: left;">Siloed, manual double-entry into SAP</td>
+<td style="text-align: left;">Real-time bi-directional SAP sync</td>
+<td style="text-align: left;">Implement API middleware</td>
+</tr>
+<tr>
+<td style="text-align: left;"><strong>Approvals</strong></td>
+<td style="text-align: left;">Sequential, desk-bound, slow</td>
+<td style="text-align: left;">Parallel (where possible), mobile-ready</td>
+<td style="text-align: left;">Deploy mobile-responsive UI</td>
+</tr>
+<tr>
+<td style="text-align: left;"><strong>Budget Control</strong></td>
+<td style="text-align: left;">Manual spreadsheet checks</td>
+<td style="text-align: left;">Automated hard-stops against budget</td>
+<td style="text-align: left;">Integrate budget validation engine</td>
+</tr>
+<tr>
+<td style="text-align: left;"><strong>Audit Trail</strong></td>
+<td style="text-align: left;">Fragmented across emails and paper</td>
+<td style="text-align: left;">Centralized, immutable digital logs</td>
+<td style="text-align: left;">Implement comprehensive system logging</td>
+</tr>
+<tr>
+<td style="text-align: left;"><strong>User Experience</strong></td>
+<td style="text-align: left;">Frustrating, high barrier to entry</td>
+<td style="text-align: left;">Intuitive, consumer-grade UI</td>
+<td style="text-align: left;">Design user-centric frontend (Fiori/Web)</td>
+</tr>
+</tbody>
+</table>
+<h3>2.8 Key Insights</h3>
+<ol>
+<li><strong>Speed vs. Control Dilemma:</strong> The business needs lightning-fast procurement for AOG situations, but strict compliance controls slow things down. <strong>Insight:</strong> The system must feature dynamic, rules-based routing that can expedite emergency requests while maintaining auditability.</li>
+<li><strong>The "Last Mile" Problem:</strong> SAP is powerful but too complex for everyday users (mechanics, line managers). <strong>Insight:</strong> Building a user-friendly abstraction layer (SmartProcure) is more effective than trying to train all staff on raw SAP GUI.</li>
+<li><strong>Data is the New Bottleneck:</strong> Manual data entry is the root of most errors and delays. <strong>Insight:</strong> Master data (materials, vendors, cost centers) must be tightly controlled and accessible via auto-complete/dropdowns to prevent garbage-in, garbage-out.</li>
+</ol>
+<hr />
+<h2>SECTION 3: STAKEHOLDER ANALYSIS</h2>
+<h3>3.1 Stakeholder Identification Method</h3>
+<p>Stakeholders were identified through a combination of Organizational Chart Analysis (top-down), Process Mapping of the current procurement lifecycle (horizontal), and reviewing the existing RACI matrix for the supply chain department.</p>
+<h3>3.2 Stakeholder Register</h3>
+<table>
+<thead>
+<tr>
+<th style="text-align: left;">Stakeholder</th>
+<th style="text-align: left;">Role</th>
+<th style="text-align: left;">Power</th>
+<th style="text-align: left;">Interest</th>
+<th style="text-align: left;">Attitude</th>
+<th style="text-align: left;">Engagement Strategy</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td style="text-align: left;"><strong>VP Procurement</strong></td>
+<td style="text-align: left;">Project Sponsor</td>
+<td style="text-align: left;">High</td>
+<td style="text-align: left;">High</td>
+<td style="text-align: left;">Champion</td>
+<td style="text-align: left;">Manage Closely. Weekly executive summaries, focus on ROI and compliance metrics.</td>
+</tr>
+<tr>
+<td style="text-align: left;"><strong>Procurement Mgr</strong></td>
+<td style="text-align: left;">Business Owner</td>
+<td style="text-align: left;">High</td>
+<td style="text-align: left;">High</td>
+<td style="text-align: left;">Supporter</td>
+<td style="text-align: left;">Manage Closely. Involve in detailed workflow design and vendor SLA definitions.</td>
+</tr>
+<tr>
+<td style="text-align: left;"><strong>Procurement Staff</strong></td>
+<td style="text-align: left;">Core User</td>
+<td style="text-align: left;">Low</td>
+<td style="text-align: left;">High</td>
+<td style="text-align: left;">Neutral/Anxious</td>
+<td style="text-align: left;">Keep Informed. Focus on training, emphasizing how the system reduces their manual data entry burden.</td>
+</tr>
+<tr>
+<td style="text-align: left;"><strong>Finance Manager</strong></td>
+<td style="text-align: left;">Key Approver</td>
+<td style="text-align: left;">High</td>
+<td style="text-align: left;">Medium</td>
+<td style="text-align: left;">Supporter</td>
+<td style="text-align: left;">Keep Satisfied. Ensure budget validation logic meets their strict requirements.</td>
+</tr>
+<tr>
+<td style="text-align: left;"><strong>Warehouse Mgr</strong></td>
+<td style="text-align: left;">Core User</td>
+<td style="text-align: left;">Medium</td>
+<td style="text-align: left;">High</td>
+<td style="text-align: left;">Champion</td>
+<td style="text-align: left;">Keep Informed/Consult. Involve heavily in the Goods Receipt and inventory sync design.</td>
+</tr>
+<tr>
+<td style="text-align: left;"><strong>IT Head</strong></td>
+<td style="text-align: left;">Tech Enabler</td>
+<td style="text-align: left;">High</td>
+<td style="text-align: left;">Medium</td>
+<td style="text-align: left;">Neutral</td>
+<td style="text-align: left;">Keep Satisfied. Align on architecture, security standards, and SAP integration protocols.</td>
+</tr>
+<tr>
+<td style="text-align: left;"><strong>Dept Heads (Req)</strong></td>
+<td style="text-align: left;">Originators</td>
+<td style="text-align: left;">Medium</td>
+<td style="text-align: left;">High</td>
+<td style="text-align: left;">Resistant (Change)</td>
+<td style="text-align: left;">Consult. Emphasize speed of approvals and UI simplicity to win them over.</td>
+</tr>
+<tr>
+<td style="text-align: left;"><strong>Internal Audit</strong></td>
+<td style="text-align: left;">Governance</td>
+<td style="text-align: left;">High</td>
+<td style="text-align: left;">Low</td>
+<td style="text-align: left;">Supporter</td>
+<td style="text-align: left;">Keep Satisfied. Ensure immutable logs and reporting meet all audit standards.</td>
+</tr>
+</tbody>
+</table>
+<h3>3.3 Power-Interest Grid Analysis</h3>
+<ul>
+<li><strong>Manage Closely (High Power, High Interest):</strong> VP Procurement, Procurement Manager. They dictate project success and budget.</li>
+<li><strong>Keep Satisfied (High Power, Low/Med Interest):</strong> Finance Manager, IT Head, Internal Audit. They can block the project if their specific requirements (budget control, security, compliance) aren't met.</li>
+<li><strong>Keep Informed (Low Power, High Interest):</strong> Procurement Staff, Warehouse Staff, Dept Heads. They are the end-users. High adoption requires them to feel heard and supported, even if they don't have veto power.</li>
+<li><strong>Monitor (Low Power, Low Interest):</strong> External Vendors (currently out of scope for direct portal access, but impacted by PO formats).</li>
+</ul>
+<h3>3.4 Communication Plan</h3>
+<table>
+<thead>
+<tr>
+<th style="text-align: left;">Stakeholder</th>
+<th style="text-align: left;">Comm. Type</th>
+<th style="text-align: left;">Frequency</th>
+<th style="text-align: left;">Channel</th>
+<th style="text-align: left;">Content</th>
+<th style="text-align: left;">Responsible</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td style="text-align: left;">VP Procurement</td>
+<td style="text-align: left;">Executive Status</td>
+<td style="text-align: left;">Bi-weekly</td>
+<td style="text-align: left;">Presentation</td>
+<td style="text-align: left;">Budget, Timeline, Major Risks</td>
+<td style="text-align: left;">Lead BA / PM</td>
+</tr>
+<tr>
+<td style="text-align: left;">Proc. / Finance Mgrs</td>
+<td style="text-align: left;">Design Workshop</td>
+<td style="text-align: left;">Weekly</td>
+<td style="text-align: left;">Teams Meeting</td>
+<td style="text-align: left;">Process flows, business rules, UI mockups</td>
+<td style="text-align: left;">Lead BA</td>
+</tr>
+<tr>
+<td style="text-align: left;">End Users (Staff)</td>
+<td style="text-align: left;">Demo &amp; Training</td>
+<td style="text-align: left;">Monthly</td>
+<td style="text-align: left;">Townhall / Video</td>
+<td style="text-align: left;">System sneak peeks, training guides</td>
+<td style="text-align: left;">Change Manager</td>
+</tr>
+<tr>
+<td style="text-align: left;">IT Department</td>
+<td style="text-align: left;">Technical Sync</td>
+<td style="text-align: left;">Weekly</td>
+<td style="text-align: left;">Jira / Standup</td>
+<td style="text-align: left;">API specs, integration issues, security</td>
+<td style="text-align: left;">Tech Lead / BA</td>
+</tr>
+</tbody>
+</table>
+<h3>3.5 Stakeholder Concerns &amp; Mitigation</h3>
+<table>
+<thead>
+<tr>
+<th style="text-align: left;">Stakeholder</th>
+<th style="text-align: left;">Likely Concern</th>
+<th style="text-align: left;">Mitigation Strategy</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td style="text-align: left;"><strong>End Users</strong></td>
+<td style="text-align: left;">"This is just another system I have to learn."</td>
+<td style="text-align: left;">Emphasize intuitive UI. Show how it eliminates paper pushing. Provide excellent training.</td>
+</tr>
+<tr>
+<td style="text-align: left;"><strong>Finance</strong></td>
+<td style="text-align: left;">"Will this bypass our budget controls?"</td>
+<td style="text-align: left;">Demonstrate the hard-stop automated budget validation feature in UAT.</td>
+</tr>
+<tr>
+<td style="text-align: left;"><strong>IT</strong></td>
+<td style="text-align: left;">"This will overload our legacy SAP system."</td>
+<td style="text-align: left;">Design asynchronous API calls and caching mechanisms; involve IT early in architecture design.</td>
+</tr>
+</tbody>
+</table>
+<hr />
+<h2>SECTION 4: AS-IS PROCESS FLOW</h2>
+<h3>4.1 Process Overview</h3>
+<p>The current procurement process is highly manual, serial, and opaque. When a department needs a part, they fill out a physical or Excel PR form. This form is passed around for physical signatures. Once approved, it is handed to the Procurement department, where a staff member manually re-types the data into SAP. SAP generates a PO, which is exported to PDF and emailed to the vendor. When goods arrive, the warehouse manually checks the delivery against a printed PO and updates SAP, often with a delay.</p>
+<h3>4.2 Detailed AS-IS Process Steps</h3>
+<ol>
+<li><strong>Employee:</strong> Identifies need, manually fills out Excel PR form (looks up material codes manually). <em>[Pain Point: High error rate in codes]</em></li>
+<li><strong>Employee:</strong> Prints form, walks it to Manager's desk or sends via email.</li>
+<li><strong>Manager:</strong> Reviews PR. If approved, signs physically or replies "Approved" via email. <em>[Pain Point: Delay if manager is off-site]</em></li>
+<li><strong>Employee:</strong> Forwards approved PR to Finance.</li>
+<li><strong>Finance:</strong> Manually checks department budget spreadsheet. Signs if budget is available. <em>[Pain Point: Time-consuming, manual check]</em></li>
+<li><strong>Employee:</strong> Sends fully signed PR to Procurement Admin.</li>
+<li><strong>Procurement Admin:</strong> Receives PR. Manually enters data into SAP GUI to create official SAP PR. <em>[Pain Point: Double entry, risk of typos]</em></li>
+<li><strong>Procurement Mgr:</strong> Reviews SAP PR, converts to SAP Purchase Order (PO).</li>
+<li><strong>Procurement Admin:</strong> Exports PO to PDF, drafts email, attaches PDF, sends to Vendor.</li>
+<li><strong>Vendor:</strong> Delivers goods to Warehouse with Delivery Note.</li>
+<li><strong>Warehouse:</strong> Visually inspects goods, checks against printed PO.</li>
+<li><strong>Warehouse:</strong> Manually logs receipt into SAP (Goods Receipt). <em>[Pain Point: Often delayed to end of shift, causing inventory desync]</em></li>
+<li><strong>Finance:</strong> Receives invoice, manually performs 3-way match (PO, GR, Invoice) before payment.</li>
+</ol>
+<h3>4.3 Process Metrics (Current State)</h3>
+<ul>
+<li><strong>PR Creation to Final Approval:</strong> 3 - 5 Days.</li>
+<li><strong>Data Entry into SAP:</strong> 1 - 2 Days backlog.</li>
+<li><strong>Total PR-to-PO Cycle:</strong> 5 - 7 Days.</li>
+<li><strong>Error Rate (Material Codes/Quantities):</strong> ~12%.</li>
+<li><strong>Inventory Update Latency:</strong> 4 - 24 Hours after physical receipt.</li>
+</ul>
+<h3>4.4 Waste Analysis (Lean TIMWOODS)</h3>
+<ul>
+<li><strong>Transport:</strong> Moving physical paper between desks.</li>
+<li><strong>Inventory:</strong> Buffer stock held because procurement is too slow to trust Just-In-Time.</li>
+<li><strong>Motion:</strong> Employees walking to get signatures.</li>
+<li><strong>Waiting:</strong> Waiting for managers to check email/return to desk to approve.</li>
+<li><strong>Over-processing:</strong> Re-typing data from Excel into SAP.</li>
+<li><strong>Defects:</strong> Incorrect material codes requiring PR rejection and rework.</li>
+</ul>
+<hr />
+<h2>SECTION 5: TO-BE PROCESS FLOW</h2>
+<h3>5.1 Solution Design Principles</h3>
+<ol>
+<li><strong>Single Point of Entry:</strong> Data is entered once by the requestor and flows seamlessly.</li>
+<li><strong>Automated Routing:</strong> The system decides who needs to approve based on business rules.</li>
+<li><strong>Real-Time Validation:</strong> Budget and material codes are validated instantly upon input.</li>
+<li><strong>Mobile-First Approvals:</strong> Managers can approve requests via smartphone with one click.</li>
+<li><strong>Exception-Based Management:</strong> Procurement staff only intervene when the system flags an issue; routine POs are automated.</li>
+</ol>
+<h3>5.2 Detailed TO-BE Process Steps</h3>
+<ol>
+<li><strong>Employee:</strong> Logs into SmartProcure. Selects items from integrated Material Catalog (dropdowns/search). System auto-fills codes and prices.</li>
+<li><strong>System:</strong> Instantly validates budget availability via API to SAP FI/CO. If insufficient, hard stop.</li>
+<li><strong>Employee:</strong> Submits PR.</li>
+<li><strong>System:</strong> Evaluates Approval Matrix and automatically routes to required approvers via push notification/email.</li>
+<li><strong>Manager/Finance:</strong> Receives notification on mobile/web. Clicks "Approve". <em>[Improvement: Instant, location-independent]</em></li>
+<li><strong>System:</strong> Upon final approval, automatically syncs PR to SAP via API.</li>
+<li><strong>System (Optional Auto-PO):</strong> If vendor is predefined and contract exists, system automatically converts PR to PO in SAP and emails Vendor. <em>[Improvement: Zero manual data entry by Procurement]</em></li>
+<li><strong>Vendor:</strong> Delivers goods.</li>
+<li><strong>Warehouse:</strong> Scans PO barcode/QR code on delivery note using mobile device. Enters received quantity.</li>
+<li><strong>System:</strong> Instantly syncs Goods Receipt to SAP, updating inventory in real-time. <em>[Improvement: Zero latency, high accuracy]</em></li>
+<li><strong>System:</strong> Triggers notification to Finance that 3-way match is ready for invoice processing.</li>
+</ol>
+<h3>5.3 Approval Matrix (Business Rules Engine)</h3>
+<p>The system will enforce the following dynamic routing rules:
+*   <strong>Value &lt; IDR 10,000,000:</strong> Direct Manager Approval only.
+*   <strong>Value IDR 10,000,000 - 50,000,000:</strong> Manager + Finance Manager.
+*   <strong>Value IDR 50,000,000 - 200,000,000:</strong> Manager + Finance Manager + VP Procurement.
+*   <strong>Value &gt; IDR 200,000,000:</strong> Manager + Finance Manager + VP Procurement + Board of Directors.
+*   <strong>Emergency (AOG) Flag:</strong> Bypasses standard SLA, sends urgent SMS/Push alerts to all required approvers immediately.</p>
+<h3>5.4 Process Improvement Summary</h3>
+<table>
+<thead>
+<tr>
+<th style="text-align: left;">Metric</th>
+<th style="text-align: left;">Expected Improvement</th>
+<th style="text-align: left;">Key Driver</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td style="text-align: left;"><strong>Cycle Time</strong></td>
+<td style="text-align: left;">5-7 days ➔ 1-2 days</td>
+<td style="text-align: left;">Automated routing, mobile approvals.</td>
+</tr>
+<tr>
+<td style="text-align: left;"><strong>Data Accuracy</strong></td>
+<td style="text-align: left;">88% ➔ 99%</td>
+<td style="text-align: left;">Catalog-driven selection, zero double-entry.</td>
+</tr>
+<tr>
+<td style="text-align: left;"><strong>Budget Control</strong></td>
+<td style="text-align: left;">Reactive ➔ Proactive</td>
+<td style="text-align: left;">Real-time API validation before submission.</td>
+</tr>
+<tr>
+<td style="text-align: left;"><strong>Procurement Staff Focus</strong></td>
+<td style="text-align: left;">Data Entry ➔ Strategic</td>
+<td style="text-align: left;">Automation of routine PO generation.</td>
+</tr>
+</tbody>
+</table>
+<h2>SECTION 6: BUSINESS REQUIREMENTS DOCUMENT (BRD)</h2>
+<h3>6.1 Document Control</h3>
+<table>
+<thead>
+<tr>
+<th style="text-align: left;">Detail</th>
+<th style="text-align: left;">Description</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td style="text-align: left;"><strong>Document Name</strong></td>
+<td style="text-align: left;">Business Requirements Document (BRD) - GAV SmartProcure</td>
+</tr>
+<tr>
+<td style="text-align: left;"><strong>Version</strong></td>
+<td style="text-align: left;">1.0 (Final Draft)</td>
+</tr>
+<tr>
+<td style="text-align: left;"><strong>Author</strong></td>
+<td style="text-align: left;">Fitria Novitasari (Lead Business Analyst)</td>
+</tr>
+<tr>
+<td style="text-align: left;"><strong>Status</strong></td>
+<td style="text-align: left;">Pending Approval</td>
+</tr>
+<tr>
+<td style="text-align: left;"><strong>Approvers</strong></td>
+<td style="text-align: left;">VP Procurement, IT Head, Finance Manager</td>
+</tr>
+</tbody>
+</table>
+<h3>6.2 Business Need Statement</h3>
+<p>GARUDA Indonesia's MRO division (GMF AeroAsia) currently loses an estimated 5,000+ man-hours annually due to manual, paper-based procurement processes. More critically, delayed procurement cycles increase the risk of Aircraft On Ground (AOG) incidents. GAV SmartProcure addresses this by replacing manual touchpoints with automated, rule-based digital workflows, ensuring faster parts availability, stricter compliance, and real-time budget control.</p>
+<h3>6.3 Stakeholder Requirements</h3>
+<table>
+<thead>
+<tr>
+<th style="text-align: left;">Stakeholder Group</th>
+<th style="text-align: left;">Core Requirement</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td style="text-align: left;"><strong>Management (VP Level)</strong></td>
+<td style="text-align: left;">Real-time dashboards on procurement cycle times and budget burn rates.</td>
+</tr>
+<tr>
+<td style="text-align: left;"><strong>Finance Department</strong></td>
+<td style="text-align: left;">Automated hard-stops for budget limits; full audit trail of approvals.</td>
+</tr>
+<tr>
+<td style="text-align: left;"><strong>Procurement Staff</strong></td>
+<td style="text-align: left;">Elimination of double-entry into SAP; auto-generation of standard POs.</td>
+</tr>
+<tr>
+<td style="text-align: left;"><strong>Requestors (Mechanics/Managers)</strong></td>
+<td style="text-align: left;">Mobile-friendly interface; real-time status tracking of their requests.</td>
+</tr>
+<tr>
+<td style="text-align: left;"><strong>Warehouse / Inventory</strong></td>
+<td style="text-align: left;">Barcode/QR scanning for instant Goods Receipt (GR) updates into SAP.</td>
+</tr>
+</tbody>
+</table>
+<h3>6.4 Business Requirements (BR)</h3>
+<table>
+<thead>
+<tr>
+<th style="text-align: left;">BR-ID</th>
+<th style="text-align: left;">Description</th>
+<th style="text-align: left;">Priority</th>
+<th style="text-align: left;">Source</th>
+<th style="text-align: left;">Module Mapping</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td style="text-align: left;"><strong>BR-001</strong></td>
+<td style="text-align: left;">The system must allow users to create Purchase Requests (PR) digitally using a standardized catalog linked to SAP Material Master.</td>
+<td style="text-align: left;">MUST</td>
+<td style="text-align: left;">Procurement</td>
+<td style="text-align: left;">M1: PR Management</td>
+</tr>
+<tr>
+<td style="text-align: left;"><strong>BR-002</strong></td>
+<td style="text-align: left;">The system must automatically validate budget availability via SAP FI/CO before allowing a PR to be submitted.</td>
+<td style="text-align: left;">MUST</td>
+<td style="text-align: left;">Finance</td>
+<td style="text-align: left;">M1: PR Management</td>
+</tr>
+<tr>
+<td style="text-align: left;"><strong>BR-003</strong></td>
+<td style="text-align: left;">The system must route approvals automatically based on a predefined value-based Approval Matrix.</td>
+<td style="text-align: left;">MUST</td>
+<td style="text-align: left;">Management</td>
+<td style="text-align: left;">M2: Approval Workflow</td>
+</tr>
+<tr>
+<td style="text-align: left;"><strong>BR-004</strong></td>
+<td style="text-align: left;">The system must allow approvers to review and approve/reject PRs via mobile devices.</td>
+<td style="text-align: left;">MUST</td>
+<td style="text-align: left;">Requestors</td>
+<td style="text-align: left;">M2: Approval Workflow</td>
+</tr>
+<tr>
+<td style="text-align: left;"><strong>BR-005</strong></td>
+<td style="text-align: left;">The system must automatically generate an SAP Purchase Order (PO) once a PR is fully approved, provided vendor data exists.</td>
+<td style="text-align: left;">SHOULD</td>
+<td style="text-align: left;">Procurement</td>
+<td style="text-align: left;">M3: PO Management</td>
+</tr>
+<tr>
+<td style="text-align: left;"><strong>BR-006</strong></td>
+<td style="text-align: left;">The system must support barcode scanning for Goods Receipt (GR) to update SAP inventory in real-time.</td>
+<td style="text-align: left;">MUST</td>
+<td style="text-align: left;">Warehouse</td>
+<td style="text-align: left;">M4: Inventory Mgmt</td>
+</tr>
+<tr>
+<td style="text-align: left;"><strong>BR-007</strong></td>
+<td style="text-align: left;">The system must provide a dashboard displaying PR-to-PO cycle time and vendor SLA performance.</td>
+<td style="text-align: left;">SHOULD</td>
+<td style="text-align: left;">Management</td>
+<td style="text-align: left;">M5: Reporting</td>
+</tr>
+<tr>
+<td style="text-align: left;"><strong>BR-008</strong></td>
+<td style="text-align: left;">The system must maintain an immutable audit log of all status changes, approvals, and budget overrides.</td>
+<td style="text-align: left;">MUST</td>
+<td style="text-align: left;">Internal Audit</td>
+<td style="text-align: left;">System-Wide</td>
+</tr>
+<tr>
+<td style="text-align: left;"><strong>BR-009</strong></td>
+<td style="text-align: left;">The system must flag "AOG" (Emergency) requests and bypass standard SLA routing for immediate alerts.</td>
+<td style="text-align: left;">MUST</td>
+<td style="text-align: left;">Management</td>
+<td style="text-align: left;">M1 &amp; M2</td>
+</tr>
+<tr>
+<td style="text-align: left;"><strong>BR-010</strong></td>
+<td style="text-align: left;">The system must enforce Segregation of Duties (SoD) so that a PR creator cannot be the final approver.</td>
+<td style="text-align: left;">MUST</td>
+<td style="text-align: left;">Internal Audit</td>
+<td style="text-align: left;">System-Wide</td>
+</tr>
+</tbody>
+</table>
+<h3>6.5 MoSCoW Prioritization Summary</h3>
+<ul>
+<li><strong>Must Have (70%):</strong> Core PR creation, budget validation, automated routing, SAP integration, audit logging.</li>
+<li><strong>Should Have (20%):</strong> Auto-PO generation, reporting dashboards, mobile app native features.</li>
+<li><strong>Could Have (10%):</strong> Vendor self-service portal, advanced predictive analytics for stockouts.</li>
+<li><strong>Won't Have (This Phase):</strong> Integration with external global vendor networks (e.g., ILS, PartsBase).</li>
+</ul>
+<hr />
+<h2>SECTION 7: FUNCTIONAL REQUIREMENTS (FR)</h2>
+<h3>Module 1: PR Management</h3>
+<table>
+<thead>
+<tr>
+<th style="text-align: left;">FR-ID</th>
+<th style="text-align: left;">Requirement Description</th>
+<th style="text-align: left;">Validation Rules</th>
+<th style="text-align: left;">Priority</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td style="text-align: left;"><strong>FR-1.1</strong></td>
+<td style="text-align: left;">System shall allow users to search the material catalog by Name, SAP Code, or Part Number.</td>
+<td style="text-align: left;">Input &gt; 3 chars</td>
+<td style="text-align: left;">High</td>
+</tr>
+<tr>
+<td style="text-align: left;"><strong>FR-1.2</strong></td>
+<td style="text-align: left;">System shall auto-populate unit price based on the last moving average price from SAP.</td>
+<td style="text-align: left;">Must fetch from SAP</td>
+<td style="text-align: left;">High</td>
+</tr>
+<tr>
+<td style="text-align: left;"><strong>FR-1.3</strong></td>
+<td style="text-align: left;">System shall allow users to save a PR as a "Draft" before submission.</td>
+<td style="text-align: left;">N/A</td>
+<td style="text-align: left;">Medium</td>
+</tr>
+<tr>
+<td style="text-align: left;"><strong>FR-1.4</strong></td>
+<td style="text-align: left;">System shall allow attachment of supporting documents (PDF/JPG) up to 10MB per PR.</td>
+<td style="text-align: left;">File size &lt;= 10MB</td>
+<td style="text-align: left;">High</td>
+</tr>
+<tr>
+<td style="text-align: left;"><strong>FR-1.5</strong></td>
+<td style="text-align: left;">System shall validate budget via API <code>GET /sap/budget</code> upon clicking "Submit".</td>
+<td style="text-align: left;">Hard stop if over</td>
+<td style="text-align: left;">Critical</td>
+</tr>
+</tbody>
+</table>
+<h3>Module 2: Approval Workflow</h3>
+<table>
+<thead>
+<tr>
+<th style="text-align: left;">FR-ID</th>
+<th style="text-align: left;">Requirement Description</th>
+<th style="text-align: left;">Validation Rules</th>
+<th style="text-align: left;">Priority</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td style="text-align: left;"><strong>FR-2.1</strong></td>
+<td style="text-align: left;">System shall read the PR total value and assign approvers based on the defined Matrix.</td>
+<td style="text-align: left;">Matrix config</td>
+<td style="text-align: left;">Critical</td>
+</tr>
+<tr>
+<td style="text-align: left;"><strong>FR-2.2</strong></td>
+<td style="text-align: left;">System shall send email and push notifications to the current pending approver.</td>
+<td style="text-align: left;">Trigger on status change</td>
+<td style="text-align: left;">High</td>
+</tr>
+<tr>
+<td style="text-align: left;"><strong>FR-2.3</strong></td>
+<td style="text-align: left;">System shall require a mandatory text comment if an approver selects "Reject" or "Return".</td>
+<td style="text-align: left;">Comment length &gt; 10 chars</td>
+<td style="text-align: left;">High</td>
+</tr>
+<tr>
+<td style="text-align: left;"><strong>FR-2.4</strong></td>
+<td style="text-align: left;">System shall allow an approver to delegate their authority to another user for a specified date range.</td>
+<td style="text-align: left;">Delegate must have equal/higher rank</td>
+<td style="text-align: left;">Medium</td>
+</tr>
+</tbody>
+</table>
+<h3>Module 3: PO Management</h3>
+<table>
+<thead>
+<tr>
+<th style="text-align: left;">FR-ID</th>
+<th style="text-align: left;">Requirement Description</th>
+<th style="text-align: left;">Validation Rules</th>
+<th style="text-align: left;">Priority</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td style="text-align: left;"><strong>FR-3.1</strong></td>
+<td style="text-align: left;">System shall convert approved PRs into POs by calling SAP API <code>POST /sap/po</code>.</td>
+<td style="text-align: left;">PR Status == 'Approved'</td>
+<td style="text-align: left;">Critical</td>
+</tr>
+<tr>
+<td style="text-align: left;"><strong>FR-3.2</strong></td>
+<td style="text-align: left;">System shall auto-generate a PDF version of the PO using the corporate template.</td>
+<td style="text-align: left;">N/A</td>
+<td style="text-align: left;">High</td>
+</tr>
+<tr>
+<td style="text-align: left;"><strong>FR-3.3</strong></td>
+<td style="text-align: left;">System shall allow Procurement Admin to manually amend a PO before it is sent to vendor.</td>
+<td style="text-align: left;">Triggers re-approval if &gt; 5% variance</td>
+<td style="text-align: left;">Medium</td>
+</tr>
+</tbody>
+</table>
+<h3>Module 4: Inventory Management (Goods Receipt)</h3>
+<table>
+<thead>
+<tr>
+<th style="text-align: left;">FR-ID</th>
+<th style="text-align: left;">Requirement Description</th>
+<th style="text-align: left;">Validation Rules</th>
+<th style="text-align: left;">Priority</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td style="text-align: left;"><strong>FR-4.1</strong></td>
+<td style="text-align: left;">System shall allow warehouse staff to search for open POs via PO Number or Vendor Name.</td>
+<td style="text-align: left;">PO Status == 'Open'</td>
+<td style="text-align: left;">High</td>
+</tr>
+<tr>
+<td style="text-align: left;"><strong>FR-4.2</strong></td>
+<td style="text-align: left;">System shall support camera integration to scan PO Barcodes for quick retrieval.</td>
+<td style="text-align: left;">Format: Code128</td>
+<td style="text-align: left;">Medium</td>
+</tr>
+<tr>
+<td style="text-align: left;"><strong>FR-4.3</strong></td>
+<td style="text-align: left;">System shall validate received quantity against ordered quantity; flag variances &gt; 0.</td>
+<td style="text-align: left;">Warn on variance</td>
+<td style="text-align: left;">Critical</td>
+</tr>
+<tr>
+<td style="text-align: left;"><strong>FR-4.4</strong></td>
+<td style="text-align: left;">System shall push GR data to SAP via API <code>POST /sap/gr</code> immediately upon submission.</td>
+<td style="text-align: left;">Network available</td>
+<td style="text-align: left;">Critical</td>
+</tr>
+</tbody>
+</table>
+<h3>Module 5: Reporting Dashboard</h3>
+<table>
+<thead>
+<tr>
+<th style="text-align: left;">FR-ID</th>
+<th style="text-align: left;">Requirement Description</th>
+<th style="text-align: left;">Validation Rules</th>
+<th style="text-align: left;">Priority</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td style="text-align: left;"><strong>FR-5.1</strong></td>
+<td style="text-align: left;">System shall display a pie chart of PR statuses (Draft, Pending, Approved, Rejected).</td>
+<td style="text-align: left;">Real-time update</td>
+<td style="text-align: left;">Medium</td>
+</tr>
+<tr>
+<td style="text-align: left;"><strong>FR-5.2</strong></td>
+<td style="text-align: left;">System shall calculate and display the average PR-to-PO cycle time for the current month.</td>
+<td style="text-align: left;">N/A</td>
+<td style="text-align: left;">High</td>
+</tr>
+<tr>
+<td style="text-align: left;"><strong>FR-5.3</strong></td>
+<td style="text-align: left;">System shall allow export of filtered data grids to CSV and Excel formats.</td>
+<td style="text-align: left;">N/A</td>
+<td style="text-align: left;">Medium</td>
+</tr>
+</tbody>
+</table>
+<hr />
+<h2>SECTION 8: NON-FUNCTIONAL REQUIREMENTS (NFR)</h2>
+<table>
+<thead>
+<tr>
+<th style="text-align: left;">NFR-ID</th>
+<th style="text-align: left;">Category</th>
+<th style="text-align: left;">Requirement Description</th>
+<th style="text-align: left;">Target Value</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td style="text-align: left;"><strong>NFR-01</strong></td>
+<td style="text-align: left;">Performance</td>
+<td style="text-align: left;">PR submission to SAP budget validation response time.</td>
+<td style="text-align: left;">&lt; 2 seconds (95th percentile)</td>
+</tr>
+<tr>
+<td style="text-align: left;"><strong>NFR-02</strong></td>
+<td style="text-align: left;">Availability</td>
+<td style="text-align: left;">System uptime during core business hours (06:00 - 22:00).</td>
+<td style="text-align: left;">99.9% uptime</td>
+</tr>
+<tr>
+<td style="text-align: left;"><strong>NFR-03</strong></td>
+<td style="text-align: left;">Security</td>
+<td style="text-align: left;">All APIs must be secured using OAuth 2.0 and HTTPS (TLS 1.3).</td>
+<td style="text-align: left;">100% compliance</td>
+</tr>
+<tr>
+<td style="text-align: left;"><strong>NFR-04</strong></td>
+<td style="text-align: left;">Security</td>
+<td style="text-align: left;">User passwords must be hashed using bcrypt or Argon2; no plain text.</td>
+<td style="text-align: left;">100% compliance</td>
+</tr>
+<tr>
+<td style="text-align: left;"><strong>NFR-05</strong></td>
+<td style="text-align: left;">Usability</td>
+<td style="text-align: left;">Mobile interface must pass Google Mobile-Friendly Test.</td>
+<td style="text-align: left;">Pass score &gt; 90/100</td>
+</tr>
+<tr>
+<td style="text-align: left;"><strong>NFR-06</strong></td>
+<td style="text-align: left;">Scalability</td>
+<td style="text-align: left;">System must handle up to 500 concurrent users without degradation.</td>
+<td style="text-align: left;">&lt; 3s response under load</td>
+</tr>
+<tr>
+<td style="text-align: left;"><strong>NFR-07</strong></td>
+<td style="text-align: left;">Reliability</td>
+<td style="text-align: left;">Recovery Point Objective (RPO) in case of database failure.</td>
+<td style="text-align: left;">&lt; 15 minutes data loss</td>
+</tr>
+<tr>
+<td style="text-align: left;"><strong>NFR-08</strong></td>
+<td style="text-align: left;">Compliance</td>
+<td style="text-align: left;">Audit logs must be retained and immutable for aviation compliance.</td>
+<td style="text-align: left;">5 years retention</td>
+</tr>
+</tbody>
+</table>
+<hr />
+<h2>SECTION 9: ACCEPTANCE CRITERIA</h2>
+<table>
+<thead>
+<tr>
+<th style="text-align: left;">AC-ID</th>
+<th style="text-align: left;">Scenario Name</th>
+<th style="text-align: left;">Given</th>
+<th style="text-align: left;">When</th>
+<th style="text-align: left;">Then</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td style="text-align: left;"><strong>AC-01</strong></td>
+<td style="text-align: left;">Standard PR Submission</td>
+<td style="text-align: left;">User has selected items totaling IDR 5,000,000</td>
+<td style="text-align: left;">User clicks "Submit PR"</td>
+<td style="text-align: left;">System validates budget, sets status to "Pending Approval", routes to Direct Manager.</td>
+</tr>
+<tr>
+<td style="text-align: left;"><strong>AC-02</strong></td>
+<td style="text-align: left;">PR Over Budget</td>
+<td style="text-align: left;">User selected items totaling IDR 50,000,000</td>
+<td style="text-align: left;">User clicks "Submit PR" AND budget is only 40M</td>
+<td style="text-align: left;">System prevents submission, shows error: "Insufficient Budget in Cost Center".</td>
+</tr>
+<tr>
+<td style="text-align: left;"><strong>AC-03</strong></td>
+<td style="text-align: left;">High Value Routing</td>
+<td style="text-align: left;">PR total is IDR 75,000,000</td>
+<td style="text-align: left;">PR is submitted successfully</td>
+<td style="text-align: left;">System routes approval sequentially: Manager ➔ Finance Mgr ➔ VP Procurement.</td>
+</tr>
+<tr>
+<td style="text-align: left;"><strong>AC-04</strong></td>
+<td style="text-align: left;">Reject with Comment</td>
+<td style="text-align: left;">Approver receives PR</td>
+<td style="text-align: left;">Approver clicks "Reject" and enters "Wrong spec"</td>
+<td style="text-align: left;">PR status becomes "Rejected", Requestor is notified via email with the comment.</td>
+</tr>
+<tr>
+<td style="text-align: left;"><strong>AC-05</strong></td>
+<td style="text-align: left;">Reject without Comment</td>
+<td style="text-align: left;">Approver receives PR</td>
+<td style="text-align: left;">Approver clicks "Reject" leaving comment blank</td>
+<td style="text-align: left;">System blocks action, shows error: "Rejection reason is mandatory."</td>
+</tr>
+<tr>
+<td style="text-align: left;"><strong>AC-06</strong></td>
+<td style="text-align: left;">Goods Receipt Scan</td>
+<td style="text-align: left;">PO #12345 is Open in system</td>
+<td style="text-align: left;">Warehouse scans barcode of PO #12345</td>
+<td style="text-align: left;">System loads PO details, awaits quantity input.</td>
+</tr>
+<tr>
+<td style="text-align: left;"><strong>AC-07</strong></td>
+<td style="text-align: left;">GR Over-receipt</td>
+<td style="text-align: left;">PO #12345 ordered 10 units</td>
+<td style="text-align: left;">Warehouse enters received qty as 12</td>
+<td style="text-align: left;">System shows warning: "Received quantity exceeds PO quantity. Manager override required."</td>
+</tr>
+</tbody>
+</table>
+<hr />
+<h2>SECTION 10: USE CASE DIAGRAM &amp; DETAILS</h2>
+<h3>10.1 Actor Identification</h3>
+<ul>
+<li><strong>Requestor (Employee):</strong> Initiates procurement needs.</li>
+<li><strong>Approver (Manager/VP):</strong> Reviews and approves/rejects requests.</li>
+<li><strong>Finance Admin:</strong> Manages budget overrides and vendor payments.</li>
+<li><strong>Procurement Admin:</strong> Manages PO generation and vendor relations.</li>
+<li><strong>Warehouse Staff:</strong> Receives physical goods and updates system.</li>
+<li><strong>SAP Core (External System):</strong> Source of truth for Material Master, Budgets, and GL.</li>
+</ul>
+<h3>10.2 Use Case Catalog (Excerpt)</h3>
+<ul>
+<li><strong>UC-01:</strong> Create Purchase Request</li>
+<li><strong>UC-02:</strong> Track PR Status</li>
+<li><strong>UC-03:</strong> Approve/Reject PR</li>
+<li><strong>UC-04:</strong> Delegate Approval Authority</li>
+<li><strong>UC-05:</strong> Generate Purchase Order</li>
+<li><strong>UC-06:</strong> Record Goods Receipt</li>
+<li><strong>UC-07:</strong> Generate Procurement Report</li>
+</ul>
+<h3>10.3 Detailed Use Case: UC-03 Approve/Reject PR</h3>
+<ul>
+<li><strong>Actor:</strong> Approver (Manager/VP)</li>
+<li><strong>Pre-condition:</strong> PR exists in system with status "Pending Approval" assigned to this actor.</li>
+<li><strong>Basic Flow:</strong><ol>
+<li>Approver logs into system or clicks link in notification email.</li>
+<li>System displays PR details (Items, Cost, Budget Impact).</li>
+<li>Approver reviews details.</li>
+<li>Approver clicks "Approve".</li>
+<li>System updates PR status, logs timestamp/user ID.</li>
+<li>System determines next step (Next Approver OR Convert to PO).</li>
+</ol>
+</li>
+<li><strong>Alternative Flow (Reject):</strong>
+    4a. Approver clicks "Reject".
+    4b. System prompts for mandatory rejection reason.
+    4c. Approver enters reason and submits.
+    4d. System updates PR status to "Rejected" and notifies Requestor.</li>
+</ul>
+<hr />
+<h2>SECTION 11: ACTIVITY DIAGRAM DESCRIPTIONS</h2>
+<h3>11.1 PR to PO Happy Path (Swimlane logic)</h3>
+<ol>
+<li><strong>Employee (Lane 1):</strong> Starts process ➔ Creates PR ➔ Submits PR.</li>
+<li><strong>System (Lane 2):</strong> Checks Budget. If OK ➔ Identifies Approver level.</li>
+<li><strong>Manager (Lane 3):</strong> Receives notification ➔ Reviews ➔ Approves.</li>
+<li><strong>System (Lane 2):</strong> Checks if further approval needed. If No ➔ Updates SAP.</li>
+<li><strong>Procurement (Lane 4):</strong> System auto-generates PO ➔ Admin reviews ➔ Sends to Vendor.</li>
+</ol>
+<h3>11.2 Goods Receipt Process (Swimlane logic)</h3>
+<ol>
+<li><strong>Warehouse (Lane 1):</strong> Receives physical goods ➔ Scans PO barcode.</li>
+<li><strong>System (Lane 2):</strong> Fetches PO details from SAP ➔ Displays to user.</li>
+<li><strong>Warehouse (Lane 1):</strong> Enters received quantity and condition ➔ Clicks Submit.</li>
+<li><strong>System (Lane 2):</strong> Validates quantity against PO. If matches ➔ Posts GR to SAP API ➔ Updates Inventory DB.</li>
+<li><strong>Finance (Lane 3):</strong> System alerts Finance that 3-way match (PO, GR) is ready for impending invoice.</li>
+</ol>
+<hr />
+<h2>SECTION 12: SEQUENCE DIAGRAM DESCRIPTIONS</h2>
+<h3>12.1 Sequence: PR Creation with Budget Validation</h3>
+<ol>
+<li><strong>Employee (UI)</strong> sends <code>POST /api/v1/pr</code> to <strong>API Gateway</strong>.</li>
+<li><strong>API Gateway</strong> routes to <strong>PR Service</strong>.</li>
+<li><strong>PR Service</strong> calls <strong>Budget Service</strong> to check limits.</li>
+<li><strong>Budget Service</strong> makes an external RFC call to <strong>SAP FI/CO</strong>.</li>
+<li><strong>SAP</strong> returns <code>{ status: "OK", available: 150000000 }</code>.</li>
+<li><strong>Budget Service</strong> returns OK to <strong>PR Service</strong>.</li>
+<li><strong>PR Service</strong> saves PR data to <strong>PostgreSQL Database</strong>.</li>
+<li><strong>PR Service</strong> triggers <strong>Workflow Engine</strong> to start approval routing.</li>
+<li><strong>Workflow Engine</strong> calls <strong>Notification Service</strong>.</li>
+<li><strong>Notification Service</strong> sends Email/Push to Manager.</li>
+<li><strong>PR Service</strong> returns <code>201 Created</code> to <strong>Employee (UI)</strong>.</li>
+</ol>
+<h2>SECTION 13: DATA FLOW DIAGRAM (DFD)</h2>
+<h3>13.1 Context Diagram (Level 0)</h3>
+<p>The central process is the <strong>GAV SmartProcure System (0.0)</strong>. 
+*   <strong>Employee</strong> sends <em>Purchase Requests</em>, receives <em>Status Updates</em>.
+*   <strong>Manager/Approver</strong> receives <em>Approval Requests</em>, sends <em>Approval Decisions</em>.
+*   <strong>Warehouse</strong> sends <em>Goods Receipt Data</em>, receives <em>Open PO Details</em>.
+*   <strong>Vendor</strong> receives <em>Purchase Orders</em>, sends <em>Delivery Notes / Invoices</em>.
+*   <strong>SAP ERP (External)</strong> receives <em>Approved PRs/POs/GRs</em>, sends <em>Master Data, Budget Status, Inventory Levels</em>.</p>
+<h3>13.2 Detailed DFD (Level 1)</h3>
+<ul>
+<li><strong>Process 1.0 (Manage PR):</strong> Inputs material codes and quantities. Reads from <code>D1: Material Master</code> and <code>D2: Budget</code>. Writes to <code>D3: Purchase Requests</code>.</li>
+<li><strong>Process 2.0 (Process Approval):</strong> Reads from <code>D3: Purchase Requests</code>. Evaluates against <code>D4: Approval Matrix</code>. Writes status to <code>D3</code> and creates logs in <code>D5: Audit Log</code>.</li>
+<li><strong>Process 3.0 (Manage PO):</strong> Reads Approved PRs from <code>D3</code> and vendor data from <code>D6: Vendor Master</code>. Writes to <code>D7: Purchase Orders</code>.</li>
+<li><strong>Process 4.0 (Manage Inventory):</strong> Reads Open POs from <code>D7</code>. Takes GR input from Warehouse. Writes to <code>D8: Inventory</code> and updates <code>D7</code> status.</li>
+</ul>
+<hr />
+<h2>SECTION 14: ENTITY RELATIONSHIP DIAGRAM (ERD)</h2>
+<h3>14.1 Key Entities &amp; Relationships</h3>
+<ol>
+<li><strong>Users (Employees)</strong> <code>1 : M</code> <strong>Purchase_Requests</strong> (One user can create many PRs).</li>
+<li><strong>Purchase_Requests</strong> <code>1 : M</code> <strong>PR_Items</strong> (A PR contains multiple line items).</li>
+<li><strong>Purchase_Requests</strong> <code>1 : M</code> <strong>Approvals</strong> (A PR goes through multiple approval stages).</li>
+<li><strong>PR_Items</strong> <code>M : 1</code> <strong>Material_Catalog</strong> (Many PR items can refer to the same catalog material).</li>
+<li><strong>Purchase_Requests</strong> <code>1 : 1</code> <strong>Purchase_Orders</strong> (An approved PR generates a PO).</li>
+<li><strong>Purchase_Orders</strong> <code>M : 1</code> <strong>Vendors</strong> (A vendor receives multiple POs).</li>
+<li><strong>Purchase_Orders</strong> <code>1 : M</code> <strong>Goods_Receipts</strong> (A PO might be fulfilled in multiple receipt batches).</li>
+</ol>
+<h3>14.2 Key Entity Attributes (Example: Purchase_Request)</h3>
+<ul>
+<li><code>PR_ID</code> (PK, UUID, Auto-generated)</li>
+<li><code>Requestor_ID</code> (FK to Users table)</li>
+<li><code>Cost_Center_ID</code> (FK to Cost_Centers table)</li>
+<li><code>Total_Amount</code> (Decimal, 15,2)</li>
+<li><code>Status</code> (Enum: Draft, Pending, Approved, Rejected, PO_Created)</li>
+<li><code>Priority</code> (Enum: Normal, Urgent, AOG)</li>
+<li><code>Created_At</code> (Timestamp)</li>
+</ul>
+<hr />
+<h2>SECTION 15: HIGH-LEVEL SYSTEM ARCHITECTURE</h2>
+<h3>15.1 Architecture Tiers</h3>
+<ol>
+<li><strong>Presentation Tier (Frontend):</strong> React.js single-page application (SPA). Fully responsive for mobile approvals. Uses a UI component library aligned with corporate branding.</li>
+<li><strong>Application Tier (Backend APIs):</strong> Node.js/Express REST APIs following a microservices pattern (PR Service, Workflow Service, Integration Service).</li>
+<li><strong>Integration Tier (Middleware):</strong> SAP PI/PO (Process Integration) or custom API Gateway to handle RFC/BAPI calls to the legacy SAP ERP safely.</li>
+<li><strong>Data Tier:</strong> <ul>
+<li><strong>PostgreSQL:</strong> Primary database for PR states, workflow history, and application-specific data.</li>
+<li><strong>SAP HANA:</strong> The ultimate system of record for master data (materials, vendors, ledger).</li>
+</ul>
+</li>
+</ol>
+<h3>15.2 Security Architecture</h3>
+<ul>
+<li><strong>Authentication:</strong> Integration with corporate Microsoft Active Directory via SAML 2.0 / OAuth 2.0 (SSO).</li>
+<li><strong>Authorization:</strong> Role-Based Access Control (RBAC) enforced at the API level (JWT tokens).</li>
+<li><strong>Data Protection:</strong> TLS 1.3 for data in transit. Database encryption for data at rest.</li>
+</ul>
+<hr />
+<h2>SECTION 16: API DOCUMENTATION (Excerpt)</h2>
+<h3>Endpoint: Create Purchase Request</h3>
+<ul>
+<li><strong>Method:</strong> <code>POST</code></li>
+<li><strong>URL:</strong> <code>/api/v1/purchase-requests</code></li>
+<li><strong>Auth Required:</strong> Yes (Bearer Token)</li>
+<li><strong>Request Body (JSON):</strong>
+    <code>json
+    {
+      "costCenterId": "CC-1029",
+      "priority": "Normal",
+      "items": [
+        { "materialCode": "MAT-8832", "quantity": 5 },
+        { "materialCode": "MAT-9912", "quantity": 10 }
+      ]
+    }</code></li>
+<li><strong>Success Response (201 Created):</strong>
+    <code>json
+    {
+      "status": "success",
+      "data": {
+        "prId": "PR-2026-08912",
+        "totalAmount": 15000000,
+        "workflowStatus": "Pending Approval",
+        "nextApproverId": "USR-442"
+      }
+    }</code></li>
+<li><strong>Error Response (400 Bad Request):</strong> Triggered if budget is exceeded or invalid material code.</li>
+</ul>
+<hr />
+<h2>SECTION 17: VALIDATION &amp; BUSINESS RULES</h2>
+<h3>17.1 Hard Validation Rules</h3>
+<ul>
+<li><strong>VR-01 (Budget):</strong> <code>IF PR.TotalAmount &gt; AvailableBudget(CostCenter) THEN Prevent_Submit AND Display_Error.</code></li>
+<li><strong>VR-02 (Delegation):</strong> A user cannot delegate approval authority to a user with a lower hierarchical rank.</li>
+<li><strong>VR-03 (Goods Receipt):</strong> <code>IF GR.Quantity &gt; (PO.OrderedQuantity - GR.PreviousReceived) THEN Flag_Variance AND Require_Manager_Override.</code></li>
+</ul>
+<h3>17.2 Segregation of Duties (SoD)</h3>
+<ul>
+<li><strong>Rule 1:</strong> The <code>Requestor_ID</code> can never equal the <code>Final_Approver_ID</code> on the same PR.</li>
+<li><strong>Rule 2:</strong> The person recording the Goods Receipt (Warehouse) cannot be the person who created the PR.</li>
+</ul>
+<hr />
+<h2>SECTION 18: ROLE MATRIX (RACI)</h2>
+<table>
+<thead>
+<tr>
+<th style="text-align: left;">Process / Activity</th>
+<th style="text-align: left;">Employee (Req)</th>
+<th style="text-align: left;">Manager (App)</th>
+<th style="text-align: left;">Finance</th>
+<th style="text-align: left;">Procurement</th>
+<th style="text-align: left;">Warehouse</th>
+<th style="text-align: left;">IT Admin</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td style="text-align: left;"><strong>Create PR</strong></td>
+<td style="text-align: left;">R, A</td>
+<td style="text-align: left;">I</td>
+<td style="text-align: left;">-</td>
+<td style="text-align: left;">I</td>
+<td style="text-align: left;">-</td>
+<td style="text-align: left;">-</td>
+</tr>
+<tr>
+<td style="text-align: left;"><strong>Approve PR</strong></td>
+<td style="text-align: left;">I</td>
+<td style="text-align: left;">R, A</td>
+<td style="text-align: left;">R, A*</td>
+<td style="text-align: left;">I</td>
+<td style="text-align: left;">-</td>
+<td style="text-align: left;">-</td>
+</tr>
+<tr>
+<td style="text-align: left;"><strong>Generate PO</strong></td>
+<td style="text-align: left;">I</td>
+<td style="text-align: left;">-</td>
+<td style="text-align: left;">-</td>
+<td style="text-align: left;">R, A</td>
+<td style="text-align: left;">I</td>
+<td style="text-align: left;">-</td>
+</tr>
+<tr>
+<td style="text-align: left;"><strong>Record GR</strong></td>
+<td style="text-align: left;">I</td>
+<td style="text-align: left;">-</td>
+<td style="text-align: left;">I</td>
+<td style="text-align: left;">I</td>
+<td style="text-align: left;">R, A</td>
+<td style="text-align: left;">-</td>
+</tr>
+<tr>
+<td style="text-align: left;"><strong>Manage SAP Config</strong></td>
+<td style="text-align: left;">-</td>
+<td style="text-align: left;">-</td>
+<td style="text-align: left;">-</td>
+<td style="text-align: left;">C</td>
+<td style="text-align: left;">-</td>
+<td style="text-align: left;">R, A</td>
+</tr>
+<tr>
+<td style="text-align: left;"><strong>System Uptime</strong></td>
+<td style="text-align: left;">-</td>
+<td style="text-align: left;">-</td>
+<td style="text-align: left;">-</td>
+<td style="text-align: left;">-</td>
+<td style="text-align: left;">-</td>
+<td style="text-align: left;">R, A</td>
+</tr>
+</tbody>
+</table>
+<p><em>(R = Responsible, A = Accountable, C = Consulted, I = Informed)</em> | <em>Finance only approves if value &gt; threshold.</em></p>
+<hr />
+<h2>SECTION 19: INTEGRATION FLOWS</h2>
+<h3>19.1 SAP Integration Points</h3>
+<ol>
+<li><strong>Material Master Sync (Scheduled Batch):</strong> Pulls new/updated material codes from SAP to SmartProcure DB every 24 hours via API to ensure local dropdowns are fast and accurate.</li>
+<li><strong>Real-time Budget Check (Synchronous API):</strong> Upon PR submission, SmartProcure pings SAP FI/CO. Must return result in &lt; 2 seconds.</li>
+<li><strong>PR/PO Posting (Asynchronous Queue):</strong> Once fully approved, the PR payload is placed in a message queue (e.g., RabbitMQ). A worker service consumes this and writes to SAP via BAPI to ensure no data loss if SAP is temporarily down.</li>
+</ol>
+<hr />
+<h2>SECTION 20: EXCEPTION FLOWS</h2>
+<table>
+<thead>
+<tr>
+<th style="text-align: left;">Exception ID</th>
+<th style="text-align: left;">Scenario</th>
+<th style="text-align: left;">System Action</th>
+<th style="text-align: left;">Recovery / Mitigation</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td style="text-align: left;"><strong>EX-01</strong></td>
+<td style="text-align: left;">SAP API Timeout during budget check.</td>
+<td style="text-align: left;">Halt submission, display friendly error to user.</td>
+<td style="text-align: left;">Auto-retry 3 times. If fails, log alert for IT. User tries again later.</td>
+</tr>
+<tr>
+<td style="text-align: left;"><strong>EX-02</strong></td>
+<td style="text-align: left;">Approver is on leave but forgot to set delegation.</td>
+<td style="text-align: left;">PR stalls in "Pending".</td>
+<td style="text-align: left;">Workflow engine escalates to Approver's Manager after 48 hours automatically.</td>
+</tr>
+<tr>
+<td style="text-align: left;"><strong>EX-03</strong></td>
+<td style="text-align: left;">Vendor rejects auto-generated PO.</td>
+<td style="text-align: left;">PO status changes to "Vendor Rejected".</td>
+<td style="text-align: left;">Triggers alert to Procurement Admin to intervene manually.</td>
+</tr>
+</tbody>
+</table>
+<hr />
+<h2>SECTION 21: USER ACCEPTANCE TESTING (UAT)</h2>
+<h3>21.1 Test Case Sample (TC-004: AOG Emergency PR)</h3>
+<ul>
+<li><strong>Module:</strong> M1 / M2 (PR &amp; Approval)</li>
+<li><strong>Pre-condition:</strong> User is logged in. Cost center has budget.</li>
+<li><strong>Test Steps:</strong><ol>
+<li>Create PR, add items.</li>
+<li>Check the "AOG / Emergency" flag.</li>
+<li>Enter mandatory AOG justification (Aircraft Tail Number).</li>
+<li>Submit PR.</li>
+</ol>
+</li>
+<li><strong>Expected Result:</strong> System bypasses standard 24hr SLA. Immediately sends SMS and Push Notifications to all approvers in the chain simultaneously (parallel approval mode).</li>
+<li><strong>Actual Result:</strong> (To be filled during execution)</li>
+<li><strong>Status:</strong> Pass/Fail</li>
+</ul>
+<hr />
+<h2>SECTION 22: RISK REGISTER</h2>
+<table>
+<thead>
+<tr>
+<th style="text-align: left;">Risk ID</th>
+<th style="text-align: left;">Risk Description</th>
+<th style="text-align: left;">Probability</th>
+<th style="text-align: left;">Impact</th>
+<th style="text-align: left;">Mitigation Strategy</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td style="text-align: left;"><strong>RSK-01</strong></td>
+<td style="text-align: left;"><strong>User Adoption:</strong> Older staff resist using the new digital system.</td>
+<td style="text-align: left;">High</td>
+<td style="text-align: left;">High</td>
+<td style="text-align: left;">Conduct intensive change management, provide "floor walkers" during go-live, secure strong mandate from VP.</td>
+</tr>
+<tr>
+<td style="text-align: left;"><strong>RSK-02</strong></td>
+<td style="text-align: left;"><strong>Integration Failure:</strong> SAP APIs do not perform fast enough for real-time checks.</td>
+<td style="text-align: left;">Medium</td>
+<td style="text-align: left;">High</td>
+<td style="text-align: left;">Implement caching for non-volatile data; stress test APIs early in the development cycle.</td>
+</tr>
+<tr>
+<td style="text-align: left;"><strong>RSK-03</strong></td>
+<td style="text-align: left;"><strong>Scope Creep:</strong> Departments ask for custom approval workflows unique to their team.</td>
+<td style="text-align: left;">High</td>
+<td style="text-align: left;">Medium</td>
+<td style="text-align: left;">Strictly enforce a standardized global approval matrix. All exceptions require Board approval.</td>
+</tr>
+</tbody>
+</table>
+<hr />
+<h2>SECTION 23: CHANGE REQUEST &amp; BUSINESS IMPACT</h2>
+<h3>23.1 Sample Change Request (CR-001)</h3>
+<ul>
+<li><strong>Title:</strong> Mobile-App Native Biometric Login</li>
+<li><strong>Description:</strong> Users want to use FaceID/Fingerprint to approve PRs instead of typing their SSO password every time on mobile.</li>
+<li><strong>Impact Analysis:</strong> High usability impact. Requires 2 weeks of development from the mobile team. Minimal risk to backend.</li>
+<li><strong>Decision:</strong> Approved for Phase 2 rollout.</li>
+</ul>
+<h3>23.2 Business Impact Analysis (ROI &amp; KPIs)</h3>
+<p>Implementing GAV SmartProcure is projected to yield massive operational benefits:
+1.  <strong>Productivity Gain:</strong> Saving ~2 hours per day for 20 Procurement staff by eliminating manual SAP data entry.
+2.  <strong>Cost Avoidance:</strong> Proactive budget hard-stops will eliminate the estimated 5% annual budget overrun caused by reactive accounting.
+3.  <strong>Compliance Confidence:</strong> Internal Audit prep time reduced from weeks to minutes, virtually eliminating the risk of regulatory fines related to parts traceability.
+4.  <strong>Key Success Metrics (KPIs to track post-launch):</strong>
+    *   System Adoption Rate (% of PRs created via system vs legacy channels).
+    *   Average PR Approval Time (Target &lt; 12 hours).
+    *   Goods Receipt to SAP Sync Latency (Target &lt; 5 minutes).</p>
+  </div>
+</body>
+</html>
