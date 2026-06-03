@@ -1,4 +1,5 @@
-<!DOCTYPE html>
+def get_html_content():
+    return """<!DOCTYPE html>
 <html lang="id">
 <head>
   <meta charset="UTF-8"/>
@@ -356,4 +357,9 @@
 
 </div>
 </body>
-</html>
+</html>"""
+
+with open('/Users/fitrianovitasari/.gemini/antigravity/scratch/portfolio/gav-smartprocure.html', 'w', encoding='utf-8') as f:
+    f.write(get_html_content())
+
+print("gav-smartprocure.html rewritten with full Indonesian layout!")
