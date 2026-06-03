@@ -3,478 +3,373 @@
 <head>
   <meta charset="UTF-8"/>
   <meta name="viewport" content="width=device-width,initial-scale=1.0"/>
-  <title>Well-Be UX Case Study – Fitria Indah Novitasari</title>
+  <title>SRS: Well-Be Application – Fitria Indah Novitasari</title>
   <link rel="preconnect" href="https://fonts.googleapis.com"/>
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin/>
-  <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@300;400;500;600;700;800;900&display=swap" rel="stylesheet"/>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet"/>
   <style>
     :root {
-      --bg-main: #060608;
-      --bg-card: #0d0d12;
-      --bg-alt: #111118;
-      --border: rgba(255,255,255,0.06);
-      --text-main: #ffffff;
-      --text-mut: #a1a1aa;
-      --accent: #10b981;
-      --accent-dim: rgba(16,185,129,0.1);
-      --radius-lg: 24px;
-      --radius-md: 16px;
+      --bg-primary: #0a0a0a;
+      --bg-secondary: #121212;
+      --bg-tertiary: #1a1a1a;
+      --border-color: #262626;
+      --text-primary: #ededed;
+      --text-secondary: #a3a3a3;
+      --accent: #3b82f6; /* Professional blue */
+      --accent-dim: rgba(59, 130, 246, 0.1);
+      --success: #10b981;
+      --radius: 8px;
     }
     
     * { margin: 0; padding: 0; box-sizing: border-box; }
-    html { scroll-behavior: smooth; }
-    body { font-family: 'Plus Jakarta Sans', sans-serif; background: var(--bg-main); color: var(--text-main); overflow-x: hidden; line-height: 1.6; }
+    body { font-family: 'Inter', -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif; background: var(--bg-primary); color: var(--text-primary); line-height: 1.6; font-size: 16px; -webkit-font-smoothing: antialiased; }
+    a { text-decoration: none; color: inherit; }
+    ul { list-style-position: inside; }
     
-    /* --- UTILS --- */
-    .container { max-width: 1400px; margin: 0 auto; padding: 0 40px; }
-    .grid-2 { display: grid; grid-template-columns: 1fr 1fr; gap: 60px; align-items: center; }
-    .reveal { opacity: 0; transform: translateY(40px); transition: all 1s cubic-bezier(0.16, 1, 0.3, 1); }
-    .reveal.visible { opacity: 1; transform: translateY(0); }
-    .display-font { font-weight: 800; letter-spacing: -1.5px; line-height: 1.1; }
+    /* Layout */
+    .container { max-width: 900px; margin: 0 auto; padding: 0 32px; }
+    .section { padding: 80px 0; border-bottom: 1px solid var(--border-color); }
+    .section:last-of-type { border-bottom: none; }
     
-    /* --- NAV --- */
-    .cs-nav { position: fixed; top: 0; left: 0; right: 0; padding: 20px 40px; display: flex; justify-content: space-between; align-items: center; z-index: 100; mix-blend-mode: difference; }
-    .cs-nav a { color: #fff; text-decoration: none; font-weight: 600; font-size: 0.9rem; display: flex; align-items: center; gap: 8px; text-transform: uppercase; letter-spacing: 1px;}
-    .cs-nav .logo { font-weight: 800; font-size: 1.2rem; letter-spacing: -0.5px; }
+    /* Navigation */
+    .nav { position: sticky; top: 0; background: rgba(10, 10, 10, 0.8); backdrop-filter: blur(12px); border-bottom: 1px solid var(--border-color); z-index: 100; padding: 16px 0; }
+    .nav .container { display: flex; justify-content: space-between; align-items: center; }
+    .nav-link { display: inline-flex; align-items: center; gap: 8px; color: var(--text-secondary); font-size: 0.9rem; font-weight: 500; transition: color 0.2s; }
+    .nav-link:hover { color: var(--text-primary); }
+    .nav-title { font-size: 0.9rem; font-weight: 600; letter-spacing: 0.5px; }
     
-    /* --- HERO --- */
-    .hero { min-height: 100vh; display: flex; align-items: center; position: relative; padding-top: 80px; overflow: hidden;}
-    .hero-bg { position: absolute; top: -20%; right: -10%; width: 800px; height: 800px; background: radial-gradient(circle, rgba(16,185,129,0.15) 0%, transparent 70%); z-index: -1; }
+    /* Typography */
+    h1 { font-size: 2.5rem; font-weight: 600; line-height: 1.2; letter-spacing: -0.02em; margin-bottom: 16px; }
+    h2 { font-size: 1.5rem; font-weight: 600; letter-spacing: -0.01em; margin-bottom: 24px; color: var(--text-primary); }
+    h3 { font-size: 1.1rem; font-weight: 600; margin-bottom: 12px; color: var(--text-primary); }
+    h4 { font-size: 0.95rem; font-weight: 600; margin-bottom: 8px; text-transform: uppercase; letter-spacing: 0.05em; color: var(--text-secondary); }
+    p { color: var(--text-secondary); margin-bottom: 20px; }
     
-    .hero-content { padding-right: 40px; }
-    .hero-tag { display: inline-block; padding: 8px 16px; border-radius: 100px; border: 1px solid var(--border); font-size: 0.8rem; font-weight: 700; text-transform: uppercase; letter-spacing: 2px; color: var(--text-mut); margin-bottom: 30px; }
-    .hero-title { font-size: clamp(3rem, 6vw, 5.5rem); margin-bottom: 30px; }
-    .hero-title span { color: var(--accent); }
-    .hero-desc { font-size: 1.25rem; color: var(--text-mut); max-width: 600px; margin-bottom: 50px; }
+    /* Hero */
+    .hero { padding: 100px 0 80px; border-bottom: 1px solid var(--border-color); }
+    .hero-meta { display: flex; flex-wrap: wrap; gap: 32px; margin-top: 48px; }
+    .meta-item h4 { font-size: 0.75rem; }
+    .meta-item p { margin: 0; color: var(--text-primary); font-weight: 500; }
     
-    .project-meta { display: flex; gap: 40px; border-top: 1px solid var(--border); padding-top: 30px; }
-    .meta-item h5 { font-size: 0.8rem; text-transform: uppercase; letter-spacing: 1px; color: var(--text-mut); margin-bottom: 8px; }
-    .meta-item p { font-size: 1rem; font-weight: 600; }
+    /* Cards & Grids */
+    .grid-2 { display: grid; grid-template-columns: 1fr 1fr; gap: 24px; }
+    .grid-3 { display: grid; grid-template-columns: repeat(3, 1fr); gap: 24px; }
+    .card { background: var(--bg-secondary); border: 1px solid var(--border-color); border-radius: var(--radius); padding: 24px; }
     
-    /* CSS Abstract Mockup */
-    .mockup-container { position: relative; width: 100%; height: 700px; display: flex; justify-content: center; align-items: center; perspective: 1000px; }
-    .phone-mockup { width: 320px; height: 650px; background: rgba(255,255,255,0.02); backdrop-filter: blur(20px); border: 1px solid rgba(255,255,255,0.1); border-radius: 40px; padding: 15px; position: relative; box-shadow: 0 30px 60px rgba(0,0,0,0.5), inset 0 0 20px rgba(255,255,255,0.05); transform: rotateY(-15deg) rotateX(5deg); transition: transform 0.5s ease; }
-    .phone-mockup:hover { transform: rotateY(0) rotateX(0); }
-    .phone-screen { width: 100%; height: 100%; background: #000; border-radius: 30px; overflow: hidden; position: relative; display: flex; flex-direction: column; }
-    .notch { position: absolute; top: 0; left: 50%; transform: translateX(-50%); width: 120px; height: 25px; background: #111; border-radius: 0 0 15px 15px; z-index: 10; }
+    /* Glossary */
+    .glossary-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 16px; }
+    .glossary-item { padding-bottom: 16px; border-bottom: 1px solid var(--border-color); }
+    .glossary-term { font-weight: 600; color: var(--text-primary); display: block; margin-bottom: 4px; }
+    .glossary-def { font-size: 0.9rem; margin: 0; }
     
-    /* Mockup UI Elements */
-    .m-header { padding: 40px 20px 20px; display: flex; justify-content: space-between; align-items: center; }
-    .m-avatar { width: 40px; height: 40px; border-radius: 20px; background: var(--border); }
-    .m-title { height: 15px; width: 120px; background: var(--border); border-radius: 10px; }
+    /* Use Cases */
+    .use-case { margin-bottom: 40px; padding-bottom: 40px; border-bottom: 1px solid var(--border-color); }
+    .use-case:last-child { margin-bottom: 0; padding-bottom: 0; border-bottom: none; }
+    .uc-header { display: flex; justify-content: space-between; align-items: baseline; margin-bottom: 16px; }
+    .uc-badge { font-size: 0.75rem; font-weight: 600; text-transform: uppercase; letter-spacing: 0.05em; padding: 4px 8px; border-radius: 4px; background: var(--accent-dim); color: var(--accent); }
+    .uc-row { display: flex; padding: 12px 0; border-top: 1px solid var(--border-color); }
+    .uc-label { width: 140px; font-weight: 500; font-size: 0.9rem; color: var(--text-primary); flex-shrink: 0; }
+    .uc-value { flex: 1; font-size: 0.95rem; color: var(--text-secondary); }
+    .uc-list { list-style: none; }
+    .uc-list li { margin-bottom: 8px; display: flex; gap: 12px; }
+    .uc-list li::before { content: counter(item) "."; counter-increment: item; color: var(--text-secondary); font-variant-numeric: tabular-nums; }
+    .uc-list { counter-reset: item; }
     
-    .m-map { flex: 1; background: #0a0a0f; position: relative; margin: 10px 20px; border-radius: 20px; overflow: hidden; border: 1px solid var(--border); }
-    .m-map-grid { position: absolute; inset: 0; background-image: linear-gradient(rgba(255,255,255,0.03) 1px, transparent 1px), linear-gradient(90deg, rgba(255,255,255,0.03) 1px, transparent 1px); background-size: 30px 30px; }
-    .m-pin { position: absolute; top: 40%; left: 50%; transform: translate(-50%, -50%); width: 24px; height: 24px; background: var(--accent); border-radius: 50%; border: 4px solid #fff; box-shadow: 0 0 20px var(--accent); }
-    .m-pulse { position: absolute; top: 40%; left: 50%; transform: translate(-50%, -50%); width: 60px; height: 60px; border-radius: 50%; border: 2px solid var(--accent); animation: pulseMap 2s infinite; }
-    @keyframes pulseMap { 0% { transform: translate(-50%, -50%) scale(0.5); opacity: 1; } 100% { transform: translate(-50%, -50%) scale(2); opacity: 0; } }
+    /* Simple Tables */
+    .data-table { width: 100%; border-collapse: collapse; margin-top: 16px; }
+    .data-table th, .data-table td { padding: 16px; text-align: left; border-bottom: 1px solid var(--border-color); font-size: 0.95rem; }
+    .data-table th { font-weight: 500; color: var(--text-primary); background: var(--bg-secondary); }
+    .data-table td { color: var(--text-secondary); vertical-align: top; }
+    .data-table tr:last-child td { border-bottom: none; }
     
-    .m-card { background: rgba(255,255,255,0.05); margin: 0 20px 20px; padding: 20px; border-radius: 16px; backdrop-filter: blur(10px); }
-    .m-line { height: 8px; background: rgba(255,255,255,0.1); border-radius: 4px; margin-bottom: 10px; }
-    .m-line.short { width: 60%; }
+    /* Footer */
+    .footer { padding: 60px 0; text-align: center; color: var(--text-secondary); font-size: 0.9rem; border-top: 1px solid var(--border-color); }
     
-    .m-floating { position: absolute; right: -40px; bottom: 150px; background: var(--bg-card); padding: 15px; border-radius: 16px; border: 1px solid var(--border); box-shadow: 0 10px 30px rgba(0,0,0,0.5); display: flex; align-items: center; gap: 15px; transform: translateZ(50px); }
-    .m-icon { width: 40px; height: 40px; border-radius: 10px; background: var(--accent-dim); color: var(--accent); display: flex; justify-content: center; align-items: center; font-size: 1.2rem; }
-    
-    /* --- SECTION 1: UNDERSTANDING --- */
-    .section-pad { padding: 150px 0; }
-    .bg-darker { background: #030304; }
-    
-    .sec-header { text-align: center; max-width: 800px; margin: 0 auto 100px; }
-    .sec-num { font-family: serif; font-style: italic; font-size: 8rem; color: transparent; -webkit-text-stroke: 1px rgba(255,255,255,0.1); line-height: 0.8; margin-bottom: -40px; }
-    .sec-title { font-size: clamp(2.5rem, 4vw, 3.5rem); margin-bottom: 20px; }
-    .sec-subtitle { font-size: 1.2rem; color: var(--text-mut); }
-    
-    .text-columns { display: grid; grid-template-columns: 1fr 1fr; gap: 60px; font-size: 1.1rem; color: var(--text-mut); }
-    .text-columns p { margin-bottom: 20px; }
-    .text-highlight { color: #fff; font-weight: 500; }
-    
-    .big-quote { text-align: center; font-size: clamp(2rem, 3vw, 2.5rem); font-weight: 300; line-height: 1.4; padding: 100px 0; max-width: 1000px; margin: 0 auto; color: #fff; }
-    .big-quote span { color: var(--accent); font-style: italic; }
-    
-    /* --- SECTION 2: DEFINING THE SOLUTION --- */
-    .persona-strip { display: flex; border-top: 1px solid var(--border); border-bottom: 1px solid var(--border); overflow-x: auto; padding: 40px 0; scrollbar-width: none; }
-    .persona-item { flex: 0 0 300px; padding: 0 40px; border-right: 1px solid var(--border); }
-    .persona-item:last-child { border-right: none; }
-    .p-icon { font-size: 3rem; margin-bottom: 20px; }
-    .p-title { font-size: 1.5rem; margin-bottom: 10px; }
-    .p-desc { color: var(--text-mut); font-size: 0.95rem; }
-    
-    .pillars-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 1px; background: var(--border); margin-top: 100px; }
-    .pillar-box { background: var(--bg-main); padding: 50px 40px; text-align: center; transition: background 0.3s; }
-    .pillar-box:hover { background: var(--bg-alt); }
-    .pillar-num { font-size: 0.8rem; font-weight: 700; color: var(--accent); margin-bottom: 20px; letter-spacing: 2px; }
-    .pillar-title { font-size: 1.3rem; margin-bottom: 15px; }
-    .pillar-desc { color: var(--text-mut); font-size: 0.95rem; }
-    
-    /* --- SECTION 3: MAPPING EXPERIENCE --- */
-    .use-case-block { padding: 100px 0; border-bottom: 1px solid var(--border); position: relative; }
-    .uc-bg-num { position: absolute; top: 50px; left: -20px; font-size: 15rem; font-weight: 900; color: rgba(255,255,255,0.02); line-height: 1; z-index: 0; pointer-events: none; }
-    .uc-content { display: grid; grid-template-columns: 1fr 2fr; gap: 80px; position: relative; z-index: 1; }
-    
-    .uc-left h3 { font-size: 2.5rem; margin-bottom: 20px; line-height: 1.1; }
-    .uc-badge { display: inline-block; padding: 6px 12px; background: rgba(239,68,68,0.1); color: #ef4444; border-radius: 4px; font-size: 0.8rem; font-weight: 700; text-transform: uppercase; margin-bottom: 20px; }
-    .uc-summary { color: var(--text-mut); font-size: 1.1rem; }
-    
-    .uc-right { background: var(--bg-card); padding: 50px; border-radius: var(--radius-lg); }
-    .flow-step { display: flex; gap: 30px; margin-bottom: 40px; position: relative; }
-    .flow-step:last-child { margin-bottom: 0; }
-    .flow-step::before { content: ''; position: absolute; left: 19px; top: 50px; bottom: -40px; width: 2px; background: var(--border); }
-    .flow-step:last-child::before { display: none; }
-    
-    .step-num { width: 40px; height: 40px; border-radius: 50%; background: var(--bg-alt); border: 2px solid var(--border); display: flex; justify-content: center; align-items: center; font-weight: 700; color: var(--accent); flex-shrink: 0; position: relative; z-index: 2; }
-    .step-text h4 { font-size: 1.2rem; margin-bottom: 8px; }
-    .step-text p { color: var(--text-mut); }
-    
-    /* Scenarios */
-    .scenario-track { margin-top: 100px; display: grid; grid-template-columns: 1fr 1fr; gap: 40px; }
-    .scenario-card { background: var(--bg-alt); border: 1px solid var(--border); border-radius: var(--radius-lg); padding: 40px; transition: transform 0.3s; }
-    .scenario-card:hover { transform: translateY(-10px); border-color: var(--accent-dim); }
-    .s-icon { width: 60px; height: 60px; border-radius: 16px; background: rgba(255,255,255,0.03); display: flex; justify-content: center; align-items: center; font-size: 1.8rem; margin-bottom: 30px; border: 1px solid var(--border); }
-    .scenario-card h4 { font-size: 1.5rem; margin-bottom: 15px; }
-    .scenario-card p { color: var(--text-mut); margin-bottom: 25px; }
-    .s-list { list-style: none; }
-    .s-list li { display: flex; gap: 12px; color: var(--text-mut); margin-bottom: 12px; font-size: 0.95rem; }
-    .s-list li::before { content: '→'; color: var(--accent); }
-    
-    /* --- FOOTER --- */
-    .cs-footer { padding: 100px 0 50px; text-align: center; }
-    .cs-footer h2 { font-size: clamp(2rem, 4vw, 3rem); margin-bottom: 30px; }
-    .btn-primary { display: inline-block; padding: 16px 32px; background: var(--text-main); color: var(--bg-main); text-decoration: none; font-weight: 700; border-radius: 100px; transition: transform 0.2s; }
-    .btn-primary:hover { transform: scale(1.05); }
-    .footer-credits { margin-top: 80px; padding-top: 30px; border-top: 1px solid var(--border); color: var(--text-mut); font-size: 0.9rem; }
-    
-    @media (max-width: 992px) {
-      .grid-2 { grid-template-columns: 1fr; gap: 40px; }
-      .text-columns { grid-template-columns: 1fr; gap: 20px; }
-      .uc-content { grid-template-columns: 1fr; gap: 40px; }
-      .scenario-track { grid-template-columns: 1fr; }
-      .pillars-grid { grid-template-columns: 1fr; }
-      .mockup-container { height: 500px; }
-      .phone-mockup { transform: scale(0.8) !important; }
-      .hero { padding-top: 120px; }
+    /* Responsive */
+    @media (max-width: 768px) {
+      .grid-2, .grid-3, .glossary-grid { grid-template-columns: 1fr; }
+      h1 { font-size: 2rem; }
+      .uc-row { flex-direction: column; gap: 4px; padding: 16px 0; }
+      .uc-label { width: 100%; color: var(--text-secondary); font-size: 0.8rem; text-transform: uppercase; letter-spacing: 0.05em; }
     }
   </style>
 </head>
 <body>
 
-  <!-- NAV -->
-  <nav class="cs-nav">
-    <a href="index.html">
-      <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M19 12H5M12 19l-7-7 7-7"/></svg>
-      Back to Portfolio
-    </a>
-    <div class="logo">FIN.</div>
+  <!-- Navigation -->
+  <nav class="nav">
+    <div class="container">
+      <a href="index.html" class="nav-link">
+        <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M19 12H5M12 19l-7-7 7-7"/></svg>
+        Back to Portfolio
+      </a>
+      <span class="nav-title">SRS: Well-Be Application</span>
+    </div>
   </nav>
 
-  <!-- HERO -->
+  <!-- Hero Section -->
   <header class="hero">
-    <div class="hero-bg"></div>
-    <div class="container grid-2">
-      <div class="hero-content reveal">
-        <span class="hero-tag">System Requirement Specification</span>
-        <h1 class="hero-title display-font">Designing A <span>Smarter</span> Proactive Monitoring System</h1>
-        <p class="hero-desc">Well-Be adalah platform inovatif yang dirancang khusus untuk memonitor lansia penderita Alzheimer melalui GPS tracking real-time dan manajemen memori digital.</p>
-        
-        <div class="project-meta">
-          <div class="meta-item">
-            <h5>Role</h5>
-            <p>System Analyst</p>
-          </div>
-          <div class="meta-item">
-            <h5>Timeline</h5>
-            <p>2025</p>
-          </div>
-          <div class="meta-item">
-            <h5>Category</h5>
-            <p>Healthcare IoT</p>
-          </div>
-        </div>
-      </div>
+    <div class="container">
+      <h4>System Requirement Specification</h4>
+      <h1>Well-Be Application: Proactive Monitoring System</h1>
+      <p style="font-size: 1.1rem; max-width: 700px;">Platform inovatif yang dirancang khusus untuk memonitor lansia penderita Alzheimer melalui pemantauan lokasi real-time dan manajemen memori digital, memfasilitasi koordinasi perawatan yang lebih baik.</p>
       
-      <!-- CSS Wireframe Mockup -->
-      <div class="mockup-container reveal">
-        <div class="phone-mockup">
-          <div class="phone-screen">
-            <div class="notch"></div>
-            <div class="m-header">
-              <div class="m-avatar"></div>
-              <div class="m-title"></div>
-            </div>
-            <div class="m-map">
-              <div class="m-map-grid"></div>
-              <div class="m-pulse"></div>
-              <div class="m-pin"></div>
-            </div>
-            <div class="m-card">
-              <div class="m-line"></div>
-              <div class="m-line short"></div>
-            </div>
-          </div>
+      <div class="hero-meta">
+        <div class="meta-item">
+          <h4>Role</h4>
+          <p>System Analyst</p>
         </div>
-        <div class="m-floating">
-          <div class="m-icon">📍</div>
-          <div>
-            <div style="font-size: 0.8rem; color: #a1a1aa; margin-bottom: 4px;">Pasien Terdeteksi</div>
-            <div style="font-size: 0.9rem; font-weight: 600;">Zona Aman</div>
-          </div>
+        <div class="meta-item">
+          <h4>Timeline</h4>
+          <p>2025</p>
+        </div>
+        <div class="meta-item">
+          <h4>Category</h4>
+          <p>Healthcare & IoT</p>
+        </div>
+        <div class="meta-item">
+          <h4>Platform</h4>
+          <p>iOS & Android</p>
         </div>
       </div>
     </div>
   </header>
 
-  <!-- SECTION 1: UNDERSTANDING -->
-  <section class="section-pad bg-darker">
+  <!-- Section 1: Introduction -->
+  <section class="section">
     <div class="container">
-      <div class="sec-header reveal">
-        <div class="sec-num">01</div>
-        <h2 class="sec-title display-font">Understanding the Challenge</h2>
-        <p class="sec-subtitle">Mengidentifikasi kebutuhan, batasan, dan ekspektasi sistem (Purpose & Scope).</p>
-      </div>
+      <h2>1. Introduction</h2>
       
-      <div class="text-columns reveal">
-        <p>Aplikasi Well-Be hadir sebagai respons terhadap kebutuhan kritis dalam perawatan lansia penderita demensia dan Alzheimer. Sistem yang ada saat ini seringkali reaktif, bukan <span class="text-highlight">proaktif</span>. Well-Be dirancang untuk tidak hanya memantau secara fisik melalui GPS tracking, tetapi juga memberikan dukungan emosional melalui fitur linimasa memori digital.</p>
-        
-        <p>Dokumen spesifikasi ini (SRS) disusun untuk memberikan panduan komprehensif bagi pengembang, tim medis, dan investor. Lingkup produk (Product Scope) berpusat pada <span class="text-highlight">peningkatan koordinasi perawatan</span> antar anggota keluarga dan pengasuh profesional, memastikan pasien selalu berada dalam radius aman, serta mengabadikan momen bahagia sebagai terapi kognitif.</p>
+      <div class="grid-2">
+        <div>
+          <h3>1.1 Purpose</h3>
+          <p>Aplikasi Well-Be adalah inovasi teknologi yang proaktif dalam memonitor lansia penderita demensia, Alzheimer, dan penurunan daya ingat. Fitur utama mencakup <strong>Linimasa</strong> untuk menyimpan kenangan sebagai terapi kognitif, serta <strong>Pelacak Lokasi</strong> melalui GPS Tracking secara real-time.</p>
+          <p>Dokumen ini mendefinisikan persyaratan sistem secara jelas untuk memfasilitasi koordinasi antara pengembang, pengasuh, keluarga, dan tim Quality Assurance (QA). Sistem harus menjamin kinerja responsif, keamanan data yang ketat, dan antarmuka yang intuitif.</p>
+        </div>
+        <div>
+          <h3>1.2 Scope & Environment</h3>
+          <p>Solusi komprehensif ini didesain untuk mengurangi beban pengasuh dan menjaga keselamatan pasien secara proaktif. Sistem terdiri dari aplikasi mobile dan integrasi perangkat *smartwatch*.</p>
+          <p><strong>Operating Environment:</strong> Mendukung minimal Android 8.0+ dan iOS 12.0+. Membutuhkan koneksi internet aktif untuk sinkronisasi data lokasi dan notifikasi real-time dari *wearable device*.</p>
+        </div>
       </div>
-      
-      <h3 class="big-quote reveal">
-        "Tujuan utama kami adalah <span>meningkatkan kualitas hidup</span> pasien sambil mengurangi beban psikologis para pengasuh."
-      </h3>
-    </div>
-  </section>
 
-  <!-- SECTION 2: DEFINING SOLUTION -->
-  <section class="section-pad">
-    <div class="container">
-      <div class="sec-header reveal">
-        <div class="sec-num">02</div>
-        <h2 class="sec-title display-font">Defining the Solution</h2>
-        <p class="sec-subtitle">Siapa pengguna kita dan apa batasan sistem yang harus dipenuhi?</p>
-      </div>
-    </div>
-
-    <!-- Personas Strip -->
-    <div class="persona-strip reveal">
-      <div class="persona-item">
-        <div class="p-icon">👴</div>
-        <h3 class="p-title">Pasien</h3>
-        <p class="p-desc">Penerima layanan utama. Memerlukan UI yang sangat disederhanakan dan akses ke fitur terapi kognitif (Linimasa memori).</p>
-      </div>
-      <div class="persona-item">
-        <div class="p-icon">🧑‍⚕️</div>
-        <h3 class="p-title">Pengasuh</h3>
-        <p class="p-desc">Pemantau langsung. Membutuhkan notifikasi real-time, pencatatan rekam medis harian, dan fitur darurat cepat.</p>
-      </div>
-      <div class="persona-item">
-        <div class="p-icon">👨‍👩‍👧</div>
-        <h3 class="p-title">Keluarga</h3>
-        <p class="p-desc">Pengawas eksternal. Perlu akses ke lokasi terkini pasien dan berpartisipasi dalam mengunggah momen/memori.</p>
-      </div>
-      <div class="persona-item">
-        <div class="p-icon">🛡️</div>
-        <h3 class="p-title">Admin</h3>
-        <p class="p-desc">Pengelola sistem backend. Mengatur akses pengguna, keamanan data, dan meng-generate laporan kesehatan bulanan.</p>
-      </div>
-    </div>
-
-    <!-- Pillars / NFR & Constraints -->
-    <div class="container">
-      <div class="pillars-grid reveal">
-        <div class="pillar-box">
-          <div class="pillar-num">NFR-01</div>
-          <h4 class="pillar-title">Performance</h4>
-          <p class="pillar-desc">Waktu respons pembaruan lokasi &lt; 5 detik. Harus mendukung 10.000 user aktif bersamaan dengan efisiensi RAM tinggi.</p>
-        </div>
-        <div class="pillar-box">
-          <div class="pillar-num">NFR-02</div>
-          <h4 class="pillar-title">Security & Privacy</h4>
-          <p class="pillar-desc">Enkripsi AES-256 untuk data medis. Wajib mematuhi regulasi HIPAA & GDPR (Design Constraint).</p>
-        </div>
-        <div class="pillar-box">
-          <div class="pillar-num">NFR-03</div>
-          <h4 class="pillar-title">Reliability</h4>
-          <p class="pillar-desc">Uptime 99.9%. Implementasi Handshake Protocols (XON/XOFF) untuk mencegah kehilangan data transmisi GPS.</p>
-        </div>
-        <div class="pillar-box">
-          <div class="pillar-num">CST-01</div>
-          <h4 class="pillar-title">Hardware Limits</h4>
-          <p class="pillar-desc">Optimalisasi konsumsi baterai smartwatch agar perangkat tidak cepat mati saat memancarkan sinyal GPS terus menerus.</p>
-        </div>
-        <div class="pillar-box">
-          <div class="pillar-num">CST-02</div>
-          <h4 class="pillar-title">EMR Integration</h4>
-          <p class="pillar-desc">Sistem harus dapat berkomunikasi dengan Electronic Medical Records (EMR) yang ada di rumah sakit terhubung.</p>
-        </div>
-        <div class="pillar-box">
-          <div class="pillar-num">NFR-04</div>
-          <h4 class="pillar-title">Usability</h4>
-          <p class="pillar-desc">Fokus pada aksesibilitas: teks besar, navigasi kontras tinggi, sangat ramah lansia yang gaptek.</p>
+      <div style="margin-top: 48px;">
+        <h3>1.3 Definitions & Acronyms</h3>
+        <div class="glossary-grid card">
+          <div class="glossary-item">
+            <span class="glossary-term">SRS</span>
+            <p class="glossary-def">Software Requirements Specifications — Dokumen standar pendefinisian fitur dan batasan sistem.</p>
+          </div>
+          <div class="glossary-item">
+            <span class="glossary-term">GPS</span>
+            <p class="glossary-def">Global Positioning System — Sistem pelacakan lokasi berbasis satelit yang digunakan smartwatch.</p>
+          </div>
+          <div class="glossary-item">
+            <span class="glossary-term">Memories</span>
+            <p class="glossary-def">Catatan digital (foto/video/teks) sebagai media terapi kognitif pasien.</p>
+          </div>
+          <div class="glossary-item">
+            <span class="glossary-term">Wearable</span>
+            <p class="glossary-def">Perangkat elektronik yang dipakai di tubuh (mis. Apple Watch) untuk memantau data kesehatan dan lokasi.</p>
+          </div>
         </div>
       </div>
     </div>
   </section>
 
-  <!-- SECTION 3: MAPPING EXPERIENCE -->
-  <section class="section-pad bg-darker">
+  <!-- Section 2: Overall Description -->
+  <section class="section">
     <div class="container">
-      <div class="sec-header reveal">
-        <div class="sec-num">03</div>
-        <h2 class="sec-title display-font">Mapping the Experience</h2>
-        <p class="sec-subtitle">Bagaimana sistem bekerja: Use Cases dan Skenario Pengguna.</p>
-      </div>
-
-      <!-- Use Case 1 -->
-      <div class="use-case-block reveal">
-        <div class="uc-bg-num">01</div>
-        <div class="uc-content">
-          <div class="uc-left">
-            <span class="uc-badge">Critical Function</span>
-            <h3>Melacak Lokasi dengan GPS</h3>
-            <p class="uc-summary">Fitur inti yang memungkinkan keluarga dan pengasuh memantau pasien Alzheimer secara real-time untuk mencegah insiden hilang (wandering).</p>
-            
-            <div style="margin-top: 40px; padding: 30px; background: rgba(16,185,129,0.05); border-left: 4px solid var(--accent); border-radius: 8px;">
-              <p style="font-style: italic; color: #fff;">"Sebagai pengasuh, saya ingin tahu pasti di mana pasien berada setiap saat, dan mendapat peringatan jika mereka keluar rumah sendirian."</p>
-            </div>
+      <h2>2. Overall Description</h2>
+      
+      <div style="margin-bottom: 48px;">
+        <h3>2.1 User Classes</h3>
+        <p>Aktor yang terlibat dalam interaksi dengan sistem Well-Be.</p>
+        <div class="grid-2">
+          <div class="card">
+            <h3>Pasien</h3>
+            <p style="margin:0; font-size:0.95rem;">Penerima utama layanan. Memiliki akses untuk menyimpan dan melihat momen/memori. Membutuhkan UI yang sangat sederhana dan ramah lansia.</p>
           </div>
-          
-          <div class="uc-right">
-            <h4 style="margin-bottom: 30px; font-size: 1.1rem; color: var(--text-mut); text-transform: uppercase; letter-spacing: 1px;">Basic Flow</h4>
-            
-            <div class="flow-step">
-              <div class="step-num">1</div>
-              <div class="step-text">
-                <h4>Sync Smartwatch</h4>
-                <p>Pasien menggunakan smartwatch yang telah dipasangkan ke sistem via Bluetooth/Wi-Fi.</p>
-              </div>
-            </div>
-            <div class="flow-step">
-              <div class="step-num">2</div>
-              <div class="step-text">
-                <h4>Continuous Tracking</h4>
-                <p>Sistem otomatis menarik data koordinat GPS dari perangkat setiap beberapa detik.</p>
-              </div>
-            </div>
-            <div class="flow-step">
-              <div class="step-num">3</div>
-              <div class="step-text">
-                <h4>Live Map View</h4>
-                <p>Keluarga membuka aplikasi dan melihat posisi pasien berupa titik/pin pada peta interaktif.</p>
-              </div>
-            </div>
-            <div class="flow-step">
-              <div class="step-num">4</div>
-              <div class="step-text">
-                <h4>Geofence Alert (Exception)</h4>
-                <p>Jika pasien melewati radius aman (geofence) atau sinyal hilang, sistem langsung membunyikan alarm di HP pengasuh.</p>
-              </div>
-            </div>
+          <div class="card">
+            <h3>Pengasuh (Caregiver)</h3>
+            <p style="margin:0; font-size:0.95rem;">Bertanggung jawab atas pemantauan langsung. Memerlukan notifikasi lokasi real-time, pencatatan rekam medis harian, dan fitur kedaruratan.</p>
+          </div>
+          <div class="card">
+            <h3>Keluarga</h3>
+            <p style="margin:0; font-size:0.95rem;">Pengawas eksternal. Perlu akses ke lokasi terkini pasien, riwayat peringatan, dan berpartisipasi dalam mengelola linimasa memori.</p>
+          </div>
+          <div class="card">
+            <h3>Administrator</h3>
+            <p style="margin:0; font-size:0.95rem;">Mengelola keseluruhan sistem, data pengguna, performa server, dan pembuatan laporan kesehatan bulanan yang komprehensif.</p>
           </div>
         </div>
       </div>
 
-      <!-- Use Case 2 -->
-      <div class="use-case-block reveal" style="border-bottom: none;">
-        <div class="uc-bg-num">02</div>
-        <div class="uc-content">
-          <div class="uc-left">
-            <span class="uc-badge" style="background: rgba(59,130,246,0.1); color: #3b82f6;">Therapy</span>
-            <h3>Mengelola Memori (Linimasa)</h3>
-            <p class="uc-summary">Pendekatan emosional untuk terapi kognitif. Keluarga dapat mengunggah kenangan agar pasien dapat melihatnya kembali.</p>
-            
-            <div style="margin-top: 40px; padding: 30px; background: rgba(59,130,246,0.05); border-left: 4px solid #3b82f6; border-radius: 8px;">
-              <p style="font-style: italic; color: #fff;">"Sebagai keluarga, saya ingin membagikan foto liburan tahun lalu agar ayah saya bisa melihatnya dan perlahan mengingat momen itu."</p>
-            </div>
+      <div style="margin-bottom: 48px;">
+        <h3>2.2 Non-Functional Requirements</h3>
+        <div class="grid-3">
+          <div class="card">
+            <h4 style="color: var(--text-primary);">Performance</h4>
+            <p style="margin:0; font-size:0.9rem;">Waktu respons data lokasi &lt; 5 detik. Harus mampu menangani 10.000 pengguna aktif dengan konsumsi RAM aplikasi &lt; 500MB.</p>
           </div>
-          
-          <div class="uc-right">
-            <h4 style="margin-bottom: 30px; font-size: 1.1rem; color: var(--text-mut); text-transform: uppercase; letter-spacing: 1px;">Basic Flow</h4>
-            
-            <div class="flow-step">
-              <div class="step-num" style="color: #3b82f6;">1</div>
-              <div class="step-text">
-                <h4>Akses Linimasa</h4>
-                <p>Keluarga memilih menu 'Memories' di aplikasi Well-Be.</p>
-              </div>
-            </div>
-            <div class="flow-step">
-              <div class="step-num" style="color: #3b82f6;">2</div>
-              <div class="step-text">
-                <h4>Unggah Media</h4>
-                <p>Keluarga menambahkan foto, video, atau catatan suara yang berkaitan dengan momen penting.</p>
-              </div>
-            </div>
-            <div class="flow-step">
-              <div class="step-num" style="color: #3b82f6;">3</div>
-              <div class="step-text">
-                <h4>Sinkronisasi</h4>
-                <p>Data disimpan di Cloud Storage yang aman (tersertifikasi HIPAA).</p>
-              </div>
-            </div>
-            <div class="flow-step">
-              <div class="step-num" style="color: #3b82f6;">4</div>
-              <div class="step-text">
-                <h4>Display ke Pasien</h4>
-                <p>Media ditampilkan dalam urutan kronologis yang mudah digeser pada tablet/perangkat pasien.</p>
-              </div>
-            </div>
+          <div class="card">
+            <h4 style="color: var(--text-primary);">Security</h4>
+            <p style="margin:0; font-size:0.9rem;">Enkripsi AES-256 untuk storage dan transmisi. Otentikasi 2FA untuk admin. Terdapat sistem deteksi anomali akses.</p>
+          </div>
+          <div class="card">
+            <h4 style="color: var(--text-primary);">Usability</h4>
+            <p style="margin:0; font-size:0.9rem;">Desain aksesibel untuk lansia. Teks besar, kontras tinggi, ikon jelas, navigasi sederhana, dan umpan balik visual yang intuitif.</p>
           </div>
         </div>
       </div>
 
-      <!-- Scenarios Grid -->
-      <div class="scenario-track reveal">
-        <div class="scenario-card">
-          <div class="s-icon">📝</div>
-          <h4>Skenario: Catatan Kesehatan</h4>
-          <p>Bagaimana pengasuh mencatat data harian pasien ke dalam sistem untuk dipantau oleh Admin.</p>
-          <ul class="s-list">
-            <li>Buka Modul Kesehatan</li>
-            <li>Input mood, tensi darah, & aktivitas</li>
-            <li>Sistem simpan dengan timestamp otomatis</li>
-            <li>Admin generate laporan PDF bulanan</li>
-          </ul>
+      <div>
+        <h3>2.3 Design Constraints & Dependencies</h3>
+        <ul style="color: var(--text-secondary); font-size: 0.95rem; margin-left: 16px;">
+          <li style="margin-bottom: 8px;"><strong>Regulatory:</strong> Wajib mematuhi regulasi privasi data medis <strong>HIPAA</strong> dan perlindungan data <strong>GDPR</strong>.</li>
+          <li style="margin-bottom: 8px;"><strong>Hardware:</strong> Sistem harus mengoptimalkan konsumsi baterai smartwatch saat pemantauan GPS aktif secara berkelanjutan.</li>
+          <li style="margin-bottom: 8px;"><strong>Interoperability:</strong> API harus kompatibel untuk berintegrasi dengan sistem <em>Electronic Medical Records (EMR)</em> di rumah sakit.</li>
+          <li style="margin-bottom: 8px;"><strong>Dependencies:</strong> Bergantung pada ketersediaan layanan GPS pihak ketiga (seperti Google Maps API) dan pembaruan OS platform.</li>
+        </ul>
+      </div>
+    </div>
+  </section>
+
+  <!-- Section 3: Use Case Specifications -->
+  <section class="section">
+    <div class="container">
+      <h2>3. Use Case Specifications</h2>
+      <p>Spesifikasi teknis interaksi antara aktor pengguna dengan sistem fungsional.</p>
+
+      <div class="card" style="padding: 32px;">
+        <!-- UC 1 -->
+        <div class="use-case">
+          <div class="uc-header">
+            <h3>UC-01: Melacak Lokasi Secara Real-time</h3>
+            <span class="uc-badge">Critical</span>
+          </div>
+          <div class="uc-row">
+            <div class="uc-label">Primary Actor</div>
+            <div class="uc-value">Keluarga, Pengasuh</div>
+          </div>
+          <div class="uc-row">
+            <div class="uc-label">Summary</div>
+            <div class="uc-value">Melacak koordinat pasien secara langsung menggunakan GPS dari smartwatch yang terintegrasi.</div>
+          </div>
+          <div class="uc-row">
+            <div class="uc-label">Basic Flow</div>
+            <div class="uc-value">
+              <ol class="uc-list">
+                <li>Pasien memakai smartwatch yang berstatus terhubung.</li>
+                <li>Pengasuh membuka halaman pemantauan di aplikasi seluler.</li>
+                <li>Sistem menarik data koordinat secara berkala.</li>
+                <li>Peta interaktif menampilkan pin lokasi pasien saat ini.</li>
+                <li>Jika pasien keluar dari zona aman (Geofence), sistem langsung mengirim push-notification darurat.</li>
+              </ol>
+            </div>
+          </div>
         </div>
-        <div class="scenario-card">
-          <div class="s-icon">⌚</div>
-          <h4>Skenario: Integrasi Device</h4>
-          <p>Langkah awal sebelum pasien mulai dipantau oleh aplikasi.</p>
-          <ul class="s-list">
-            <li>Admin buka menu 'Pairing'</li>
-            <li>Scan smartwatch via Bluetooth</li>
-            <li>Sistem lakukan jabat tangan (Handshake)</li>
-            <li>Device sukses mengirim ping pertama</li>
-          </ul>
+
+        <!-- UC 2 -->
+        <div class="use-case">
+          <div class="uc-header">
+            <h3>UC-02: Mengelola Memori (Linimasa)</h3>
+            <span class="uc-badge" style="background: rgba(16, 185, 129, 0.1); color: var(--success);">Therapy</span>
+          </div>
+          <div class="uc-row">
+            <div class="uc-label">Primary Actor</div>
+            <div class="uc-value">Keluarga, Pasien</div>
+          </div>
+          <div class="uc-row">
+            <div class="uc-label">Summary</div>
+            <div class="uc-value">Fasilitas unggah dan kelola foto/video momen bahagia sebagai instrumen terapi ingatan pasien.</div>
+          </div>
+          <div class="uc-row">
+            <div class="uc-label">Basic Flow</div>
+            <div class="uc-value">
+              <ol class="uc-list">
+                <li>Anggota keluarga masuk ke modul 'Memories'.</li>
+                <li>Memilih fungsi unggah (foto/video/teks).</li>
+                <li>Menambahkan deskripsi dan tanggal momen tersebut.</li>
+                <li>Data tersimpan dan disinkronisasi ke perangkat pasien.</li>
+                <li>Pasien dapat menelusuri memori secara kronologis di aplikasinya.</li>
+              </ol>
+            </div>
+          </div>
+        </div>
+
+        <!-- UC 3 -->
+        <div class="use-case">
+          <div class="uc-header">
+            <h3>UC-03: Pencatatan Kesehatan Harian</h3>
+            <span class="uc-badge">Essential</span>
+          </div>
+          <div class="uc-row">
+            <div class="uc-label">Primary Actor</div>
+            <div class="uc-value">Pengasuh, Admin</div>
+          </div>
+          <div class="uc-row">
+            <div class="uc-label">Summary</div>
+            <div class="uc-value">Input data kondisi fisik dan psikologis harian pasien untuk evaluasi jangka panjang.</div>
+          </div>
+          <div class="uc-row">
+            <div class="uc-label">Basic Flow</div>
+            <div class="uc-value">
+              <ol class="uc-list">
+                <li>Pengasuh membuka modul rekam medis harian.</li>
+                <li>Mengisi parameter kesehatan (tekanan darah, tingkat aktivitas, suasana hati).</li>
+                <li>Menyimpan catatan; sistem memberikan <em>timestamp</em> otomatis.</li>
+                <li>Admin dapat mengekspor data komulatif ini menjadi laporan bulanan.</li>
+              </ol>
+            </div>
+          </div>
         </div>
       </div>
 
     </div>
   </section>
 
-  <!-- FOOTER -->
-  <footer class="cs-footer">
-    <div class="container reveal">
-      <h2 class="display-font">Ready to dive deeper?</h2>
-      <a href="index.html" class="btn-primary">Back to Portfolio</a>
+  <!-- Section 4: User Stories -->
+  <section class="section">
+    <div class="container">
+      <h2>4. User Stories</h2>
       
-      <div class="footer-credits">
-        <p>Conceptual UX Case Study / System Requirement Specification by Fitria Indah Novitasari.</p>
-      </div>
+      <table class="data-table card" style="padding:0; overflow: hidden; display: table;">
+        <thead>
+          <tr>
+            <th style="width: 20%;">Role</th>
+            <th>Story Statement</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr>
+            <td><strong>Admin</strong></td>
+            <td>Sebagai Admin, saya ingin mengekstrak laporan perkembangan bulanan agar dapat mengevaluasi kondisi pasien dan melakukan audit kinerja pengasuh.</td>
+          </tr>
+          <tr>
+            <td><strong>Pasien</strong></td>
+            <td>Sebagai Pasien, saya ingin melihat foto-foto memori keluarga dengan mudah agar saya dapat mengingat momen bahagia tanpa merasa kebingungan menggunakan aplikasi.</td>
+          </tr>
+          <tr>
+            <td><strong>Pengasuh</strong></td>
+            <td>Sebagai Pengasuh, saya ingin menerima notifikasi instan jika pasien keluar dari zona aman agar dapat melakukan tindakan pencegahan atau evakuasi sesegera mungkin.</td>
+          </tr>
+          <tr>
+            <td><strong>Keluarga</strong></td>
+            <td>Sebagai Keluarga, saya ingin melihat rute perjalanan pasien hari ini agar memastikan pasien berada dalam pengawasan yang benar dan aman.</td>
+          </tr>
+        </tbody>
+      </table>
+    </div>
+  </section>
+
+  <!-- Footer -->
+  <footer class="footer">
+    <div class="container">
+      <p>System Requirement Specification Document — Well-Be Application.<br>
+      Created by Fitria Indah Novitasari (2025).</p>
     </div>
   </footer>
 
-  <script>
-    // Scroll Reveal Animation
-    const revealObserver = new IntersectionObserver((entries) => {
-      entries.forEach(entry => {
-        if (entry.isIntersecting) {
-          entry.target.classList.add('visible');
-          revealObserver.unobserve(entry.target);
-        }
-      });
-    }, { threshold: 0.1, rootMargin: '0px 0px -50px 0px' });
-    
-    document.querySelectorAll('.reveal').forEach(el => revealObserver.observe(el));
-  </script>
 </body>
 </html>
