@@ -3,179 +3,347 @@
 <head>
   <meta charset="UTF-8"/>
   <meta name="viewport" content="width=device-width,initial-scale=1.0"/>
-  <title>System Analyst Project: Well-Be App – Fitria</title>
+  <title>SRS: Well-Be App – Fitria</title>
   <meta name="description" content="System Requirement Specification case study for Well-Be Application"/>
   <link rel="preconnect" href="https://fonts.googleapis.com"/>
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin/>
   <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@300;400;500;600;700;800&display=swap" rel="stylesheet"/>
   <link rel="stylesheet" href="style.css"/>
   <style>
-    body { padding-left: 0; }
-    .project-header {
-      padding: 100px 20px 40px;
-      text-align: center;
-      background: var(--bg-card);
-      border-bottom: 1px solid var(--border);
+    body { display: flex; align-items: flex-start; padding: 0; margin: 0; background: var(--bg-main); color: var(--text-main); }
+    .srs-sidebar {
+      width: 300px; height: 100vh; position: sticky; top: 0;
+      padding: 30px 20px; background: var(--bg-card);
+      border-right: 1px solid var(--border);
+      overflow-y: auto;
     }
-    .project-header h1 {
-      font-size: 2.5rem;
-      margin-bottom: 15px;
-      background: linear-gradient(135deg, var(--text-main), var(--accent2));
-      -webkit-background-clip: text;
-      -webkit-text-fill-color: transparent;
-    }
-    .project-role {
-      display: inline-block;
-      padding: 6px 16px;
-      background: rgba(16, 185, 129, 0.1);
-      color: #10b981;
-      border-radius: 20px;
-      font-weight: 600;
-      font-size: 0.9rem;
-      border: 1px solid rgba(16, 185, 129, 0.2);
-      margin-bottom: 20px;
-    }
-    .project-content {
-      max-width: 800px;
-      margin: 0 auto;
-      padding: 40px 20px;
-    }
-    .section-box {
-      background: var(--bg-card);
-      border: 1px solid var(--border);
-      border-radius: 16px;
-      padding: 30px;
-      margin-bottom: 30px;
-    }
-    .section-box h3 {
-      color: var(--accent2);
-      margin-bottom: 15px;
-      font-size: 1.4rem;
-      border-bottom: 1px solid var(--border);
-      padding-bottom: 10px;
-    }
-    .section-box p, .section-box li {
-      color: var(--text-mut);
-      line-height: 1.7;
-      margin-bottom: 10px;
-    }
-    .grid-2 {
-      display: grid;
-      grid-template-columns: 1fr 1fr;
-      gap: 20px;
-    }
-    .story-card {
-      background: rgba(255, 255, 255, 0.02);
-      padding: 15px;
-      border-radius: 12px;
-      border: 1px solid var(--border);
-    }
-    .story-card h4 {
-      color: var(--text-main);
-      margin-bottom: 8px;
-    }
+    .srs-sidebar-header { margin-bottom: 30px; }
+    .srs-sidebar-header h2 { font-size: 1.2rem; color: var(--accent2); }
     .back-btn {
-      position: absolute;
-      top: 30px;
-      left: 30px;
-      display: inline-flex;
-      align-items: center;
-      gap: 8px;
-      color: var(--text-mut);
-      text-decoration: none;
-      font-weight: 500;
-      transition: color 0.3s;
+      display: inline-flex; align-items: center; gap: 8px; color: var(--text-mut);
+      text-decoration: none; font-weight: 500; margin-bottom: 20px; transition: color 0.3s;
     }
     .back-btn:hover { color: var(--accent2); }
-    @media (max-width: 768px) {
-      .grid-2 { grid-template-columns: 1fr; }
-      .back-btn { position: relative; top: 0; left: 0; margin-bottom: 20px; justify-content: center; width: 100%; }
+    .srs-nav-link {
+      display: block; padding: 12px 15px; color: var(--text-mut);
+      text-decoration: none; border-radius: 8px; margin-bottom: 5px;
+      font-size: 0.95rem; transition: all 0.2s;
+    }
+    .srs-nav-link:hover, .srs-nav-link.active { background: rgba(16, 185, 129, 0.1); color: var(--accent2); }
+    .srs-nav-sub { padding-left: 30px; font-size: 0.85rem; padding-top: 5px; padding-bottom: 5px; }
+    
+    .srs-main { flex: 1; padding: 50px; max-width: 1000px; margin: 0 auto; overflow-x: hidden; }
+    
+    .srs-header { text-align: center; margin-bottom: 50px; }
+    .srs-header h1 { font-size: 3rem; background: linear-gradient(135deg, var(--text-main), var(--accent2)); -webkit-background-clip: text; -webkit-text-fill-color: transparent; margin-bottom: 15px; }
+    .srs-header p { color: var(--text-mut); font-size: 1.1rem; }
+    
+    .srs-section { background: var(--bg-card); border: 1px solid var(--border); border-radius: 16px; padding: 40px; margin-bottom: 40px; }
+    .srs-section h2 { color: var(--text-main); font-size: 2rem; margin-bottom: 20px; border-bottom: 1px solid var(--border); padding-bottom: 15px;}
+    .srs-section h3 { color: var(--accent2); font-size: 1.3rem; margin-top: 30px; margin-bottom: 15px; }
+    .srs-section h4 { color: var(--text-main); font-size: 1.1rem; margin-top: 20px; margin-bottom: 10px; }
+    .srs-section p, .srs-section li { color: var(--text-mut); line-height: 1.8; margin-bottom: 15px; font-size: 1.05rem; }
+    .srs-section ul { padding-left: 20px; }
+    
+    .srs-table { width: 100%; border-collapse: collapse; margin-top: 20px; margin-bottom: 20px; border-radius: 8px; overflow: hidden; }
+    .srs-table th, .srs-table td { border: 1px solid var(--border); padding: 15px; text-align: left; }
+    .srs-table th { background: rgba(16, 185, 129, 0.1); color: var(--accent2); font-weight: 600; }
+    .srs-table td { color: var(--text-mut); line-height: 1.6; }
+    
+    .uc-card { background: rgba(255,255,255,0.02); border: 1px solid var(--border); border-radius: 12px; padding: 25px; margin-bottom: 20px; }
+    .uc-card h4 { color: var(--accent2); margin-top: 0; margin-bottom: 15px; font-size: 1.2rem; border-bottom: 1px dashed var(--border); padding-bottom: 10px; }
+    .uc-row { display: flex; margin-bottom: 12px; border-bottom: 1px solid rgba(255,255,255,0.05); padding-bottom: 12px; }
+    .uc-row:last-child { border-bottom: none; margin-bottom: 0; padding-bottom: 0; }
+    .uc-label { width: 180px; font-weight: 600; color: var(--text-main); flex-shrink: 0; }
+    .uc-value { flex: 1; color: var(--text-mut); line-height: 1.6;}
+    
+    @media (max-width: 900px) {
+      body { flex-direction: column; }
+      .srs-sidebar { width: 100%; height: auto; position: relative; border-right: none; border-bottom: 1px solid var(--border); padding: 20px; }
+      .srs-main { padding: 20px; }
+      .uc-row { flex-direction: column; }
+      .uc-label { width: 100%; margin-bottom: 5px; color: var(--accent2); }
     }
   </style>
 </head>
 <body>
 
-  <header class="project-header">
+  <aside class="srs-sidebar">
     <a href="index.html#projects" class="back-btn">
       <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M19 12H5M12 19l-7-7 7-7"/></svg>
       Back to Portfolio
     </a>
-    <div class="project-role">System Requirement Specification</div>
-    <h1>Well-Be Application</h1>
-    <p style="color: var(--text-mut); max-width: 600px; margin: 0 auto;">
-      A comprehensive healthcare monitoring application designed for Alzheimer's and Dementia patients, featuring real-time GPS tracking and timeline memories.
-    </p>
-    <div style="margin-top: 25px;">
-      <a href="img/srs-wellbe.pdf" target="_blank" class="btn btn-primary">Read Full SRS PDF</a>
+    <div class="srs-sidebar-header">
+      <h2>SRS: Well-Be App</h2>
     </div>
-  </header>
-
-  <main class="project-content">
-    
-    <div class="section-box anim">
-      <h3>Project Overview</h3>
-      <p>
-        The <strong>Well-Be App</strong> serves as a proactive technology innovation to monitor elderly patients experiencing dementia and memory loss. The system acts as a bridge between the Patient, Caregiver, Family, and Admin, specifically utilizing Smartwatch integration.
-      </p>
-      <p><strong>My Role: System Analyst</strong></p>
-      <p>As part of the analysis team, I was specifically responsible for formulating the <em>User Interface (User Stories & Scenarios)</em>, establishing the <em>General & Design Constraints</em>, and mapping out the <em>Assumptions and Dependencies</em>.</p>
-    </div>
-
-    <div class="section-box anim">
-      <h3>User Stories & Persona Analysis</h3>
-      <p>Defined specific requirements from the perspective of four primary actors to ensure accurate functionality alignment.</p>
+    <nav>
+      <a href="#intro" class="srs-nav-link active">1. Introduction</a>
+      <a href="#intro-purpose" class="srs-nav-link srs-nav-sub">1.1 Purpose</a>
+      <a href="#intro-scope" class="srs-nav-link srs-nav-sub">1.2 Scope</a>
+      <a href="#intro-def" class="srs-nav-link srs-nav-sub">1.3 Definitions</a>
       
-      <div class="grid-2" style="margin-top: 20px;">
-        <div class="story-card">
-          <h4>👤 Patient</h4>
-          <p>The primary receiver of care who requires safety monitoring.</p>
-          <ul style="padding-left: 20px; font-size: 0.9rem;">
-            <li>Wants to save and recall precious memories.</li>
-            <li>Requires real-time location monitoring for safety.</li>
-          </ul>
-        </div>
-        <div class="story-card">
-          <h4>🧑‍⚕️ Caregiver</h4>
-          <p>Responsible for direct physical and mental monitoring.</p>
-          <ul style="padding-left: 20px; font-size: 0.9rem;">
-            <li>Needs to monitor health conditions to provide appropriate care.</li>
-            <li>Requires real-time location notifications.</li>
-          </ul>
-        </div>
-        <div class="story-card">
-          <h4>👨‍👩‍👧‍👦 Family</h4>
-          <p>External supervisor wanting to remain involved in the patient's life.</p>
-          <ul style="padding-left: 20px; font-size: 0.9rem;">
-            <li>Wants remote access to the patient's location.</li>
-            <li>Wants to view and manage the patient's timeline memories.</li>
-          </ul>
-        </div>
-        <div class="story-card">
-          <h4>🛡️ Admin</h4>
-          <p>System manager maintaining data integrity.</p>
-          <ul style="padding-left: 20px; font-size: 0.9rem;">
-            <li>Manages caregiver scheduling and data.</li>
-            <li>Generates monthly health progress reports.</li>
-          </ul>
+      <a href="#overall" class="srs-nav-link">2. Overall Description</a>
+      <a href="#overall-uc" class="srs-nav-link srs-nav-sub">2.2 Use Case Specification</a>
+      <a href="#overall-nfr" class="srs-nav-link srs-nav-sub">2.3 Non-Functional Req</a>
+      <a href="#overall-users" class="srs-nav-link srs-nav-sub">2.4 User Classes</a>
+      <a href="#overall-constraints" class="srs-nav-link srs-nav-sub">2.5 Design Constraints</a>
+      <a href="#overall-assumptions" class="srs-nav-link srs-nav-sub">2.6 Assumptions</a>
+      
+      <a href="#ui" class="srs-nav-link">3. User Interface & Stories</a>
+      <a href="#ui-roles" class="srs-nav-link srs-nav-sub">2.7.1 Role Description</a>
+      <a href="#ui-stories" class="srs-nav-link srs-nav-sub">2.7.2 User Story</a>
+      <a href="#ui-scenario" class="srs-nav-link srs-nav-sub">2.7.3 User Scenario</a>
+    </nav>
+  </aside>
+
+  <main class="srs-main">
+    <div class="srs-header">
+      <h1>Well-Be Application</h1>
+      <p>System Requirement Specification (SRS)<br>Role: System Analyst</p>
+    </div>
+
+    <!-- 1. INTRODUCTION -->
+    <section id="intro" class="srs-section anim">
+      <h2>1. Introduction</h2>
+      
+      <h3 id="intro-purpose">1.1 Purpose</h3>
+      <h4>1.1.1 Ringkasan Keseluruhan Dokumen</h4>
+      <p>Aplikasi Will-be adalah inovasi teknologi yang proaktif dalam memonitor lansia penderita demensia, Alzheimer, dan penurunan daya ingat. Aplikasi Will-be ini memiliki fitur-fitur yang mendukung dalam peningkatan kualitas hidup pasien Alzheimer dan mengurangi beban pengasuh, seperti fitur linimasa yaitu fitur untuk menyimpan momen hangat dan bahagia lansia, dan fitur monitoring pelacak keberadaan lansia melalui GPS Tracking.</p>
+      
+      <h4>1.1.2 Tujuan Penulisan Dokumen</h4>
+      <p>Dokumen ini berfungsi untuk mendefinisikan dengan jelas persyaratan sistem dan memberikan panduan terperinci mengenai fitur-fitur aplikasi. Selain itu, dokumen ini memfasilitasi koordinasi antara pengasuh, keluarga, dan tim jaminan kualitas. Juga penting untuk memastikan bahwa aplikasi mematuhi regulasi terkait keamanan dan privasi data.</p>
+      <p>Aplikasi dirancang untuk memberikan solusi pemantauan kesehatan yang komprehensif dengan fitur utama yaitu Linimasa, Pelacak Lokasi. Ekspektasi sistem mencakup kinerja yang responsif, keamanan data yang ketat, antarmuka yang intuitif, dan kompatibilitas dengan berbagai perangkat.</p>
+
+      <h4>1.1.3 Audiens yang Dituju</h4>
+      <p>Audiens yang dituju mencakup manajer proyek, investor, organisasi kesehatan, pengembang, dan insinyur. Tim jaminan kualitas (QA) harus memahami persyaratan untuk pengujian menyeluruh. Personel regulasi perlu memastikan kepatuhan privasi data. Terakhir, pengasuh dan penyedia layanan kesehatan sebagai pengguna akhir.</p>
+
+      <h3 id="intro-scope">1.2 Scope</h3>
+      <h4>1.2.1 System Description</h4>
+      <p>Aplikasi Will-be adalah solusi inovatif yang dirancang untuk memantau dan mendukung pasien Alzheimer melalui fitur-fitur yang memudahkan pengasuh dan keluarga. Fitur utama mencakup pelacakan lokasi secara real-time menggunakan GPS, manajemen catatan kondisi kesehatan pasien, serta memori yang dapat diakses oleh pengasuh dan keluarga.</p>
+
+      <h4>1.2.2 Product Scope</h4>
+      <p>Aplikasi Will-be adalah solusi komprehensif untuk mendukung perawatan pasien Alzheimer melalui fitur pelacakan lokasi real-time, manajemen catatan kesehatan, dan integrasi dengan perangkat smartwatch. Aplikasi ini bertujuan meningkatkan efisiensi perawatan, menjaga keselamatan pasien, dan mengurangi beban pengasuh.</p>
+
+      <h4>1.2.3 Operating Environment</h4>
+      <p>Beroperasi pada platform mobile yang mendukung sistem operasi Android dan iOS, dengan minimal OS Android 8.0 (Oreo) ke atas. Sistem membutuhkan koneksi internet untuk layanan GPS, notifikasi real-time, dan sinkronisasi dengan smartwatch. Lingkungan operasional meliputi smartphone, tablet, dan cloud storage yang aman.</p>
+
+      <h4>1.2.4 General Constraint</h4>
+      <ul>
+        <li><strong>Peningkatan Kualitas Hidup Pasien:</strong> Diukur melalui pengumpulan data rutin terkait kesehatan pasien (aktivitas fisik, pola tidur, perilaku, suasana hati, fungsi kognitif).</li>
+        <li><strong>Peningkatan Koordinasi Perawatan:</strong> Memfasilitasi komunikasi yang lebih baik antara pengasuh, keluarga, dan tenaga medis melalui notifikasi real-time dan integrasi wearable.</li>
+      </ul>
+
+      <h3 id="intro-def">1.3 Definition, Acronyms, and Abbreviation</h3>
+      <table class="srs-table">
+        <tr>
+          <th>Term/Acronym</th>
+          <th>Definition</th>
+        </tr>
+        <tr>
+          <td>SRS</td>
+          <td>Software Requirements Specifications. Dokumen yang menjelaskan seluruh fungsi sistem dan batasannya.</td>
+        </tr>
+        <tr>
+          <td>GPS</td>
+          <td>Global Positioning System. Sistem pelacakan lokasi yang digunakan oleh aplikasi.</td>
+        </tr>
+        <tr>
+          <td>OS</td>
+          <td>Operating System. Perangkat lunak sistem yang mengelola perangkat keras.</td>
+        </tr>
+        <tr>
+          <td>Memories</td>
+          <td>Catatan dan kenangan digital pasien yang dapat diakses keluarga dan pengasuh.</td>
+        </tr>
+        <tr>
+          <td>Realtime</td>
+          <td>Sistem yang memberikan informasi langsung secara waktu nyata.</td>
+        </tr>
+      </table>
+    </section>
+
+    <!-- 2. OVERALL DESCRIPTION -->
+    <section id="overall" class="srs-section anim">
+      <h2>2. Overall Description</h2>
+      <p>Bagian ini merangkum arsitektur, spesifikasi use case, batasan desain, dan kebutuhan non-fungsional aplikasi.</p>
+      
+      <h3 id="overall-uc">2.2.2 Use Case Specification</h3>
+      
+      <div class="uc-card">
+        <h4>Melacak Lokasi dengan GPS</h4>
+        <div class="uc-row"><div class="uc-label">Aktor Utama</div><div class="uc-value">Keluarga, Pengasuh, Smartwatch</div></div>
+        <div class="uc-row"><div class="uc-label">Summary</div><div class="uc-value">Akan melacak lokasi pasien secara real time dengan GPS lewat Smartwatch yang sudah diintegrasikan.</div></div>
+        <div class="uc-row"><div class="uc-label">Priority</div><div class="uc-value">Critical</div></div>
+        <div class="uc-row"><div class="uc-label">Precondition</div><div class="uc-value">Pasien menggunakan smartwatch yang terhubung. Keluarga/pengasuh memiliki akses ke aplikasi.</div></div>
+        <div class="uc-row"><div class="uc-label">Post-Conditions</div><div class="uc-value">Keluarga/pengasuh mendapatkan informasi terkini lokasi pasien secara real-time.</div></div>
+        <div class="uc-row">
+          <div class="uc-label">Basic Path</div>
+          <div class="uc-value">
+            1. Pasien memakai smartwatch.<br>
+            2. Keluarga/pengasuh masuk ke sistem Well-Be.<br>
+            3. Sistem otomatis memantau lokasi pasien via GPS.<br>
+            4. Keluarga dapat melihat lokasi di aplikasi.<br>
+            5. Notifikasi dikirim jika pasien di area berbahaya.
+          </div>
         </div>
       </div>
-    </div>
 
-    <div class="section-box anim">
-      <h3>Constraints & Dependencies</h3>
-      <p>Mapped out critical boundaries for the architecture to ensure system reliability and legal compliance.</p>
-      <ul style="padding-left: 20px; margin-top: 15px;">
-        <li><strong>Regulatory Policies:</strong> The app handles highly sensitive medical data and must comply with strict privacy regulations (e.g., GDPR, HIPAA).</li>
-        <li><strong>Hardware Limitations:</strong> Requires seamless integration with Smartwatch GPS modules while optimizing for battery consumption.</li>
-        <li><strong>Security:</strong> All user data is secured with AES-256 encryption for both storage and transmission, reinforced by Two-Factor Authentication.</li>
-        <li><strong>Dependencies:</strong> Relies on third-party GPS APIs, OS updates (iOS/Android), and constant server uptime for real-time tracking.</li>
+      <div class="uc-card">
+        <h4>Mengintegrasikan Smartwatch</h4>
+        <div class="uc-row"><div class="uc-label">Aktor Utama</div><div class="uc-value">Keluarga, Smartwatch</div></div>
+        <div class="uc-row"><div class="uc-label">Summary</div><div class="uc-value">Menghubungkan smartwatch pasien ke sistem Well-Be untuk pemantauan.</div></div>
+        <div class="uc-row"><div class="uc-label">Priority</div><div class="uc-value">Critical</div></div>
+        <div class="uc-row">
+          <div class="uc-label">Basic Path</div>
+          <div class="uc-value">
+            1. Admin/pasien menghubungkan smartwatch ke sistem.<br>
+            2. Sistem memverifikasi perangkat.<br>
+            3. Smartwatch terintegrasi dengan sistem.
+          </div>
+        </div>
+      </div>
+
+      <div class="uc-card">
+        <h4>Mengelola Memories</h4>
+        <div class="uc-row"><div class="uc-label">Aktor Utama</div><div class="uc-value">Pasien, Keluarga, Pengasuh</div></div>
+        <div class="uc-row"><div class="uc-label">Summary</div><div class="uc-value">Menambah, mengedit, atau menghapus kenangan/memories yang disimpan dalam aplikasi.</div></div>
+        <div class="uc-row"><div class="uc-label">Priority</div><div class="uc-value">Critical</div></div>
+        <div class="uc-row">
+          <div class="uc-label">Basic Path</div>
+          <div class="uc-value">
+            1. Aktor memilih menu memories.<br>
+            2. Aktor dapat menambah, mengedit, menghapus.<br>
+            3. Sistem menyimpan perubahan.
+          </div>
+        </div>
+      </div>
+      
+      <div class="uc-card">
+        <h4>Notes Kondisi Kesehatan</h4>
+        <div class="uc-row"><div class="uc-label">Aktor Utama</div><div class="uc-value">Admin, Pengasuh, Keluarga</div></div>
+        <div class="uc-row"><div class="uc-label">Summary</div><div class="uc-value">Mencatat dan memperbarui informasi terkait kondisi kesehatan pasien.</div></div>
+        <div class="uc-row"><div class="uc-label">Priority</div><div class="uc-value">Critical</div></div>
+      </div>
+
+      <h3 id="overall-nfr">2.3 Non-Functional Requirement</h3>
+      <table class="srs-table">
+        <tr>
+          <th>NFR Category</th>
+          <th>Requirement / Kebutuhan</th>
+        </tr>
+        <tr>
+          <td>Functional Suitability</td>
+          <td>Mencakup semua fitur esensial (GPS, integrasi wearable). Hasil akurat dan relevan untuk pemantauan pasien Alzheimer.</td>
+        </tr>
+        <tr>
+          <td>Performance</td>
+          <td>Waktu respons data lokasi < 5 detik (jaringan 4G). Menangani 10.000 pengguna aktif bersamaan. Efisiensi RAM < 500MB di mobile.</td>
+        </tr>
+        <tr>
+          <td>Compatibility</td>
+          <td>Android (min 8.0), iOS (min 12.0). Kompatibel dengan smartwatch (Apple Watch & WearOS).</td>
+        </tr>
+        <tr>
+          <td>Usability</td>
+          <td>User-friendly untuk pengasuh/lansia yang kurang familiar teknologi. Aksesibilitas: teks besar dan ikon jelas.</td>
+        </tr>
+        <tr>
+          <td>Security</td>
+          <td>Enkripsi AES-256 (storage & transmisi). Mendukung Two-Factor Authentication (2FA) untuk akses data sensitif.</td>
+        </tr>
+        <tr>
+          <td>Reliability & Portability</td>
+          <td>Uptime 99.9%. Backup otomatis setiap 12 jam. Cloud sync untuk migrasi antar perangkat. Tetap optimal di jaringan 3G.</td>
+        </tr>
+      </table>
+
+      <h3 id="overall-users">2.4 User Classes and Characteristic</h3>
+      <ul>
+        <li><strong>ADMIN:</strong> Mengelola keseluruhan sistem, data pengguna, performa. Butuh akses penuh dan dashboard laporan komprehensif.</li>
+        <li><strong>PENGASUH:</strong> Memberikan perawatan langsung, memantau kondisi, komunikasi dengan keluarga. Butuh antarmuka sederhana, pelacakan akurat, dan notifikasi real-time.</li>
+        <li><strong>PASIEN / KELUARGA:</strong> Pasien sebagai penerima layanan (menyimpan momen). Keluarga sebagai pengawas eksternal yang memantau kondisi dan lokasi. Butuh UI lansia-friendly, linimasa memori, dan peringatan batas area.</li>
       </ul>
-    </div>
+
+      <h3 id="overall-constraints">2.5 Design and Implementation Constraint</h3>
+      <ul>
+        <li><strong>Regulatory Policies:</strong> Wajib mematuhi GDPR dan HIPAA untuk privasi dan keamanan data kesehatan pasien.</li>
+        <li><strong>Hardware Limitations:</strong> Optimalisasi baterai pada integrasi GPS smartwatch, dan harus berjalan lancar di berbagai kelas smartphone.</li>
+        <li><strong>Interfaces to Other Apps:</strong> Harus dapat berintegrasi dengan Electronic Medical Records (EMR) secara real-time.</li>
+        <li><strong>Security Considerations:</strong> Memiliki deteksi anomali untuk mencegah akses data dari pihak tak berwenang.</li>
+        <li><strong>Reliability Requirements:</strong> Handshake protocols (XON/XOFF atau ACK-NACK) untuk mencegah kehilangan data transmisi GPS.</li>
+      </ul>
+
+      <h3 id="overall-assumptions">2.6 Assumptions and Dependencies</h3>
+      <p>
+        <strong>Asumsi:</strong> Internet stabil untuk pengguna, ketersediaan perangkat smartwatch, pengguna memiliki literasi dasar, serta tersedianya tenaga perawat di area layanan.<br>
+        <strong>Dependencies:</strong> Layanan GPS pihak ketiga (Google Maps API dll), pembaruan OS Android/iOS rutin, regulasi kesehatan pemerintah, dan keandalan uptime server.
+      </p>
+    </section>
+
+    <!-- 3. USER INTERFACE & SCENARIOS -->
+    <section id="ui" class="srs-section anim">
+      <h2>3. User Interface & Stories</h2>
+
+      <h3 id="ui-roles">2.7.1 Deskripsi Role</h3>
+      <div class="uc-card">
+        <h4>1. Pasien</h4>
+        <p>Penerima utama layanan. Memiliki akses ke sistem untuk menyimpan momen/memori (foto, catatan, video). Kondisinya dipantau secara real-time (lokasi) untuk memastikan keamanan di manapun berada.</p>
+      </div>
+      <div class="uc-card">
+        <h4>2. Pengasuh</h4>
+        <p>Individu yang bertanggung jawab atas pemantauan fisik/mental secara real-time. Memberikan notifikasi ke admin/keluarga jika ada perubahan signifikan atau keadaan darurat.</p>
+      </div>
+      <div class="uc-card">
+        <h4>3. Keluarga</h4>
+        <p>Pengawas eksternal yang peduli. Memiliki akses memantau lokasi real-time, melihat memori, dan menerima notifikasi terkait kondisi kesehatan dan peringatan zona bahaya.</p>
+      </div>
+
+      <h3 id="ui-stories">2.7.2 User Story</h3>
+      <ul>
+        <li><strong>Admin:</strong> "Saya ingin melihat laporan perkembangan bulanan agar bisa mengevaluasi kondisi pasien secara berkala."</li>
+        <li><strong>Pasien:</strong> "Saya ingin mengingat semua memori agar saya dapat mengingat kembali momen bahagia saya."</li>
+        <li><strong>Pengasuh:</strong> "Saya ingin mendapatkan notifikasi keberadaan pasien dengan realtime agar cepat mengambil tindakan medis."</li>
+        <li><strong>Keluarga:</strong> "Saya ingin melihat dan mengelola memori pasien agar dapat mengetahui momen terindah mereka."</li>
+      </ul>
+
+      <h3 id="ui-scenario">2.7.3 User Scenario</h3>
+      <table class="srs-table">
+        <tr>
+          <th>Fitur</th>
+          <th>Skenario</th>
+        </tr>
+        <tr>
+          <td><strong>Melacak Lokasi Secara Real-time</strong></td>
+          <td>
+            1. Pengguna login.<br>
+            2. Pengguna membuka halaman pemantauan pasien.<br>
+            3. Pengguna melihat titik lokasi sinkronisasi smartwatch.<br>
+            4. Lokasi selalu terbarui di peta.
+          </td>
+        </tr>
+        <tr>
+          <td><strong>Mengelola Linimasa (Memories)</strong></td>
+          <td>
+            1. Pengguna login dan membuka halaman linimasa.<br>
+            2. Pengguna dapat meng-upload memories pasien.<br>
+            3. Pengguna/pasien bisa menelusuri memori tersebut.
+          </td>
+        </tr>
+        <tr>
+          <td><strong>Mengakses Catatan Kesehatan</strong></td>
+          <td>
+            1. Pengguna membuka halaman catatan kesehatan.<br>
+            2. Sistem menampilkan rekam medis dan kondisi terkini.<br>
+            3. Bisa difilter/mencari berdasarkan tanggal & waktu.
+          </td>
+        </tr>
+      </table>
+    </section>
 
   </main>
 
   <script>
-    // Simple intersection observer for anim class
+    // Intersection Observer for scroll animations
     const observer = new IntersectionObserver((entries) => {
       entries.forEach(entry => {
         if(entry.isIntersecting) {
@@ -183,12 +351,43 @@
           entry.target.style.transform = 'translateY(0)';
         }
       });
-    });
+    }, { threshold: 0.1 });
+    
     document.querySelectorAll('.anim').forEach(el => {
       el.style.opacity = 0;
       el.style.transform = 'translateY(20px)';
       el.style.transition = 'all 0.6s ease';
       observer.observe(el);
+    });
+
+    // Sticky Sidebar Highlighting
+    const sections = document.querySelectorAll('section');
+    const navLinks = document.querySelectorAll('.srs-nav-link');
+
+    window.addEventListener('scroll', () => {
+      let current = '';
+      sections.forEach(section => {
+        const sectionTop = section.offsetTop;
+        const sectionHeight = section.clientHeight;
+        if (pageYOffset >= (sectionTop - 150)) {
+          current = section.getAttribute('id');
+        }
+      });
+
+      // Simple nested heading detection
+      const headings = document.querySelectorAll('h3');
+      headings.forEach(h => {
+        if (pageYOffset >= (h.offsetTop - 150)) {
+          current = h.getAttribute('id');
+        }
+      });
+
+      navLinks.forEach(link => {
+        link.classList.remove('active');
+        if (link.getAttribute('href').includes(current)) {
+          link.classList.add('active');
+        }
+      });
     });
   </script>
 </body>
