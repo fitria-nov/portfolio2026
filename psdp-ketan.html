@@ -1,0 +1,1060 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+  <meta charset="UTF-8"/>
+  <meta name="viewport" content="width=device-width,initial-scale=1.0"/>
+  <title>Ketan Bersaudara: ERP Odoo Implementation Blueprint</title>
+  <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@300;400;500;600;700;800&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet"/>
+  <!-- Mermaid JS for diagrams -->
+  <script src="https://cdn.jsdelivr.net/npm/mermaid/dist/mermaid.min.js"></script>
+  <script>
+    mermaid.initialize({ 
+      startOnLoad: true, 
+      theme: 'neutral',
+      themeVariables: {
+        fontFamily: 'Plus Jakarta Sans',
+        fontSize: '13px'
+      }
+    });
+  </script>
+  <style>
+    :root {
+      --bg-workspace: #f8fafc;
+      --bg-card: #ffffff;
+      --border-color: #e2e8f0;
+      
+      --accent-indigo: #4f46e5;
+      --accent-indigo-soft: #e0e7ff;
+      --accent-teal: #0d9488;
+      --accent-teal-soft: #ccfbf1;
+      --accent-rose: #e11d48;
+      --accent-rose-soft: #ffe4e6;
+      --accent-amber: #d97706;
+      --accent-amber-soft: #fef3c7;
+      --accent-emerald: #10b981;
+      --accent-emerald-soft: #d1fae5;
+      
+      --text-dark: #0f172a;
+      --text-muted: #64748b;
+      --sidebar-width: 320px;
+    }
+    
+    * { margin: 0; padding: 0; box-sizing: border-box; }
+    html { scroll-behavior: smooth; }
+    body { 
+      font-family: 'Plus Jakarta Sans', sans-serif; 
+      background: var(--bg-workspace); 
+      color: var(--text-dark); 
+      line-height: 1.6;
+      display: flex;
+      background-image: radial-gradient(#e2e8f0 1.5px, transparent 1.5px);
+      background-size: 24px 24px;
+    }
+    
+    /* Document Sidebar / Index Table of Contents */
+    .doc-sidebar {
+      position: fixed;
+      top: 0;
+      left: 0;
+      bottom: 0;
+      width: var(--sidebar-width);
+      background: #ffffff;
+      border-right: 1px solid var(--border-color);
+      display: flex;
+      flex-direction: column;
+      z-index: 50;
+      box-shadow: 2px 0 20px rgba(0,0,0,0.02);
+    }
+    .doc-sidebar-header {
+      padding: 30px 24px;
+      border-bottom: 1px solid var(--border-color);
+    }
+    .doc-sidebar-header h2 {
+      font-size: 1.15rem;
+      font-weight: 800;
+      letter-spacing: -0.02em;
+      margin-bottom: 4px;
+    }
+    .doc-sidebar-header span {
+      font-size: 0.75rem;
+      color: var(--text-muted);
+      font-weight: 600;
+      text-transform: uppercase;
+      letter-spacing: 0.05em;
+    }
+    .doc-sidebar-nav {
+      flex: 1;
+      overflow-y: auto;
+      padding: 20px 16px;
+    }
+    .nav-group-title {
+      font-size: 0.72rem;
+      font-weight: 700;
+      text-transform: uppercase;
+      letter-spacing: 0.08em;
+      color: var(--text-muted);
+      margin: 20px 0 8px 8px;
+    }
+    .nav-item {
+      display: flex;
+      align-items: center;
+      gap: 10px;
+      padding: 8px 12px;
+      border-radius: 8px;
+      font-size: 0.82rem;
+      font-weight: 500;
+      color: #475569;
+      text-decoration: none;
+      transition: all 0.2s ease;
+      cursor: pointer;
+    }
+    
+    /* Theme color specific styling */
+    
+    .nav-item:hover {
+      background: #f1f5f9;
+      color: var(--accent-emerald);
+    }
+    .nav-item.active {
+      background: var(--accent-emerald-soft);
+      color: var(--accent-emerald);
+      font-weight: 600;
+    }
+    .timeline-dot {
+      border: 2px solid var(--accent-emerald);
+      color: var(--accent-emerald);
+    }
+    .section-card {
+      border-left: 5px solid var(--accent-emerald);
+    }
+    
+    
+    .nav-num {
+      font-weight: 700;
+      font-size: 0.75rem;
+      opacity: 0.7;
+    }
+    
+    /* Main Content Area */
+    .main-workspace {
+      margin-left: var(--sidebar-width);
+      flex: 1;
+      min-width: 0;
+      padding: 60px 80px 100px;
+    }
+    
+    .workspace-header {
+      max-width: 1100px;
+      margin-bottom: 60px;
+      border-bottom: 2px solid var(--border-color);
+      padding-bottom: 40px;
+      position: relative;
+    }
+    .workspace-header h1 {
+      font-size: 2.8rem;
+      font-weight: 800;
+      letter-spacing: -0.04em;
+      line-height: 1.15;
+      margin-bottom: 16px;
+      color: #0f172a;
+    }
+    .workspace-header p {
+      font-size: 1.15rem;
+      color: var(--text-muted);
+      max-width: 750px;
+    }
+    .workspace-header-meta {
+      display: flex;
+      gap: 20px;
+      margin-top: 24px;
+      font-size: 0.85rem;
+      color: var(--text-muted);
+    }
+    .workspace-header-meta span strong {
+      color: var(--text-dark);
+    }
+    
+    /* Phase Blocks & Section Styles */
+    .phase-block {
+      margin-bottom: 80px;
+    }
+    .phase-badge {
+      display: inline-block;
+      padding: 6px 16px;
+      border-radius: 99px;
+      font-size: 0.75rem;
+      font-weight: 700;
+      text-transform: uppercase;
+      letter-spacing: 0.05em;
+      margin-bottom: 20px;
+    }
+    .pb-purple { background: var(--accent-indigo-soft); color: var(--accent-indigo); }
+    .pb-blue { background: #dbeafe; color: #1e40af; }
+    .pb-green { background: var(--accent-teal-soft); color: var(--accent-teal); }
+    .pb-amber { background: var(--accent-amber-soft); color: var(--accent-amber); }
+    .pb-rose { background: var(--accent-rose-soft); color: var(--accent-rose); }
+    .pb-emerald { background: var(--accent-emerald-soft); color: var(--accent-emerald); }
+    
+    /* Layout Cards & Grids */
+    .section-card {
+      background: var(--bg-card);
+      border: 1px solid var(--border-color);
+      border-radius: 16px;
+      padding: 40px;
+      margin-bottom: 40px;
+      box-shadow: 0 4px 30px rgba(0,0,0,0.015);
+      scroll-margin-top: 100px;
+    }
+    .section-card h3 {
+      font-size: 1.5rem;
+      font-weight: 800;
+      letter-spacing: -0.02em;
+      margin-bottom: 10px;
+      color: var(--text-dark);
+      display: flex;
+      align-items: center;
+      gap: 12px;
+    }
+    .section-card-num {
+      color: var(--text-muted);
+      font-size: 1rem;
+      font-weight: 500;
+    }
+    .section-card-desc {
+      font-size: 0.95rem;
+      color: var(--text-muted);
+      margin-bottom: 24px;
+      max-width: 800px;
+    }
+    
+    /* Bento Grid */
+    .bento-grid {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 20px;
+    }
+    .bento-cell {
+      border: 1px solid var(--border-color);
+      background: #fafafb;
+      padding: 24px;
+      border-radius: 12px;
+    }
+    .bento-wide { grid-column: span 2; }
+    .bento-cell h4 { font-size: 1rem; margin-bottom: 8px; color: var(--text-dark); }
+    .bento-cell p { font-size: 0.88rem; color: #475569; }
+    
+    /* RACI & Data Tables */
+    .table-wrapper {
+      overflow-x: auto;
+      border: 1px solid var(--border-color);
+      border-radius: 12px;
+      margin-bottom: 20px;
+    }
+    table {
+      width: 100%;
+      border-collapse: collapse;
+      text-align: left;
+      font-size: 0.88rem;
+    }
+    th, td {
+      padding: 14px 20px;
+      border-bottom: 1px solid var(--border-color);
+    }
+    th {
+      background: #f8fafc;
+      font-weight: 600;
+      color: var(--text-muted);
+      text-transform: uppercase;
+      font-size: 0.75rem;
+      letter-spacing: 0.05em;
+    }
+    tr:last-child td { border-bottom: none; }
+    
+    /* Workflow Timeline */
+    .workflow-timeline {
+      display: flex;
+      flex-direction: column;
+      gap: 20px;
+      position: relative;
+      padding-left: 32px;
+    }
+    .workflow-timeline::before {
+      content: '';
+      position: absolute;
+      left: 11px;
+      top: 10px;
+      bottom: 10px;
+      width: 2px;
+      background: var(--border-color);
+    }
+    .timeline-item {
+      position: relative;
+    }
+    .timeline-dot {
+      position: absolute;
+      left: -32px;
+      top: 6px;
+      width: 24px;
+      height: 24px;
+      border-radius: 50%;
+      background: #ffffff;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 0.7rem;
+      font-weight: 800;
+    }
+    .timeline-content {
+      background: #fafafb;
+      padding: 16px 20px;
+      border-radius: 10px;
+      border: 1px solid var(--border-color);
+    }
+    .timeline-content h4 { font-size: 0.95rem; margin-bottom: 4px; }
+    .timeline-content p { font-size: 0.85rem; color: var(--text-muted); }
+    
+    /* Sticky Notes (UX Style) */
+    .sticky-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
+      gap: 20px;
+      margin-top: 10px;
+    }
+    .sticky-note {
+      padding: 24px;
+      border-radius: 8px;
+      box-shadow: 0 4px 15px rgba(0,0,0,0.03);
+      position: relative;
+      transform: rotate(-1deg);
+      transition: all 0.2s ease;
+    }
+    .sticky-note:nth-child(even) {
+      transform: rotate(1.5deg);
+    }
+    .sticky-note:hover {
+      transform: scale(1.03) rotate(0deg);
+      box-shadow: 0 8px 25px rgba(0,0,0,0.06);
+    }
+    .sticky-note h4 {
+      font-size: 1rem;
+      font-weight: 700;
+      margin-bottom: 10px;
+      color: #1e293b;
+      border-bottom: 1px dashed rgba(0,0,0,0.1);
+      padding-bottom: 6px;
+    }
+    .sticky-note p {
+      font-size: 0.85rem;
+      color: #334155;
+    }
+    .sticky-yellow { background: #fef08a; border-left: 5px solid #ca8a04; }
+    .sticky-blue { background: #bfdbfe; border-left: 5px solid #2563eb; }
+    .sticky-green { background: #a7f3d0; border-left: 5px solid #059669; }
+    .sticky-rose { background: #fecdd3; border-left: 5px solid #e11d48; }
+    .sticky-purple { background: #e9d5ff; border-left: 5px solid #7c3aed; }
+    
+    /* Image containers */
+    .img-container {
+      background: #fafafb;
+      border: 1px solid var(--border-color);
+      border-radius: 12px;
+      padding: 30px;
+      text-align: center;
+      margin-top: 20px;
+    }
+    .img-container img {
+      max-width: 100%;
+      height: auto;
+      border-radius: 8px;
+      box-shadow: 0 4px 12px rgba(0,0,0,0.05);
+    }
+    .img-caption {
+      margin-top: 12px;
+      font-size: 0.85rem;
+      color: var(--text-muted);
+      font-weight: 600;
+    }
+    
+    .grid-2 {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 20px;
+    }
+    @media (max-width: 1024px) {
+      .grid-2 {
+        grid-template-columns: 1fr;
+      }
+    }
+    
+    /* Mermaid Box Styling */
+    .diagram-container {
+      background: #fafafb;
+      border: 1px solid var(--border-color);
+      border-radius: 12px;
+      padding: 30px;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+      margin-top: 20px;
+      overflow-x: auto;
+    }
+    
+    /* Tag & Badges */
+    .badge {
+      display: inline-block;
+      padding: 4px 10px;
+      border-radius: 6px;
+      font-size: 0.75rem;
+      font-weight: 600;
+      text-transform: uppercase;
+    }
+    .badge-primary { background: var(--accent-indigo-soft); color: var(--accent-indigo); }
+    .badge-success { background: var(--accent-teal-soft); color: var(--accent-teal); }
+    .badge-danger { background: var(--accent-rose-soft); color: var(--accent-rose); }
+    .badge-warning { background: var(--accent-amber-soft); color: var(--accent-amber); }
+    
+    /* Code block */
+    pre {
+      background: #0f172a;
+      color: #cbd5e1;
+      padding: 20px;
+      border-radius: 12px;
+      font-family: 'JetBrains Mono', monospace;
+      font-size: 0.85rem;
+      overflow-x: auto;
+      margin-top: 15px;
+    }
+    
+    /* Footer */
+    .workspace-footer {
+      text-align: center;
+      padding-top: 40px;
+      border-top: 1px solid var(--border-color);
+      color: var(--text-muted);
+      font-size: 0.85rem;
+    }
+    
+    /* Return Button */
+    .return-btn {
+      position: absolute;
+      right: 0;
+      top: 10px;
+      background: #ffffff;
+      border: 1px solid var(--border-color);
+      color: var(--text-dark);
+      padding: 8px 16px;
+      border-radius: 8px;
+      font-size: 0.85rem;
+      font-weight: 600;
+      text-decoration: none;
+      display: flex;
+      align-items: center;
+      gap: 6px;
+      transition: all 0.2s;
+    }
+    .return-btn:hover {
+      background: #f8fafc;
+      border-color: #cbd5e1;
+    }
+  </style>
+</head>
+<body>
+
+<div class="doc-sidebar">
+  <div class="doc-sidebar-header">
+    <h2>Ketan Bersaudara ERP</h2>
+    <span>Enterprise System Analyst</span>
+  </div>
+  
+  <div class="doc-sidebar-nav">
+    
+    <div class="nav-group-title">Fase 1: Case Study</div>
+    <a href="#general-overview" class="nav-item active"><span class="nav-num">1.1</span> Gambaran Perusahaan</a>
+    <a href="#org-structure" class="nav-item"><span class="nav-num">1.2</span> Struktur Organisasi</a>
+    <a href="#current-system" class="nav-item"><span class="nav-num">1.3</span> Sistem Saat Ini</a>
+    
+    <div class="nav-group-title">Fase 2: Tantangan & Strategi</div>
+    <a href="#challenges" class="nav-item"><span class="nav-num">2.1</span> Tantangan Operasional</a>
+    <a href="#marketing-strat" class="nav-item"><span class="nav-num">2.2</span> Strategi Pemasaran</a>
+    <a href="#recommendations" class="nav-item"><span class="nav-num">2.3</span> Rekomendasi Sistem</a>
+    
+    <div class="nav-group-title">Fase 3: Modul Production</div>
+    <a href="#production-func" class="nav-item"><span class="nav-num">3.1</span> Fungsi Produksi</a>
+    <a href="#products-list" class="nav-item"><span class="nav-num">3.2</span> Daftar Produk & Bahan</a>
+    <a href="#bom-spec" class="nav-item"><span class="nav-num">3.3</span> Bill of Materials (BoM)</a>
+    
+    <div class="nav-group-title">Fase 4: Logistik & Quality</div>
+    <a href="#inventory-func" class="nav-item"><span class="nav-num">4.1</span> Fungsi Inventaris</a>
+    <a href="#mo-process" class="nav-item"><span class="nav-num">4.2</span> Manufacturing Order</a>
+    <a href="#quality-control" class="nav-item"><span class="nav-num">4.3</span> Quality Control Specs</a>
+    <a href="#stock-reporting" class="nav-item"><span class="nav-num">4.4</span> Laporan Stok</a>
+    
+    <div class="nav-group-title">Fase 5: Marketing & Sales</div>
+    <a href="#marketing-sales-exploration" class="nav-item"><span class="nav-num">5.1</span> Overview Odoo CRM</a>
+    <a href="#email-events" class="nav-item"><span class="nav-num">5.2</span> Email Marketing & Events</a>
+    <a href="#survey-sms" class="nav-item"><span class="nav-num">5.3</span> Feedback Survey & SMS</a>
+    <a href="#sales-pos" class="nav-item"><span class="nav-num">5.4</span> Sales Workflow & POS</a>
+    <a href="#crm-dashboard" class="nav-item"><span class="nav-num">5.5</span> CRM Pipeline & Dashboard</a>
+    
+    <div class="nav-group-title">Fase 6: Pemodelan BPMN</div>
+    <a href="#bpmn-sales-asis" class="nav-item"><span class="nav-num">6.1</span> BPMN Sales As-Is</a>
+    <a href="#bpmn-sales-tobe" class="nav-item"><span class="nav-num">6.2</span> BPMN Sales To-Be</a>
+    <a href="#bpmn-prod-asis" class="nav-item"><span class="nav-num">6.3</span> BPMN Production As-Is</a>
+    <a href="#bpmn-prod-tobe" class="nav-item"><span class="nav-num">6.4</span> BPMN Production To-Be</a>
+    <a href="#system-comparison" class="nav-item"><span class="nav-num">6.5</span> Perbandingan As-Is vs To-Be</a>
+    
+    <div class="nav-group-title">Fase 7: Kesimpulan & Saran</div>
+    <a href="#kesimpulan" class="nav-item"><span class="nav-num">7.1</span> Kesimpulan Hasil</a>
+    <a href="#saran" class="nav-item"><span class="nav-num">7.2</span> Saran Pengembangan</a>
+    
+  </div>
+</div>
+
+<div class="main-workspace">
+
+  <div class="workspace-header">
+    <a href="index.html" class="return-btn">← Kembali ke Portfolio</a>
+    <h1>Ketan Bersaudara: ERP Odoo Implementation Blueprint</h1>
+    <p>Dokumentasi portfolio profesional dan detail analisis sistem.</p>
+    <div class="workspace-header-meta">
+      <span>Unit Bisnis: <strong>Food & Beverage Retail Operations</strong></span>
+      <span>Platform: <strong>Odoo ERP (Manufacturing, Inventory, Quality, Marketing, CRM & POS Modules)</strong></span>
+      <span>Arsitek Sistem: <strong>Fitria Indah Novitasari</strong></span>
+    </div>
+  </div>
+
+  
+  <!-- PHASE 1: CASE STUDY -->
+  <div class="phase-block">
+    <div class="phase-badge pb-purple">Fase 1: Case Study & Context</div>
+    
+    <!-- 1.1 Gambaran Umum -->
+    <div class="section-card" id="general-overview">
+      <h3><span class="section-card-num">1.1.</span> Gambaran Umum Perusahaan</h3>
+      <p class="section-card-desc">Konteks bisnis F&B tradisional-modern Ketan Bersaudara.</p>
+      <div class="bento-grid">
+        <div class="bento-cell bento-wide">
+          <h4>Ketan Bersaudara di Pasar Tunjungan</h4>
+          <p><strong>Ketan Bersaudara</strong> adalah usaha kuliner di sektor F&B (Food & Beverage) yang berfokus pada makanan penutup tradisional (dessert). Berlokasi di Pasar Tunjungan, Surabaya, usaha ini dimiliki oleh Koko Nico dengan mitra operasional Cece Olivia. Konsep yang diusung memadukan ketan tradisional dengan aneka topping modern untuk menghadirkan pengalaman kuliner yang kekinian dan unik bagi konsumen lokal.</p>
+        </div>
+        <div class="bento-cell">
+          <h4>Lokasi & Target Pasar</h4>
+          <p>Pasar Tunjungan, Surabaya. Menargetkan generasi muda, pecinta kuliner tradisional-modern, dan turis lokal yang mencari citra rasa khas setempat dengan penyajian estetik.</p>
+        </div>
+      </div>
+    </div>
+    
+    <!-- 1.2 Struktur Organisasi -->
+    <div class="section-card" id="org-structure">
+      <h3><span class="section-card-num">1.2.</span> Struktur Organisasi</h3>
+      <p class="section-card-desc">Pemetaan peran operasional yang masih bersifat informal.</p>
+      <p>Struktur organisasi Ketan Bersaudara bersifat informal dan sederhana. Pengawasan operasional harian dilakukan langsung oleh Pemilik (Koko Nico) dan Mitra Operasional (Cece Olivia). Staf di toko menjalankan peran ganda (kasir, juru masak, pelayan, petugas kebersihan) tanpa adanya divisi formal. Kondisi ini memicu ketergantungan pada satu titik (single point of failure) untuk tugas-tugas kritis di gerai.</p>
+    </div>
+    
+    <!-- 1.3 Sistem Saat Ini -->
+    <div class="section-card" id="current-system">
+      <h3><span class="section-card-num">1.3.</span> Sistem Operasional yang Digunakan Saat Ini (Sebelum ERP)</h3>
+      <p class="section-card-desc">Tiga sistem utama yang berjalan secara terpisah tanpa sinkronisasi terpusat.</p>
+      <div class="sticky-grid">
+        <div class="sticky-note sticky-yellow">
+          <h4>1. POS Mandiri</h4>
+          <p>Sistem Point of Sale berbasis langganan bulanan digunakan untuk mencatat transaksi dan pengelolaan kasir cabang.</p>
+        </div>
+        <div class="sticky-note sticky-blue">
+          <h4>2. Pelaporan Manual</h4>
+          <p>Laporan penjualan diekspor ke Microsoft Excel secara harian. Pemantauan toko didukung oleh sistem CCTV harian.</p>
+        </div>
+        <div class="sticky-note sticky-green">
+          <h4>3. Absensi Terbatas</h4>
+          <p>Kehadiran staf dicatat melalui login manual sistem POS dengan memasukkan ID, kata sandi, dan foto.</p>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- PHASE 2: TANTANGAN & STRATEGI -->
+  <div class="phase-block">
+    <div class="phase-badge pb-blue">Fase 2: Tantangan Operasional & Rekomendasi</div>
+    
+    <!-- 2.1 Tantangan -->
+    <div class="section-card" id="challenges">
+      <h3><span class="section-card-num">2.1.</span> Tantangan Operasional Bisnis</h3>
+      <p class="section-card-desc">Daftar kendala utama yang menghambat efisiensi operasional Ketan Bersaudara.</p>
+      <div class="table-wrapper">
+        <table>
+          <thead>
+            <tr>
+              <th>Area Kendala</th>
+              <th>Deskripsi Masalah</th>
+              <th>Dampak Operasional</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr>
+              <td><strong>Pengelolaan Stok</strong></td>
+              <td>Pemeriksaan sediaan stok tidak teratur dan sangat bergantung pada kehadiran fisik owner.</td>
+              <td>Sering terjadi kehabisan bahan baku secara mendadak.</td>
+            </tr>
+            <tr>
+              <td><strong>Pengadaan Reaktif</strong></td>
+              <td>Pembelian bahan baku (seperti gula dan susu) dilakukan ad-hoc setelah stok benar-benar habis.</td>
+              <td>Siklus operasional terhenti dan terpaksa membeli eceran dengan harga mahal.</td>
+            </tr>
+            <tr>
+              <td><strong>Ketidakjelasan Peran</strong></td>
+              <td>Tanggung jawab pendelegasian tugas antar staf dapur, kasir, dan pelayan belum terdefinisi formal.</td>
+              <td>Akuntabilitas kerja staf rendah dan efisiensi kerja menurun.</td>
+            </tr>
+            <tr>
+              <td><strong>Absensi SDM</strong></td>
+              <td>Sistem login POS tidak memiliki fitur pembagian shift kerja, penugasan harian, dan pencatatan telat.</td>
+              <td>Kesulitan mengelola kehadiran dan jam kerja karyawan secara transparan.</td>
+            </tr>
+          </tbody>
+        </table>
+      </div>
+    </div>
+    
+    <!-- 2.2 Strategi Pemasaran -->
+    <div class="section-card" id="marketing-strat">
+      <h3><span class="section-card-num">2.2.</span> Strategi Pemasaran</h3>
+      <p class="section-card-desc">Promosi digital untuk membangun brand awareness.</p>
+      <div class="bento-grid">
+        <div class="bento-cell">
+          <h4>Instagram Marketing</h4>
+          <p>Fokus pada estetika foto produk ketan kekinian untuk menarik perhatian audiens muda lokal di Surabaya.</p>
+        </div>
+        <div class="bento-cell">
+          <h4>TikTok Tren Video</h4>
+          <p>Memanfaatkan video pendek bertema kuliner estetik untuk menjangkau viralitas organik secara luas.</p>
+        </div>
+        <div class="bento-cell">
+          <h4>Kemitraan Influencer</h4>
+          <p>Bekerja sama dengan mikro-influencer kuliner Surabaya untuk memicu ulasan jujur dan kunjungan langsung ke gerai.</p>
+        </div>
+      </div>
+    </div>
+    
+    <!-- 2.3 Rekomendasi -->
+    <div class="section-card" id="recommendations">
+      <h3><span class="section-card-num">2.3.</span> Rekomendasi Pengembangan Sistem (Odoo ERP)</h3>
+      <p class="section-card-desc">Solusi integrasi bisnis menggunakan Odoo ERP.</p>
+      <div class="sticky-grid">
+        <div class="sticky-note sticky-rose">
+          <h4>ERP Terintegrasi</h4>
+          <p>Menghubungkan POS kasir, manajemen stok gudang, pengadaan barang, dan logistik produksi dalam satu platform Odoo.</p>
+        </div>
+        <div class="sticky-note sticky-purple">
+          <h4>Standarisasi Peran</h4>
+          <p>Mendefinisikan alur tanggung jawab formal untuk pengecekan persediaan minimum bahan baku.</p>
+        </div>
+        <div class="sticky-note sticky-yellow">
+          <h4>Sistem Penjadwalan</h4>
+          <p>Menerapkan modul absensi digital terintegrasi kalender shift kerja dan modul pelaporan KPI di Odoo.</p>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- PHASE 3: MODUL PRODUCTION -->
+  <div class="phase-block">
+    <div class="phase-badge pb-green">Fase 3: Modul Production (Odoo Manufacturing)</div>
+    
+    <!-- 3.1 Fungsi Produksi -->
+    <div class="section-card" id="production-func">
+      <h3><span class="section-card-num">3.1.</span> Fungsi Produksi (Manufacturing Module)</h3>
+      <p class="section-card-desc">Bagaimana Odoo mengelola siklus pembuatan ketan dari pesanan masuk.</p>
+      <p>Modul Manufacturing Odoo memproses pesanan penjualan dari Point of Sale untuk diterjemahkan menjadi Manufacturing Order secara otomatis. Sistem akan langsung mencocokkan ketersediaan bahan baku di gudang dengan resep standar (Bill of Materials), lalu memotong jumlah persediaan secara real-time saat produksi selesai.</p>
+    </div>
+    
+    <!-- 3.2 Daftar Produk -->
+    <div class="section-card" id="products-list">
+      <h3><span class="section-card-num">3.2.</span> Daftar Produk Jadi & Bahan Baku</h3>
+      <p class="section-card-desc">Pendaftaran 47 item produk dan bahan pembantu di dalam database Odoo.</p>
+      <p>Ketan Bersaudara mendaftarkan 47 jenis item produk jadi dan bahan baku di dalam sistem, meliputi produk siap saji seperti Ketan Bersaudara Signature, Ketan Bingsu, Ketan Bowl, Ketan Susu, Ketan Durian, Bingsu Strawberry, serta bahan mentah (Ketan Putih, Susu, Susu Kental Manis, Es Batu, Es Krim, Strawberry, Gula, Santan, Selasih, dll).</p>
+      
+      <div class="img-container">
+        <img src="img/psdp_diagrams/page4_img1.jpeg" alt="Daftar Produk Odoo 1"/>
+        <div class="img-caption">Gambar 2.1: Tampilan Daftar Produk Jadi & Bahan Baku di Odoo (Bagian 1)</div>
+      </div>
+      <div class="grid-2" style="margin-top: 20px;">
+        <div class="img-container">
+          <img src="img/psdp_diagrams/page5_img1.jpeg" alt="Daftar Produk Odoo 2"/>
+          <div class="img-caption">Gambar 2.2: Tampilan Daftar Produk (Bagian 2)</div>
+        </div>
+        <div class="img-container">
+          <img src="img/psdp_diagrams/page5_img2.jpeg" alt="Daftar Produk Odoo 3"/>
+          <div class="img-caption">Gambar 2.3: Tampilan Daftar Produk (Bagian 3)</div>
+        </div>
+      </div>
+    </div>
+    
+    <!-- 3.3 BoM Spec -->
+    <div class="section-card" id="bom-spec">
+      <h3><span class="section-card-num">3.3.</span> Bill of Materials (BoM / Resep Baku)</h3>
+      <p class="section-card-desc">Komposisi bahan baku untuk memproduksi 1 unit menu jadi.</p>
+      <p>Terdapat 10 BoM aktif di dalam sistem. Contoh detail komposisi resep untuk <strong>1 unit Ketan Susu</strong>: Ketan Putih (1.00 unit) + Susu (1.00 unit) + Susu Kental Manis (1.00 unit). Apabila pesanan Ketan Susu tervalidasi, sistem otomatis mengurangi ketiga bahan tersebut.</p>
+      
+      <div class="img-container">
+        <img src="img/psdp_diagrams/page5_img3.jpeg" alt="Bill of Materials Odoo"/>
+        <div class="img-caption">Gambar 2.4: Daftar Konfigurasi Bill of Materials (BoM) di Odoo</div>
+      </div>
+    </div>
+  </div>
+
+  <!-- PHASE 4: LOGISTIK & QUALITY -->
+  <div class="phase-block">
+    <div class="phase-badge pb-amber">Fase 4: Logistik, Inventaris, & Quality Control</div>
+    
+    <!-- 4.1 Inventaris -->
+    <div class="section-card" id="inventory-func">
+      <h3><span class="section-card-num">4.1.</span> Fungsi Inventaris (Inventory Module)</h3>
+      <p class="section-card-desc">Pencatatan persediaan bahan baku secara real-time di gudang.</p>
+      <p>Modul Inventory Odoo memelihara database stok bahan baku di gerai Pasar Tunjungan secara akurat. Input stok awal dilakukan menggunakan fitur physical inventory untuk 36 bahan baku utama. Integrasi penuh dengan modul produksi memastikan setiap bahan baku yang dikonsumsi untuk Manufacturing Order langsung tercatat keluar dari kartu stok digital.</p>
+      
+      <div class="img-container">
+        <img src="img/psdp_diagrams/page6_img1.jpeg" alt="Stok On Hand Gudang"/>
+        <div class="img-caption">Gambar 2.6: Tampilan Saldo Persediaan Bahan Baku (Stock On Hand) di Odoo</div>
+      </div>
+    </div>
+    
+    <!-- 4.2 MO Process -->
+    <div class="section-card" id="mo-process">
+      <h3><span class="section-card-num">4.2.</span> Proses Manufacturing Order (MO)</h3>
+      <p class="section-card-desc">Alur pembuatan dan konfirmasi perintah produksi.</p>
+      <p>Ketika transaksi POS tervalidasi, MO berkode <strong>WH/MO/00001</strong> terbuat secara otomatis untuk melacak proses produksi menu seperti Bingsu Strawberry (2 unit). Status MO berpindah dari Draft -> Confirmed -> Done, memicu pemotongan bahan baku mentah (Ketan Putih, Susu, Strawberry, dll) secara instan.</p>
+      
+      <div class="grid-2">
+        <div class="img-container">
+          <img src="img/psdp_diagrams/page6_img2.jpeg" alt="Manufacturing Order Detail"/>
+          <div class="img-caption">Gambar 2.7: Formulir Detail Perintah Produksi (MO) di Odoo</div>
+        </div>
+        <div class="img-container">
+          <img src="img/psdp_diagrams/page6_img3.jpeg" alt="MO Completed"/>
+          <div class="img-caption">Gambar 2.8: Status Penyelesaian Order Produksi (Done)</div>
+        </div>
+      </div>
+    </div>
+    
+    <!-- 4.3 Quality Control -->
+    <div class="section-card" id="quality-control">
+      <h3><span class="section-card-num">4.3.</span> Spesifikasi Quality Control</h3>
+      <p class="section-card-desc">Mekanisme pemeriksaan kualitas sajian sebelum diantar ke pelanggan.</p>
+      <p>Modul Quality di Odoo mendukung standarisasi rasa dan kebersihan piring saji Ketan Bersaudara. Konfigurasi Quality Control Point (<strong>QCP00001</strong>) dipasang pada menu Bingsu Strawberry. Pemeriksaan kualitas menggunakan metode <strong>Pass/Fail</strong> oleh Main Quality Team guna menjamin estetika topping dan kesegaran es krim sebelum divalidasi ke pelanggan.</p>
+      
+      <div class="grid-2">
+        <div class="img-container">
+          <img src="img/psdp_diagrams/page7_img1.jpeg" alt="Quality Check Form"/>
+          <div class="img-caption">Gambar 2.9: Antarmuka Verifikasi Kualitas (Quality Check) di Odoo</div>
+        </div>
+        <div class="img-container">
+          <img src="img/psdp_diagrams/page7_img2.jpeg" alt="QCP Config"/>
+          <div class="img-caption">Gambar 2.10: Konfigurasi Titik Kontrol Kualitas (QCP00001)</div>
+        </div>
+      </div>
+    </div>
+    
+    <!-- 4.4 Laporan Stok -->
+    <div class="section-card" id="stock-reporting">
+      <h3><span class="section-card-num">4.4.</span> Laporan Stok & Replenishment</h3>
+      <p class="section-card-desc">Sistem monitoring stok kritis bagi owner.</p>
+      <p>Melalui fitur Reporting -> Inventory at Date, owner dapat melihat daftar On Hand, Free to Use, dan Incoming stock. Terdapat tombol replenishment cepat di samping barang kritis (seperti Air Mineral atau Es Krim) agar tim gudang dapat langsung membuat purchase request bahan tanpa harus menunggu owner datang ke toko.</p>
+      
+      <div class="img-container">
+        <img src="img/psdp_diagrams/page8_img1.jpeg" alt="Laporan Stok Inventory"/>
+        <div class="img-caption">Gambar 2.11: Tampilan Laporan Stok Real-Time & Riwayat Mutasi di Odoo</div>
+      </div>
+    </div>
+  </div>
+
+  <!-- PHASE 5: MARKETING & SALES -->
+  <div class="phase-block">
+    <div class="phase-badge pb-rose">Fase 5: Eksplorasi Modul Marketing & Sales</div>
+    
+    <!-- 5.1 Overview -->
+    <div class="section-card" id="marketing-sales-exploration">
+      <h3><span class="section-card-num">5.1.</span> Overview Odoo Marketing & CRM</h3>
+      <p class="section-card-desc">Digitalisasi promosi dan penjualan untuk mendorong loyalitas konsumen.</p>
+      <p>Ketan Bersaudara memanfaatkan modul Odoo CRM (ketan-bersaudara.odoo.com) untuk mengelola prospek pelanggan dari saluran digital, meluncurkan blast promosi teratur, membuat event spesial, mengelola database transaksi kasir POS, dan memantau KPI omset harian melalui dashboard visual terintegrasi.</p>
+    </div>
+    
+    <!-- 5.2 Email & Events -->
+    <div class="section-card" id="email-events">
+      <h3><span class="section-card-num">5.2.</span> Email Marketing & Modul Events</h3>
+      <p class="section-card-desc">Manajemen kampanye email massal dan koordinasi acara luring.</p>
+      <p>Modul Email Marketing digunakan untuk mengirim welcome email berisi kode diskon 10% (<strong>KETANBARU10</strong>). Modul Events mengoordinasikan acara "Grand Opening & Free Tasting" di Pasar Tunjungan (25 April 2026, kapasitas 200 peserta). Integrasi kedua modul memastikan pendaftar acara luring langsung masuk ke dalam kontak langganan email promosi.</p>
+      
+      <div class="grid-2">
+        <div class="img-container">
+          <img src="img/psdp_diagrams/page16_img1.jpeg" alt="Email Marketing Blast"/>
+          <div class="img-caption">Gambar 5.1: Kampanye Email Massal di Odoo</div>
+        </div>
+        <div class="img-container">
+          <img src="img/psdp_diagrams/page17_img1.jpeg" alt="Email Editor"/>
+          <div class="img-caption">Gambar 5.2: Desain Drag-and-Drop Email Editor</div>
+        </div>
+      </div>
+      <div class="grid-2" style="margin-top: 20px;">
+        <div class="img-container">
+          <img src="img/psdp_diagrams/page18_img1.jpeg" alt="Events Management"/>
+          <div class="img-caption">Gambar 5.3: Manajemen Penjadwalan Acara (Events)</div>
+        </div>
+        <div class="img-container">
+          <img src="img/psdp_diagrams/page18_img2.jpeg" alt="Events Registration"/>
+          <div class="img-caption">Gambar 5.4: Form Detail Tiket & Registrasi Acara</div>
+        </div>
+      </div>
+    </div>
+    
+    <!-- 5.3 Survey & SMS -->
+    <div class="section-card" id="survey-sms">
+      <h3><span class="section-card-num">5.3.</span> Feedback Survey & SMS Marketing</h3>
+      <p class="section-card-desc">Pengukuran NPS kepuasan pelanggan dan blast SMS terarah.</p>
+      <p>Modul Survey mengumpulkan masukan konsumen secara berkala menggunakan pertanyaan terstruktur berbasis NPS (Net Promoter Score). Modul SMS Marketing dimanfaatkan untuk blast promosi instan (misal: "Beli 2 porsi, GRATIS 1 topping tambahan, berlaku s/d Rabu") langsung ke ponsel pelanggan yang terdaftar.</p>
+      
+      <div class="grid-2">
+        <div class="img-container">
+          <img src="img/psdp_diagrams/page18_img3.jpeg" alt="Survey Form"/>
+          <div class="img-caption">Gambar 5.8: Pembuatan Kuesioner Kepuasan Konsumen</div>
+        </div>
+        <div class="img-container">
+          <img src="img/psdp_diagrams/page19_img1.jpeg" alt="Survey Share"/>
+          <div class="img-caption">Gambar 5.9: Tombol Distribusi Tautan Survei</div>
+        </div>
+      </div>
+      <div class="grid-2" style="margin-top: 20px;">
+        <div class="img-container">
+          <img src="img/psdp_diagrams/page19_img2.jpeg" alt="Survey Preview"/>
+          <div class="img-caption">Gambar 5.10: Tampilan Kuesioner di Layar Konsumen</div>
+        </div>
+        <div class="img-container">
+          <img src="img/psdp_diagrams/page20_img1.jpeg" alt="Survey Results"/>
+          <div class="img-caption">Gambar 5.12: Dashboard Ringkasan Hasil Analisis Survei</div>
+        </div>
+      </div>
+    </div>
+    
+    <!-- 5.4 Sales & POS -->
+    <div class="section-card" id="sales-pos">
+      <h3><span class="section-card-num">5.4.</span> Modul Sales & Point of Sale (POS)</h3>
+      <p class="section-card-desc">Dokumentasi transaksi penjualan luring di meja kasir Pasar Tunjungan.</p>
+      <p>Alur modul Sales mengelola pesanan formal (Quotation -> Sales Order -> Invoice -> PAID). Sementara modul POS berjalan sebagai mesin kasir layar sentuh di gerai, mendukung pencatatan identitas konsumen setia, penambahan detail pesanan, metode bayar nontunai (QRIS/Debit), dan cetak struk instan.</p>
+      
+      <div class="grid-2">
+        <div class="img-container">
+          <img src="img/psdp_diagrams/page21_img1.jpeg" alt="Sales Quotation"/>
+          <div class="img-caption">Gambar 5.14: Formulir Pembuatan Quotation (Penawaran)</div>
+        </div>
+        <div class="img-container">
+          <img src="img/psdp_diagrams/page21_img2.jpeg" alt="Invoice Generate"/>
+          <div class="img-caption">Gambar 5.15: Dialog Pembuatan Faktur (Invoice)</div>
+        </div>
+      </div>
+      <div class="grid-2" style="margin-top: 20px;">
+        <div class="img-container">
+          <img src="img/psdp_diagrams/page21_img3.jpeg" alt="Invoice Proforma"/>
+          <div class="img-caption">Gambar 5.16: Tampilan Faktur Proforma</div>
+        </div>
+        <div class="img-container">
+          <img src="img/psdp_diagrams/page22_img1.jpeg" alt="Invoice Paid"/>
+          <div class="img-caption">Gambar 5.17: Status Faktur Lunas (PAID) dengan Stempel Sistem</div>
+        </div>
+      </div>
+      <div class="grid-2" style="margin-top: 20px;">
+        <div class="img-container">
+          <img src="img/psdp_diagrams/page22_img2.jpeg" alt="POS Dashboard"/>
+          <div class="img-caption">Gambar 5.18: Dashboard Utama Point of Sale (POS)</div>
+        </div>
+        <div class="img-container">
+          <img src="img/psdp_diagrams/page23_img1.jpeg" alt="POS Product Add"/>
+          <div class="img-caption">Gambar 5.19: Form Pendaftaran Produk Baru di POS</div>
+        </div>
+      </div>
+    </div>
+    
+    <!-- 5.5 CRM & Dashboard -->
+    <div class="section-card" id="crm-dashboard">
+      <h3><span class="section-card-num">5.5.</span> CRM Pipeline & Pelaporan Dashboard</h3>
+      <p class="section-card-desc">Visualisasi grafik kinerja bisnis dan prospek hubungan pelanggan.</p>
+      <p>Modul CRM melacak prospek calon kemitraan atau pelanggan loyal melalui tahapan pipeline (New -> Qualified -> Proposition -> Won). Modul Dashboard merangkum metrik finansial, produk terlaris (Best Category / SKU), total omset harian, dan metrik gudang secara grafis.</p>
+      
+      <div class="grid-2">
+        <div class="img-container">
+          <img src="img/psdp_diagrams/page24_img1.jpeg" alt="Dashboard Sales Charts"/>
+          <div class="img-caption">Gambar 5.23: Visualisasi Grafik Pendapatan & Kinerja Gudang</div>
+        </div>
+        <div class="img-container">
+          <img src="img/psdp_diagrams/page24_img2.jpeg" alt="CRM Pipeline stage"/>
+          <div class="img-caption">Gambar 5.24: Tampilan Papan Kanban Tahapan Prospek CRM</div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- PHASE 6: PEMODELAN BPMN -->
+  <div class="phase-block">
+    <div class="phase-badge pb-amber">Fase 6: Pemodelan Alur Kerja Bisnis (BPMN)</div>
+    
+    <!-- 6.1 BPMN Sales As-Is -->
+    <div class="section-card" id="bpmn-sales-asis">
+      <h3><span class="section-card-num">6.1.</span> BPMN As-Is Marketing & Sales (Sebelum ERP)</h3>
+      <p class="section-card-desc">Alur penjualan lama yang lambat dan didominasi pencatatan manual harian.</p>
+      <p>Sebelum implementasi ERP Odoo, alur pemesanan dan pemasaran berjalan terfragmentasi. Kasir mencatat pesanan, memeriksa bahan secara fisik ke dapur, memasak secara manual, dan owner melakukan rekap penjualan harian dari kertas struk kasir.</p>
+      
+      <div class="img-container">
+        <img src="img/psdp_diagrams/page9_img1.jpeg" alt="BPMN Sales As-Is"/>
+        <div class="img-caption">Gambar 3.1: Diagram Alur Proses Bisnis Penjualan Manual (As-Is)</div>
+      </div>
+    </div>
+    
+    <!-- 6.2 BPMN Sales To-Be -->
+    <div class="section-card" id="bpmn-sales-tobe">
+      <h3><span class="section-card-num">6.2.</span> BPMN To-Be Marketing & Sales (Setelah ERP)</h3>
+      <p class="section-card-desc">Otomatisasi pengiriman promosi, input POS, dan sinkronisasi laporan.</p>
+      <p>Sistem baru mengintegrasikan modul pemasaran digital (Email/SMS) untuk menarik calon pembeli. Transaksi POS kasir langsung memicu pembuatan nota digital, pengurangan stok bahan baku, dan pengkinian dashboard penjualan owner secara real-time.</p>
+      
+      <div class="img-container">
+        <img src="img/psdp_diagrams/page11_img1.jpeg" alt="BPMN Sales To-Be"/>
+        <div class="img-caption">Gambar 3.2: Diagram Alur Proses Bisnis Penjualan Terintegrasi Odoo (To-Be)</div>
+      </div>
+    </div>
+    
+    <!-- 6.3 BPMN Production As-Is -->
+    <div class="section-card" id="bpmn-prod-asis">
+      <h3><span class="section-card-num">6.3.</span> BPMN As-Is Production (Sebelum ERP)</h3>
+      <p class="section-card-desc">Proses dapur yang tidak terdokumentasi dan pemeriksaan stok manual.</p>
+      <p>Alur produksi as-is sangat bergantung pada ingatan dan pemeriksaan manual oleh staf dapur. Kendali mutu dilakukan subjektif dan laporan pemakaian bahan baku tidak terintegrasi ke sistem keuangan.</p>
+      
+      <div class="img-container">
+        <img src="img/psdp_diagrams/page13_img1.jpeg" alt="BPMN Production As-Is"/>
+        <div class="img-caption">Gambar 4.1: Diagram Alur Proses Bisnis Produksi Manual (As-Is)</div>
+      </div>
+    </div>
+    
+    <!-- 6.4 BPMN Production To-Be -->
+    <div class="section-card" id="bpmn-prod-tobe">
+      <h3><span class="section-card-num">6.4.</span> BPMN To-Be Production (Setelah ERP)</h3>
+      <p class="section-card-desc">Siklus produksi terotomatisasi Bill of Materials (BoM) dan pos pengecekan mutu.</p>
+      <p>Begitu penjualan terkonfirmasi di kasir, Odoo otomatis menerbitkan Manufacturing Order (MO), merujuk resep BoM untuk mengurangi stok di gudang, mewajibkan staf dapur melewati quality check titik Pass/Fail, dan merilis status selesai ke dashboard monitoring.</p>
+      
+      <div class="img-container">
+        <img src="img/psdp_diagrams/page14_img1.jpeg" alt="BPMN Production To-Be"/>
+        <div class="img-caption">Gambar 4.2: Diagram Alur Proses Bisnis Produksi Terintegrasi Odoo (To-Be)</div>
+      </div>
+    </div>
+    
+    <!-- 6.5 Perbandingan -->
+    <div class="section-card" id="system-comparison">
+      <h3><span class="section-card-num">6.5.</span> Perbandingan Proses Bisnis As-Is vs To-Be</h3>
+      <p class="section-card-desc">Tabel matriks transformasi operasional Ketan Bersaudara paska implementasi Odoo.</p>
+      <div class="table-wrapper">
+        <table>
+          <thead>
+            <tr>
+              <th>Dimensi Operasional</th>
+              <th>Kondisi As-Is (Sistem Manual)</th>
+              <th>Kondisi To-Be (Sistem ERP Odoo)</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr>
+              <td><strong>Pencatatan Transaksi</strong></td>
+              <td>Pencatatan manual / POS terpisah tanpa update data pusat.</td>
+              <td>Otomatis tercatat terintegrasi dengan modul inventory.</td>
+            </tr>
+            <tr>
+              <td><strong>Manajemen Stok Gudang</strong></td>
+              <td>Cek fisik manual berkala, reaktif saat stok habis.</td>
+              <td>Pengecekan real-time berbasis kartu stok otomatis BoM.</td>
+            </tr>
+            <tr>
+              <td><strong>Kendali Mutu (Quality Control)</strong></td>
+              <td>Manual, subjektif, tidak ada bukti terdokumentasi.</td>
+              <td>Terkonfigurasi melalui modul Quality Control Points (Pass/Fail).</td>
+            </tr>
+            <tr>
+              <td><strong>Pelaporan Penjualan</strong></td>
+              <td>Rekap Excel manual harian oleh owner di akhir shift.</td>
+              <td>Dashboard KPI real-time merangkum penjualan per SKU.</td>
+            </tr>
+            <tr>
+              <td><strong>Manajemen Promosi</strong></td>
+              <td>Tidak terstruktur, posting sosial media seadanya.</td>
+              <td>Terjadwal dan terpusat melalui modul Odoo Marketing.</td>
+            </tr>
+          </tbody>
+        </table>
+      </div>
+    </div>
+  </div>
+
+  <!-- PHASE 7: KESIMPULAN & SARAN -->
+  <div class="phase-block">
+    <div class="phase-badge pb-green">Fase 7: Kesimpulan & Saran Pengembangan</div>
+    
+    <!-- 7.1 Kesimpulan -->
+    <div class="section-card" id="kesimpulan">
+      <h3><span class="section-card-num">7.1.</span> Kesimpulan Hasil Implementasi</h3>
+      <p class="section-card-desc">Ringkasan pencapaian integrasi sistem Ketan Bersaudara.</p>
+      <p>Transformasi digital menggunakan platform Odoo ERP berhasil menyatukan seluruh fungsi operasional gerai Ketan Bersaudara Pasar Tunjungan dalam satu database terpadu. Kendala operasional kritis seperti kehabisan bahan baku mendadak, lambatnya pencatatan omset harian, dan ketidakjelasan tugas staf teratasi melalui modul Manufacturing, Inventory, Sales, dan CRM. Hal ini memangkas ketergantungan mutlak gerai pada kehadiran fisik owner di toko.</p>
+    </div>
+    
+    <!-- 7.2 Saran -->
+    <div class="section-card" id="saran">
+      <h3><span class="section-card-num">7.2.</span> Saran Pengembangan Sistem Lebih Lanjut</h3>
+      <p class="section-card-desc">Rekomendasi taktis untuk mengoptimalkan penggunaan sistem Odoo di masa depan.</p>
+      <div class="sticky-grid">
+        <div class="sticky-note sticky-yellow">
+          <h4>1. Fitur Reorder Rules</h4>
+          <p>Mengaktifkan pengaturan batas minimum stok di Odoo agar otomatis menerbitkan Purchase Requisition bahan baku saat kritis.</p>
+        </div>
+        <div class="sticky-note sticky-blue">
+          <h4>2. Modul HR & Kalender Shift</h4>
+          <p>Mengintegrasikan pencatatan jam kerja dan shift staf secara formal dalam modul SDM Odoo.</p>
+        </div>
+        <div class="sticky-note sticky-green">
+          <h4>3. Optimasi CRM & Loyalitas</h4>
+          <p>Memanfaatkan database kontak POS untuk merancang promosi personal berbasis riwayat belanja kesukaan konsumen.</p>
+        </div>
+        <div class="sticky-note sticky-rose">
+          <h4>4. Modul Keuangan & Akuntansi</h4>
+          <p>Mengeksplorasi modul Purchase & Accounting guna mengotomatiskan pembukuan laba rugi bulanan gerai.</p>
+        </div>
+      </div>
+    </div>
+  </div>
+    
+
+  <div class="workspace-footer">
+    <p>&copy; 2026 Fitria Indah Novitasari. All Rights Reserved. Portfolio Canvas Workspace.</p>
+  </div>
+
+</div>
+
+<script>
+  // Active nav highlighting on scroll
+  const sections = document.querySelectorAll('.section-card');
+  const navItems = document.querySelectorAll('.nav-item');
+  
+  window.addEventListener('scroll', () => {
+    let current = '';
+    sections.forEach(section => {
+      const sectionTop = section.offsetTop;
+      const sectionHeight = section.clientHeight;
+      if (pageYOffset >= (sectionTop - 150)) {
+        current = section.getAttribute('id');
+      }
+    });
+    
+    navItems.forEach(item => {
+      item.classList.remove('active');
+      if (item.getAttribute('href') === `#${current}`) {
+        item.classList.add('active');
+      }
+    });
+  });
+</script>
+
+</body>
+</html>
