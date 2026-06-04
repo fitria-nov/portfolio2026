@@ -145,7 +145,27 @@
 
 <!-- ===== PROJECTS ===== -->
 <section id="projects" class="panel">
-  <div class="panel-header anim"><div><h1 class="panel-title">Projects</h1><p class="panel-sub">Selected works showcasing my design & creative journey</p></div></div>
+
+  <!-- DRAMATIC HERO HEADER -->
+  <div class="proj-hero anim-scale">
+    <div class="proj-hero-bg">
+      <div class="proj-hero-grain"></div>
+      <div class="proj-hero-glow g1"></div>
+      <div class="proj-hero-glow g2"></div>
+    </div>
+    <div class="proj-hero-content">
+      <span class="proj-hero-eyebrow">Portfolio</span>
+      <h1 class="proj-hero-title">Selected<br/><span class="proj-hero-accent">Works</span></h1>
+      <p class="proj-hero-sub">Crafting digital experiences from concept to deployment — across system design, UI/UX, and creative content.</p>
+      <div class="proj-hero-stats">
+        <div class="proj-hero-stat"><span class="proj-hero-num">11</span><span class="proj-hero-lbl">Projects</span></div>
+        <div class="proj-hero-stat-divider"></div>
+        <div class="proj-hero-stat"><span class="proj-hero-num">3</span><span class="proj-hero-lbl">Disciplines</span></div>
+        <div class="proj-hero-stat-divider"></div>
+        <div class="proj-hero-stat"><span class="proj-hero-num">4+</span><span class="proj-hero-lbl">Clients</span></div>
+      </div>
+    </div>
+  </div>
 
   <!-- FILTER PILLS -->
   <div class="proj-filters anim">
@@ -158,93 +178,115 @@
   <!-- PROJECT GRID -->
   <div class="proj-grid">
 
-    <!-- PROJECT -1: GAV SmartProcure -->
-    <div class="proj-card anim" data-category="system-analyst">
+    <!-- PROJECT: GAV SmartProcure (FEATURED) -->
+    <div class="proj-card proj-card--featured anim" data-category="system-analyst">
       <div class="proj-inner">
         <div class="proj-image" onclick="window.location.href='gav-canvas.html'">
-          <div style="background: linear-gradient(135deg, #0f172a, #334155); width: 100%; height: 100%; display: flex; align-items: center; justify-content: center; color: white; font-weight: bold; font-size: 1.8rem; text-align: center; padding: 20px;">GAV SmartProcure</div>
+          <div class="proj-gradient-cover" style="--grad-from:#0f172a;--grad-to:#334155;">
+            <span class="proj-gradient-label">GAV SmartProcure</span>
+            <span class="proj-gradient-sub">Enterprise Procurement System</span>
+          </div>
           <div class="proj-overlay"><span class="proj-view">View Detail ↗</span></div>
         </div>
         <div class="proj-body">
-          <span class="proj-cat" style="color: #10b981; border-color: rgba(16, 185, 129, 0.2); background: rgba(16, 185, 129, 0.1);">System Analyst</span>
-          <h3 style="font-size: 1.5rem; margin-bottom: 12px; color: #1e293b;">Enterprise Procurement System (SAP Integrated)</h3>
-        <p style="color: #64748b; margin-bottom: 24px;">Digital Transformation of manual procurement workflow to zero-paper process with SAP backend integration. (BA & System Analyst Role)</p>
-        <div style="display: flex; gap: 12px; margin-bottom: 24px; flex-wrap: wrap;">
-          <span style="background: #e0f2fe; color: #0284c7; padding: 6px 14px; border-radius: 99px; font-size: 0.85rem; font-weight: 600;">System Analysis</span>
-          <span style="background: #e0f2fe; color: #0284c7; padding: 6px 14px; border-radius: 99px; font-size: 0.85rem; font-weight: 600;">SAP BAPI</span>
-          <span style="background: #e0f2fe; color: #0284c7; padding: 6px 14px; border-radius: 99px; font-size: 0.85rem; font-weight: 600;">UML & Diagramming</span>
-        </div>
-        <a href="gav-canvas.html" style="display: inline-block; background: #2563eb; color: white; padding: 12px 24px; border-radius: 8px; font-weight: 600; text-decoration: none;">Lihat Dokumen UX Canvas (NEW) &rarr;</a>
-      </div>
-          <div class="proj-tags"><span>Enterprise System</span><span>SAP Workflow</span><span>BRD</span><span>UML</span></div>
+          <div class="proj-meta">
+            <span class="proj-role-badge proj-role--sa">System Analyst</span>
+            <span class="proj-year">2025</span>
+          </div>
+          <h3 class="proj-title">Enterprise Procurement System<br/><span class="proj-title-thin">(SAP Integrated)</span></h3>
+          <p class="proj-desc">Digital Transformation of manual procurement workflow to zero-paper process with SAP backend integration. Business Analyst & System Analyst Role.</p>
+          <div class="proj-tech-stack">
+            <span class="proj-tech proj-tech--blue">System Analysis</span>
+            <span class="proj-tech proj-tech--blue">SAP BAPI</span>
+            <span class="proj-tech proj-tech--blue">UML & Diagramming</span>
+          </div>
+          <a href="gav-canvas.html" class="proj-cta proj-cta--blue">Lihat Dokumen UX Canvas &rarr;</a>
         </div>
       </div>
     </div>
 
-    <!-- PROJECT 0: Well-Be SRS -->
+    <!-- PROJECT: Well-Be SRS -->
     <div class="proj-card anim" data-category="system-analyst">
       <div class="proj-inner">
         <div class="proj-image" onclick="window.location.href='sa-wellbe.html'">
-          <div style="background: linear-gradient(135deg, #0d9488, #0f766e); width: 100%; height: 100%; display: flex; align-items: center; justify-content: center; color: white; font-weight: bold; font-size: 2rem; text-align: center; padding: 20px;">Well-Be SRS</div>
+          <div class="proj-gradient-cover" style="--grad-from:#0d9488;--grad-to:#0f766e;">
+            <span class="proj-gradient-label">Well-Be SRS</span>
+            <span class="proj-gradient-sub">Medical Monitoring System</span>
+          </div>
           <div class="proj-overlay"><span class="proj-view">View Detail ↗</span></div>
         </div>
         <div class="proj-body">
-          <span class="proj-cat" style="color: #0d9488; border-color: rgba(13, 148, 136, 0.2); background: rgba(13, 148, 136, 0.1);">System Analyst</span>
-          <h3 style="font-size: 1.5rem; margin-bottom: 12px; color: #1e293b;">Software Requirements (SRS) - Well-Be</h3>
-          <p style="color: #64748b; margin-bottom: 24px;">Penyusunan dokumen SRS aplikasi pemantauan medis lansia Alzheimer terintegrasi WearOS. Pemodelan sistem DFD, CDM/PDM, Use Case, dan Sequence.</p>
-          <div style="display: flex; gap: 12px; margin-bottom: 24px; flex-wrap: wrap;">
-            <span style="background: #ccfbf1; color: #0d9488; padding: 6px 14px; border-radius: 99px; font-size: 0.85rem; font-weight: 600;">Requirements Eng.</span>
-            <span style="background: #ccfbf1; color: #0d9488; padding: 6px 14px; border-radius: 99px; font-size: 0.85rem; font-weight: 600;">UML Modeling</span>
-            <span style="background: #ccfbf1; color: #0d9488; padding: 6px 14px; border-radius: 99px; font-size: 0.85rem; font-weight: 600;">Smartwatch GPS</span>
+          <div class="proj-meta">
+            <span class="proj-role-badge proj-role--teal">System Analyst</span>
+            <span class="proj-year">2025</span>
           </div>
-          <a href="sa-wellbe.html" style="display: inline-block; background: #0d9488; color: white; padding: 12px 24px; border-radius: 8px; font-weight: 600; text-decoration: none;">Lihat Dokumen SRS Canvas &rarr;</a>
+          <h3 class="proj-title">Software Requirements (SRS)<br/><span class="proj-title-thin">Well-Be Healthcare</span></h3>
+          <p class="proj-desc">Penyusunan dokumen SRS aplikasi pemantauan medis lansia Alzheimer terintegrasi WearOS. Pemodelan sistem DFD, CDM/PDM, Use Case, dan Sequence.</p>
+          <div class="proj-tech-stack">
+            <span class="proj-tech proj-tech--teal">Requirements Eng.</span>
+            <span class="proj-tech proj-tech--teal">UML Modeling</span>
+            <span class="proj-tech proj-tech--teal">Smartwatch GPS</span>
+          </div>
+          <a href="sa-wellbe.html" class="proj-cta proj-cta--teal">Lihat Dokumen SRS Canvas &rarr;</a>
         </div>
       </div>
     </div>
 
-    <!-- PROJECT 0.5: PSDP Ketan Bersaudara -->
+    <!-- PROJECT: Ketan Bersaudara ERP -->
     <div class="proj-card anim" data-category="system-analyst">
       <div class="proj-inner">
         <div class="proj-image" onclick="window.location.href='psdp-ketan.html'">
-          <div style="background: linear-gradient(135deg, #10b981, #059669); width: 100%; height: 100%; display: flex; align-items: center; justify-content: center; color: white; font-weight: bold; font-size: 2.2rem; text-align: center; padding: 20px;">Ketan Bersaudara ERP</div>
+          <div class="proj-gradient-cover" style="--grad-from:#10b981;--grad-to:#059669;">
+            <span class="proj-gradient-label">Ketan Bersaudara</span>
+            <span class="proj-gradient-sub">ERP Odoo Implementation</span>
+          </div>
           <div class="proj-overlay"><span class="proj-view">View Detail ↗</span></div>
         </div>
         <div class="proj-body">
-          <span class="proj-cat" style="color: #10b981; border-color: rgba(16, 185, 129, 0.2); background: rgba(16, 185, 129, 0.1);">System Analyst</span>
-          <h3 style="font-size: 1.5rem; margin-bottom: 12px; color: #1e293b;">ERP Odoo - Ketan Bersaudara</h3>
-          <p style="color: #64748b; margin-bottom: 24px;">Implementasi ERP Odoo untuk digitalisasi F&B tradisional-modern. Mengintegrasikan modul Manufacturing (BoM), Inventory, Quality Control, dan CRM/POS.</p>
-          <div style="display: flex; gap: 12px; margin-bottom: 24px; flex-wrap: wrap;">
-            <span style="background: #d1fae5; color: #059669; padding: 6px 14px; border-radius: 99px; font-size: 0.85rem; font-weight: 600;">Odoo ERP</span>
-            <span style="background: #d1fae5; color: #059669; padding: 6px 14px; border-radius: 99px; font-size: 0.85rem; font-weight: 600;">BPMN Modeling</span>
-            <span style="background: #d1fae5; color: #059669; padding: 6px 14px; border-radius: 99px; font-size: 0.85rem; font-weight: 600;">Manufacturing (BoM)</span>
+          <div class="proj-meta">
+            <span class="proj-role-badge proj-role--green">System Analyst</span>
+            <span class="proj-year">2025</span>
           </div>
-          <a href="psdp-ketan.html" style="display: inline-block; background: #10b981; color: white; padding: 12px 24px; border-radius: 8px; font-weight: 600; text-decoration: none;">Lihat Dokumen ERP Canvas &rarr;</a>
+          <h3 class="proj-title">ERP Odoo Implementation<br/><span class="proj-title-thin">Ketan Bersaudara F&amp;B</span></h3>
+          <p class="proj-desc">Implementasi ERP Odoo untuk digitalisasi F&amp;B tradisional-modern. Mengintegrasikan modul Manufacturing (BoM), Inventory, Quality Control, dan CRM/POS.</p>
+          <div class="proj-tech-stack">
+            <span class="proj-tech proj-tech--green">Odoo ERP</span>
+            <span class="proj-tech proj-tech--green">BPMN Modeling</span>
+            <span class="proj-tech proj-tech--green">Manufacturing (BoM)</span>
+          </div>
+          <a href="psdp-ketan.html" class="proj-cta proj-cta--green">Lihat Dokumen ERP Canvas &rarr;</a>
         </div>
       </div>
     </div>
 
-    <!-- PROJECT 0.7: LPPM SIMPPM Portal -->
+    <!-- PROJECT: LPPM SIMPPM Portal -->
     <div class="proj-card anim" data-category="system-analyst">
       <div class="proj-inner">
         <div class="proj-image" onclick="window.location.href='lppm-portal.html'">
-          <div style="background: linear-gradient(135deg, #d97706, #b45309); width: 100%; height: 100%; display: flex; align-items: center; justify-content: center; color: white; font-weight: bold; font-size: 2.2rem; text-align: center; padding: 20px;">SIMPPM Portal</div>
+          <div class="proj-gradient-cover" style="--grad-from:#d97706;--grad-to:#b45309;">
+            <span class="proj-gradient-label">SIMPPM Portal</span>
+            <span class="proj-gradient-sub">Research Management System</span>
+          </div>
           <div class="proj-overlay"><span class="proj-view">View Detail ↗</span></div>
         </div>
         <div class="proj-body">
-          <span class="proj-cat" style="color: #d97706; border-color: rgba(217, 119, 6, 0.2); background: rgba(217, 119, 6, 0.1);">System Analyst</span>
-          <h3 style="font-size: 1.5rem; margin-bottom: 12px; color: #1e293b;">SIMPPM LPPM Research Portal</h3>
-          <p style="color: #64748b; margin-bottom: 24px;">Digitalisasi tata kelola pengajuan proposal penelitian dosen & mahasiswa. Pemodelan alur kerja swimlane (BPMN), Use Case, DFD, ERD, dan spesifikasi integrasi API.</p>
-          <div style="display: flex; gap: 12px; margin-bottom: 24px; flex-wrap: wrap;">
-            <span style="background: #fef3c7; color: #d97706; padding: 6px 14px; border-radius: 99px; font-size: 0.85rem; font-weight: 600;">Proposal Workflow</span>
-            <span style="background: #fef3c7; color: #d97706; padding: 6px 14px; border-radius: 99px; font-size: 0.85rem; font-weight: 600;">Double-Blind Review</span>
-            <span style="background: #fef3c7; color: #d97706; padding: 6px 14px; border-radius: 99px; font-size: 0.85rem; font-weight: 600;">UML Modeling</span>
+          <div class="proj-meta">
+            <span class="proj-role-badge proj-role--amber">System Analyst</span>
+            <span class="proj-year">2025</span>
           </div>
-          <a href="lppm-portal.html" style="display: inline-block; background: #d97706; color: white; padding: 12px 24px; border-radius: 8px; font-weight: 600; text-decoration: none;">Lihat Dokumen Portal Canvas &rarr;</a>
+          <h3 class="proj-title">SIMPPM LPPM<br/><span class="proj-title-thin">Research Portal</span></h3>
+          <p class="proj-desc">Digitalisasi tata kelola pengajuan proposal penelitian dosen &amp; mahasiswa. Pemodelan alur kerja swimlane (BPMN), Use Case, DFD, ERD, dan spesifikasi integrasi API.</p>
+          <div class="proj-tech-stack">
+            <span class="proj-tech proj-tech--amber">Proposal Workflow</span>
+            <span class="proj-tech proj-tech--amber">Double-Blind Review</span>
+            <span class="proj-tech proj-tech--amber">UML Modeling</span>
+          </div>
+          <a href="lppm-portal.html" class="proj-cta proj-cta--amber">Lihat Dokumen Portal Canvas &rarr;</a>
         </div>
       </div>
     </div>
 
-    <!-- PROJECT 1: S2 Dental Care -->
+    <!-- PROJECT: S2 Dental Care -->
     <div class="proj-card anim" data-category="content">
       <div class="proj-inner">
         <div class="proj-image" onclick="openLightbox('img/project-s2dental.png')">
@@ -252,15 +294,18 @@
           <div class="proj-overlay"><span class="proj-view">View Project ↗</span></div>
         </div>
         <div class="proj-body">
-          <span class="proj-cat">Content Creator</span>
-          <h3>Feed Design — S2 Dental Care</h3>
-          <p>Designed the entire social media feed for S2 Dental Care, a modern dental clinic in Surabaya. Created engaging visuals covering orthodontics, dental veneers, promotions, and educational health content — all while maintaining a professional yet approachable brand tone.</p>
+          <div class="proj-meta">
+            <span class="proj-role-badge proj-role--content">Content Creator</span>
+            <span class="proj-year">2025</span>
+          </div>
+          <h3 class="proj-title">Feed Design<br/><span class="proj-title-thin">S2 Dental Care</span></h3>
+          <p class="proj-desc">Designed the entire social media feed for S2 Dental Care, a modern dental clinic in Surabaya. Created engaging visuals covering orthodontics, dental veneers, promotions, and educational health content.</p>
           <div class="proj-tags"><span>Social Media</span><span>Feed Design</span><span>Canva</span><span>Healthcare Branding</span></div>
         </div>
       </div>
     </div>
 
-    <!-- PROJECT 2: Cerindo Brand Building -->
+    <!-- PROJECT: Cerindo Brand Building -->
     <div class="proj-card anim" data-category="content">
       <div class="proj-inner">
         <div class="proj-image" onclick="openLightbox('img/project-cerindo.png')">
@@ -268,15 +313,18 @@
           <div class="proj-overlay"><span class="proj-view">View Project ↗</span></div>
         </div>
         <div class="proj-body">
-          <span class="proj-cat">Content Creator</span>
-          <h3>Brand Building — PT Cerdas Anak Indonesia</h3>
-          <p>Built the visual brand identity for CERINDO, an innovative e-learning platform. Developed content for sub-brands including PENPRINDO (professional education), MENTORIX (mentoring), and TRAINIX (industrial training) — focusing on competency development and BNSP certifications.</p>
+          <div class="proj-meta">
+            <span class="proj-role-badge proj-role--content">Content Creator</span>
+            <span class="proj-year">2025</span>
+          </div>
+          <h3 class="proj-title">Brand Building<br/><span class="proj-title-thin">PT Cerdas Anak Indonesia</span></h3>
+          <p class="proj-desc">Built the visual brand identity for CERINDO, an innovative e-learning platform. Developed content for sub-brands including PENPRINDO, MENTORIX, and TRAINIX — focusing on competency development and BNSP certifications.</p>
           <div class="proj-tags"><span>Brand Building</span><span>Content Strategy</span><span>Visual Identity</span><span>Education</span></div>
         </div>
       </div>
     </div>
 
-    <!-- PROJECT 3: Bomboskuy Marketplace -->
+    <!-- PROJECT: Bomboskuy Marketplace -->
     <div class="proj-card anim" data-category="uiux">
       <div class="proj-inner">
         <div class="proj-image" onclick="openLightbox('img/project-bomboskuy.png')">
@@ -284,15 +332,18 @@
           <div class="proj-overlay"><span class="proj-view">View Project ↗</span></div>
         </div>
         <div class="proj-body">
-          <span class="proj-cat proj-cat-uiux">UI/UX Design</span>
-          <h3>UI/UX Design — Bomboskuy Marketplace</h3>
-          <p>Designed a warm, inviting marketplace UI for Bomboskuy — a handmade bomboloni brand. Focused on creating a delightful user experience that mirrors the sweetness of the product, with a soft color palette, playful typography, and intuitive product browsing flow.</p>
+          <div class="proj-meta">
+            <span class="proj-role-badge proj-role--uiux">UI/UX Design</span>
+            <span class="proj-year">2024</span>
+          </div>
+          <h3 class="proj-title">UI/UX Design<br/><span class="proj-title-thin">Bomboskuy Marketplace</span></h3>
+          <p class="proj-desc">Designed a warm, inviting marketplace UI for Bomboskuy — a handmade bomboloni brand. Focused on creating a delightful user experience with a soft color palette, playful typography, and intuitive browsing flow.</p>
           <div class="proj-tags"><span>Figma</span><span>UI/UX</span><span>E-Commerce</span><span>Prototyping</span></div>
         </div>
       </div>
     </div>
 
-    <!-- PROJECT 4: Popjasa Daily Feed -->
+    <!-- PROJECT: Popjasa Daily Feed -->
     <div class="proj-card anim" data-category="content">
       <div class="proj-inner">
         <div class="proj-image" onclick="openLightbox('img/project-popjasa.png')">
@@ -300,15 +351,18 @@
           <div class="proj-overlay"><span class="proj-view">View Project ↗</span></div>
         </div>
         <div class="proj-body">
-          <span class="proj-cat">Content Creator</span>
-          <h3>Daily Feed — PT Popjasa Indonesia</h3>
-          <p>Produced daily social media content for Popjasa, a specialized legal service provider. Created informative carousel posts about company registration, licensing, CVs, and entrepreneurship tips — combining visual storytelling with legal education to boost engagement.</p>
+          <div class="proj-meta">
+            <span class="proj-role-badge proj-role--content">Content Creator</span>
+            <span class="proj-year">2025</span>
+          </div>
+          <h3 class="proj-title">Daily Feed<br/><span class="proj-title-thin">PT Popjasa Indonesia</span></h3>
+          <p class="proj-desc">Produced daily social media content for Popjasa, a specialized legal service provider. Created informative carousel posts about company registration, licensing, and entrepreneurship tips.</p>
           <div class="proj-tags"><span>Social Media</span><span>Copywriting</span><span>Carousel Design</span><span>Legal Content</span></div>
         </div>
       </div>
     </div>
 
-    <!-- PROJECT 5: Upgrade Skill -->
+    <!-- PROJECT: Upgrade Skill -->
     <div class="proj-card anim" data-category="content">
       <div class="proj-inner">
         <div class="proj-image" onclick="openLightbox('img/project-upgradeskill.png')">
@@ -316,15 +370,18 @@
           <div class="proj-overlay"><span class="proj-view">View Project ↗</span></div>
         </div>
         <div class="proj-body">
-          <span class="proj-cat">Content Creator</span>
-          <h3>Digital Marketing Content — Upgrade Skill ID</h3>
-          <p>Created educational digital marketing content for Upgrade Skill, a comprehensive digital education and creative agency platform by PT Popjasa Indonesia. Designed carousel posts covering SEO strategies, marketing pillars, social media trends, and 4P marketing frameworks — empowering entrepreneurs with practical digital knowledge.</p>
+          <div class="proj-meta">
+            <span class="proj-role-badge proj-role--content">Content Creator</span>
+            <span class="proj-year">2025</span>
+          </div>
+          <h3 class="proj-title">Digital Marketing Content<br/><span class="proj-title-thin">Upgrade Skill ID</span></h3>
+          <p class="proj-desc">Created educational digital marketing content for Upgrade Skill. Designed carousel posts covering SEO strategies, marketing pillars, social media trends, and 4P marketing frameworks.</p>
           <div class="proj-tags"><span>Digital Marketing</span><span>Content Strategy</span><span>SEO</span><span>Social Media Education</span></div>
         </div>
       </div>
     </div>
 
-    <!-- PROJECT 6: Start Franchise -->
+    <!-- PROJECT: Start Franchise -->
     <div class="proj-card anim" data-category="uiux">
       <div class="proj-inner">
         <div class="proj-image" onclick="openLightbox('img/project-startfranchise.png')">
@@ -332,15 +389,18 @@
           <div class="proj-overlay"><span class="proj-view">View Project ↗</span></div>
         </div>
         <div class="proj-body">
-          <span class="proj-cat proj-cat-uiux">UI/UX Design</span>
-          <h3>UI/UX Design — Start Franchise Platform</h3>
-          <p>Designed the complete website UI for Start Franchise, a digital solutions platform built for fast and confident business growth. Created an intuitive interface featuring franchise starter kits, SOP bundles, and branding toolkits — with a modern, trustworthy visual language that empowers brands to scale worldwide.</p>
+          <div class="proj-meta">
+            <span class="proj-role-badge proj-role--uiux">UI/UX Design</span>
+            <span class="proj-year">2025</span>
+          </div>
+          <h3 class="proj-title">UI/UX Design<br/><span class="proj-title-thin">Start Franchise Platform</span></h3>
+          <p class="proj-desc">Designed the complete website UI for Start Franchise, a digital solutions platform built for fast and confident business growth. Modern, trustworthy visual language that empowers brands to scale worldwide.</p>
           <div class="proj-tags"><span>Figma</span><span>Web Design</span><span>E-Commerce</span><span>Business Platform</span></div>
         </div>
       </div>
     </div>
 
-    <!-- PROJECT 7: TEDx UNAIR -->
+    <!-- PROJECT: TEDx UNAIR -->
     <div class="proj-card anim" data-category="uiux">
       <div class="proj-inner">
         <div class="proj-image" onclick="openLightbox('img/project-tedxunair.png')">
@@ -348,9 +408,12 @@
           <div class="proj-overlay"><span class="proj-view">View Project ↗</span></div>
         </div>
         <div class="proj-body">
-          <span class="proj-cat proj-cat-uiux">UI/UX Design</span>
-          <h3>UI/UX Design — TEDx UNAIR 2024 &amp; 2025</h3>
-          <p>Designed a digital treasure hunt website for TEDx Universitas Airlangga under the theme "Experimental: Transforming the Ordinary." The interface invites users to piece together clues, combining interactive puzzle elements with TEDx merchandise e-commerce and event information.</p>
+          <div class="proj-meta">
+            <span class="proj-role-badge proj-role--uiux">UI/UX Design</span>
+            <span class="proj-year">2024</span>
+          </div>
+          <h3 class="proj-title">UI/UX Design<br/><span class="proj-title-thin">TEDx UNAIR 2024 &amp; 2025</span></h3>
+          <p class="proj-desc">Designed a digital treasure hunt website for TEDx Universitas Airlangga under the theme "Experimental: Transforming the Ordinary." Interactive puzzle elements with TEDx merchandise e-commerce.</p>
           <div class="proj-tags"><span>Figma</span><span>Web Design</span><span>Interactive UI</span><span>Event Branding</span></div>
         </div>
       </div>
