@@ -2253,6 +2253,774 @@ def generate_psdp():
         </div>
       </div>
     </div>
+    """
+    return build_html(title, project_name, role, meta_units, meta_platform, meta_author, sidebar_nav_html, main_content_html, accent_class, color_theme_style)
+
+def generate_lppm():
+    project_name = "SIMPPM LPPM Portal"
+    title = "SIMPPM Portal: Research & Community Service Proposal Management System"
+    role = "Senior Business & System Analyst"
+    meta_units = "LPPM (Lembaga Penelitian dan Pengabdian kepada Masyarakat)"
+    meta_platform = "LPPM Proposal Workflow Portal, REST API Integration & Reviewer Matrix"
+    meta_author = "Fitria Indah Novitasari"
+    accent_class = "accent-amber"
+    
+    color_theme_style = """
+    .nav-item:hover {
+      background: #f1f5f9;
+      color: var(--accent-amber);
+    }
+    .nav-item.active {
+      background: var(--accent-amber-soft);
+      color: var(--accent-amber);
+      font-weight: 600;
+    }
+    .timeline-dot {
+      border: 2px solid var(--accent-amber);
+      color: var(--accent-amber);
+    }
+    .section-card {
+      border-left: 5px solid var(--accent-amber);
+    }
+    """
+    
+    sidebar_nav_html = """
+    <div class="nav-group-title">Fase 1: Case Study</div>
+    <a href="#general-overview" class="nav-item active"><span class="nav-num">1.1</span> Gambaran Perusahaan</a>
+    <a href="#org-structure" class="nav-item"><span class="nav-num">1.2</span> Struktur Organisasi</a>
+    <a href="#current-system" class="nav-item"><span class="nav-num">1.3</span> Sistem Saat Ini</a>
+    
+    <div class="nav-group-title">Fase 2: Proses Bisnis</div>
+    <a href="#bpmn-swimlane" class="nav-item"><span class="nav-num">2.1</span> BPMN Swimlane Alur</a>
+    <a href="#workflow-breakdown" class="nav-item"><span class="nav-num">2.2</span> Breakdown Alur Kerja</a>
+    
+    <div class="nav-group-title">Fase 3: Kebutuhan Sistem</div>
+    <a href="#brd" class="nav-item"><span class="nav-num">3.1</span> BRD Overview</a>
+    <a href="#func-req" class="nav-item"><span class="nav-num">3.2</span> Functional Specs</a>
+    <a href="#nonfunc-req" class="nav-item"><span class="nav-num">3.3</span> Non-Functional Specs</a>
+    <a href="#accept-crit" class="nav-item"><span class="nav-num">3.4</span> Acceptance Criteria</a>
+    
+    <div class="nav-group-title">Fase 4: Pemodelan UML</div>
+    <a href="#usecase" class="nav-item"><span class="nav-num">4.1</span> Use Case Diagram</a>
+    <a href="#activity" class="nav-item"><span class="nav-num">4.2</span> Activity Diagram</a>
+    <a href="#sequence" class="nav-item"><span class="nav-num">4.3</span> Sequence Diagram</a>
+    <a href="#dfd" class="nav-item"><span class="nav-num">4.4</span> DFD (Level 0 & 1)</a>
+    <a href="#erd" class="nav-item"><span class="nav-num">4.5</span> ERD Database</a>
+    
+    <div class="nav-group-title">Fase 5: Teknis & Integrasi</div>
+    <a href="#api-doc" class="nav-item"><span class="nav-num">5.1</span> API Documentation</a>
+    <a href="#val-rules" class="nav-item"><span class="nav-num">5.2</span> Validation Rules</a>
+    <a href="#role-matrix" class="nav-item"><span class="nav-num">5.3</span> Role & RACI Matrix</a>
+    <a href="#exception" class="nav-item"><span class="nav-num">5.4</span> Exception Flow</a>
+    
+    <div class="nav-group-title">Fase 6: Pengujian & Risiko</div>
+    <a href="#uat" class="nav-item"><span class="nav-num">6.1</span> UAT Test Plan</a>
+    <a href="#rtm" class="nav-item"><span class="nav-num">6.2</span> RTM Document</a>
+    <a href="#risk-reg" class="nav-item"><span class="nav-num">6.3</span> Risk Register</a>
+    
+    <div class="nav-group-title">Fase 7: Dampak Bisnis</div>
+    <a href="#biz-impact" class="nav-item"><span class="nav-num">7.1</span> Business Impact</a>
+    """
+    
+    main_content_html = """
+  <!-- PHASE 1: CASE STUDY -->
+  <div class="phase-block">
+    <div class="phase-badge pb-purple">Fase 1: Case Study & Context</div>
+    
+    <!-- 1.1 Gambaran Umum -->
+    <div class="section-card" id="general-overview">
+      <h3><span class="section-card-num">1.1.</span> Gambaran Perusahaan</h3>
+      <p class="section-card-desc">Latar belakang bisnis tata kelola administrasi penelitian perguruan tinggi.</p>
+      <div class="bento-grid">
+        <div class="bento-cell bento-wide">
+          <h4>LPPM Research & Community Service Portal</h4>
+          <p>Lembaga Penelitian dan Pengabdian kepada Masyarakat (LPPM) memegang tanggung jawab mutlak dalam pengelolaan siklus hibah internal perguruan tinggi. Portal SIMPPM dirancang untuk mendigitalisasi proses administrasi proposal pengajuan dana penelitian dosen dan mahasiswa secara transparan. Sistem baru ini mengintegrasikan seluruh pihak terkait secara online guna memastikan tata kelola administrasi riset yang efisien, cepat, dan bebas manipulasi.</p>
+        </div>
+        <div class="bento-cell">
+          <h4>Target Efisiensi</h4>
+          <p style="font-size: 2.2rem; font-weight: 800; color: var(--accent-amber); line-height: 1;">7 Hari</p>
+          <p style="font-weight: 600; margin-top: 10px;">Siklus Verifikasi Proposal</p>
+          <p>Memotong birokrasi manual dari rata-rata 35 hari kerja menjadi di bawah 1 minggu kerja secara online.</p>
+        </div>
+      </div>
+    </div>
+    
+    <!-- 1.2 Struktur Organisasi -->
+    <div class="section-card" id="org-structure">
+      <h3><span class="section-card-num">1.2.</span> Struktur Organisasi & Peran Kerja</h3>
+      <p class="section-card-desc">Definisi peran operasional utama yang terlibat dalam siklus proposal.</p>
+      <div class="table-wrapper">
+        <table>
+          <thead>
+            <tr>
+              <th>Aktor Peran</th>
+              <th>Tanggung Jawab Teknis</th>
+              <th>Kebutuhan Antarmuka Sistem</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr>
+              <td><strong>Admin LPPM</strong></td>
+              <td>Mengaktifkan periode hibah, melakukan verifikasi administratif akhir, dan melakukan plotting reviewer.</td>
+              <td>Dashboard monitoring penerimaan, menu plotting reviewer, dan audit log pendaftaran.</td>
+            </tr>
+            <tr>
+              <td><strong>Dosen Ketua</strong></td>
+              <td>Menyusun judul riset, membentuk usulan proposal, dan mengundang dosen/mahasiswa anggota.</td>
+              <td>Formulir isian proposal, menu pencarian NIDN/NIM, dan pengunggahan dokumen PDF.</td>
+            </tr>
+            <tr>
+              <td><strong>Anggota (Dosen & Mhs)</strong></td>
+              <td>Melakukan konfirmasi kesediaan bergabung ke dalam proyek riset.</td>
+              <td>Notifikasi digital dan satu-klik persetujuan (Approve/Reject) undangan di portal.</td>
+            </tr>
+            <tr>
+              <td><strong>Akademik Fakultas</strong></td>
+              <td>Melakukan pengecekan kelengkapan administrasi proposal tingkat fakultas.</td>
+              <td>Daftar antrean proposal fakultas dan checkbox kelayakan format berkas.</td>
+            </tr>
+            <tr>
+              <td><strong>Dekanat Fakultas</strong></td>
+              <td>Memberikan rekomendasi strategis kelayakan riset di tingkat fakultas.</td>
+              <td>Formulir rilis surat rekomendasi elektronik bertanda tangan digital.</td>
+            </tr>
+            <tr>
+              <td><strong>Reviewer Ahli</strong></td>
+              <td>Melakukan review substansi akademis proposal secara independen (blind review).</td>
+              <td>Formulir input nilai kuantitatif dan feedback kualitatif riset secara acak.</td>
+            </tr>
+          </tbody>
+        </table>
+      </div>
+    </div>
+    
+    <!-- 1.3 Sistem Lama & Tantangan -->
+    <div class="section-card" id="current-system">
+      <h3><span class="section-card-num">1.3.</span> Analisis Sistem Lama & Tantangan Operasional</h3>
+      <p class="section-card-desc">Masalah utama alur kerja berbasis kertas fisik (hardcopy) sebelum sistem terintegrasi.</p>
+      <div class="sticky-grid">
+        <div class="sticky-note sticky-yellow">
+          <h4>Berkas Rangkap 5</h4>
+          <p>Dosen harus mencetak proposal sebanyak 5 rangkap untuk dikirimkan secara manual ke validator fakultas dan dekan.</p>
+        </div>
+        <div class="sticky-note sticky-blue">
+          <h4>Klaim Anggota Sepihak</h4>
+          <p>Pencantuman nama dosen/mahasiswa sebagai anggota riset sering dilakukan sepihak tanpa adanya konfirmasi tertulis.</p>
+        </div>
+        <div class="sticky-note sticky-green">
+          <h4>Plotting Manual Excel</h4>
+          <p>Penunjukan reviewer oleh admin LPPM dilakukan via Excel, rentan terhadap kolusi dan konflik kepentingan (conflict of interest).</p>
+        </div>
+        <div class="sticky-note sticky-rose">
+          <h4>Verifikasi Terlambat</h4>
+          <p>Kesalahan format atau kelengkapan berkas baru terdeteksi setelah proposal dinilai reviewer, membuang waktu dan biaya penilaian.</p>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- PHASE 2: BUSINESS PROCESS -->
+  <div class="phase-block">
+    <div class="phase-badge pb-blue">Fase 2: Pemetaan Alur Kerja Bisnis</div>
+    
+    <!-- 2.1 BPMN Swimlane -->
+    <div class="section-card" id="bpmn-swimlane">
+      <h3><span class="section-card-num">2.1.</span> BPMN Swimlane Alur Pengajuan & Evaluasi Proposal</h3>
+      <p class="section-card-desc">Visualisasi alur proses bisnis lintas peran dari pembukaan periode hingga penandatanganan kontrak riset.</p>
+      <div class="diagram-container">
+        <div class="mermaid">
+          graph TD
+            subgraph Admin LPPM
+              Mulai([Mulai]) --> ActPeriod[Mengaktifkan Periode & Pengumuman]
+              ActPeriod --> WaitSubmit{Menunggu Submit Proposal}
+              FinalVerify[Verifikasi Administratif Akhir] --> FinalLolos{Lolos Seleksi?}
+              FinalLolos -- Tidak --> StatusNoLolosAdmin[Status: Tidak Lolos Seleksi Administrasi] --> End([Selesai])
+              FinalLolos -- Ya --> PlotReviewer[Plotting Reviewer]
+              PlotReviewer --> Review1[Penilaian Reviewer 1]
+              PlotReviewer --> Review2[Penilaian Reviewer 2]
+              Review1 --> JoinReviews
+              Review2 --> JoinReviews
+              JoinReviews[Konsolidasi Nilai] --> GradeLolos{Lolos Passing Grade?}
+              GradeLolos -- Tidak --> StatusNoLolosSubstansi[Status: Tidak Lolos Seleksi/Cadangan] --> End
+              GradeLolos -- Ya --> StatusDiterima[Status: Proposal Diterima / Didanai] --> Contract[Kontrak & Pendanaan]
+              Contract --> ProgressReport[Pelaksanaan & Pelaporan] --> End
+            end
+
+            subgraph Dosen Ketua
+              ActPeriod -.-> CreateProp[Membuat Proposal Baru]
+              CreateProp --> PilihAnggota{Pilih Anggota?}
+              PilihAnggota -- Ya --> InviteMembers[Kirim Undangan Anggota]
+              PilihAnggota -- No --> UploadDocs[Upload Proposal & Lampiran]
+              InviteMembers -.-> ApproveDosen
+              InviteMembers -.-> ApproveMhs
+              ConfirmJoin[Gabungkan Persetujuan] --> UploadDocs
+              UploadDocs --> SubmitProp[Submit Proposal]
+              SubmitProp --> VerifyFakultas
+            end
+
+            subgraph Dosen Anggota
+              ApproveDosen[Konfirmasi & Persetujuan Anggota Dosen] --> ConfirmJoin
+            end
+
+            subgraph Mahasiswa
+              ApproveMhs[Konfirmasi & Persetujuan Anggota Mahasiswa] --> ConfirmJoin
+            end
+
+            subgraph Akademik Fakultas
+              VerifyFakultas[Verifikasi Kelengkapan & Validasi] --> LolosVerify{Lolos Verifikasi?}
+              LolosVerify -- Tidak --> StatusReject[Status: Ditolak / Perbaikan Draft] --> CreateProp
+              LolosVerify -- Ya --> ForwardDean[Teruskan ke Dekanat]
+            end
+
+            subgraph Dekanat Fakultas
+              ForwardDean --> DeanReview[Review & Rekomendasi Dekan]
+              DeanReview --> RecDean{Rekomendasi?}
+              RecDean -- Tidak --> StatusNoRec[Status: Tidak Rekomendasi] --> End
+              RecDean -- Ya --> StatusRec[Status: Direkomendasikan] --> FinalVerify
+            end
+        </div>
+      </div>
+    </div>
+    
+    <!-- 2.2 Workflow Breakdown -->
+    <div class="section-card" id="workflow-breakdown">
+      <h3><span class="section-card-num">2.2.</span> Breakdown Detil Alur Kerja LPPM</h3>
+      <p class="section-card-desc">Penjelasan langkah-langkah logis operasional lintas peran berdasarkan swimlane diagram.</p>
+      <div class="workflow-timeline">
+        <div class="timeline-item">
+          <div class="timeline-dot">1</div>
+          <div class="timeline-content">
+            <h4>Inisiasi & Publikasi (Admin LPPM)</h4>
+            <p>Admin LPPM membuka periode pendaftaran hibah tahunan di portal SIMPPM. Sistem mempublikasikan dokumen panduan format riset secara otomatis.</p>
+          </div>
+        </div>
+        <div class="timeline-item">
+          <div class="timeline-dot">2</div>
+          <div class="timeline-content">
+            <h4>Penyusunan Usulan & Undang Anggota (Dosen Ketua)</h4>
+            <p>Dosen Ketua membuat berkas usulan di portal. Jika riset melibatkan anggota dosen atau mahasiswa, sistem otomatis mengirimkan undangan verifikasi digital.</p>
+          </div>
+        </div>
+        <div class="timeline-item">
+          <div class="timeline-dot">3</div>
+          <div class="timeline-content">
+            <h4>Konfirmasi Persetujuan Anggota (Dosen Anggota & Mahasiswa)</h4>
+            <p>Anggota wajib melakukan konfirmasi bergabung. Tombol "Submit Proposal" pada layar Dosen Ketua hanya akan aktif (unlock) apabila status persetujuan semua anggota bernilai "Approved".</p>
+          </div>
+        </div>
+        <div class="timeline-item">
+          <div class="timeline-dot">4</div>
+          <div class="timeline-content">
+            <h4>Verifikasi Kelayakan Format (Akademik & Dekanat Fakultas)</h4>
+            <p>Akademik Fakultas memeriksa format berkas administrasi. Berkas yang lolos diserahkan ke Dekanat untuk mendapatkan surat rekomendasi dekanat. Berkas yang tidak lengkap dikembalikan ke status Draf Dosen Ketua untuk direvisi.</p>
+          </div>
+        </div>
+        <div class="timeline-item">
+          <div class="timeline-dot">5</div>
+          <div class="timeline-content">
+            <h4>Plotting & Penilaian Independen (Reviewer LPPM)</h4>
+            <p>Admin LPPM melakukan plotting reviewer secara acak menggunakan sub-sistem Subject Area Matching. Dua reviewer secara independen memberikan penilaian numerik di portal. Proposal dengan rata-rata nilai di atas passing grade ditetapkan sebagai "Diterima / Didanai".</p>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- PHASE 3: REQUIREMENTS -->
+  <div class="phase-block">
+    <div class="phase-badge pb-green">Fase 3: Kebutuhan Sistem (BRD & Specs)</div>
+    
+    <!-- 3.1 BRD -->
+    <div class="section-card" id="brd">
+      <h3><span class="section-card-num">3.1.</span> Business Requirements (BRD Overview)</h3>
+      <p class="section-card-desc">Target bisnis utama dalam digitalisasi sistem hibah riset LPPM.</p>
+      <div style="background: #fafafb; padding: 24px; border-radius: 12px; border: 1px solid var(--border-color);">
+        <p><strong>BR-01:</strong> Sistem harus mampu memotong siklus waktu verifikasi dan penilaian dari rata-rata 35 hari kerja menjadi maksimum 7 hari kerja.</p>
+        <p style="margin-top: 8px;"><strong>BR-02:</strong> Sistem wajib menjamin transparansi review dengan mekanisme double-blind scoring, mengeliminasi bias penunjukan reviewer sebesar 100%.</p>
+      </div>
+    </div>
+    
+    <!-- 3.2 Functional Requirements -->
+    <div class="section-card" id="func-req">
+      <h3><span class="section-card-num">3.2.</span> Functional Requirements</h3>
+      <p class="section-card-desc">Spesifikasi fungsional portal pengajuan proposal SIMPPM.</p>
+      <div class="table-wrapper">
+        <table>
+          <thead>
+            <tr>
+              <th>ID Kebutuhan</th>
+              <th>Deskripsi Spesifikasi Kebutuhan</th>
+              <th>Prasyarat Validasi (Trigger)</th>
+              <th>Prioritas</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr>
+              <td><strong>FR-01</strong></td>
+              <td>Sistem harus mengunci tombol submit proposal apabila status persetujuan salah satu anggota riset masih 'Pending' atau 'Rejected'.</td>
+              <td>Database Status Table (Confirmations)</td>
+              <td><span class="badge badge-danger">Critical</span></td>
+            </tr>
+            <tr>
+              <td><strong>FR-02</strong></td>
+              <td>Sistem wajib menolak upload proposal jika file bukan berformat PDF atau ukuran melebihi limit 10MB.</td>
+              <td>MIME Type File Check API</td>
+              <td><span class="badge badge-danger">Critical</span></td>
+            </tr>
+            <tr>
+              <td><strong>FR-03</strong></td>
+              <td>Sistem otomatis melakukan plotting reviewer secara acak berdasarkan kesesuaian rumpun ilmu (Subject Area Match).</td>
+              <td>Plotting Reviewer Engine</td>
+              <td><span class="badge badge-primary">High</span></td>
+            </tr>
+          </tbody>
+        </table>
+      </div>
+    </div>
+    
+    <!-- 3.3 Non-Functional -->
+    <div class="section-card" id="nonfunc-req">
+      <h3><span class="section-card-num">3.3.</span> Non-Functional Requirements</h3>
+      <p class="section-card-desc">Persyaratan performa, keamanan, dan ketersediaan sistem portal.</p>
+      <div class="bento-grid">
+        <div class="bento-cell">
+          <h4>Ketersediaan Sistem</h4>
+          <p>Portal wajib memiliki uptime minimal <strong>99.9%</strong> selama periode puncak pengiriman proposal.</p>
+        </div>
+        <div class="bento-cell">
+          <h4>Keamanan Berkas</h4>
+          <p>Seluruh berkas proposal yang diunggah wajib dienkripsi menggunakan algoritma standar <strong>AES-256</strong>.</p>
+        </div>
+        <div class="bento-cell">
+          <h4>Integrasi Data</h4>
+          <p>Proses pengecekan NIDN dan NIM terintegrasi API PDDIKTI dengan jaminan integritas data <strong>100%</strong>.</p>
+        </div>
+      </div>
+    </div>
+    
+    <!-- 3.4 Acceptance Criteria -->
+    <div class="section-card" id="accept-crit">
+      <h3><span class="section-card-num">3.4.</span> Acceptance Criteria (Gherkin Scenario)</h3>
+      <p class="section-card-desc">Kriteria pengujian penerimaan sistem untuk persetujuan anggota riset.</p>
+      <pre>Scenario: Percobaan Submit Proposal Tanpa Persetujuan Anggota Lengkap
+  Given Dosen Ketua mengundang 1 Dosen Anggota dan 1 Mahasiswa Anggota
+  And Dosen Anggota mengubah status persetujuan menjadi "Approved"
+  And Mahasiswa Anggota masih berstatus "Pending"
+  When Dosen Ketua membuka halaman review proposal
+  Then Sistem mengunci tombol "Submit Proposal ke Fakultas"
+  And Menampilkan pesan warning "Menunggu Persetujuan dari Anggota Mahasiswa"</pre>
+    </div>
+  </div>
+
+  <!-- PHASE 4: UML DIAGRAMS -->
+  <div class="phase-block">
+    <div class="phase-badge pb-amber">Fase 4: Pemodelan Sistem & Database (UML)</div>
+    
+    <!-- 4.1 Use Case -->
+    <div class="section-card" id="usecase">
+      <h3><span class="section-card-num">4.1.</span> Use Case Diagram</h3>
+      <p class="section-card-desc">Pemetaan interaksi para aktor terhadap fitur-fitur portal SIMPPM.</p>
+      <div class="diagram-container">
+        <div class="mermaid">
+          graph LR
+            Ketua((Dosen Ketua)) --> UC1(Buat Usulan Proposal)
+            Ketua --> UC2(Input Anggota & Berkas)
+            Anggota((Dosen & Mhs Anggota)) --> UC3(Konfirmasi Keanggotaan)
+            Akademik((Akademik Fakultas)) --> UC4(Validasi Administrasi)
+            Dekan((Dekanat Fakultas)) --> UC5(Terbitkan Rekomendasi)
+            Reviewer((Reviewer Ahli)) --> UC6(Input Penilaian Kuantitatif)
+            Admin((Admin LPPM)) --> UC7(Plotting Reviewer & Kontrak)
+            
+            UC1 -.->|include| UC8(Cek Periode Aktif)
+            UC2 -.->|include| UC9(Verifikasi NIDN/NIM via PDDIKTI)
+        </div>
+      </div>
+    </div>
+    
+    <!-- 4.2 Activity Diagram -->
+    <div class="section-card" id="activity">
+      <h3><span class="section-card-num">4.2.</span> Activity Diagram</h3>
+      <p class="section-card-desc">Alur logis aktivitas validasi dan seleksi proposal.</p>
+      <div class="diagram-container">
+        <div class="mermaid">
+          stateDiagram-v2
+            [*] --> SubmitProposal
+            SubmitProposal --> CekFakultas
+            state CekFakultas <<choice>>
+            CekFakultas --> RevisiDraft : jika Dokumen Tidak Lengkap
+            CekFakultas --> DeanApproval : jika Dokumen Lengkap
+            RevisiDraft --> SubmitProposal
+            DeanApproval --> FinalLPPMVerify
+            state FinalLPPMVerify <<choice>>
+            FinalLPPMVerify --> RejectAdmin : jika Gagal Verifikasi Administrasi
+            FinalLPPMVerify --> AssignReviewers : jika Lolos Verifikasi Administrasi
+            RejectAdmin --> [*]
+            AssignReviewers --> ReviewProcess
+            ReviewProcess --> PassingGradeCheck
+            state PassingGradeCheck <<choice>>
+            PassingGradeCheck --> ProposalRejected : jika Rata-rata Nilai < Passing Grade
+            PassingGradeCheck --> ProposalApproved : jika Rata-rata Nilai >= Passing Grade
+            ProposalRejected --> [*]
+            ProposalApproved --> TandaTanganKontrak
+            TandaTanganKontrak --> [*]
+        </div>
+      </div>
+    </div>
+    
+    <!-- 4.3 Sequence Diagram -->
+    <div class="section-card" id="sequence">
+      <h3><span class="section-card-num">4.3.</span> Sequence Diagram</h3>
+      <p class="section-card-desc">Aliran pesan dalam runtime untuk persetujuan keanggotaan riset.</p>
+      <div class="diagram-container">
+        <div class="mermaid">
+          sequenceDiagram
+            actor Ketua as Dosen Ketua
+            participant Portal as Portal SIMPPM
+            actor Anggota as Anggota (Dosen/Mhs)
+            participant DB as Database Server
+            
+            Ketua->>Portal: Input Anggota (NIDN/NIM)
+            Portal->>DB: Check User & Status Aktif
+            DB-->>Portal: User Found
+            Portal->>DB: Create Member Entry (status: PENDING)
+            Portal-->>Anggota: Kirim Email Undangan & Notifikasi
+            Anggota->>Portal: Login & Buka Undangan Keanggotaan
+            Anggota->>Portal: Klik "Setujui Gabung"
+            Portal->>DB: Update Member Entry (status: APPROVED)
+            DB-->>Portal: Confirmed Successful
+            Portal-->>Ketua: Update Status UI (Tombol Submit Aktif)
+        </div>
+      </div>
+    </div>
+    
+    <!-- 4.4 DFD -->
+    <div class="section-card" id="dfd">
+      <h3><span class="section-card-num">4.4.</span> Data Flow Diagram (DFD Level 0 - Context)</h3>
+      <p class="section-card-desc">Aliran pertukaran data eksternal dengan sistem portal SIMPPM.</p>
+      <div class="diagram-container">
+        <div class="mermaid">
+          graph LR
+            Dosen[Dosen Ketua & Anggota] -->|Kirim Data Proposal & Konfirmasi| Sys((Portal SIMPPM))
+            Sys -->|Kirim Notifikasi Persetujuan| Dosen
+            Sys -->|Daftar Dokumen Proposal| Fak[Fakultas & Dekanat]
+            Fak -->|Rilis Persetujuan & Rekomendasi| Sys
+            Sys -->|Payload Nilai Proposal| Reviewer[Reviewer LPPM]
+            Reviewer -->|Input Penilaian & Ulasan| Sys
+            Sys <-->|Request NIDN & NIM Check| PDDIKTI[API Database PDDIKTI]
+        </div>
+      </div>
+    </div>
+    
+    <!-- 4.5 ERD -->
+    <div class="section-card" id="erd">
+      <h3><span class="section-card-num">4.5.</span> Entity Relationship Diagram (ERD Schema)</h3>
+      <p class="section-card-desc">Struktur relasi database portal untuk mengelola siklus riset dan pengabdian.</p>
+      <div class="diagram-container">
+        <div class="mermaid">
+          erDiagram
+            USER ||--o{ PROPOSAL : creates
+            PROPOSAL ||--|{ MEMBER : contains
+            USER ||--o{ MEMBER : joins
+            PROPOSAL ||--o{ REVIEW : receives
+            USER ||--o{ REVIEW : evaluates
+            PROPOSAL ||--o| CONTRACT : generates
+            
+            USER {
+              int user_id PK
+              string nama
+              string email
+              string nidn_nim
+              string unit_kerja
+            }
+            PROPOSAL {
+              int proposal_id PK
+              int ketua_id FK
+              string judul
+              string skema_riset
+              string file_path
+              string status
+            }
+            MEMBER {
+              int member_id PK
+              int proposal_id FK
+              int user_id FK
+              string tipe_anggota
+              string status_persetujuan
+            }
+            REVIEW {
+              int review_id PK
+              int proposal_id FK
+              int reviewer_id FK
+              float skor_nilai
+              string komentar
+            }
+            CONTRACT {
+              int contract_id PK
+              int proposal_id FK
+              string nomor_kontrak
+              float nilai_pendanaan
+            }
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- PHASE 5: TECHNICAL SPECS -->
+  <div class="phase-block">
+    <div class="phase-badge pb-rose">Fase 5: Spesifikasi Teknis & Integrasi API</div>
+    
+    <!-- 5.1 API Doc -->
+    <div class="section-card" id="api-doc">
+      <h3><span class="section-card-num">5.1.</span> API Documentation (RESTful Endpoints)</h3>
+      <p class="section-card-desc">Endpoints krusial untuk membuat proposal baru dan persetujuan anggota riset.</p>
+      
+      <strong>1. Endpoint:</strong> <code style="background:#e2e8f0; padding:2px 6px; border-radius:4px; font-family:'JetBrains Mono';">POST /api/v1/proposal</code>
+      <pre>{
+  "judul": "Analisis Preprocessing Teks NLP Bahasa Daerah Jawa Timur",
+  "skema_riset": "HIBAH_INTERNAL_PEMULA",
+  "anggota_dosen": ["0423108821"],
+  "anggota_mahasiswa": ["434231055"]
+}</pre>
+
+      <strong style="display:block; margin-top:20px;">2. Endpoint:</strong> <code style="background:#e2e8f0; padding:2px 6px; border-radius:4px; font-family:'JetBrains Mono';">POST /api/v1/proposal/{id}/confirm-member</code>
+      <pre>{
+  "user_id": 10293,
+  "status_persetujuan": "APPROVED"
+}</pre>
+    </div>
+    
+    <!-- 5.2 Validation Rules -->
+    <div class="section-card" id="val-rules">
+      <h3><span class="section-card-num">5.2.</span> Validation Rules (Logika Bisnis)</h3>
+      <p class="section-card-desc">Pengecekan integritas data sebelum didorong ke database sistem.</p>
+      <div class="table-wrapper">
+        <table>
+          <thead>
+            <tr>
+              <th>Aturan Validasi</th>
+              <th>Syarat Kriteria Sistem</th>
+              <th>Pesan Kesalahan (Error Code)</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr>
+              <td>NIDN/NIM Check</td>
+              <td>Nomor NIDN/NIM terdaftar aktif di server database PDDIKTI.</td>
+              <td>USER_NOT_ACTIVE: Pengguna Tidak Aktif / Tidak Terdaftar</td>
+            </tr>
+            <tr>
+              <td>Conflict of Interest</td>
+              <td>Reviewer tidak boleh berasal dari program studi yang sama dengan Dosen Ketua.</td>
+              <td>COI_DETECTED: Reviewer Berasal dari Prodi Pengusul</td>
+            </tr>
+            <tr>
+              <td>Double Proposal Block</td>
+              <td>Dosen Ketua hanya boleh mengusulkan maksimal 2 proposal dalam 1 periode aktif.</td>
+              <td>LIMIT_EXCEEDED: Batas Pengajuan Proposal Terlampaui</td>
+            </tr>
+          </tbody>
+        </table>
+      </div>
+    </div>
+    
+    <!-- 5.3 RACI Matrix -->
+    <div class="section-card" id="role-matrix">
+      <h3><span class="section-card-num">5.3.</span> Role & RACI Access Control Matrix</h3>
+      <p class="section-card-desc">Manajemen hak akses berdasarkan peran pengguna akhir (RBAC).</p>
+      <div class="table-wrapper">
+        <table>
+          <thead>
+            <tr>
+              <th>Fitur / Layanan</th>
+              <th>Dosen Ketua</th>
+              <th>Akademik</th>
+              <th>Dekan</th>
+              <th>Reviewer</th>
+              <th>Admin LPPM</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr>
+              <td>Create & Edit Proposal</td>
+              <td><span class="badge badge-success">Full Access</span></td>
+              <td>-</td>
+              <td>-</td>
+              <td>-</td>
+              <td><span class="badge badge-primary">Read</span></td>
+            </tr>
+            <tr>
+              <td>Rilis Rekomendasi Dekan</td>
+              <td>-</td>
+              <td><span class="badge badge-primary">Read</span></td>
+              <td><span class="badge badge-success">Approve</span></td>
+              <td>-</td>
+              <td>-</td>
+            </tr>
+            <tr>
+              <td>Plotting Reviewer acak</td>
+              <td>-</td>
+              <td>-</td>
+              <td>-</td>
+              <td>-</td>
+              <td><span class="badge badge-success">Full Access</span></td>
+            </tr>
+            <tr>
+              <td>Input Nilai Evaluasi</td>
+              <td>-</td>
+              <td>-</td>
+              <td>-</td>
+              <td><span class="badge badge-success">Approve</span></td>
+              <td>-</td>
+            </tr>
+          </tbody>
+        </table>
+      </div>
+    </div>
+    
+    <!-- 5.4 Exception Flow -->
+    <div class="section-card" id="exception">
+      <h3><span class="section-card-num">5.4.</span> Exception Flow (SLA Breach Mitigation)</h3>
+      <p class="section-card-desc">Mitigasi keterlambatan proses penilaian oleh reviewer.</p>
+      <div style="background: #fff5f5; border: 1px solid #fecaca; border-radius: 12px; padding: 24px;">
+        <p style="color: #991b1b; font-weight: 700; margin-bottom: 8px;">Kebijakan Reviewer Timeout (SLA 7 Hari):</p>
+        <p style="color: #7f1d1d; font-size: 0.9rem;">Apabila reviewer yang di-plot tidak memasukkan nilai evaluasi dalam batas waktu 7 hari kerja, sistem otomatis mengirimkan notifikasi penarikan tugas. Engine Plotting LPPM akan langsung berjalan untuk merekrut reviewer cadangan (Backup Reviewer) secara otomatis tanpa intervensi manual admin.</p>
+      </div>
+    </div>
+  </div>
+
+  <!-- PHASE 6: TESTING & RISK -->
+  <div class="phase-block">
+    <div class="phase-badge pb-purple">Fase 6: Pengujian & Manajemen Risiko Proyek</div>
+    
+    <!-- 6.1 UAT -->
+    <div class="section-card" id="uat">
+      <h3><span class="section-card-num">6.1.</span> UAT Test Plan</h3>
+      <p class="section-card-desc">Uji kelayakan sistem untuk validasi persetujuan anggota.</p>
+      <div class="table-wrapper">
+        <table>
+          <thead>
+            <tr>
+              <th>ID Uji</th>
+              <th>Target Fitur Uji</th>
+              <th>Langkah Percobaan</th>
+              <th>Hasil yang Diharapkan</th>
+              <th>Status</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr>
+              <td>UAT-L01</td>
+              <td>Bypass Submit Block</td>
+              <td>Lakukan klik tombol submit saat ada anggota berstatus 'Pending'.</td>
+              <td>Sistem mengunci tombol submit dan menampilkan tooltip peringatan.</td>
+              <td><span class="badge badge-success">Passed</span></td>
+            </tr>
+            <tr>
+              <td>UAT-L02</td>
+              <td>Double-Blind Integrity</td>
+              <td>Buka halaman input nilai pada akun Reviewer 1.</td>
+              <td>Nama pengusul dan instansi disamarkan (sensor), hanya menampilkan dokumen proposal tanpa identitas.</td>
+              <td><span class="badge badge-success">Passed</span></td>
+            </tr>
+          </tbody>
+        </table>
+      </div>
+    </div>
+    
+    <!-- 6.2 RTM -->
+    <div class="section-card" id="rtm">
+      <h3><span class="section-card-num">6.2.</span> Requirements Traceability Matrix (RTM)</h3>
+      <p class="section-card-desc">Pemetaan dari kebutuhan fungsional hingga rencana kasus uji UAT.</p>
+      <div class="table-wrapper">
+        <table>
+          <thead>
+            <tr>
+              <th>ID Kebutuhan Bisnis</th>
+              <th>ID Fungsional (FR)</th>
+              <th>Skenario Kasus Uji</th>
+              <th>Modul Evaluasi</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr>
+              <td>BR-01 (SLA Reduction)</td>
+              <td>FR-03 (Automated Plotting Engine)</td>
+              <td>UAT-L03 (Auto-Assign review)</td>
+              <td>Plotting Reviewer Cluster</td>
+            </tr>
+            <tr>
+              <td>BR-02 (Anti-Bias Scoring)</td>
+              <td>FR-01 (Double-Blind Privacy Filter)</td>
+              <td>UAT-L02 (Double-Blind Integrity)</td>
+              <td>Review & Grading Module</td>
+            </tr>
+          </tbody>
+        </table>
+      </div>
+    </div>
+    
+    <!-- 6.3 Risk Register -->
+    <div class="section-card" id="risk-reg">
+      <h3><span class="section-card-num">6.3.</span> Risk Register</h3>
+      <p class="section-card-desc">Potensi hambatan kelancaran rilis sistem dan rencana rencana mitigasi.</p>
+      <div class="table-wrapper">
+        <table>
+          <thead>
+            <tr>
+              <th>Deskripsi Risiko</th>
+              <th>Level Risiko</th>
+              <th>Dampak Operasional</th>
+              <th>Rencana Tindakan Mitigasi</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr>
+              <td>Downtime API PDDIKTI saat validasi mahasiswa</td>
+              <td><span class="badge badge-warning">Sedang</span></td>
+              <td>Staf tidak dapat memvalidasi NIM mahasiswa secara real-time.</td>
+              <td>Gunakan caching data mahasiswa lokal yang disinkronisasi berkala di malam hari.</td>
+            </tr>
+            <tr>
+              <td>Beban server saat overload upload PDF</td>
+              <td><span class="badge badge-danger">Tinggi</span></td>
+              <td>Server melambat akibat upload ratusan berkas proposal berukuran besar secara serentak.</td>
+              <td>Implementasikan CDN dan upload buffer file langsung ke cloud storage (seperti AWS S3/Cloud Storage) dengan throttling limit.</td>
+            </tr>
+          </tbody>
+        </table>
+      </div>
+    </div>
+  </div>
+
+  <!-- PHASE 7: BUSINESS IMPACT -->
+  <div class="phase-block">
+    <div class="phase-badge pb-emerald">Fase 7: Dampak Bisnis (ROI)</div>
+    
+    <!-- 7.1 Business Impact -->
+    <div class="section-card" id="biz-impact">
+      <h3><span class="section-card-num">7.1.</span> Business Impact & ROI Metrics</h3>
+      <p class="section-card-desc">Dampak riil transformasi digital terhadap pengelolaan riset LPPM.</p>
+      <div class="bento-grid">
+        <div class="bento-cell">
+          <h4>SLA Verifikasi Riset</h4>
+          <p style="font-size: 2.2rem; font-weight: 800; color: var(--accent-teal); line-height: 1;">-80%</p>
+          <p style="font-weight: 600; margin-top: 10px;">Cycle Time Pengajuan</p>
+          <p>Memangkas alur verifikasi berkas dari 35 hari kerja menjadi kurang dari 7 hari.</p>
+        </div>
+        <div class="bento-cell">
+          <h4>Penyelamatan Anggaran (Review)</h4>
+          <p style="font-size: 2.2rem; font-weight: 800; color: var(--accent-teal); line-height: 1;">100%</p>
+          <p style="font-weight: 600; margin-top: 10px;">Double-Blind Compliance</p>
+          <p>Menghilangkan potensi konflik kepentingan reviewer secara total melalui sistem blind plotting.</p>
+        </div>
+        <div class="bento-cell">
+          <h4>Paperless Savings</h4>
+          <p style="font-size: 2.2rem; font-weight: 800; color: var(--accent-teal); line-height: 1;">98%</p>
+          <p style="font-weight: 600; margin-top: 10px;">Efisiensi Cetak Berkas</p>
+          <p>Menghilangkan pencetakan proposal rangkap 5 secara fisik ke format digital PDF.</p>
+        </div>
+      </div>
+    </div>
   </div>
     """
     
@@ -2281,3 +3049,10 @@ if __name__ == '__main__':
     with open(os.path.join(portfolio_dir, 'psdp-ketan.html'), 'w', encoding='utf-8') as f:
         f.write(psdp_html)
     print("[✓] Generated PSDP Ketan Bersaudara ERP HTML page.")
+
+    # 4. LPPM SIMPPM
+    lppm_html = generate_lppm()
+    with open(os.path.join(portfolio_dir, 'lppm-portal.html'), 'w', encoding='utf-8') as f:
+        f.write(lppm_html)
+    print("[✓] Generated LPPM SIMPPM Portal HTML page.")
+
