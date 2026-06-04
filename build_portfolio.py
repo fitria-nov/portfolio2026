@@ -537,7 +537,7 @@ def generate_gav():
     """
     
     sidebar_nav_html = """
-    <div class="nav-group-title">Fase 1: Discovery</div>
+<div class="nav-group-title">Fase 1: Discovery</div>
     <a href="#ex-summary" class="nav-item active"><span class="nav-num">01</span> Executive Summary</a>
     <a href="#biz-problem" class="nav-item"><span class="nav-num">02</span> Business Problem</a>
     <a href="#stakeholder" class="nav-item"><span class="nav-num">03</span> Stakeholder Analysis</a>
@@ -545,40 +545,42 @@ def generate_gav():
     <div class="nav-group-title">Fase 2: Proses Bisnis</div>
     <a href="#asis-proc" class="nav-item"><span class="nav-num">04</span> AS-IS Process</a>
     <a href="#tobe-proc" class="nav-item"><span class="nav-num">05</span> TO-BE Process</a>
+    <a href="#status-mapping" class="nav-item"><span class="nav-num">06</span> Status Code Mapping</a>
     
     <div class="nav-group-title">Fase 3: Kebutuhan Sistem</div>
-    <a href="#brd" class="nav-item"><span class="nav-num">06</span> BRD Overview</a>
-    <a href="#func-req" class="nav-item"><span class="nav-num">07</span> Functional Specs</a>
-    <a href="#nonfunc-req" class="nav-item"><span class="nav-num">08</span> Non-Functional Specs</a>
-    <a href="#accept-crit" class="nav-item"><span class="nav-num">09</span> Acceptance Criteria</a>
+    <a href="#brd" class="nav-item"><span class="nav-num">07</span> BRD Overview</a>
+    <a href="#func-req" class="nav-item"><span class="nav-num">08</span> Functional Specs</a>
+    <a href="#nonfunc-req" class="nav-item"><span class="nav-num">09</span> Non-Functional Specs</a>
+    <a href="#accept-crit" class="nav-item"><span class="nav-num">10</span> Acceptance Criteria</a>
     
     <div class="nav-group-title">Fase 4: Pemodelan UML</div>
-    <a href="#usecase" class="nav-item"><span class="nav-num">10</span> Use Case Diagram</a>
-    <a href="#activity" class="nav-item"><span class="nav-num">11</span> Activity Diagram</a>
+    <a href="#usecase" class="nav-item"><span class="nav-num">11</span> Use Case & Activity</a>
     <a href="#sequence" class="nav-item"><span class="nav-num">12</span> Sequence Diagram</a>
-    <a href="#dfd" class="nav-item"><span class="nav-num">13</span> DFD (Level 0 & 1)</a>
-    <a href="#erd" class="nav-item"><span class="nav-num">14</span> ERD Database</a>
-    <a href="#architecture" class="nav-item"><span class="nav-num">15</span> System Architecture</a>
+    <a href="#erd" class="nav-item"><span class="nav-num">13</span> ERD Database</a>
+    <a href="#data-dict" class="nav-item"><span class="nav-num">14</span> Data Dictionary</a>
     
     <div class="nav-group-title">Fase 5: Teknis & Integrasi</div>
-    <a href="#api-doc" class="nav-item"><span class="nav-num">16</span> API Documentation</a>
-    <a href="#val-rules" class="nav-item"><span class="nav-num">17</span> Validation Rules</a>
-    <a href="#role-matrix" class="nav-item"><span class="nav-num">18</span> Role & RACI Matrix</a>
-    <a href="#integration" class="nav-item"><span class="nav-num">19</span> Integration Flow</a>
-    <a href="#exception" class="nav-item"><span class="nav-num">20</span> Exception Flow</a>
+    <a href="#api-doc" class="nav-item"><span class="nav-num">15</span> API Documentation</a>
+    <a href="#val-rules" class="nav-item"><span class="nav-num">16</span> Validation Rules</a>
+    <a href="#role-matrix" class="nav-item"><span class="nav-num">17</span> Role & RACI Matrix</a>
+    <a href="#exception" class="nav-item"><span class="nav-num">18</span> Exception Flow</a>
+    <a href="#sys-arch" class="nav-item"><span class="nav-num">19</span> System Architecture</a>
     
     <div class="nav-group-title">Fase 6: Pengujian & Risiko</div>
-    <a href="#uat" class="nav-item"><span class="nav-num">21</span> UAT Test Plan</a>
-    <a href="#rtm" class="nav-item"><span class="nav-num">22</span> RTM Document</a>
-    <a href="#risk-reg" class="nav-item"><span class="nav-num">23</span> Risk Register</a>
+    <a href="#uat" class="nav-item"><span class="nav-num">20</span> UAT Test Plan</a>
+    <a href="#rtm" class="nav-item"><span class="nav-num">21</span> RTM Document</a>
+    <a href="#risk-reg" class="nav-item"><span class="nav-num">22</span> Risk Register</a>
+    <a href="#perf-bench" class="nav-item"><span class="nav-num">23</span> Performance Benchmark</a>
     <a href="#change-req" class="nav-item"><span class="nav-num">24</span> Change Request</a>
     
-    <div class="nav-group-title">Fase 7: Dampak Bisnis</div>
-    <a href="#biz-impact" class="nav-item"><span class="nav-num">25</span> Business Impact</a>
+    <div class="nav-group-title">Fase 7: Serah Terima</div>
+    <a href="#sign-off" class="nav-item"><span class="nav-num">25</span> Dokumen Sign-off</a>
+    <a href="#before-after" class="nav-item"><span class="nav-num">26</span> Sebelum vs Sesudah</a>
+    <a href="#roadmap" class="nav-item"><span class="nav-num">27</span> Lessons & Roadmap</a>
     """
     
     main_content_html = """
-  <!-- PHASE 1 -->
+<!-- PHASE 1 -->
   <div class="phase-block">
     <div class="phase-badge pb-purple">Fase 1: Discovery & Initiation</div>
     
@@ -681,29 +683,52 @@ def generate_gav():
     
     <!-- 4. AS-IS Process -->
     <div class="section-card" id="asis-proc">
-      <h3><span class="section-card-num">04.</span> AS-IS Process (Alur Manual Berjalan)</h3>
-      <p class="section-card-desc">Proses birokrasi manual yang menyebabkan kemacetan logistik suku cadang pesawat.</p>
+      <h3><span class="section-card-num">2.1.</span> AS-IS Process (Alur Manual Berjalan)</h3>
+      <p class="section-card-desc">Proses birokrasi manual yang menyebabkan kemacetan logistik suku cadang pesawat dan berisiko AOG (Aircraft On Ground).</p>
       
-      <div class="workflow-timeline">
+      <p style="margin-bottom: 20px; font-size: 0.95rem; color: #475569;">
+        Pada proses manual berjalan, alur pengadaan suku cadang kritis dimulai ketika Mekanik mendeteksi kegagalan komponen di hangar. Mekanik harus membuka buku panduan Illustrated Parts Catalog (IPC) fisik atau PDF statis untuk mencari Part Number. Data disalin secara manual ke formulir kertas Purchase Requisition (PR), yang rawan kesalahan ketik (human error). Kertas PR tersebut kemudian diajukan secara fisik untuk meminta tanda tangan basah dari Lead Engineering dan Finance Controller. Finance Controller melakukan pengecekan budget secara manual di sistem SAP FMBB secara periodik. Jika disetujui, admin logistik di kantor utama akan menginput ulang data dari formulir fisik ke dalam SAP GUI melalui T-Code ME51N. Alur ini memakan waktu rata-rata 7.2 hari dan tidak memiliki transparansi status.
+      </p>
+
+      <div class="diagram-container">
+        <div class="mermaid">
+          flowchart TD
+              A["Mekanik Hangar: Kerusakan Komponen"] --> B["Buka Manual IPC Fisik & Cari Part Number"]
+              B --> C["Tulis Formulir Requisition (Kertas)"]
+              C --> D["Kirim Formulir Fisik ke Lead Engineering"]
+              D --> E{"Persetujuan Teknis?"}
+              E -- Ditolak --> F["Revisi / Ajukan Ulang Form"]
+              E -- Disetujui --> G["Kirim Formulir ke Finance Controller"]
+              G --> H["Finance Cek Anggaran Manual di SAP FMBB"]
+              H --> I{"Budget Cukup?"}
+              I -- Tidak --> J["Hold / Batalkan Pengajuan"]
+              I -- Ya --> K["Kirim Formulir Fisik ke Admin Logistik"]
+              K --> L["Admin Logistik Input Manual via SAP GUI ME51N"]
+              L --> M["SAP ERP Menerbitkan Nomor PR & PO Manual"]
+        </div>
+        <div class="img-caption">Diagram Alur AS-IS: Alur Birokrasi Manual Menggunakan Formulir Kertas</div>
+      </div>
+
+      <div class="workflow-timeline" style="margin-top: 30px;">
         <div class="timeline-item">
           <div class="timeline-dot">1</div>
           <div class="timeline-content">
             <h4>Pencatatan Fisik IPC Boeing/Airbus</h4>
-            <p>Mekanik menyalin kode part number dari buku panduan pesawat (katalog manual) ke lembar kertas Excel PR.</p>
+            <p>Mekanik menyalin kode part number dari buku panduan pesawat (katalog manual) ke lembar kertas Excel PR. Tingkat kesalahan input material mencapai 12%.</p>
           </div>
         </div>
         <div class="timeline-item">
           <div class="timeline-dot">2</div>
           <div class="timeline-content">
             <h4>Persetujuan Fisik Berjenjang</h4>
-            <p>Formulir dikirimkan lewat kurir internal kantor untuk meminta tanda tangan basah tim Engineering dan Finance.</p>
+            <p>Formulir dikirimkan lewat kurir internal kantor untuk meminta tanda tangan basah tim Engineering dan Finance. Memerlukan waktu berhari-hari jika manager tidak ada di tempat.</p>
           </div>
         </div>
         <div class="timeline-item">
           <div class="timeline-dot">3</div>
           <div class="timeline-content">
             <h4>Rekap Manual & SAP Input</h4>
-            <p>Admin logistik mengetik ulang data dari kertas ke dalam program SAP GUI via T-code <strong>ME51N</strong>.</p>
+            <p>Admin logistik mengetik ulang data dari kertas ke dalam program SAP GUI via T-code <strong>ME51N</strong>. Menimbulkan latensi proses pengadaan yang berujung pada AOG.</p>
           </div>
         </div>
       </div>
@@ -711,31 +736,225 @@ def generate_gav():
     
     <!-- 5. TO-BE Process -->
     <div class="section-card" id="tobe-proc">
-      <h3><span class="section-card-num">05.</span> TO-BE Process (Alur Otomatis Integrasi SAP)</h3>
-      <p class="section-card-desc">Alur transaksi digital tanpa kertas dengan validasi instan terintegrasi SAP ERP.</p>
+      <h3><span class="section-card-num">2.2.</span> TO-BE Process (Alur Otomatis Integrasi SAP)</h3>
+      <p class="section-card-desc">Alur transaksi digital tanpa kertas dengan validasi instan terintegrasi SAP ERP Core secara real-time.</p>
       
+      <p style="margin-bottom: 20px; font-size: 0.95rem; color: #475569;">
+        Sistem SmartProcure mendigitalisasi seluruh rantai pengadaan suku cadang MRO. Mekanik melakukan login menggunakan SSO dan mencari suku cadang via OCI Punchout Catalog yang terhubung langsung ke visual catalog OEM yang selalu terbarui. Setelah item dimasukkan ke keranjang, sistem memverifikasi ketersediaan material di database cache lokal, lalu mengecek sisa anggaran real-time di SAP FI-FM (via `RFC_READ_FM_BUDGET`). Jika anggaran tersedia, sistem mencadangkan dana (*hard block*) dan mengirimkan notifikasi persetujuan instan ke ponsel pintar approver. Setelah rilis persetujuan akhir dari Finance Controller dan Procurement Manager, sistem memicu eksekusi otomatis BAPI PO (<strong>BAPI_PO_CREATE1</strong>) ke sistem SAP ERP tanpa input manual dari administrator logistik. Suku cadang kemudian dikirim oleh vendor, diterima di gudang menggunakan pemindaian barcode mobile (MIGO / BAPI_GOODSMVT_CREATE), dan dicocokkan otomatis (MIRO).
+      </p>
+
+      <div class="diagram-container">
+        <div class="mermaid">
+          flowchart TD
+              A["Mekanik: SSO Login ke Portal SmartProcure"] --> B["Cari Suku Cadang via OCI Punchout Catalog"]
+              B --> C["Validasi Kelayakan Udara (FAA/EASA) & Buat Draft PR"]
+              C --> D["API Gateway Kong: Panggil RFC_READ_FM_BUDGET (SAP FI-FM)"]
+              D --> E{"Pagu Budget Mencukupi?"}
+              E -- Tidak --> F["Hard Block & Munculkan Error Overbudget"]
+              E -- Ya --> G["Pemesanan Anggaran (Budget Reserved) & Kirim Notifikasi Push"]
+              G --> H["Engineering Lead: Technical Review via Mobile App"]
+              H --> I{"Technical Approved?"}
+              I -- Tidak --> J["Cancel PR & Batalkan Budget Reservation"]
+              I -- Ya --> K["Finance Controller: Rilis Dokumen via Mobile"]
+              K --> L["Procurement Manager: Final PO Release Approval"]
+              L --> M["Sistem Eksekusi BAPI_PO_CREATE1 Otomatis"]
+              M --> N["SAP ERP: Terbit PO Resmi & Auto-Email ke Vendor"]
+        </div>
+        <div class="img-caption">Diagram Alur TO-BE: Otomatisasi Terintegrasi SAP BAPI & Real-time Budget Check</div>
+      </div>
+
+      <h4 style="margin-top: 30px; margin-bottom: 15px; font-size: 1.1rem;">Breakdown Alur Kerja Detail (12 Langkah Proses Bisnis):</h4>
       <div class="workflow-timeline">
         <div class="timeline-item">
           <div class="timeline-dot">1</div>
           <div class="timeline-content">
-            <h4>E-Catalog & OCI Punchout</h4>
-            <p>Mekanik memilih material secara langsung via web. Sistem mengambil data master material dari modul SAP MM.</p>
+            <h4>SSO Authentication & Session Initialization</h4>
+            <p>Mekanik Hangar melakukan otentikasi melalui Single Sign-On (SSO) berbasis LDAP/Active Directory perusahaan, menginisialisasi sesi aman pada SmartProcure dan membaca otorisasi berdasarkan unit hanggar.</p>
           </div>
         </div>
         <div class="timeline-item">
           <div class="timeline-dot">2</div>
           <div class="timeline-content">
-            <h4>Validasi Dana Real-time</h4>
-            <p>API Gateway mengirim query pengecekan ke SAP FI-FM. Transaksi otomatis ditolak jika pagu dana Cost Center habis.</p>
+            <h4>OCI Punchout Illustrated Catalog Lookup</h4>
+            <p>Mekanik mengakses modul katalog dan dialihkan via OCI Punchout ke Illustrated Parts Catalog (IPC) OEM terintegrasi untuk mencari material secara visual demi menjamin kecocokan part number pesawat.</p>
           </div>
         </div>
         <div class="timeline-item">
           <div class="timeline-dot">3</div>
           <div class="timeline-content">
-            <h4>Rilis BAPI Otomatis</h4>
-            <p>Setelah disetujui via mobile app, sistem langsung mengeksekusi BAPI pembuat PO (<strong>BAPI_PO_CREATE1</strong>) ke sistem SAP ERP.</p>
+            <h4>Material Verification & FAA/EASA Compliance Checking</h4>
+            <p>Sistem memverifikasi status suku cadang (misal, life-limited parts) dan mewajibkan lampiran sertifikasi kelayakan udara (FAA Form 8130-3 / EASA Form One) saat form pengajuan diisi.</p>
           </div>
         </div>
+        <div class="timeline-item">
+          <div class="timeline-dot">4</div>
+          <div class="timeline-content">
+            <h4>Local Database Caching</h4>
+            <p>Draft transaksi, informasi part, serta data estimasi harga disimpan di database buffer lokal (PostgreSQL) agar transaksi dapat diproses tanpa membebani memori utama server SAP secara berlebihan.</p>
+          </div>
+        </div>
+        <div class="timeline-item">
+          <div class="timeline-dot">5</div>
+          <div class="timeline-content">
+            <h4>Real-time SAP FI-FM Budget Check & Hard Block</h4>
+            <p>Sebelum PR dikirim, sistem memicu pemanggilan RFC `RFC_READ_FM_BUDGET` ke modul SAP Funds Management. Jika pagu dana Cost Center/WBS tidak cukup, sistem langsung mengaktifkan status hard block.</p>
+          </div>
+        </div>
+        <div class="timeline-item">
+          <div class="timeline-dot">6</div>
+          <div class="timeline-content">
+            <h4>Multi-tier Approval Routing Configuration</h4>
+            <p>Sistem menentukan rute persetujuan dinamis secara otomatis berdasarkan batas nominal wewenang pengadaan, tipe pesawat, dan kategori suku cadang (Critical vs Routine).</p>
+          </div>
+        </div>
+        <div class="timeline-item">
+          <div class="timeline-dot">7</div>
+          <div class="timeline-content">
+            <h4>Mobile Push Notification & Alert Dispatch</h4>
+            <p>Notifikasi persetujuan instan dikirim ke perangkat seluler Engineering Lead dan Finance Controller menggunakan Firebase Cloud Messaging (FCM) untuk meminimalkan waktu tunggu persetujuan.</p>
+          </div>
+        </div>
+        <div class="timeline-item">
+          <div class="timeline-dot">8</div>
+          <div class="timeline-content">
+            <h4>Digital Signature Approval & Technical Release</h4>
+            <p>Approver melakukan tinjauan teknis dan merilis dokumen secara digital. Sistem melakukan pencatatan log audit persetujuan ke database lokal yang aman.</p>
+          </div>
+        </div>
+        <div class="timeline-item">
+          <div class="timeline-dot">9</div>
+          <div class="timeline-content">
+            <h4>BAPI PO Execution (BAPI_PO_CREATE1)</h4>
+            <p>Sistem memicu pemanggilan BAPI sinkronous ke modul SAP Material Management untuk menghasilkan Purchase Order (PO) resmi di SAP, lengkap dengan referensi PR lokal.</p>
+          </div>
+        </div>
+        <div class="timeline-item">
+          <div class="timeline-dot">10</div>
+          <div class="timeline-content">
+            <h4>Vendor Auto-Dispatch & Tracking</h4>
+            <p>Dokumen PO yang diterbitkan SAP didorong langsung ke email vendor secara otomatis melalui SAP PO Middleware, memulai proses perakitan atau pengiriman suku cadang.</p>
+          </div>
+        </div>
+        <div class="timeline-item">
+          <div class="timeline-dot">11</div>
+          <div class="timeline-content">
+            <h4>Warehouse Goods Receipt via Barcode Scan (BAPI_GOODSMVT_CREATE / MIGO)</h4>
+            <p>Saat suku cadang tiba di gudang hanggar, Warehouse Officer memindai kode batang material melalui terminal genggam, memicu BAPI penerimaan barang (MIGO) di SAP MM secara real-time.</p>
+          </div>
+        </div>
+        <div class="timeline-item">
+          <div class="timeline-dot">12</div>
+          <div class="timeline-content">
+            <h4>Accounts Payable Payment Clearance (MIRO)</h4>
+            <p>Tim Akuntansi memverifikasi tagihan invoice vendor terhadap data PO dan Goods Receipt (Three-way Matching) di modul SAP FI-AP (MIRO) sebelum pembayaran dilepaskan secara otomatis.</p>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- 6. Pemetaan Status Code Transaksi -->
+    <div class="section-card" id="status-mapping">
+      <h3><span class="section-card-num">2.3.</span> Pemetaan Status Code Transaksi</h3>
+      <p class="section-card-desc">Tabel pemetaan siklus hidup (state transition) dokumen transaksi pengadaan pada portal SmartProcure.</p>
+      
+      <div class="table-wrapper">
+        <table>
+          <thead>
+            <tr>
+              <th>Status Code</th>
+              <th>Deskripsi Status</th>
+              <th>Aktor Utama</th>
+              <th>Pemicu Transisi (Trigger)</th>
+              <th>Status Selanjutnya (Next State)</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr>
+              <td><span class="badge badge-primary" style="background:#cbd5e1; color:#1e293b;">DRAFT</span></td>
+              <td>Dokumen PR baru dibuat di portal lokal dan belum dikirim.</td>
+              <td>Mekanik Hangar</td>
+              <td>Menyimpan draf pengajuan suku cadang di aplikasi.</td>
+              <td>SUBMITTED</td>
+            </tr>
+            <tr>
+              <td><span class="badge badge-primary">SUBMITTED</span></td>
+              <td>Dokumen telah diserahkan untuk proses validasi awal.</td>
+              <td>Mekanik Hangar</td>
+              <td>Mengklik tombol "Kirim Pengajuan" pada antarmuka.</td>
+              <td>BUDGET_VERIFYING</td>
+            </tr>
+            <tr>
+              <td><span class="badge badge-warning">BUDGET_VERIFYING</span></td>
+              <td>Proses pengecekan saldo anggaran Cost Center ke modul SAP FI-FM.</td>
+              <td>System (OData API)</td>
+              <td>API Gateway mengirim request ke SAP PI/PO Middleware.</td>
+              <td>BUDGET_APPROVED, CANCELLED</td>
+            </tr>
+            <tr>
+              <td><span class="badge badge-success">BUDGET_APPROVED</span></td>
+              <td>Anggaran terverifikasi cukup dan diblokir sementara di SAP.</td>
+              <td>System (SAP Core)</td>
+              <td>Respon sukses (pagu cukup) dari `RFC_READ_FM_BUDGET`.</td>
+              <td>PENDING_ENG_REVIEW</td>
+            </tr>
+            <tr>
+              <td><span class="badge badge-warning">PENDING_ENG_REVIEW</span></td>
+              <td>Menunggu tinjauan kelayakan teknis dan sertifikasi suku cadang.</td>
+              <td>Engineering Lead</td>
+              <td>Notifikasi push persetujuan teknis terkirim ke ponsel.</td>
+              <td>ENG_APPROVED, CANCELLED</td>
+            </tr>
+            <tr>
+              <td><span class="badge badge-success">ENG_APPROVED</span></td>
+              <td>Tinjauan teknis disetujui, siap untuk persetujuan anggaran final.</td>
+              <td>Engineering Lead</td>
+              <td>Engineering Lead menyetujui detail material dan kelaikan.</td>
+              <td>FIN_APPROVED, CANCELLED</td>
+            </tr>
+            <tr>
+              <td><span class="badge badge-success">FIN_APPROVED</span></td>
+              <td>Pagu anggaran dirilis final oleh controller keuangan.</td>
+              <td>Finance Controller</td>
+              <td>Finance Controller merilis rute persetujuan keuangan.</td>
+              <td>PENDING_PO_GEN</td>
+            </tr>
+            <tr>
+              <td><span class="badge badge-warning">PENDING_PO_GEN</span></td>
+              <td>Dokumen siap dikirim ke antrean pembuatan PO resmi di SAP ERP.</td>
+              <td>System (Kafka Broker)</td>
+              <td>Seluruh otorisasi terpenuhi, antrean terkirim ke producer.</td>
+              <td>PO_GENERATED, CANCELLED</td>
+            </tr>
+            <tr>
+              <td><span class="badge badge-success" style="background:#dbeafe; color:#1e40af;">PO_GENERATED</span></td>
+              <td>Purchase Order sukses terbit di SAP MM (BAPI_PO_CREATE1).</td>
+              <td>System (SAP BAPI)</td>
+              <td>Respon sukses SAP PI/PO mengembalikan Nomor PO resmi.</td>
+              <td>GOODS_RECEIVING</td>
+            </tr>
+            <tr>
+              <td><span class="badge badge-warning" style="background:#ccfbf1; color:#0f766e;">GOODS_RECEIVING</span></td>
+              <td>Suku cadang dalam pengiriman dan proses scan penerimaan gudang.</td>
+              <td>Warehouse Officer</td>
+              <td>Vendor mengirim barang dan gudang memindai QR code material.</td>
+              <td>COMPLETED</td>
+            </tr>
+            <tr>
+              <td><span class="badge badge-success" style="background:#d1fae5; color:#065f46;">COMPLETED</span></td>
+              <td>Suku cadang masuk gudang hanggar dan invoice terverifikasi.</td>
+              <td>Warehouse & AP</td>
+              <td>BAPI_GOODSMVT_CREATE sukses dan T-Code MIRO diselesaikan.</td>
+              <td>[*] (Selesai)</td>
+            </tr>
+            <tr>
+              <td><span class="badge badge-danger">CANCELLED</span></td>
+              <td>Transaksi dihentikan/ditolak oleh approver atau kehabisan anggaran.</td>
+              <td>Approver / System</td>
+              <td>Penolakan manual atau status overbudget terdeteksi.</td>
+              <td>[*] (Selesai)</td>
+            </tr>
+          </tbody>
+        </table>
       </div>
     </div>
   </div>
@@ -744,84 +963,225 @@ def generate_gav():
   <div class="phase-block">
     <div class="phase-badge pb-green">Fase 3: Kebutuhan Sistem (BRD & Specs)</div>
     
-    <!-- 6. BRD -->
+    <!-- 7. BRD Overview -->
     <div class="section-card" id="brd">
-      <h3><span class="section-card-num">06.</span> Business Requirements (BRD Overview)</h3>
-      <p class="section-card-desc">Kebutuhan level bisnis strategis untuk efisiensi rantai logistik maskapai.</p>
-      <div style="background: #fafafb; padding: 24px; border-radius: 12px; border: 1px solid var(--border-color);">
-        <p><strong>BR-01:</strong> Sistem harus mampu menghemat total pengeluaran operasional akibat AOG minimum <strong>15%</strong> pada tahun pertama perilisan.</p>
-        <p style="margin-top: 8px;"><strong>BR-02:</strong> Validasi anggaran belanja wajib dilakukan secara real-time pada modul SAP FI-FM menggunakan RFC <strong>RFC_READ_FM_BUDGET</strong> sebelum Purchase Requisition (PR) memperoleh nomor dokumen resmi.</p>
+      <h3><span class="section-card-num">3.1.</span> Business Requirements (BRD Overview)</h3>
+      <p class="section-card-desc">Kebutuhan bisnis tingkat tinggi (strategic requirements) untuk meningkatkan efisiensi rantai logistik maskapai.</p>
+      
+      <div style="background: #fafafb; padding: 30px; border-radius: 12px; border: 1px solid var(--border-color); display: flex; flex-direction: column; gap: 15px;">
+        <div>
+          <p><strong>BR-01: MRO Log SLA Reduction (Efisiensi Waktu Logistik)</strong></p>
+          <p style="font-size: 0.88rem; color: var(--text-muted); margin-top: 4px;">
+            Sistem harus memangkas siklus waktu (SLA) dari pembuatan draf permintaan suku cadang (PR) hingga penerbitan Purchase Order (PO) dari rata-rata 7.2 hari menjadi kurang dari 48 jam kerja demi meminimalisasi durasi pesawat grounded (AOG).
+          </p>
+        </div>
+        <hr style="border: 0; border-top: 1px solid var(--border-color);"/>
+        <div>
+          <p><strong>BR-02: Cost Control & Budget Hard Block</strong></p>
+          <p style="font-size: 0.88rem; color: var(--text-muted); margin-top: 4px;">
+            Sistem harus melakukan validasi anggaran belanja secara real-time pada modul SAP FI-FM (Funds Management) menggunakan RFC <code>RFC_READ_FM_BUDGET</code>. Pagu anggaran Cost Center tidak boleh terlampaui (hard block) demi menghindari pembengkakan biaya divisi teknik hangar.
+          </p>
+        </div>
+        <hr style="border: 0; border-top: 1px solid var(--border-color);"/>
+        <div>
+          <p><strong>BR-03: Inventory Accuracy & Real-time Synchronization</strong></p>
+          <p style="font-size: 0.88rem; color: var(--text-muted); margin-top: 4px;">
+            Sistem harus menjaga akurasi kuantitas suku cadang antara gudang fisik hangar dan modul SAP MM dengan selisih kesesuaian stok (stock discrepancy) di bawah 0.1% melalui input data barcode nirkabel secara instan.
+          </p>
+        </div>
+        <hr style="border: 0; border-top: 1px solid var(--border-color);"/>
+        <div>
+          <p><strong>BR-04: Regulatory Compliance & Airworthiness Certification</strong></p>
+          <p style="font-size: 0.88rem; color: var(--text-muted); margin-top: 4px;">
+            Sistem wajib mematuhi regulasi penerbangan nasional (DKUPPU) dan internasional (FAA/EASA). Setiap pengadaan suku cadang kritis bernilai di atas $10,000 USD diwajibkan melampirkan file sertifikasi kelayakan udara (FAA Form 8130-3 atau EASA Form One) yang valid sebelum dokumen disetujui.
+          </p>
+        </div>
+        <hr style="border: 0; border-top: 1px solid var(--border-color);"/>
+        <div>
+          <p><strong>BR-05: Immutable Transaction History & Auditable Trail</strong></p>
+          <p style="font-size: 0.88rem; color: var(--text-muted); margin-top: 4px;">
+            Sistem wajib menyediakan catatan audit (audit trail) yang tidak dapat dimanipulasi (immutable) atas semua perubahan status pengajuan transaksi, riwayat otorisasi approver, dan catatan kegagalan sinkronisasi SAP demi kepatuhan audit.
+          </p>
+        </div>
+        <hr style="border: 0; border-top: 1px solid var(--border-color);"/>
+        <div>
+          <p><strong>BR-06: Vendor Coordination & Dispatch Automation</strong></p>
+          <p style="font-size: 0.88rem; color: var(--text-muted); margin-top: 4px;">
+            Sistem harus mengotomatiskan pengiriman PO resmi langsung ke email vendor dan mengintegrasikan status pengiriman tanpa intervensi manual dari staf procurement guna mengurangi latensi pengiriman barang.
+          </p>
+        </div>
       </div>
     </div>
     
-    <!-- 7. Functional Requirements -->
+    <!-- 8. Functional Specs -->
     <div class="section-card" id="func-req">
-      <h3><span class="section-card-num">07.</span> Functional Requirements</h3>
-      <p class="section-card-desc">Spesifikasi fungsional sistem pengadaan SmartProcure.</p>
+      <h3><span class="section-card-num">3.2.</span> Functional Requirements</h3>
+      <p class="section-card-desc">Spesifikasi fungsional sistem pengadaan SmartProcure yang dipetakan langsung dengan modul SAP.</p>
+      
       <div class="table-wrapper">
         <table>
           <thead>
             <tr>
               <th>ID Kebutuhan</th>
               <th>Deskripsi Spesifikasi Kebutuhan</th>
-              <th>Ketergantungan SAP</th>
+              <th>Ketergantungan SAP / Interface</th>
               <th>Prioritas</th>
             </tr>
           </thead>
           <tbody>
             <tr>
               <td><strong>FR-01</strong></td>
-              <td>Sistem wajib mengeksekusi fungsi pemeriksaan anggaran secara real-time sebelum rilis transaksi PR.</td>
-              <td>Modul SAP FI-FM (Funds Management)</td>
-              <td><span class="badge badge-danger">Critical</span></td>
+              <td>Sistem harus menyediakan pencarian visual dan pemilihan item melalui modul katalog OCI Punchout.</td>
+              <td>SAP MM - OCI (Open Catalog Interface)</td>
+              <td><span class="badge badge-primary">High</span></td>
             </tr>
             <tr>
               <td><strong>FR-02</strong></td>
-              <td>Sistem wajib mengirimkan notifikasi mobile push notification ke perangkat ponsel pintar manager.</td>
+              <td>Sistem wajib menolak pengajuan PR untuk material kritis jika pengguna tidak melampirkan berkas sertifikasi kelaikan FAA Form 8130-3 / EASA Form One.</td>
+              <td>Microservice Compliance Validation</td>
+              <td><span class="badge badge-danger">Critical</span></td>
+            </tr>
+            <tr>
+              <td><strong>FR-03</strong></td>
+              <td>Sistem harus memeriksa kesesuaian harga pengajuan dengan toleransi deviasi maksimum 5% terhadap master data kontrak vendor.</td>
+              <td>SAP MM Contract Master Data</td>
+              <td><span class="badge badge-primary">High</span></td>
+            </tr>
+            <tr>
+              <td><strong>FR-04</strong></td>
+              <td>Sistem harus secara dinamis mengarahkan workflow approval berdasarkan threshold limit wewenang approver (misal, VP Finance &gt; IDR 500jt).</td>
+              <td>Microservice Workflow Engine & LDAP AD</td>
+              <td><span class="badge badge-danger">Critical</span></td>
+            </tr>
+            <tr>
+              <td><strong>FR-05</strong></td>
+              <td>Sistem harus mengirim notifikasi push approval real-time ke ponsel pintar approver untuk mempercepat siklus rilis PR.</td>
               <td>Firebase Cloud Messaging (FCM)</td>
               <td><span class="badge badge-primary">High</span></td>
             </tr>
             <tr>
-              <td><strong>FR-03</strong></td>
-              <td>Sistem wajib mengeksekusi update persediaan logistik di SAP MM setelah gudang memindai QR barang.</td>
-              <td>BAPI_GOODSMVT_CREATE (MIGO)</td>
+              <td><strong>FR-06</strong></td>
+              <td>Sistem harus mengeksekusi pemeriksaan anggaran secara real-time dan melakukan hard block jika pagu tidak mencukupi.</td>
+              <td>SAP FI-FM (RFC_READ_FM_BUDGET)</td>
+              <td><span class="badge badge-danger">Critical</span></td>
+            </tr>
+            <tr>
+              <td><strong>FR-07</strong></td>
+              <td>Sistem wajib memicu eksekusi pembuatan Purchase Order secara otomatis begitu persetujuan akhir terpenuhi.</td>
+              <td>SAP MM BAPI (BAPI_PO_CREATE1)</td>
+              <td><span class="badge badge-danger">Critical</span></td>
+            </tr>
+            <tr>
+              <td><strong>FR-08</strong></td>
+              <td>Sistem harus menyinkronkan data penerimaan barang fisik di hanggar menggunakan scanner barcode nirkabel ke modul logistik SAP.</td>
+              <td>SAP MM (BAPI_GOODSMVT_CREATE / MIGO)</td>
               <td><span class="badge badge-success">Medium</span></td>
+            </tr>
+            <tr>
+              <td><strong>FR-09</strong></td>
+              <td>Sistem wajib mencatat seluruh aktivitas transaksi (IP address, payload, action, timestamp) secara otomatis ke log audit internal.</td>
+              <td>Microservice Logging Service</td>
+              <td><span class="badge badge-primary">High</span></td>
+            </tr>
+            <tr>
+              <td><strong>FR-10</strong></td>
+              <td>Sistem harus menampilkan dashboard statistik analytics performa pengadaan, sisa anggaran Cost Center, SLA approver, dan status AOG.</td>
+              <td>Microservice Reporting Dashboard</td>
+              <td><span class="badge badge-success">Medium</span></td>
+            </tr>
+            <tr>
+              <td><strong>FR-11</strong></td>
+              <td>Sistem wajib mengonversi nilai mata uang asing secara otomatis menggunakan kurs harian yang ditarik dari SAP ERP.</td>
+              <td>SAP FI (RFC_READ_EXCHANGE_RATE)</td>
+              <td><span class="badge badge-success">Medium</span></td>
+            </tr>
+            <tr>
+              <td><strong>FR-12</strong></td>
+              <td>Sistem harus memblokir pengajuan transaksi PR ganda jika ditemukan kecocokan SKU, Qty, dan Cost Center dalam interval 5 menit terakhir.</td>
+              <td>Redis Cache & Transaction Guard</td>
+              <td><span class="badge badge-primary">High</span></td>
             </tr>
           </tbody>
         </table>
       </div>
     </div>
     
-    <!-- 8. Non-Functional Requirements -->
+    <!-- 9. Non-Functional Specs -->
     <div class="section-card" id="nonfunc-req">
-      <h3><span class="section-card-num">08.</span> Non-Functional Requirements</h3>
-      <p class="section-card-desc">Parameter performa, keandalan, dan keamanan sistem pengadaan.</p>
+      <h3><span class="section-card-num">3.3.</span> Non-Functional Requirements</h3>
+      <p class="section-card-desc">Parameter kinerja teknis, keamanan, keandalan, dan skalabilitas sistem SmartProcure.</p>
+      
       <div class="bento-grid">
         <div class="bento-cell">
-          <h4>Waktu Respon (SLA)</h4>
-          <p>Waktu respon API Gateway dari web portal ke SAP PI/PO integrasi hub tidak boleh melebihi <strong>2.2 detik</strong>.</p>
+          <h4>Latensi Respon API (SLA)</h4>
+          <p>Waktu respon API Gateway Kong dari portal web to SAP PO Middleware tidak boleh melebihi <strong>2.2 detik</strong> untuk transaksi sinkronous.</p>
         </div>
         <div class="bento-cell">
-          <h4>Enkripsi Data</h4>
-          <p>Seluruh pertukaran payload data JSON/XML wajib dienkripsi dengan standar <strong>AES-256-GCM</strong>.</p>
+          <h4>Enkripsi Data Sensitif</h4>
+          <p>Seluruh payload transaksi data JSON/XML wajib dilindungi dengan enkripsi <strong>AES-256-GCM</strong> (at rest) dan <strong>TLS 1.3</strong> (in transit).</p>
         </div>
         <div class="bento-cell">
-          <h4>Skalabilitas</h4>
-          <p>Sistem harus stabil menangani hingga <strong>12,000 request PR</strong> secara simultan selama periode puncak liburan.</p>
+          <h4>Ketersediaan Sistem (Uptime)</h4>
+          <p>Target ketersediaan sistem operasional di lingkungan produksi minimum <strong>99.95%</strong> per tahun dengan skema multi-node cluster.</p>
+        </div>
+        <div class="bento-cell">
+          <h4>Beban Pengguna Concurrency</h4>
+          <p>Sistem harus stabil dan handal menangani beban puncak hingga <strong>12,000 request PR</strong> secara bersamaan tanpa degradasi performa.</p>
+        </div>
+        <div class="bento-cell">
+          <h4>Kafka Message Queue Backup</h4>
+          <p>Queue antrean berbasis <strong>Apache Kafka</strong> dengan ketahanan kegagalan (fault tolerance) 3 node replica untuk menampung data saat SAP timeout.</p>
+        </div>
+        <div class="bento-cell">
+          <h4>Immutable History Audit Log</h4>
+          <p>Penyimpanan log audit transaksi di database menggunakan skema <strong>Write-Once-Read-Many (WORM)</strong> untuk mencegah manipulasi data audit.</p>
         </div>
       </div>
     </div>
     
-    <!-- 9. Acceptance Criteria -->
+    <!-- 10. Acceptance Criteria -->
     <div class="section-card" id="accept-crit">
-      <h3><span class="section-card-num">09.</span> Acceptance Criteria (Gherkin Scenario)</h3>
-      <p class="section-card-desc">Kriteria pengujian fitur pengecekan anggaran menggunakan struktur Given-When-Then.</p>
-      <pre>Scenario: Percobaan Transaksi PR Melebihi Anggaran Cost Center
-  Given Mekanik mengajukan PR untuk part "MAIN GEAR WHEEL" seharga IDR 750,000,000
-  And Sisa pagu anggaran Cost Center "CC_MRO_ENG" di SAP FM adalah IDR 500,000,000
+      <h3><span class="section-card-num">3.4.</span> Acceptance Criteria (Gherkin Scenarios)</h3>
+      <p class="section-card-desc">Kasus uji penerimaan pengadaan suku cadang kritis menggunakan struktur Given-When-Then.</p>
+      
+      <div style="display:flex; flex-direction:column; gap:20px;">
+        <div>
+          <h4 style="font-size:0.95rem; margin-bottom:8px; color:var(--text-dark);">Skenario A: Pengecekan Budget Real-Time & Hard Block</h4>
+          <pre>Scenario: Percobaan Transaksi PR Melebihi Anggaran Cost Center
+  Given Mekanik Hangar melakukan login SSO ke SmartProcure
+  And Sisa pagu anggaran Cost Center "CC_MRO_ENG" di SAP FI-FM adalah IDR 500,000,000
+  And Mekanik mengisi draf PR untuk part "MAIN GEAR WHEEL" seharga IDR 750,000,000
   When Mekanik mengklik tombol "Kirim Pengajuan"
-  Then Sistem memunculkan pesan error "Transaksi Dihentikan: Anggaran Kurang Sebesar IDR 250,000,000"
-  And Status dokumen PR dibatalkan secara otomatis</pre>
+  Then Sistem memicu pemanggilan RFC_READ_FM_BUDGET ke SAP FI-FM
+  And Sistem memblokir pengajuan (Hard Block) secara otomatis
+  And Sistem menampilkan pesan error "Transaksi Dihentikan: Anggaran Kurang Sebesar IDR 250,000,000"
+  And Status dokumen PR disetel ke CANCELLED</pre>
+        </div>
+
+        <div>
+          <h4 style="font-size:0.95rem; margin-bottom:8px; color:var(--text-dark);">Skenario B: Threshold Approval Escalation</h4>
+          <pre>Scenario: Eskalasi Jalur Approval Berdasarkan Batas Nominal Pengadaan
+  Given Pengajuan PR untuk suku cadang "NOZZLE ASSY" bernilai IDR 600,000,000 diajukan oleh Mekanik
+  And Batas nominal otorisasi Engineering Lead adalah IDR 100,000,000
+  And Batas nominal otorisasi VP Finance adalah IDR 1,000,000,000
+  When Dokumen PR disubmit oleh Mekanik Hangar
+  Then Sistem mendeteksi total pengajuan melebihi limit Engineering Lead
+  And Sistem secara otomatis menambahkan VP Finance ke rute persetujuan (Approval Routing)
+  And Sistem mengirimkan notifikasi mobile push ke VP Finance</pre>
+        </div>
+
+        <div>
+          <h4 style="font-size:0.95rem; margin-bottom:8px; color:var(--text-dark);">Skenario C: Goods Receipt Stock Synchronization</h4>
+          <pre>Scenario: Sinkronisasi Kuantitas Stok SAP MM Melalui Pemindaian Barcode
+  Given Suku cadang "TURBINE BLADE" telah tiba di gudang hanggar dengan referensi PO "PO-2026-99302"
+  And Jumlah persediaan barang di modul SAP MM saat ini adalah 5 unit
+  When Warehouse Officer memindai kode batang QR pada kemasan dengan kuantitas 2 unit
+  And Warehouse Officer menyetujui penerimaan barang (Goods Receipt MIGO)
+  Then Sistem memicu pemanggilan BAPI_GOODSMVT_CREATE ke SAP MM
+  And Sistem berhasil memperbarui jumlah stok material di SAP MM menjadi 7 unit
+  And Sistem merilis status logistik PO menjadi COMPLETED</pre>
+        </div>
+      </div>
     </div>
   </div>
 
@@ -829,10 +1189,12 @@ def generate_gav():
   <div class="phase-block">
     <div class="phase-badge pb-amber">Fase 4: Pemodelan UML & Arsitektur</div>
     
-    <!-- 10. Use Case Diagram -->
+    <!-- 11. Use Case Diagram -->
     <div class="section-card" id="usecase">
-      <h3><span class="section-card-num">10.</span> Use Case Diagram</h3>
-      <p class="section-card-desc">Pemetaan interaksi pengguna terhadap fitur inti SmartProcure.</p>
+      <h3><span class="section-card-num">4.1.</span> Use Case & Activity Diagram (with DFD Level 0)</h3>
+      <p class="section-card-desc">Diagram UML interaksi pengguna dan alur kerja logis proses persetujuan pengadaan pada portal SmartProcure.</p>
+      
+      <h4 style="font-size:0.95rem; margin-bottom:10px;">Use Case Diagram</h4>
       <div class="diagram-container">
         <div class="mermaid">
           graph LR
@@ -843,13 +1205,15 @@ def generate_gav():
             UC1 -.->|include| UC5(Validasi Budget SAP FI-FM)
             UC3 -.->|include| UC6(Trigger BAPI PO Create)
         </div>
+        <div class="img-caption">Diagram Use Case: Pemetaan Interaksi Aktor Terhadap Fungsionalitas Inti</div>
       </div>
-    </div>
-    
-    <!-- 11. Activity Diagram -->
-    <div class="section-card" id="activity">
-      <h3><span class="section-card-num">11.</span> Activity Diagram</h3>
-      <p class="section-card-desc">Alur logis aktivitas verifikasi transaksi PR.</p>
+      <p style="margin-top: 15px; font-size: 0.88rem; color: var(--text-muted); line-height: 1.6;">
+        <strong>Deskripsi Teknis Use Case:</strong> Diagram di atas memetakan relasi antara 4 aktor utama dengan sistem SmartProcure. Mekanik Hangar bertindak sebagai inisiator logistik, mencari suku cadang via OCI Punchout, dan menginput formulir PR. Proses ini secara otomatis menyertakan validasi real-time anggaran di SAP FI-FM (sebagai hubungan <em>&lt;&lt;include&gt;&gt;</em>). Persetujuan dilakukan secara remote oleh Manager Approval (Engineering Lead & Finance Controller) lewat perangkat seluler, yang secara otomatis memicu pembuatan PO di SAP via <em>BAPI_PO_CREATE1</em>. Warehouse Staff mengakhiri siklus hidup dokumen dengan mengonfirmasi Goods Receipt (GR MIGO) di gudang fisik hanggar.
+      </p>
+
+      <hr style="border:0; border-top:1px solid var(--border-color); margin: 30px 0;"/>
+
+      <h4 style="font-size:0.95rem; margin-bottom:10px;">Activity Diagram</h4>
       <div class="diagram-container">
         <div class="mermaid">
           stateDiagram-v2
@@ -866,42 +1230,15 @@ def generate_gav():
             CancelPR --> [*]
             GenerateSAP_PO --> [*]
         </div>
+        <div class="img-caption">Diagram Aktivitas: Percabangan Keputusan Alur Transaksi PR ke PO</div>
       </div>
-    </div>
-    
-    <!-- 12. Sequence Diagram -->
-    <div class="section-card" id="sequence">
-      <h3><span class="section-card-num">12.</span> Sequence Diagram</h3>
-      <p class="section-card-desc">Sekuen panggilan API real-time dari portal ke modul SAP ERP.</p>
-      <div class="diagram-container">
-        <div class="mermaid">
-          sequenceDiagram
-            actor Mekanik as Mekanik Hangar
-            participant Web as Portal Web
-            participant Gate as API Gateway (Kong)
-            participant SAP as SAP ERP Core (HANA)
-            
-            Mekanik->>Web: Submit PR Form
-            Web->>Gate: POST /api/v1/pr
-            Gate->>SAP: Call RFC_READ_FM_BUDGET
-            SAP-->>Gate: Return Budget State (IDR 50M)
-            alt Anggaran Kurang
-                Gate-->>Web: 400 Bad Request (Overbudget)
-                Web-->>Mekanik: Tampilkan Peringatan Anggaran Habis
-            else Anggaran Cukup
-                Gate->>SAP: Call BAPI_PR_CREATE
-                SAP-->>Gate: Return PR Number (10002931)
-                Gate-->>Web: 201 Created
-                Web-->>Mekanik: Tampilkan Status Sukses
-            end
-        </div>
-      </div>
-    </div>
-    
-    <!-- 13. DFD -->
-    <div class="section-card" id="dfd">
-      <h3><span class="section-card-num">13.</span> Data Flow Diagram (DFD Level 0)</h3>
-      <p class="section-card-desc">Aliran data antar entitas eksternal dengan sistem SmartProcure.</p>
+      <p style="margin-top: 15px; font-size: 0.88rem; color: var(--text-muted); line-height: 1.6;">
+        <strong>Deskripsi Teknis Activity Diagram:</strong> Diagram alur di atas menggambarkan keputusan bercabang kritis dalam SmartProcure. InputFormPR memicu pengiriman draf ke modul integrasi. Jika respon pengecekan budget SAP mengembalikan kode kegagalan (dana tidak cukup), alur dialihkan ke percabangan <em>TampilkanPeringatan</em> dan transaksi dibatalkan (hard block). Jika anggaran aman, sistem mencari rute approver. Keputusan Manager bertindak sebagai gerbang persetujuan akhir; jika ditolak, PR dibatalkan, sedangkan jika disetujui, sistem langsung mengeksekusi modul pembuatan PO di SAP Core.
+      </p>
+
+      <hr style="border:0; border-top:1px solid var(--border-color); margin: 30px 0;"/>
+
+      <h4 style="font-size:0.95rem; margin-bottom:10px;">Data Flow Diagram (DFD Level 0)</h4>
       <div class="diagram-container">
         <div class="mermaid">
           graph LR
@@ -911,61 +1248,288 @@ def generate_gav():
             Sys <-->|Call RFC Check & BAPI| SAP[SAP Core ERP]
             Sys -->|Kirim PO Resmi| Vendor[Vendor Eksternal]
         </div>
+        <div class="img-caption">Diagram Aliran Data (DFD Level 0): Aliran Data Antar Entitas Eksternal</div>
+      </div>
+    </div>
+    
+    <!-- 12. Sequence Diagram -->
+    <div class="section-card" id="sequence">
+      <h3><span class="section-card-num">4.2.</span> Sequence Diagram</h3>
+      <p class="section-card-desc">Sekuen panggilan API real-time dari portal web, microservice, gateway, middleware ke SAP ERP.</p>
+      <div class="diagram-container">
+        <div class="mermaid">
+          sequenceDiagram
+              autonumber
+              actor Mekanik as Mekanik Hangar
+              participant Portal as Portal Web SmartProcure
+              participant GW as API Gateway Kong
+              participant MS as Microservice PR Engine
+              participant MW as SAP PI/PO Middleware
+              participant SAP_MM as SAP MM (Material Master)
+              participant SAP_FI as SAP FI-FM (Budget Control)
+              participant SAP_BAPI as SAP BAPI (PO Engine)
+              actor Manager as Finance Controller
+
+              Mekanik->>Portal: Buka modul Catalog & cari Part Number
+              Portal->>GW: GET /api/v1/catalog?search=A320-gear
+              GW->>MS: Route request to Catalog Service
+              MS->>MW: Call RFC_READ_MATERIAL_DATA
+              MW->>SAP_MM: Ambil detail master material & stok
+              SAP_MM-->>MW: Detail material, unit, & harga standard
+              MW-->>MS: Data material (JSON payload)
+              MS-->>GW: Send catalog list
+              GW-->>Portal: Render catalog di UI Mekanik
+              Mekanik->>Portal: Tambahkan item ke cart & Klik 'Kirim PR'
+              Portal->>GW: POST /api/v1/pr (Request Payload)
+              GW->>MS: Route to Transaction Service
+              MS->>MS: Validasi FAA/EASA Certificate & input local DB
+              MS->>MW: Request Budget Reservation (RFC_READ_FM_BUDGET)
+              MW->>SAP_FI: Periksa pagu anggaran Cost Center
+              alt Anggaran Tidak Mencukupi (Overbudget)
+                  SAP_FI-->>MW: Respon: Budget Insufficient (Block)
+                  MW-->>MS: Map status BUDGET_REJECTED
+                  MS-->>GW: Error 422 Unprocessable Entity
+                  GW-->>Portal: Tampilkan error "Dana Anggaran Terlampaui"
+                  Portal-->>Mekanik: PR Ditolak otomatis
+              else Anggaran Mencukupi (Budget OK)
+                  SAP_FI-->>MW: Respon: Budget reserved & locked
+                  MW-->>MS: Map status BUDGET_APPROVED
+                  MS->>MS: Simpan status PR = PENDING_ENG_REVIEW
+                  MS-->>GW: Success 201 Created (PR Saved)
+                  GW-->>Portal: Notifikasi sukses dikirim ke antrean approval
+                  Portal-->>Mekanik: PR berhasil diserahkan
+              end
+
+              Note over Portal, SAP_BAPI: Proses Persetujuan Berjenjang & Penerbitan PO
+              Manager->>Portal: Rilis Persetujuan (Approve via Mobile)
+              Portal->>GW: PUT /api/v1/pr/{id}/approve (Action: RELEASE)
+              GW->>MS: Route to Approval Service
+              MS->>MS: Validasi Limit Otorisasi & Update status FIN_APPROVED
+              MS->>MW: Trigger BAPI_PO_CREATE1 (Payload PO Detail)
+              MW->>SAP_BAPI: Jalankan pembuatan PO di SAP ECC/HANA
+              SAP_BAPI-->>MW: Nomor PO Berhasil Diterbitkan (e.g., PO-2026-99302)
+              MW-->>MS: Kembalikan Response PO Nomor & Metadata SAP
+              MS->>MS: Simpan status PO_GENERATED di local database
+              MS-->>GW: Success 200 OK (PO Created)
+              GW-->>Portal: Notifikasi PO Terbit & kirim email ke Vendor
+              Portal-->>Manager: Tampilan Status "PO Diterbitkan di SAP"
+        </div>
+        <div class="img-caption">Diagram Sekuritas & Aliran Integrasi Sekuen Transaksi SmartProcure ke SAP Modul</div>
       </div>
     </div>
     
     <!-- 14. ERD -->
     <div class="section-card" id="erd">
-      <h3><span class="section-card-num">14.</span> Entity Relationship Diagram (ERD Schema)</h3>
+      <h3><span class="section-card-num">4.3.</span> Entity Relationship Diagram (ERD Schema)</h3>
       <p class="section-card-desc">Relasi tabel database lokal untuk buffer data transaksi sebelum didorong ke SAP.</p>
       <div class="diagram-container">
         <div class="mermaid">
           erDiagram
-            PEGAWAI ||--o{ PR_HEADER : submits
-            PR_HEADER ||--|{ PR_ITEM : contains
-            MATERIAL_MASTER ||--o{ PR_ITEM : references
-            PR_HEADER ||--o| PO_HEADER : generates
-            
-            PEGAWAI {
-              int id PK
-              string nama
-              string cost_center
-            }
-            PR_HEADER {
-              int pr_id PK
-              int pegawai_id FK
-              string sap_pr_number
-              float total_amount
-              string status
-            }
-            PR_ITEM {
-              int item_id PK
-              int pr_id FK
-              string sku_part_number FK
-              int qty
-            }
-            MATERIAL_MASTER {
-              string sku_part_number PK
-              string deskripsi
-              string unit_measure
-            }
+              USERS ||--o{ REQUISITIONS : creates
+              BUDGET_CENTERS ||--o{ REQUISITIONS : assigned_to
+              VENDORS ||--o{ PARTS_CATALOG : supplies
+              PARTS_CATALOG ||--o{ REQUISITION_ITEMS : referenced_in
+              REQUISITIONS ||--|{ REQUISITION_ITEMS : contains
+              REQUISITIONS ||--o{ APPROVAL_LOGS : logs
+              REQUISITIONS ||--o| SAP_SYNC_QUEUE : enqueues
+              
+              USERS {
+                  bigint user_id PK
+                  string username
+                  string email
+                  string role
+                  string cost_center
+                  boolean is_active
+              }
+              BUDGET_CENTERS {
+                  string cost_center_id PK
+                  string description
+                  decimal allocated_budget
+                  decimal consumed_budget
+                  string currency
+              }
+              VENDORS {
+                  string vendor_id PK
+                  string name
+                  string email
+                  string address
+                  string certification_number
+                  date cert_expiry_date
+              }
+              PARTS_CATALOG {
+                  string part_number PK
+                  string vendor_id FK
+                  string description
+                  decimal unit_price
+                  string uom
+                  string aircraft_type
+                  string certificate_required
+              }
+              REQUISITIONS {
+                  bigint requisition_id PK
+                  bigint user_id FK
+                  string cost_center_id FK
+                  string status
+                  decimal total_amount
+                  timestamp created_at
+                  string sap_pr_number
+              }
+              REQUISITION_ITEMS {
+                  bigint item_id PK
+                  bigint requisition_id FK
+                  string part_number FK
+                  integer quantity
+                  decimal estimated_price
+                  string status
+              }
+              APPROVAL_LOGS {
+                  bigint approval_id PK
+                  bigint requisition_id FK
+                  bigint approver_id FK
+                  string action
+                  string comments
+                  timestamp processed_at
+              }
+              SAP_SYNC_QUEUE {
+                  bigint queue_id PK
+                  bigint requisition_id FK
+                  string transaction_type
+                  string payload
+                  string sync_status
+                  integer retry_count
+                  string error_message
+                  timestamp scheduled_at
+              }
         </div>
+        <div class="img-caption">Diagram ERD: Skema Database Lokal SmartProcure (8 Tabel Utama)</div>
       </div>
     </div>
-    
-    <!-- 15. High-Level Architecture -->
-    <div class="section-card" id="architecture">
-      <h3><span class="section-card-num">15.</span> High-Level Architecture Blueprint</h3>
-      <p class="section-card-desc">Arsitektur integrasi sistem, middleware, dan modul ERP SAP.</p>
-      <div class="diagram-container">
-        <div class="mermaid">
-          graph TD
-            App[Web & Mobile Client] -->|HTTPS REST| GW[API Gateway Kong]
-            GW -->|JSON Payload| NodeApp[Express Node.js Cluster]
-            NodeApp -->|Session Buffer| PG[(PostgreSQL AppDB)]
-            NodeApp -->|SOAP XML / RFC| SAP_PI{SAP PI/PO Integration Hub}
-            SAP_PI <-->|SAP BAPI Connection| SAP_ERP[(SAP ECC 6.0 EHP8 ERP Core)]
-        </div>
+
+    <!-- 15. Data Dictionary -->
+    <div class="section-card" id="data-dict">
+      <h3><span class="section-card-num">4.4.</span> Data Dictionary</h3>
+      <p class="section-card-desc">Kamus data teknis untuk tabel REQUISITION_ITEMS dan APPROVAL_LOGS pada database PostgreSQL lokal.</p>
+      
+      <h4 style="font-size:0.95rem; margin-top:20px; margin-bottom:10px; color:var(--text-dark);">Tabel: REQUISITION_ITEMS</h4>
+      <div class="table-wrapper">
+        <table>
+          <thead>
+            <tr>
+              <th>Field Name</th>
+              <th>Data Type</th>
+              <th>Constraint</th>
+              <th>Description</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr>
+              <td><code>item_id</code></td>
+              <td>BIGINT</td>
+              <td>PRIMARY KEY, AUTO_INCREMENT</td>
+              <td>ID unik identitas baris item suku cadang yang dipesan.</td>
+            </tr>
+            <tr>
+              <td><code>requisition_id</code></td>
+              <td>BIGINT</td>
+              <td>FOREIGN KEY references REQUISITIONS(requisition_id)</td>
+              <td>ID induk dari Purchase Requisition terkait.</td>
+            </tr>
+            <tr>
+              <td><code>part_number</code></td>
+              <td>VARCHAR(50)</td>
+              <td>FOREIGN KEY references PARTS_CATALOG(part_number)</td>
+              <td>Part number unik dari pabrikan OEM (Boeing/Airbus).</td>
+            </tr>
+            <tr>
+              <td><code>quantity</code></td>
+              <td>INTEGER</td>
+              <td>NOT NULL, CHECK (quantity &gt; 0)</td>
+              <td>Jumlah unit suku cadang yang diajukan.</td>
+            </tr>
+            <tr>
+              <td><code>estimated_price</code></td>
+              <td>NUMERIC(15, 2)</td>
+              <td>NOT NULL</td>
+              <td>Perkiraan harga satuan material dalam IDR atau mata uang asal.</td>
+            </tr>
+            <tr>
+              <td><code>uom</code></td>
+              <td>VARCHAR(10)</td>
+              <td>NOT NULL (e.g., 'PC', 'SET', 'BOX')</td>
+              <td>Satuan pengukuran material (Unit of Measure).</td>
+            </tr>
+            <tr>
+              <td><code>status</code></td>
+              <td>VARCHAR(25)</td>
+              <td>NOT NULL, DEFAULT 'PENDING'</td>
+              <td>Status item (misal, PENDING, APPROVED, REJECTED).</td>
+            </tr>
+            <tr>
+              <td><code>cert_file_path</code></td>
+              <td>VARCHAR(255)</td>
+              <td>NULLABLE</td>
+              <td>Alamat url dokumen sertifikasi udara (FAA/EASA PDF) di Object Storage (S3).</td>
+            </tr>
+            <tr>
+              <td><code>created_at</code></td>
+              <td>TIMESTAMP</td>
+              <td>NOT NULL, DEFAULT CURRENT_TIMESTAMP</td>
+              <td>Waktu pembuatan baris transaksi.</td>
+            </tr>
+          </tbody>
+        </table>
+      </div>
+
+      <h4 style="font-size:0.95rem; margin-top:30px; margin-bottom:10px; color:var(--text-dark);">Tabel: APPROVAL_LOGS</h4>
+      <div class="table-wrapper">
+        <table>
+          <thead>
+            <tr>
+              <th>Field Name</th>
+              <th>Data Type</th>
+              <th>Constraint</th>
+              <th>Description</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr>
+              <td><code>approval_id</code></td>
+              <td>BIGINT</td>
+              <td>PRIMARY KEY, AUTO_INCREMENT</td>
+              <td>ID unik log aksi persetujuan.</td>
+            </tr>
+            <tr>
+              <td><code>requisition_id</code></td>
+              <td>BIGINT</td>
+              <td>FOREIGN KEY references REQUISITIONS(requisition_id)</td>
+              <td>ID Purchase Requisition yang sedang ditinjau.</td>
+            </tr>
+            <tr>
+              <td><code>approver_id</code></td>
+              <td>BIGINT</td>
+              <td>FOREIGN KEY references USERS(user_id)</td>
+              <td>ID pengguna yang melakukan aksi persetujuan.</td>
+            </tr>
+            <tr>
+              <td><code>action</code></td>
+              <td>VARCHAR(20)</td>
+              <td>NOT NULL (e.g., 'SUBMIT', 'APPROVE', 'REJECT', 'BYPASS')</td>
+              <td>Aksi yang dilakukan terhadap dokumen pengisian.</td>
+            </tr>
+            <tr>
+              <td><code>comments</code></td>
+              <td>TEXT</td>
+              <td>NULLABLE</td>
+              <td>Catatan justifikasi teknis atau alasan penolakan anggaran.</td>
+            </tr>
+            <tr>
+              <td><code>processed_at</code></td>
+              <td>TIMESTAMP</td>
+              <td>NOT NULL, DEFAULT CURRENT_TIMESTAMP</td>
+              <td>Waktu aksi persetujuan dilakukan.</td>
+            </tr>
+          </tbody>
+        </table>
       </div>
     </div>
   </div>
@@ -976,53 +1540,262 @@ def generate_gav():
     
     <!-- 16. API Documentation -->
     <div class="section-card" id="api-doc">
-      <h3><span class="section-card-num">16.</span> API Documentation (Integration Endpoint)</h3>
-      <p class="section-card-desc">Payload input untuk interaksi data transaksi PR dari API Gateway ke middleware.</p>
+      <h3><span class="section-card-num">5.1.</span> API Documentation (Integration Endpoints)</h3>
+      <p class="section-card-desc">Katalog REST API sinkronous dan asinkronous untuk mengintegrasikan SmartProcure dengan Middleware SAP PI/PO.</p>
       
-      <strong>REST Endpoint:</strong> <code style="background:#e2e8f0; padding:2px 6px; border-radius:4px; font-family:'JetBrains Mono';">POST /api/v1/purchase-requisition</code>
-      <pre>{
+      <div style="display:flex; flex-direction:column; gap:25px;">
+        <!-- Endpoint 1 -->
+        <div>
+          <h4 style="font-size:0.95rem;"><span class="badge badge-success" style="background:#d1fae5; color:#065f46;">POST</span> <code>/api/v1/pr</code></h4>
+          <p style="font-size:0.85rem; color:var(--text-muted); margin-top:4px;">Membuat Purchase Requisition baru dan mencadangkan anggaran di database lokal serta memicu verifikasi SAP.</p>
+          <pre><strong>Request Payload:</strong>
+{
   "employee_id": 44920,
   "cost_center": "CC_MRO_ENG",
   "wbs_element": "WBS-737-LANDINGGEAR",
+  "total_amount_idr": 450000000.00,
   "items": [
     {
       "part_number": "411W5101-1",
       "qty": 1,
       "unit": "PC",
-      "estimated_price_idr": 450000000.00
+      "estimated_price_idr": 450000000.00,
+      "cert_required": "FAA_8130_3",
+      "cert_file_path": "https://s3.storage.company.com/certs/cert_411w5101_1.pdf"
+    }
+  ]
+}
+
+<strong>Response (201 Created):</strong>
+{
+  "status": "success",
+  "message": "PR Draft created & budget reserved successfully",
+  "requisition_id": 88301923,
+  "status_code": "BUDGET_APPROVED",
+  "sap_reservation_number": "RES-993021"
+}</pre>
+        </div>
+
+        <!-- Endpoint 2 -->
+        <div>
+          <h4 style="font-size:0.95rem;"><span class="badge badge-primary">GET</span> <code>/api/v1/budget/check</code></h4>
+          <p style="font-size:0.85rem; color:var(--text-muted); margin-top:4px;">Melakukan pengecekan pagu anggaran sisa (real-time query) langsung ke SAP FI-FM.</p>
+          <pre><strong>Query Params:</strong> ?cost_center=CC_MRO_ENG&amp;amount=450000000
+
+<strong>Response (200 OK):</strong>
+{
+  "cost_center": "CC_MRO_ENG",
+  "allocated_budget": 1000000000.00,
+  "consumed_budget": 400000000.00,
+  "available_budget": 600000000.00,
+  "currency": "IDR",
+  "is_sufficient": true
+}</pre>
+        </div>
+
+        <!-- Endpoint 3 -->
+        <div>
+          <h4 style="font-size:0.95rem;"><span class="badge badge-warning" style="background:#fef3c7; color:#d97706;">PUT</span> <code>/api/v1/pr/{id}/approve</code></h4>
+          <p style="font-size:0.85rem; color:var(--text-muted); margin-top:4px;">Memproses rilis persetujuan oleh Engineering Lead atau Finance Controller.</p>
+          <pre><strong>Request Payload:</strong>
+{
+  "approver_id": 11029,
+  "action": "RELEASE",
+  "comments": "Suku cadang sesuai dengan visual manual book IPC Boeing 737."
+}
+
+<strong>Response (200 OK):</strong>
+{
+  "status": "success",
+  "requisition_id": 88301923,
+  "status_code": "ENG_APPROVED",
+  "next_approver_role": "FINANCE_CONTROLLER"
+}</pre>
+        </div>
+
+        <!-- Endpoint 4 -->
+        <div>
+          <h4 style="font-size:0.95rem;"><span class="badge badge-primary">GET</span> <code>/api/v1/pr/{id}/track</code></h4>
+          <p style="font-size:0.85rem; color:var(--text-muted); margin-top:4px;">Melacak perjalanan PR lokal dan status Purchase Order terintegrasi sistem SAP.</p>
+          <pre><strong>Response (200 OK):</strong>
+{
+  "requisition_id": 88301923,
+  "sap_pr_number": "10002931",
+  "sap_po_number": "5500019203",
+  "status_code": "PO_GENERATED",
+  "sap_sync_status": "SYNCED",
+  "tracking": [
+    { "status": "DRAFT", "timestamp": "2026-06-04T10:00:00Z", "actor": "Mekanik" },
+    { "status": "BUDGET_APPROVED", "timestamp": "2026-06-04T10:02:00Z", "actor": "SAP FI-FM" },
+    { "status": "ENG_APPROVED", "timestamp": "2026-06-04T11:30:00Z", "actor": "Lead Engineering" },
+    { "status": "PO_GENERATED", "timestamp": "2026-06-04T14:15:00Z", "actor": "BAPI PO Engine" }
+  ]
+}</pre>
+        </div>
+
+        <!-- Endpoint 5 -->
+        <div>
+          <h4 style="font-size:0.95rem;"><span class="badge badge-success" style="background:#d1fae5; color:#065f46;">POST</span> <code>/api/v1/migo/sync</code></h4>
+          <p style="font-size:0.85rem; color:var(--text-muted); margin-top:4px;">Sinkronisasi penerimaan barang fisik di hanggar (Goods Receipt MIGO) via barcode mobile scanner ke SAP MM.</p>
+          <pre><strong>Request Payload:</strong>
+{
+  "sap_po_number": "5500019203",
+  "warehouse_id": "WH_HANGAR_2",
+  "items": [
+    {
+      "part_number": "411W5101-1",
+      "qty_received": 1,
+      "uom": "PC",
+      "barcode_raw": "QR_411W5101-1_SN90123"
+    }
+  ]
+}
+
+<strong>Response (200 OK):</strong>
+{
+  "status": "success",
+  "sap_material_document": "5000928301",
+  "sap_fiscal_year": "2026",
+  "message": "Goods Receipt MIGO posted successfully to SAP MM"
+}</pre>
+        </div>
+
+        <!-- Endpoint 6 -->
+        <div>
+          <h4 style="font-size:0.95rem;"><span class="badge badge-primary">GET</span> <code>/api/v1/catalog</code></h4>
+          <p style="font-size:0.85rem; color:var(--text-muted); margin-top:4px;">Mengambil data material IPC Boeing/Airbus via OCI Punchout Interface.</p>
+          <pre><strong>Query Params:</strong> ?search=landing-gear&amp;aircraft=B737-800
+
+<strong>Response (200 OK):</strong>
+{
+  "search_query": "landing-gear",
+  "results_count": 1,
+  "materials": [
+    {
+      "part_number": "411W5101-1",
+      "description": "Main Landing Gear Cylinder Assy",
+      "manufacturer": "BOEING OEM",
+      "uom": "PC",
+      "unit_price_idr": 450000000.00,
+      "cert_required": true
     }
   ]
 }</pre>
+        </div>
+
+        <!-- Endpoint 7 -->
+        <div>
+          <h4 style="font-size:0.95rem;"><span class="badge badge-primary">GET</span> <code>/api/v1/audit/logs</code></h4>
+          <p style="font-size:0.85rem; color:var(--text-muted); margin-top:4px;">Mengambil catatan riwayat audit sistem transaksi PR untuk kebutuhan compliance regulator penerbangan.</p>
+          <pre><strong>Query Params:</strong> ?requisition_id=88301923
+
+<strong>Response (200 OK):</strong>
+{
+  "requisition_id": 88301923,
+  "audit_trail": [
+    {
+      "log_id": 901230,
+      "actor_id": 44920,
+      "action": "PR_SUBMITTED",
+      "ip_address": "192.168.10.45",
+      "user_agent": "Mozilla/5.0 (Macintosh)",
+      "timestamp": "2026-06-04T10:00:00Z"
+    },
+    {
+      "log_id": 901231,
+      "actor_id": 11029,
+      "action": "PR_APPROVED_ENG",
+      "ip_address": "192.168.12.100",
+      "user_agent": "SmartProcureMobile/iOS",
+      "timestamp": "2026-06-04T11:30:00Z"
+    }
+  ]
+}</pre>
+        </div>
+
+        <!-- Endpoint 8 -->
+        <div>
+          <h4 style="font-size:0.95rem;"><span class="badge badge-primary">GET</span> <code>/api/v1/dashboard/stats</code></h4>
+          <p style="font-size:0.85rem; color:var(--text-muted); margin-top:4px;">Mengambil ringkasan statistik performa untuk dashboard analitis SmartProcure.</p>
+          <pre><strong>Response (200 OK):</strong>
+{
+  "aog_risk_active": 3,
+  "pending_approvals_count": 8,
+  "sap_sync_success_rate": "99.85%",
+  "sla_average_hours": 31.5,
+  "budget_utilization": {
+    "allocated": 2500000000.00,
+    "consumed": 1850000000.00,
+    "available": 650000000.00
+  }
+}</pre>
+        </div>
+      </div>
     </div>
     
     <!-- 17. Validation Rules -->
     <div class="section-card" id="val-rules">
-      <h3><span class="section-card-num">17.</span> Validation Rules</h3>
-      <p class="section-card-desc">Aturan validasi input guna menjamin konsistensi data sebelum masuk ke SAP database.</p>
+      <h3><span class="section-card-num">5.2.</span> Validation Rules</h3>
+      <p class="section-card-desc">Aturan validasi bisnis dan teknis yang ketat untuk menjamin keamanan dan kepatuhan pengadaan sebelum integrasi SAP.</p>
+      
       <div class="table-wrapper">
         <table>
           <thead>
             <tr>
-              <th>Aturan Validasi</th>
-              <th>Kriteria Sistem</th>
-              <th>Pesan Kesalahan (Error Message)</th>
+              <th>ID Rule</th>
+              <th>Nama Validasi</th>
+              <th>Kriteria Validasi Sistem</th>
+              <th>Pesan Kesalahan (Error Code / Message)</th>
             </tr>
           </thead>
           <tbody>
             <tr>
-              <td>Cost Center Lock</td>
-              <td>Cost Center wajib terdaftar aktif di modul SAP FI/CO master data.</td>
-              <td>CC_BLOCKED: Cost Center Diblokir/Tidak Terdaftar</td>
+              <td><strong>VAL-01</strong></td>
+              <td>FAA/EASA Certificate Check</td>
+              <td>Suku cadang bertipe kritis (Critical Engine/Structural Parts) wajib mengunggah dokumen sertifikasi kelayakan (Form 8130-3/EASA Form One) dalam bentuk PDF.</td>
+              <td><code>ERR_CERT_MISSING</code><br/>"Dokumen sertifikat kelaikan udara wajib dilampirkan."</td>
             </tr>
             <tr>
-              <td>Part SKU Match</td>
-              <td>Kode part number harus sesuai dengan master data SAP MM.</td>
-              <td>SKU_INVALID: Part Number Tidak Dikenali di SAP MM</td>
+              <td><strong>VAL-02</strong></td>
+              <td>Cost Center Active Check</td>
+              <td>Cost Center pengaju harus terdaftar aktif di SAP Master Data Modul CO.</td>
+              <td><code>ERR_CC_BLOCKED</code><br/>"Cost Center diblokir atau tidak aktif di SAP."</td>
             </tr>
             <tr>
-              <td>Regulatory Document</td>
-              <td>Dokumen PR bernilai > $10k wajib melampirkan Form EASA/FAA.</td>
-              <td>DOC_MISSING: Form Sertifikasi Kelayakan Diperlukan</td>
+              <td><strong>VAL-03</strong></td>
+              <td>Contract Price Tolerance Check</td>
+              <td>Harga item yang diajukan tidak boleh melenceng melebihi +5% dari harga kesepakatan kontrak induk (Master Contract) di SAP MM.</td>
+              <td><code>ERR_PRICE_TOLERANCE_EXCEEDED</code><br/>"Deviasi harga melebihi batas toleransi kontrak 5%."</td>
+            </tr>
+            <tr>
+              <td><strong>VAL-04</strong></td>
+              <td>Active Vendor Sourcing Check</td>
+              <td>Vendor yang dipilih wajib bertipe "Approved Supplier List" dan memiliki masa berlaku sertifikat keselamatan logistik aktif.</td>
+              <td><code>ERR_VENDOR_EXPIRED</code><br/>"Sertifikat vendor telah kadaluarsa atau tidak aktif."</td>
+            </tr>
+            <tr>
+              <td><strong>VAL-05</strong></td>
+              <td>Manager Approval Limit Match</td>
+              <td>Nominal transaksi PR wajib dicocokkan dengan batas wewenang pengadaan approver berdasarkan data Active Directory.</td>
+              <td><code>ERR_APPROVAL_LIMIT_EXCEEDED</code><br/>"Transaksi melebihi limit otorisasi persetujuan Anda."</td>
+            </tr>
+            <tr>
+              <td><strong>VAL-06</strong></td>
+              <td>Currency Rate Freshness Check</td>
+              <td>Kurs konversi mata uang asing wajib ditarik dari SAP Master Exchange Rate harian terbaru. Deviasi rate maksimum adalah 2%.</td>
+              <td><code>ERR_RATE_OUT_OF_BOUNDS</code><br/>"Kurs mata uang menyimpang dari standar harian SAP."</td>
+            </tr>
+            <tr>
+              <td><strong>VAL-07</strong></td>
+              <td>Aircraft Compatibility Check</td>
+              <td>Material yang dipesan wajib terdaftar kompatibel dengan tipe armada pesawat yang sedang mengalami status AOG.</td>
+              <td><code>ERR_AIRCRAFT_INCOMPATIBLE</code><br/>"Part Number tidak kompatibel dengan tipe pesawat tersebut."</td>
+            </tr>
+            <tr>
+              <td><strong>VAL-08</strong></td>
+              <td>Anti-Duplicate Protection</td>
+              <td>Sistem memblokir pengajuan PR baru yang memiliki kesamaan SKU, kuantitas, dan cost center dalam jangka waktu 5 menit (300 detik) terakhir.</td>
+              <td><code>ERR_DUPLICATE_REQUEST</code><br/>"Pengajuan PR serupa terdeteksi dalam 5 menit terakhir."</td>
             </tr>
           </tbody>
         </table>
@@ -1031,106 +1804,314 @@ def generate_gav():
     
     <!-- 18. Role Matrix -->
     <div class="section-card" id="role-matrix">
-      <h3><span class="section-card-num">18.</span> Role & RACI Matrix</h3>
-      <p class="section-card-desc">Pengaturan kontrol akses berbasis peran (RBAC) pada sistem pengadaan.</p>
+      <h3><span class="section-card-num">5.3.</span> Role & RACI Matrix</h3>
+      <p class="section-card-desc">Matriks akuntabilitas (RACI) peran pengguna dalam mengoperasikan fitur-fitur kritis SmartProcure.</p>
+      
       <div class="table-wrapper">
         <table>
           <thead>
             <tr>
-              <th>Fitur / Aksi</th>
+              <th>Fitur & Operasional Sistem</th>
               <th>Mekanik Hangar</th>
               <th>Engineering Lead</th>
-              <th>VP Finance</th>
+              <th>Finance Controller</th>
+              <th>Procurement Manager</th>
+              <th>Warehouse Officer</th>
               <th>SAP Admin</th>
             </tr>
           </thead>
           <tbody>
             <tr>
-              <td>Akses Katalog OCI</td>
-              <td><span class="badge badge-success">Full Access</span></td>
-              <td><span class="badge badge-primary">Read</span></td>
+              <td>1. Akses Katalog OCI & Pencarian Suku Cadang</td>
+              <td><span class="badge badge-success">R</span></td>
+              <td><span class="badge badge-primary">C</span></td>
               <td>-</td>
-              <td><span class="badge badge-warning">Maintain</span></td>
+              <td>-</td>
+              <td><span class="badge badge-warning">I</span></td>
+              <td><span class="badge badge-danger">A</span></td>
             </tr>
             <tr>
-              <td>Rilis PR &lt; IDR 50jt</td>
+              <td>2. Input Permintaan PR & Pembuatan Draft</td>
+              <td><span class="badge badge-success">R</span></td>
               <td>-</td>
-              <td><span class="badge badge-success">Approve</span></td>
               <td>-</td>
               <td>-</td>
+              <td>-</td>
+              <td><span class="badge badge-danger">A</span></td>
             </tr>
             <tr>
-              <td>Rilis PR &gt; IDR 500jt</td>
+              <td>3. Validasi Kelayakan Udara (FAA/EASA)</td>
+              <td><span class="badge badge-success">R</span></td>
+              <td><span class="badge badge-danger">A</span></td>
               <td>-</td>
               <td>-</td>
-              <td><span class="badge badge-danger">Approve</span></td>
               <td>-</td>
+              <td><span class="badge badge-primary">C</span></td>
+            </tr>
+            <tr>
+              <td>4. Real-time Budget Check & Hard Block</td>
+              <td><span class="badge badge-warning">I</span></td>
+              <td>-</td>
+              <td><span class="badge badge-danger">A</span></td>
+              <td>-</td>
+              <td>-</td>
+              <td><span class="badge badge-success">R</span></td>
+            </tr>
+            <tr>
+              <td>5. Technical Review & Sign-Off</td>
+              <td>-</td>
+              <td><span class="badge badge-success">R</span></td>
+              <td>-</td>
+              <td>-</td>
+              <td>-</td>
+              <td><span class="badge badge-danger">A</span></td>
+            </tr>
+            <tr>
+              <td>6. Financial Audit & Release</td>
+              <td>-</td>
+              <td>-</td>
+              <td><span class="badge badge-success">R</span></td>
+              <td>-</td>
+              <td>-</td>
+              <td><span class="badge badge-danger">A</span></td>
+            </tr>
+            <tr>
+              <td>7. Final PO Release Approval</td>
+              <td>-</td>
+              <td>-</td>
+              <td>-</td>
+              <td><span class="badge badge-success">R</span></td>
+              <td>-</td>
+              <td><span class="badge badge-danger">A</span></td>
+            </tr>
+            <tr>
+              <td>8. Triggering BAPI PO Create</td>
+              <td>-</td>
+              <td>-</td>
+              <td>-</td>
+              <td><span class="badge badge-warning">I</span></td>
+              <td>-</td>
+              <td><span class="badge badge-danger">A</span></td>
+            </tr>
+            <tr>
+              <td>9. Notifikasi Pengiriman PO ke Vendor</td>
+              <td>-</td>
+              <td>-</td>
+              <td>-</td>
+              <td><span class="badge badge-success">R</span></td>
+              <td>-</td>
+              <td><span class="badge badge-danger">A</span></td>
+            </tr>
+            <tr>
+              <td>10. Goods Receipt (MIGO) Mobile Scan</td>
+              <td><span class="badge badge-warning">I</span></td>
+              <td>-</td>
+              <td>-</td>
+              <td>-</td>
+              <td><span class="badge badge-success">R</span></td>
+              <td><span class="badge badge-danger">A</span></td>
+            </tr>
+            <tr>
+              <td>11. Invoice Verification (MIRO) Matching</td>
+              <td>-</td>
+              <td>-</td>
+              <td><span class="badge badge-danger">A</span></td>
+              <td><span class="badge badge-primary">C</span></td>
+              <td><span class="badge badge-warning">I</span></td>
+              <td><span class="badge badge-success">R</span></td>
+            </tr>
+            <tr>
+              <td>12. Audit Trail Log Maintenance</td>
+              <td>-</td>
+              <td>-</td>
+              <td><span class="badge badge-primary">C</span></td>
+              <td>-</td>
+              <td>-</td>
+              <td><span class="badge badge-danger">A</span></td>
+            </tr>
+            <tr>
+              <td>13. System Health & SAP API Gateway Config</td>
+              <td>-</td>
+              <td>-</td>
+              <td>-</td>
+              <td>-</td>
+              <td>-</td>
+              <td><span class="badge badge-danger">A</span></td>
             </tr>
           </tbody>
         </table>
       </div>
-    </div>
-    
-    <!-- 19. Integration Flow -->
-    <div class="section-card" id="integration">
-      <h3><span class="section-card-num">19.</span> Integration Flow Detail</h3>
-      <p class="section-card-desc">Aliran pertukaran data sinkronisasi API dari server logistik ke SAP gateway.</p>
-      <div class="diagram-container">
-        <div class="mermaid">
-          flowchart TD
-            Client[Aplikasi SmartProcure] -->|REST JSON| GW[API Gateway Kong]
-            GW -->|SOAP XML Mapping| PI[SAP PI/PO Integration Hub]
-            PI -->|Call RFC| ERP[(SAP ECC HANA Core)]
-            ERP -->|Konfirmasi Sukses PR/PO| PI
-            PI -->|Kembalikan Response JSON| GW
-            GW -->|Tampilkan Nomor PR/PO| Client
-        </div>
-      </div>
+      <p style="font-size:0.82rem; color:var(--text-muted); margin-top:10px;">
+        * Keterangan RACI: <strong>R</strong> = Responsible (Pelaksana), <strong>A</strong> = Accountable (Penanggung Jawab Utama), <strong>C</strong> = Consulted (Pihak yang Dikonsultasikan), <strong>I</strong> = Informed (Pihak yang Diinformasikan).
+      </p>
     </div>
     
     <!-- 20. Exception Flow -->
     <div class="section-card" id="exception">
-      <h3><span class="section-card-num">20.</span> Exception Flow (Mitigasi Downtime)</h3>
-      <p class="section-card-desc">Sistem cadangan ketika integrasi API SAP mengalami gangguan.</p>
-      <div style="background: #fff5f5; border: 1px solid #fecaca; border-radius: 12px; padding: 24px;">
-        <p style="color: #991b1b; font-weight: 700; margin-bottom: 8px;">Kebijakan API Offline (SAP ERP Down Mitigation):</p>
-        <p style="color: #7f1d1d; font-size: 0.9rem;">Apabila server integrasi SAP tidak merespon dalam waktu 5 detik (Timeout), sistem akan otomatis mengaktifkan antrean cadangan (Message Queue) berbasis Apache Kafka. Dokumen PR disimpan secara lokal berstatus "Offline Queue", dan tim IT akan menerima peringatan otomatis via Discord Webhook untuk audit manual.</p>
+      <h3><span class="section-card-num">5.4.</span> Exception Flow (Mitigasi Gangguan Integrasi & Operasional)</h3>
+      <p class="section-card-desc">Prosedur penanganan pengecualian sistem ketika integrasi SAP ERP mengalami timeout atau kegagalan bisnis lainnya.</p>
+      
+      <div style="display:flex; flex-direction:column; gap:20px;">
+        <div style="background: #fff5f5; border: 1px solid #fecaca; border-radius: 12px; padding: 24px;">
+          <p style="color: #991b1b; font-weight: 700; margin-bottom: 8px;">Pengecekan 01: SAP PO Integration Timeout Fallback (Asynchronous Retry)</p>
+          <p style="color: #7f1d1d; font-size: 0.9rem; line-height: 1.6;">
+            <strong>Kondisi:</strong> Server integrasi SAP PI/PO tidak merespon (timeout &gt; 5 detik) selama proses pengiriman PR/PO.<br/>
+            <strong>Mitigasi Teknis:</strong> Sistem secara otomatis mengalihkan payload data transaksi PR/PO ke database buffer lokal dengan status <code>OFFLINE_QUEUE</code> dan mempublikasikannya ke Kafka topic <code>sap-integration-retry</code>. Pekerjaan latar belakang (background worker) akan mencoba mengirim ulang data secara berkala setiap 15 menit. Tim IT Support akan menerima peringatan kegagalan otomatis melalui webhook Discord/Slack.
+          </p>
+        </div>
+
+        <div style="background: #fffbeb; border: 1px solid #fde68a; border-radius: 12px; padding: 24px;">
+          <p style="color: #92400e; font-weight: 700; margin-bottom: 8px;">Pengecekan 02: Emergency Budget Override Approval (Kondisi AOG Kritis)</p>
+          <p style="color: #78350f; font-size: 0.9rem; line-height: 1.6;">
+            <strong>Kondisi:</strong> Terjadi AOG kritis pada armada pesawat di hanggar namun pagu anggaran Cost Center bersangkutan telah habis (Hard Block aktif).<br/>
+            <strong>Mitigasi Teknis:</strong> VP Finance dapat menggunakan otorisasi bypass khusus (Emergency Budget Override) dengan melampirkan file Justifikasi Operasional Darurat (Emergency Ops Justification). Sistem akan merilis reservasi budget dengan status <code>OVERRIDDEN</code> dan mengirimkan email pemberitahuan otomatis ke Direksi Keuangan untuk audit tindak lanjut.
+          </p>
+        </div>
+
+        <div style="background: #eff6ff; border: 1px solid #bfdbfe; border-radius: 12px; padding: 24px;">
+          <p style="color: #1e40af; font-weight: 700; margin-bottom: 8px;">Pengecekan 03: SKU Mismatch during Catalog Sync (Superceded Part Number)</p>
+          <p style="color: #1e3a8a; font-size: 0.9rem; line-height: 1.6;">
+            <strong>Kondisi:</strong> Kode Part Number yang dipilih mekanik dari OCI Catalog tidak ditemukan di database SAP MM karena perubahan serial/nomor suku cadang dari OEM.<br/>
+            <strong>Mitigasi Teknis:</strong> Sistem memeriksa tabel silang (Cross-Reference Parts Table) di SAP MM untuk menemukan nomor suku cadang alternatif yang disetujui (Superceded Part Number). Mekanik dan Lead Engineering akan diminta mengonfirmasi kesetaraan teknis material tersebut sebelum PR disubmit.
+          </p>
+        </div>
+
+        <div style="background: #fdf2f8; border: 1px solid #fbcfe8; border-radius: 12px; padding: 24px;">
+          <p style="color: #9d174d; font-weight: 700; margin-bottom: 8px;">Pengecekan 04: Damaged Goods Rejection (MIGO Discrepancy)</p>
+          <p style="color: #831843; font-size: 0.9rem; line-height: 1.6;">
+            <strong>Kondisi:</strong> Barang fisik tiba di hanggar dalam kondisi kemasan rusak atau tanpa dokumen kelaikan FAA/EASA.<br/>
+            <strong>Mitigasi Teknis:</strong> Warehouse Officer menandai status penerimaan barang sebagai "REJECTED_DISCREPANCY" pada scanner barcode mobile. Hal ini memicu pembatalan otomatis proses MIGO di SAP, mengunci penerimaan barang, mengirim email pemberitahuan komplain ke Vendor, dan menandai status dokumen PO sebagai "Delivery Discrepancy" di dashboard SmartProcure.
+          </p>
+        </div>
+      </div>
+    </div>
+
+    <!-- 21. System Architecture -->
+    <div class="section-card" id="sys-arch">
+      <h3><span class="section-card-num">5.5.</span> System Architecture</h3>
+      <p class="section-card-desc">Representasi visual arsitektur sistem SmartProcure yang menunjukkan lapisan komunikasi data dari client hingga ke modul core SAP.</p>
+      
+      <div class="diagram-container">
+        <div class="mermaid">
+          graph TD
+              subgraph "Presentation Layer (Client)"
+                  Web[Web Portal React.js]
+                  Mobile[Mobile Flutter App]
+              end
+
+              subgraph "Integration & Routing Layer"
+                  Kong[Kong API Gateway]
+                  Auth[SSO Active Directory]
+              end
+
+              subgraph "Microservices Layer"
+                  MS_PR[PR Service - Node.js]
+                  MS_Cat[Catalog Service - Go]
+                  MS_App[Approval Service - Python]
+              end
+
+              subgraph "Event Bus & Message Queue"
+                  Kafka{Apache Kafka Event Bus}
+                  Redis[(Redis Cluster Cache)]
+              end
+
+              subgraph "Middleware Layer"
+                  SAP_PI{SAP PI/PO Middleware Hub}
+              end
+
+              subgraph "Core SAP ERP Module"
+                  SAP_MM[(SAP MM Material)]
+                  SAP_FI[(SAP FI-FM Budget)]
+                  SAP_AP[(SAP Accounts Payable)]
+              end
+
+              Web & Mobile -->|REST HTTPS| Kong
+              Kong <-->|Authenticate| Auth
+              Kong -->|Route JSON| MS_PR & MS_Cat & MS_App
+              MS_Cat <-->|Quick Read| Redis
+              MS_PR -->|Publish Events| Kafka
+              Kafka -->|Process Sync| SAP_PI
+              SAP_PI <-->|BAPI_PO_CREATE1 / RFC| SAP_MM & SAP_FI & SAP_AP
+        </div>
+        <div class="img-caption">Diagram Arsitektur Sistem Layanan Integrasi Logistik SmartProcure</div>
       </div>
     </div>
   </div>
 
   <!-- PHASE 6 -->
   <div class="phase-block">
-    <div class="phase-badge pb-purple">Fase 6: Pengujian & Manajemen Perubahan</div>
+    <div class="phase-badge pb-purple">Fase 6: Pengujian & Risiko</div>
     
     <!-- 21. UAT -->
     <div class="section-card" id="uat">
-      <h3><span class="section-card-num">21.</span> UAT Test Plan</h3>
-      <p class="section-card-desc">Daftar kasus uji penerimaan pengguna sebelum rilis ke server produksi.</p>
+      <h3><span class="section-card-num">6.1.</span> UAT Test Plan</h3>
+      <p class="section-card-desc">Rencana pengujian penerimaan pengguna (User Acceptance Testing) yang mencakup skenario integrasi SAP ERP.</p>
       <div class="table-wrapper">
         <table>
           <thead>
             <tr>
               <th>ID Uji</th>
               <th>Target Pengujian</th>
-              <th>Langkah Eksperimen</th>
-              <th>Ekspektasi Hasil</th>
+              <th>Langkah Eksperimen Uji</th>
+              <th>Ekspektasi Hasil Sistem</th>
               <th>Status</th>
             </tr>
           </thead>
           <tbody>
             <tr>
-              <td>UAT-001</td>
+              <td><strong>UAT-001</strong></td>
               <td>Pengecekan Anggaran SAP FI-FM</td>
-              <td>Kirim PR dengan nilai melebihi limit Cost Center.</td>
-              <td>Sistem memblokir pengajuan dan menampilkan pesan anggaran kurang.</td>
+              <td>Kirim pengajuan PR dengan total biaya suku cadang melebihi sisa limit anggaran Cost Center.</td>
+              <td>Sistem memblokir pengajuan (Hard Block) dan memunculkan pesan error kekurangan anggaran secara real-time.</td>
               <td><span class="badge badge-success">Passed</span></td>
             </tr>
             <tr>
-              <td>UAT-002</td>
+              <td><strong>UAT-002</strong></td>
               <td>Bypass Emergency AOG</td>
-              <td>Kirim PR berstatus kritis tanpa lampiran Form Sertifikasi.</td>
-              <td>Sistem menolak dokumen dan meminta upload file pendukung.</td>
+              <td>Kirim pengajuan PR bertipe kritis (AOG) tanpa melampirkan berkas sertifikasi udara (FAA/EASA).</td>
+              <td>Sistem menolak dokumen secara otomatis dan meminta upload berkas sertifikasi kelaikan udara.</td>
+              <td><span class="badge badge-success">Passed</span></td>
+            </tr>
+            <tr>
+              <td><strong>UAT-003</strong></td>
+              <td>OCI Catalog Sync Lookup</td>
+              <td>Melakukan login SSO, masuk ke katalog OCI, dan memilih suku cadang dari visual catalog Boeing.</td>
+              <td>Detail part number, deskripsi, harga standar, dan UoM berhasil disalin ke formulir PR tanpa kesalahan karakter.</td>
+              <td><span class="badge badge-success">Passed</span></td>
+            </tr>
+            <tr>
+              <td><strong>UAT-004</strong></td>
+              <td>Escalation Routing Limit</td>
+              <td>Kirim pengajuan PR senilai IDR 650,000,000 untuk memicu alur persetujuan bertingkat.</td>
+              <td>Sistem mengarahkan pengajuan ke rute Engineering Lead terlebih dahulu, dilanjutkan ke VP Finance secara otomatis.</td>
+              <td><span class="badge badge-success">Passed</span></td>
+            </tr>
+            <tr>
+              <td><strong>UAT-005</strong></td>
+              <td>BAPI PO Generation</td>
+              <td>Lakukan otorisasi rilis final pada PR yang disetujui, lalu amati pembuatan dokumen PO di SAP.</td>
+              <td>Sistem memanggil <code>BAPI_PO_CREATE1</code> secara sinkronous, mengembalikan Nomor PO resmi, dan status PR berubah menjadi PO_GENERATED.</td>
+              <td><span class="badge badge-success">Passed</span></td>
+            </tr>
+            <tr>
+              <td><strong>UAT-006</strong></td>
+              <td>MIGO Barcode Scanner Sync</td>
+              <td>Pindai kode batang barang masuk melalui terminal genggam gudang untuk menyelesaikan status PO.</td>
+              <td>Sistem mengeksekusi <code>BAPI_GOODSMVT_CREATE</code> di SAP MM, memperbarui jumlah stok, dan mengubah status PO menjadi GOODS_RECEIVING.</td>
+              <td><span class="badge badge-success">Passed</span></td>
+            </tr>
+            <tr>
+              <td><strong>UAT-007</strong></td>
+              <td>Kafka Offline Queue Timeout</td>
+              <td>Putuskan sementara koneksi SAP PI/PO, lalu submit PR baru. Pulihkan koneksi setelah 10 menit.</td>
+              <td>PR tersimpan lokal di status <code>OFFLINE_QUEUE</code>. Saat koneksi pulih, background worker memproses antrean dan PR sukses terintegrasi.</td>
+              <td><span class="badge badge-success">Passed</span></td>
+            </tr>
+            <tr>
+              <td><strong>UAT-008</strong></td>
+              <td>Three-Way Matching AP MIRO</td>
+              <td>Lakukan verifikasi tagihan invoice vendor di T-Code MIRO terhadap PO dan Goods Receipt terkait.</td>
+              <td>Sistem berhasil mencocokkan nominal di modul SAP FI-AP, memblokir deviasi harga &gt;5%, dan merilis status pembayaran.</td>
               <td><span class="badge badge-success">Passed</span></td>
             </tr>
           </tbody>
@@ -1140,30 +2121,68 @@ def generate_gav():
     
     <!-- 22. RTM -->
     <div class="section-card" id="rtm">
-      <h3><span class="section-card-num">22.</span> Requirements Traceability Matrix (RTM)</h3>
-      <p class="section-card-desc">Matriks penelusuran dari dokumen bisnis kebutuhan (BR) hingga kasus uji UAT.</p>
+      <h3><span class="section-card-num">6.2.</span> Requirements Traceability Matrix (RTM)</h3>
+      <p class="section-card-desc">Matriks penelusuran untuk memetakan Kebutuhan Bisnis (BR), Kebutuhan Fungsional (FR), Modul SAP, dan Kasus Uji UAT.</p>
       <div class="table-wrapper">
         <table>
           <thead>
             <tr>
-              <th>ID Kebutuhan Bisnis</th>
-              <th>ID Fungsional (FR)</th>
-              <th>Modul Integrasi</th>
+              <th>ID BR</th>
+              <th>Kebutuhan Bisnis (BR)</th>
+              <th>ID FR</th>
+              <th>Kebutuhan Fungsional (FR)</th>
+              <th>Modul Integrasi SAP</th>
               <th>Kode Test Case UAT</th>
             </tr>
           </thead>
           <tbody>
             <tr>
-              <td>BR-01 (AOG Prevention)</td>
-              <td>FR-02 (Mobile Approval Routing)</td>
-              <td>Workflow Engine Gateway</td>
-              <td>UAT-003 (Mobile Push & Sign)</td>
+              <td><strong>BR-01</strong></td>
+              <td>MRO Log SLA Reduction</td>
+              <td>FR-04, FR-05, FR-07</td>
+              <td>Threshold routing, mobile push notification, auto BAPI PO trigger.</td>
+              <td>Workflow Engine &amp; BAPI Engine</td>
+              <td>UAT-004, UAT-005</td>
             </tr>
             <tr>
-              <td>BR-02 (Financial Audit)</td>
-              <td>FR-01 (Real-time Budget Check)</td>
-              <td>SAP RFC FI-FM Interface</td>
-              <td>UAT-001 (Pengecekan Anggaran)</td>
+              <td><strong>BR-02</strong></td>
+              <td>Cost Control Hard Block</td>
+              <td>FR-06</td>
+              <td>Pengecekan anggaran real-time dan hard block.</td>
+              <td>SAP FI-FM (Funds Management)</td>
+              <td>UAT-001</td>
+            </tr>
+            <tr>
+              <td><strong>BR-03</strong></td>
+              <td>Inventory Accuracy</td>
+              <td>FR-08</td>
+              <td>Sinkronisasi MIGO penerimaan barang via barcode scan.</td>
+              <td>SAP MM (Material Management)</td>
+              <td>UAT-006</td>
+            </tr>
+            <tr>
+              <td><strong>BR-04</strong></td>
+              <td>Regulatory Compliance</td>
+              <td>FR-02</td>
+              <td>Validasi wajib lampiran berkas kelayakan FAA/EASA.</td>
+              <td>Compliance Validation Service</td>
+              <td>UAT-002</td>
+            </tr>
+            <tr>
+              <td><strong>BR-05</strong></td>
+              <td>Audit History Trail</td>
+              <td>FR-09</td>
+              <td>Logging otomatis aktivitas transaksi.</td>
+              <td>Microservice Audit Logger</td>
+              <td>UAT-007, UAT-008</td>
+            </tr>
+            <tr>
+              <td><strong>BR-06</strong></td>
+              <td>Vendor Dispatch Auto</td>
+              <td>FR-01, FR-11</td>
+              <td>OCI Catalog Integration &amp; Multi-currency rate conversion.</td>
+              <td>SAP MM Contracts &amp; Exchange Rate</td>
+              <td>UAT-003</td>
             </tr>
           </tbody>
         </table>
@@ -1172,39 +2191,114 @@ def generate_gav():
     
     <!-- 23. Risk Register -->
     <div class="section-card" id="risk-reg">
-      <h3><span class="section-card-num">23.</span> Risk Register</h3>
-      <p class="section-card-desc">Analisis mitigasi terhadap potensi kendala proyek selama migrasi sistem.</p>
+      <h3><span class="section-card-num">6.3.</span> Risk Register</h3>
+      <p class="section-card-desc">Daftar analisis risiko teknis dan operasional beserta dampak dan mitigasinya selama implementasi proyek.</p>
       <div class="table-wrapper">
         <table>
           <thead>
             <tr>
               <th>Deskripsi Risiko</th>
-              <th>Level Dampak</th>
-              <th>Skenario Dampak</th>
-              <th>Rencana Mitigasi</th>
+              <th>Tingkat Risiko</th>
+              <th>Skenario Dampak Buruk</th>
+              <th>Rencana Mitigasi Sistem</th>
             </tr>
           </thead>
           <tbody>
             <tr>
-              <td>Gagal Koneksi OData SAP Gateway</td>
+              <td><strong>Inkompatibilitas Versi RFC/BAPI</strong></td>
               <td><span class="badge badge-danger">Tinggi</span></td>
-              <td>Logistik material hangar lumpuh, PO tidak terbit.</td>
-              <td>Sediakan offline-buffer queue di internal database portal.</td>
+              <td>Kegagalan komunikasi API akibat perbedaan skema data pada upgrade versi SAP.</td>
+              <td>Menerapkan lapisan pembungkus (REST API Wrapper) di middleware SAP PI/PO untuk menstandardisasi JSON payload.</td>
             </tr>
             <tr>
-              <td>Penolakan Adaptasi Mekanik Senior</td>
+              <td><strong>Korupsi Data Selama Migrasi Master Material</strong></td>
+              <td><span class="badge badge-danger">Tinggi</span></td>
+              <td>Salah pesan suku cadang di hangar akibat data part number lama terduplikasi.</td>
+              <td>Melakukan pembersihan data (data cleansing) secara total dan validasi checksum MD5 sebelum migrasi data ke database lokal.</td>
+            </tr>
+            <tr>
+              <td><strong>Bottleneck Antrean Message Queue Kafka</strong></td>
               <td><span class="badge badge-warning">Sedang</span></td>
-              <td>Mekanik kembali menggunakan formulir Excel manual.</td>
-              <td>Sediakan pendampingan onsite di hangar selama 30 hari pertama.</td>
+              <td>Keterlambatan pemrosesan rilis PO saat terjadi transaksi massal di peak season.</td>
+              <td>Menerapkan autoscaling pada Kafka consumers group dan mengalokasikan partisi topic tambahan.</td>
+            </tr>
+            <tr>
+              <td><strong>Gangguan Layanan SSO (Active Directory Outage)</strong></td>
+              <td><span class="badge badge-danger">Tinggi</span></td>
+              <td>Mekanik dan Approver tidak dapat login ke portal, melumpuhkan logistik MRO.</td>
+              <td>Menyediakan mekanisme otentikasi darurat fallback (PIN lokal terenkripsi) khusus untuk pengguna kritis (hangar lead).</td>
+            </tr>
+            <tr>
+              <td><strong>Deviasi Katalog Vendor (OCI Mismatch)</strong></td>
+              <td><span class="badge badge-warning">Sedang</span></td>
+              <td>Vendor mengubah kode part number secara sepihak, memicu error sinkronisasi.</td>
+              <td>Sistem memicu sinkronisasi berkala (daily cron job) untuk memperbarui data pemetaan silang material lokal.</td>
+            </tr>
+            <tr>
+              <td><strong>Penyalahgunaan Bypass Anggaran (Override Abuse)</strong></td>
+              <td><span class="badge badge-danger">Tinggi</span></td>
+              <td>VP Finance menyalahgunakan override anggaran untuk transaksi non-AOG.</td>
+              <td>Setiap bypass anggaran wajib disertai tanda tangan digital PKI dan dilacak di dashboard kepatuhan audit mingguan.</td>
+            </tr>
+          </tbody>
+        </table>
+      </div>
+    </div>
+
+    <!-- 24. Performance Benchmark Target -->
+    <div class="section-card" id="perf-bench">
+      <h3><span class="section-card-num">6.4.</span> Performance Benchmark Target</h3>
+      <p class="section-card-desc">Batas performa non-fungsional sistem pengadaan SmartProcure yang harus dipenuhi sebelum rilis ke server produksi.</p>
+      
+      <div class="table-wrapper">
+        <table>
+          <thead>
+            <tr>
+              <th>Metrik Performa</th>
+              <th>Target SLA / Nilai Acuan</th>
+              <th>Alat Uji (Testing Tool)</th>
+              <th>Kondisi Pengujian / Deskripsi</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr>
+              <td><strong>API Response Time (PR Submission)</strong></td>
+              <td>&lt; 2.2 Detik</td>
+              <td>JMeter / K6</td>
+              <td>Rata-rata respons API di gateway Kong ke server middleware SAP PI/PO.</td>
+            </tr>
+            <tr>
+              <td><strong>Bulk Catalog Query Response</strong></td>
+              <td>&lt; 1.5 Detik</td>
+              <td>Apache Benchmark</td>
+              <td>Pencarian suku cadang pada OCI Punchout dengan visual rendering.</td>
+            </tr>
+            <tr>
+              <td><strong>Throughput Capacity</strong></td>
+              <td>&gt; 500 requests / detik</td>
+              <td>K6 Load Testing</td>
+              <td>Kapasitas server mengolah payload pembuatan draf PR secara simultan.</td>
+            </tr>
+            <tr>
+              <td><strong>Database Sync Latency</strong></td>
+              <td>&lt; 500 milidetik</td>
+              <td>PostgreSQL Monitor</td>
+              <td>Waktu sinkronisasi data dari PostgreSQL buffer lokal ke modul SAP MM.</td>
+            </tr>
+            <tr>
+              <td><strong>Concurrent User Session</strong></td>
+              <td>12,000 Sesi Aktif</td>
+              <td>Locust</td>
+              <td>Sistem stabil melayani pengguna aktif tanpa mengalami kebocoran memori (OOM).</td>
             </tr>
           </tbody>
         </table>
       </div>
     </div>
     
-    <!-- 24. Change Request -->
+    <!-- 25. Change Request -->
     <div class="section-card" id="change-req">
-      <h3><span class="section-card-num">24.</span> Change Request Document</h3>
+      <h3><span class="section-card-num">6.5.</span> Change Request Document</h3>
       <p class="section-card-desc">Formulir permohonan perubahan lingkup fitur paska fase 1 rilis.</p>
       <div style="background: #fafafb; border: 1px solid var(--border-color); border-radius: 12px; padding: 24px;">
         <p><strong>CR Nomor:</strong> CR-MRO-2026-009</p>
@@ -1216,31 +2310,146 @@ def generate_gav():
 
   <!-- PHASE 7 -->
   <div class="phase-block">
-    <div class="phase-badge pb-emerald">Fase 7: Dampak Bisnis (ROI)</div>
+    <div class="phase-badge pb-indigo">Fase 7: Serah Terima & Roadmap</div>
     
-    <!-- 25. Business Impact Analysis -->
-    <div class="section-card" id="biz-impact">
-      <h3><span class="section-card-num">25.</span> Business Impact Analysis</h3>
-      <p class="section-card-desc">Dampak riil transformasi sistem terhadap KPI operasional maskapai.</p>
+    <!-- 26. Sign-off -->
+    <div class="section-card" id="sign-off">
+      <h3><span class="section-card-num">7.1.</span> Dokumen Serah Terima (Sign-off)</h3>
+      <p class="section-card-desc">Pernyataan persetujuan resmi bahwa proyek SmartProcure telah memenuhi kriteria penerimaan sistem.</p>
       
-      <div class="bento-grid">
-        <div class="bento-cell">
-          <h4>SLA Efisiensi Logistik</h4>
-          <p style="font-size: 2.2rem; font-weight: 800; color: var(--accent-teal); line-height: 1;">-75%</p>
-          <p style="font-weight: 600; margin-top: 10px;">Siklus PR ke PO</p>
-          <p>Pemangkasan alur rilis material dari rata-rata 7.2 hari menjadi kurang dari 40 jam kerja.</p>
+      <div class="table-wrapper">
+        <table>
+          <thead>
+            <tr>
+              <th>Aktor Penanggung Jawab</th>
+              <th>Nama Lengkap</th>
+              <th>Jabatan Teknis</th>
+              <th>Tanggal Tanda Tangan</th>
+              <th>Tanda Tangan Digital</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr>
+              <td><strong>Mekanik Hangar</strong></td>
+              <td>Budi Santoso</td>
+              <td>Lead Hangar Maintenance</td>
+              <td>04 Juni 2026</td>
+              <td><span style="font-family: 'Courier New', monospace; font-weight: bold; color: var(--accent-indigo);">[SIGNED_SECURE_BS2026]</span></td>
+            </tr>
+            <tr>
+              <td><strong>Engineering Lead</strong></td>
+              <td>Dr. Ir. Hermawan Prasetyo</td>
+              <td>VP Engineering Quality</td>
+              <td>04 Juni 2026</td>
+              <td><span style="font-family: 'Courier New', monospace; font-weight: bold; color: var(--accent-indigo);">[SIGNED_SECURE_HP9910]</span></td>
+            </tr>
+            <tr>
+              <td><strong>Finance Controller</strong></td>
+              <td>Sri Wahyuni, S.E., M.B.A.</td>
+              <td>Head of Corporate Budgeting</td>
+              <td>04 Juni 2026</td>
+              <td><span style="font-family: 'Courier New', monospace; font-weight: bold; color: var(--accent-indigo);">[SIGNED_SECURE_SW5501]</span></td>
+            </tr>
+            <tr>
+              <td><strong>Procurement Manager</strong></td>
+              <td>Rian Hidayat</td>
+              <td>Head of Strategic Sourcing</td>
+              <td>04 Juni 2026</td>
+              <td><span style="font-family: 'Courier New', monospace; font-weight: bold; color: var(--accent-indigo);">[SIGNED_SECURE_RH3019]</span></td>
+            </tr>
+            <tr>
+              <td><strong>Warehouse Officer</strong></td>
+              <td>Agus Salim</td>
+              <td>Warehouse Logistics Supervisor</td>
+              <td>04 Juni 2026</td>
+              <td><span style="font-family: 'Courier New', monospace; font-weight: bold; color: var(--accent-indigo);">[SIGNED_SECURE_AS2930]</span></td>
+            </tr>
+          </tbody>
+        </table>
+      </div>
+    </div>
+
+    <!-- 27. Before vs After -->
+    <div class="section-card" id="before-after">
+      <h3><span class="section-card-num">7.2.</span> Sebelum vs Sesudah Implementasi (Before vs After)</h3>
+      <p class="section-card-desc">Analisis komparatif efisiensi operasional sebelum dan sesudah implementasi sistem SmartProcure.</p>
+      
+      <div class="table-wrapper">
+        <table>
+          <thead>
+            <tr>
+              <th>Proses Logistik</th>
+              <th>Sistem Lama (AS-IS)</th>
+              <th>Sistem Baru (TO-BE SmartProcure)</th>
+              <th>Peningkatan Efisiensi</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr>
+              <td><strong>Pencarian Suku Cadang (Catalog Search)</strong></td>
+              <td>Mencari secara manual di buku manual cetak (IPC) dan mencocokkan kode secara manual ke Excel. Memakan waktu 3 - 5 jam.</td>
+              <td>Integrasi OCI Punchout visual langsung ke katalog maskapai / OEM. Menampilkan stok dan kecocokan instan dalam 2 menit.</td>
+              <td><span class="badge badge-success">Sangat Cepat (-99% Waktu)</span></td>
+            </tr>
+            <tr>
+              <td><strong>Pemeriksaan Anggaran (Budget Check)</strong></td>
+              <td>Staf Finance memverifikasi lembar PR kertas dengan anggaran divisi secara bulanan. Rawan overbudget hingga akhir kuartal.</td>
+              <td>Hard block otomatis real-time di SAP FI-FM saat submit PR. Mencegah draf dikirim jika anggaran Cost Center habis.</td>
+              <td><span class="badge badge-success">Akurasi 100% (Zero Leakage)</span></td>
+            </tr>
+            <tr>
+              <td><strong>Pembuatan PO (Purchase Order Creation)</strong></td>
+              <td>Dokumen PR yang disetujui ditgetik ulang secara manual oleh admin di SAP ME51N. SLA rilis PO rata-rata 7.2 hari kerja.</td>
+              <td>Pemicu otomatis via API BAPI_PO_CREATE1 ke SAP Core segera setelah disetujui. PO terbit dalam &lt; 2 menit.</td>
+              <td><span class="badge badge-success">Efisiensi SLA (-99.9%)</span></td>
+            </tr>
+          </tbody>
+        </table>
+      </div>
+    </div>
+    
+    <!-- 28. Lessons Learned & Roadmap -->
+    <div class="section-card" id="roadmap">
+      <h3><span class="section-card-num">7.3.</span> Lessons Learned & Roadmap</h3>
+      <p class="section-card-desc">Evaluasi proyek dan garis waktu pengembangan fitur SmartProcure di masa mendatang.</p>
+      
+      <h4 style="font-size:0.95rem; margin-bottom:10px; color:var(--text-dark);">Lessons Learned (Evaluasi Implementasi)</h4>
+      <div style="background: #fafafb; padding: 24px; border-radius: 12px; border: 1px solid var(--border-color); margin-bottom: 25px;">
+        <ul style="padding-left: 20px; font-size: 0.88rem; color: var(--text-muted); line-height: 1.7; display: flex; flex-direction: column; gap: 8px;">
+          <li><strong>Pentingnya Kualitas Master Data:</strong> Proses integrasi OCI sangat bergantung pada kebersihan data katalog vendor di SAP. Ketidaksesuaian tipis pada UoM dapat memicu error transaksi BAPI.</li>
+          <li><strong>Mitigasi Jaringan di Hanggar:</strong> Penggunaan terminal pemindai barcode nirkabel di hanggar membutuhkan jangkauan Wi-Fi yang stabil. Skema sinkronisasi asinkronous (Kafka offline queue) terbukti vital menyelamatkan transaksi saat sinyal terputus.</li>
+          <li><strong>Manajemen Perubahan Pengguna (Change Management):</strong> Pelatihan intensif bagi mekanik senior hanggar untuk berpindah dari form kertas ke portal digital sangat menentukan tingkat adopsi sistem baru.</li>
+        </ul>
+      </div>
+
+      <h4 style="font-size:0.95rem; margin-bottom:15px; color:var(--text-dark);">Roadmap Pengembangan Produk (Future Roadmap)</h4>
+      <div class="workflow-timeline">
+        <div class="timeline-item">
+          <div class="timeline-dot"></div>
+          <div class="timeline-content">
+            <h4>Q3 2026: AI-Powered Predictive Sourcing</h4>
+            <p style="font-size: 0.88rem; color: var(--text-muted); margin-top: 4px;">
+              Mengembangkan modul rekomendasi suku cadang otomatis menggunakan machine learning berdasarkan riwayat kerusakan pesawat (aircraft maintenance log) untuk mencegah AOG lebih dini.
+            </p>
+          </div>
         </div>
-        <div class="bento-cell">
-          <h4>Audit Keuangan</h4>
-          <p style="font-size: 2.2rem; font-weight: 800; color: var(--accent-teal); line-height: 1;">100%</p>
-          <p style="font-weight: 600; margin-top: 10px;">Akurasi Anggaran</p>
-          <p>Zero instances of over-budget spending di Cost Center hangar berkat modul FM hard-block.</p>
+        <div class="timeline-item">
+          <div class="timeline-dot"></div>
+          <div class="timeline-content">
+            <h4>Q4 2026: Multi-Vendor Collaborative Portal</h4>
+            <p style="font-size: 0.88rem; color: var(--text-muted); margin-top: 4px;">
+              Membangun portal kolaboratif vendor eksternal di mana vendor dapat memperbarui status pengiriman logistik secara real-time dan mengunggah dokumen digital kelaikan udara secara mandiri.
+            </p>
+          </div>
         </div>
-        <div class="bento-cell">
-          <h4>Akurasi Fisik Stok</h4>
-          <p style="font-size: 2.2rem; font-weight: 800; color: var(--accent-teal); line-height: 1;">99.85%</p>
-          <p style="font-weight: 600; margin-top: 10px;">Kesesuaian SAP MM</p>
-          <p>Mengeliminasi selisih stok gudang melalui entri real-time GR pemindaian barcode mobile.</p>
+        <div class="timeline-item">
+          <div class="timeline-dot"></div>
+          <div class="timeline-content">
+            <h4>Q1 2027: SAP S/4HANA Cloud Transition</h4>
+            <p style="font-size: 0.88rem; color: var(--text-muted); margin-top: 4px;">
+              Migrasi penuh gateway integrasi dari SAP ECC 6.0 RPC Wrapper ke SAP S/4HANA Cloud REST OData v4 endpoints guna meningkatkan latensi sinkronisasi hingga di bawah 1 detik.
+            </p>
+          </div>
         </div>
       </div>
     </div>
