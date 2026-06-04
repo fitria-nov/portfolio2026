@@ -2300,12 +2300,10 @@ def generate_lppm():
     <a href="#nonfunc-req" class="nav-item"><span class="nav-num">3.3</span> Non-Functional Specs</a>
     <a href="#accept-crit" class="nav-item"><span class="nav-num">3.4</span> Acceptance Criteria</a>
     
-    <div class="nav-group-title">Fase 4: Pemodelan UML</div>
-    <a href="#usecase" class="nav-item"><span class="nav-num">4.1</span> Use Case Diagram</a>
-    <a href="#activity" class="nav-item"><span class="nav-num">4.2</span> Activity Diagram</a>
-    <a href="#sequence" class="nav-item"><span class="nav-num">4.3</span> Sequence Diagram</a>
-    <a href="#dfd" class="nav-item"><span class="nav-num">4.4</span> DFD (Level 0 & 1)</a>
-    <a href="#erd" class="nav-item"><span class="nav-num">4.5</span> ERD Database</a>
+    <div class="nav-group-title">Fase 4: Pemodelan Sistem</div>
+    <a href="#activity" class="nav-item"><span class="nav-num">4.1</span> Activity Diagram</a>
+    <a href="#sequence" class="nav-item"><span class="nav-num">4.2</span> Sequence Diagram</a>
+    <a href="#erd" class="nav-item"><span class="nav-num">4.3</span> ERD Database</a>
     
     <div class="nav-group-title">Fase 5: Teknis & Integrasi</div>
     <a href="#api-doc" class="nav-item"><span class="nav-num">5.1</span> API Documentation</a>
@@ -2619,34 +2617,13 @@ def generate_lppm():
     </div>
   </div>
 
-  <!-- PHASE 4: UML DIAGRAMS -->
+  <!-- PHASE 4: SYSTEM DESIGN & MODELING -->
   <div class="phase-block">
-    <div class="phase-badge pb-amber">Fase 4: Pemodelan Sistem & Database (UML)</div>
+    <div class="phase-badge pb-amber">Fase 4: Desain & Pemodelan Sistem (UML & Database)</div>
     
-    <!-- 4.1 Use Case -->
-    <div class="section-card" id="usecase">
-      <h3><span class="section-card-num">4.1.</span> Use Case Diagram</h3>
-      <p class="section-card-desc">Pemetaan interaksi para aktor terhadap fitur-fitur portal SIMPPM.</p>
-      <div class="diagram-container">
-        <div class="mermaid">
-          graph LR
-            Ketua((Dosen Ketua)) --> UC1(Buat Usulan Proposal)
-            Ketua --> UC2(Input Anggota & Berkas)
-            Anggota((Dosen & Mhs Anggota)) --> UC3(Konfirmasi Keanggotaan)
-            Akademik((Akademik Fakultas)) --> UC4(Validasi Administrasi)
-            Dekan((Dekanat Fakultas)) --> UC5(Terbitkan Rekomendasi)
-            Reviewer((Reviewer Ahli)) --> UC6(Input Penilaian Kuantitatif)
-            Admin((Admin LPPM)) --> UC7(Plotting Reviewer & Kontrak)
-            
-            UC1 -.->|include| UC8(Cek Periode Aktif)
-            UC2 -.->|include| UC9(Verifikasi NIDN/NIM via PDDIKTI)
-        </div>
-      </div>
-    </div>
-    
-    <!-- 4.2 Activity Diagram -->
+    <!-- 4.1 Activity Diagram -->
     <div class="section-card" id="activity">
-      <h3><span class="section-card-num">4.2.</span> Activity Diagram</h3>
+      <h3><span class="section-card-num">4.1.</span> Activity Diagram</h3>
       <p class="section-card-desc">Alur logis aktivitas validasi dan seleksi proposal.</p>
       <div class="diagram-container">
         <div class="mermaid">
@@ -2674,9 +2651,9 @@ def generate_lppm():
       </div>
     </div>
     
-    <!-- 4.3 Sequence Diagram -->
+    <!-- 4.2 Sequence Diagram -->
     <div class="section-card" id="sequence">
-      <h3><span class="section-card-num">4.3.</span> Sequence Diagram</h3>
+      <h3><span class="section-card-num">4.2.</span> Sequence Diagram</h3>
       <p class="section-card-desc">Aliran pesan dalam runtime untuk persetujuan keanggotaan riset.</p>
       <div class="diagram-container">
         <div class="mermaid">
@@ -2700,27 +2677,9 @@ def generate_lppm():
       </div>
     </div>
     
-    <!-- 4.4 DFD -->
-    <div class="section-card" id="dfd">
-      <h3><span class="section-card-num">4.4.</span> Data Flow Diagram (DFD Level 0 - Context)</h3>
-      <p class="section-card-desc">Aliran pertukaran data eksternal dengan sistem portal SIMPPM.</p>
-      <div class="diagram-container">
-        <div class="mermaid">
-          graph LR
-            Dosen[Dosen Ketua & Anggota] -->|Kirim Data Proposal & Konfirmasi| Sys((Portal SIMPPM))
-            Sys -->|Kirim Notifikasi Persetujuan| Dosen
-            Sys -->|Daftar Dokumen Proposal| Fak[Fakultas & Dekanat]
-            Fak -->|Rilis Persetujuan & Rekomendasi| Sys
-            Sys -->|Payload Nilai Proposal| Reviewer[Reviewer LPPM]
-            Reviewer -->|Input Penilaian & Ulasan| Sys
-            Sys <-->|Request NIDN & NIM Check| PDDIKTI[API Database PDDIKTI]
-        </div>
-      </div>
-    </div>
-    
-    <!-- 4.5 ERD -->
+    <!-- 4.3 ERD -->
     <div class="section-card" id="erd">
-      <h3><span class="section-card-num">4.5.</span> Entity Relationship Diagram (ERD Schema)</h3>
+      <h3><span class="section-card-num">4.3.</span> Entity Relationship Diagram (ERD Schema)</h3>
       <p class="section-card-desc">Struktur relasi database portal untuk mengelola siklus riset dan pengabdian.</p>
       <div class="diagram-container">
         <div class="mermaid">
