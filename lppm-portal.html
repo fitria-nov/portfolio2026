@@ -477,6 +477,7 @@
     <div class="nav-group-title">Fase 2: Proses Bisnis</div>
     <a href="#bpmn-swimlane" class="nav-item"><span class="nav-num">2.1</span> BPMN Swimlane Alur</a>
     <a href="#workflow-breakdown" class="nav-item"><span class="nav-num">2.2</span> Breakdown Alur Kerja</a>
+    <a href="#status-code-map" class="nav-item"><span class="nav-num">2.3</span> Pemetaan Status Code</a>
     
     <div class="nav-group-title">Fase 3: Kebutuhan Sistem</div>
     <a href="#brd" class="nav-item"><span class="nav-num">3.1</span> BRD Overview</a>
@@ -488,20 +489,25 @@
     <a href="#activity" class="nav-item"><span class="nav-num">4.1</span> Activity Diagram</a>
     <a href="#sequence" class="nav-item"><span class="nav-num">4.2</span> Sequence Diagram</a>
     <a href="#erd" class="nav-item"><span class="nav-num">4.3</span> ERD Database</a>
+    <a href="#data-dictionary" class="nav-item"><span class="nav-num">4.4</span> Data Dictionary</a>
     
     <div class="nav-group-title">Fase 5: Teknis & Integrasi</div>
     <a href="#api-doc" class="nav-item"><span class="nav-num">5.1</span> API Documentation</a>
     <a href="#val-rules" class="nav-item"><span class="nav-num">5.2</span> Validation Rules</a>
     <a href="#role-matrix" class="nav-item"><span class="nav-num">5.3</span> Role & RACI Matrix</a>
     <a href="#exception" class="nav-item"><span class="nav-num">5.4</span> Exception Flow</a>
+    <a href="#sys-architecture" class="nav-item"><span class="nav-num">5.5</span> System Architecture</a>
     
     <div class="nav-group-title">Fase 6: Pengujian & Risiko</div>
     <a href="#uat" class="nav-item"><span class="nav-num">6.1</span> UAT Test Plan</a>
     <a href="#rtm" class="nav-item"><span class="nav-num">6.2</span> RTM Document</a>
     <a href="#risk-reg" class="nav-item"><span class="nav-num">6.3</span> Risk Register</a>
+    <a href="#perf-benchmark" class="nav-item"><span class="nav-num">6.4</span> Performance Benchmark</a>
     
     <div class="nav-group-title">Fase 7: Dampak Bisnis</div>
     <a href="#biz-impact" class="nav-item"><span class="nav-num">7.1</span> Business Impact</a>
+    <a href="#before-after" class="nav-item"><span class="nav-num">7.2</span> Before vs After</a>
+    <a href="#lessons-roadmap" class="nav-item"><span class="nav-num">7.3</span> Lessons & Roadmap</a>
     
   </div>
 </div>
@@ -618,7 +624,7 @@
     <!-- 2.1 BPMN Swimlane -->
     <div class="section-card" id="bpmn-swimlane">
       <h3><span class="section-card-num">2.1.</span> BPMN Swimlane Alur Pengajuan & Evaluasi Proposal</h3>
-      <p class="section-card-desc">Visualisasi alur proses bisnis lintas peran dari pembukaan periode hingga penandatanganan kontrak riset.</p>
+      <p class="section-card-desc">Visualisasi alur proses bisnis lintas peran dari pembukaan periode hingga penandatanganan kontrak riset. Diagram swimlane di bawah ini menggambarkan interaksi antara 6 aktor utama (Admin LPMB, Dosen Ketua, Dosen Anggota, Mahasiswa, Akademik Fakultas, dan Dekanat Fakultas) dalam satu siklus pengajuan pengmas lengkap — mulai dari konfigurasi skema oleh admin, autentikasi SSO, pengisian formulir, review berjenjang, pelaksanaan kegiatan, hingga pelaporan akhir dan pengarsipan ke WUADC.</p>
       
       <div class="img-container" style="margin-bottom: 30px;">
         <img src="img/lppm-swimlane.jpg" alt="Orisinal Swimlane Diagram LPMB SIMPPM"/>
@@ -727,49 +733,292 @@
     <!-- 2.2 Workflow Breakdown -->
     <div class="section-card" id="workflow-breakdown">
       <h3><span class="section-card-num">2.2.</span> Breakdown Detil Alur Kerja LPMB</h3>
-      <p class="section-card-desc">Penjelasan langkah-langkah logis operasional lintas peran berdasarkan swimlane diagram.</p>
+      <p class="section-card-desc">Penjelasan langkah-langkah logis operasional lintas peran berdasarkan swimlane diagram. Setiap langkah mencakup deskripsi sub-proses, aktor penanggung jawab, perubahan status proposal, dan titik keputusan (decision gate) yang menentukan apakah proses berlanjut atau dikembalikan untuk perbaikan.</p>
       <div class="workflow-timeline">
         <div class="timeline-item">
           <div class="timeline-dot">1</div>
           <div class="timeline-content">
-            <h4>Inisiasi & Konfigurasi Skema (Admin LPMB)</h4>
-            <p>Admin LPMB menentukan skema pengabdian masyarakat (reguler, internal, mandiri) serta master dokumen prasyarat yang wajib dipenuhi oleh para pengusul.</p>
+            <h4>Inisiasi & Konfigurasi Skema Pengmas (Admin LPMB)</h4>
+            <p>Admin LPMB membuka menu konfigurasi skema pengabdian masyarakat dan menentukan parameter skema yang berlaku untuk periode berjalan. Terdapat tiga jenis skema: <strong>Reguler</strong> (pendanaan dari pihak eksternal, durasi 6-12 bulan), <strong>Internal</strong> (pendanaan dari universitas, durasi 4-6 bulan), dan <strong>Mandiri</strong> (tanpa pendanaan institusional, fleksibel). Untuk setiap skema, admin mengatur: daftar dokumen prasyarat wajib, batas maksimum anggota dosen dan mahasiswa, batas ukuran file upload (max 10MB per file), format file yang diperbolehkan (PDF/DOC/DOCX), serta template formulir pengisian proposal. Konfigurasi ini disimpan ke tabel <strong>SKEMA_PENGMAS</strong> dan menjadi referensi validasi saat dosen melakukan pengajuan.</p>
           </div>
         </div>
         <div class="timeline-item">
           <div class="timeline-dot">2</div>
           <div class="timeline-content">
-            <h4>Autentikasi & Pengajuan Usulan (Dosen Ketua)</h4>
-            <p>Dosen Ketua masuk ke sistem melalui SSO Cyber Kampus atau Gmail. Setelah periode pendaftaran divalidasi aktif, dosen memilih skema dan mengisi form pengajuan dengan mengunggah proposal, RAB, CV, SP, serta Pakta Integritas.</p>
+            <h4>Pembukaan Periode Pendaftaran (Admin LPMB)</h4>
+            <p>Admin LPMB mengaktifkan periode pendaftaran dengan menentukan <strong>tanggal_buka</strong> dan <strong>tanggal_tutup</strong> pada tabel <strong>PERIODE_PENGMAS</strong>. Hanya periode dengan flag <code>is_active = true</code> yang memperbolehkan dosen mengakses halaman formulir pengajuan. Sistem secara otomatis menonaktifkan periode ketika tanggal tutup terlewati, serta mengirimkan notifikasi pengingat H-7 dan H-1 sebelum periode berakhir kepada seluruh dosen yang belum menyelesaikan proses submit.</p>
           </div>
         </div>
         <div class="timeline-item">
           <div class="timeline-dot">3</div>
           <div class="timeline-content">
-            <h4>Tinjauan Keanggotaan Paralel (Dosen Anggota & Mahasiswa)</h4>
-            <p>Sistem secara otomatis menampilkan riwayat usulan kepada Dosen Anggota dan Mahasiswa secara paralel untuk transparansi keterlibatan tim pengmas.</p>
+            <h4>Autentikasi SSO & Validasi Akun (Dosen Ketua)</h4>
+            <p>Dosen Ketua melakukan login ke portal SIMPPM melalui dua metode Single Sign-On: <strong>SSO Cyber Kampus</strong> (autentikasi utama berbasis NIDN) atau <strong>Google OAuth (Gmail Institusi)</strong> (autentikasi alternatif). Sistem melakukan query real-time ke API Cyber Kampus untuk memvalidasi: (1) NIDN terdaftar dan status kepegawaian aktif, (2) data jabatan akademik, fakultas, dan program studi terisi lengkap, (3) tidak sedang dalam masa cuti atau non-aktif. Jika validasi gagal, sistem menampilkan pesan error spesifik dan memblokir akses ke halaman pengajuan. Status proposal pada tahap ini: belum ada record (pre-submission).</p>
           </div>
         </div>
         <div class="timeline-item">
           <div class="timeline-dot">4</div>
           <div class="timeline-content">
-            <h4>Verifikasi Kelengkapan Awal (Akademik & Dekanat Fakultas)</h4>
-            <p>Berkas diperiksa oleh Akademik Fakultas (Reject 3 jika tidak lengkap). Jika lengkap, Dekan me-review substansi awal (Reject 5 jika tidak disetujui). Apabila lolos persetujuan dekan, Dosen Ketua melengkapi tanda tangan administrasi berkas pengajuan.</p>
+            <h4>Validasi Periode & Query Data Master (Sistem)</h4>
+            <p>Setelah autentikasi berhasil, sistem memeriksa apakah saat ini berada dalam periode pendaftaran aktif (<code>is_active = true AND CURRENT_DATE BETWEEN tanggal_buka AND tanggal_tutup</code>). Jika periode tidak aktif, dosen diarahkan ke halaman informasi "Periode Pengajuan Belum Dibuka" dan tidak dapat mengakses formulir. Jika aktif, sistem melakukan batch query ke API Cyber Kampus dan PDDIKTI untuk mengambil data master: daftar dosen aktif per fakultas (untuk pemilihan anggota), daftar mahasiswa aktif per prodi, unit kerja, serta riwayat pengajuan sebelumnya. Data ini di-cache selama sesi untuk mempercepat proses pengisian formulir.</p>
           </div>
         </div>
         <div class="timeline-item">
           <div class="timeline-dot">5</div>
           <div class="timeline-content">
-            <h4>Verifikasi Konten & Review Akhir Kelulusan (LPMB & Review Akhir)</h4>
-            <p>Admin LPMB memverifikasi kesesuaian konten (Reject 7 ditolak). Berkas yang lolos akan melalui tinjauan akhir berjenjang oleh Akademik Fakultas dan Dekanat Fakultas untuk menetapkan status penerimaan akhir usulan.</p>
+            <h4>Pemilihan Skema & Pengisian Formulir (Dosen Ketua)</h4>
+            <p>Dosen Ketua memilih skema pengmas yang sesuai (Reguler/Internal/Mandiri). Formulir dinamis akan di-render sesuai konfigurasi skema terpilih, menampilkan field-field yang relevan: judul proposal, abstrak, tahun pelaksanaan, rencana anggaran biaya (dana_diajukan), lokasi kegiatan, dan daftar target capaian luaran. Dosen juga mendaftarkan anggota tim dengan memasukkan NIDN (untuk dosen anggota) dan NIM (untuk mahasiswa) — sistem langsung memvalidasi ketersediaan dan status aktif masing-masing calon anggota melalui API. Status proposal: <span class="badge badge-warning">DRAFT</span></p>
           </div>
         </div>
         <div class="timeline-item">
           <div class="timeline-dot">6</div>
           <div class="timeline-content">
-            <h4>Pelaksanaan & Laporan Akhir (Tim Pengmas & LPMB)</h4>
-            <p>Tim pengmas (Ketua, Anggota, Mahasiswa) melaksanakan pengabdian masyarakat secara paralel. Setelah selesai, Dosen Ketua mengunggah Logbook dan Laporan ke portal untuk dimonitoring & dievaluasi oleh LPMB. Laporan yang disetujui akan diarsipkan otomatis ke tabel basis data master <strong>WUADC</strong>.</p>
+            <h4>Upload Berkas Prasyarat & Submit (Dosen Ketua)</h4>
+            <p>Dosen Ketua mengunggah seluruh dokumen prasyarat sesuai skema: (1) <strong>File Proposal</strong> — dokumen inti kegiatan pengmas, (2) <strong>RAB (Rencana Anggaran Biaya)</strong> — rincian penggunaan dana, (3) <strong>CV Ketua</strong> — curriculum vitae dosen ketua tim, (4) <strong>Surat Pernyataan (SP)</strong> — pernyataan keaslian dan kesanggupan, (5) <strong>Pakta Integritas</strong> — komitmen etik pelaksanaan. Sistem melakukan validasi real-time: tipe file (PDF/DOC/DOCX), ukuran maksimum 10MB per file, dan kelengkapan dokumen wajib per skema. Setelah semua berkas lengkap dan tervalidasi, Dosen Ketua menekan tombol "Upload Berkas dan Submit". Status proposal berubah: <span class="badge badge-warning">DRAFT</span> → <span class="badge badge-primary">SUBMITTED</span></p>
           </div>
+        </div>
+        <div class="timeline-item">
+          <div class="timeline-dot">7</div>
+          <div class="timeline-content">
+            <h4>Notifikasi Paralel ke Anggota Tim (Dosen Anggota & Mahasiswa)</h4>
+            <p>Saat proposal di-submit, sistem secara otomatis mengirimkan notifikasi (email + in-app notification) kepada seluruh Dosen Anggota dan Mahasiswa yang didaftarkan. Mereka dapat melihat detail proposal, riwayat usulan, dan status keterlibatan mereka melalui halaman "Riwayat Usulan Saya". Notifikasi ini mencakup: judul proposal, nama ketua tim, skema pengmas, dan tautan langsung ke detail proposal. Anggota tidak memiliki akses edit — hanya view dan konfirmasi partisipasi.</p>
+          </div>
+        </div>
+        <div class="timeline-item">
+          <div class="timeline-dot">8</div>
+          <div class="timeline-content">
+            <h4>Review Kelengkapan Berkas Administratif (Akademik Fakultas)</h4>
+            <p>Staf Akademik Fakultas menerima notifikasi antrean review baru di dashboard mereka. Proses review meliputi pemeriksaan: (1) kelengkapan seluruh dokumen wajib sesuai skema, (2) kesesuaian format dan template dokumen, (3) validitas data identitas pengusul dan anggota, (4) konsistensi judul dan abstrak dengan isi proposal. Akademik menggunakan checklist digital terintegrasi untuk menandai setiap item yang telah diperiksa. <strong>Decision Gate:</strong> Jika berkas tidak lengkap/tidak sesuai → <span class="badge badge-danger">REJECTED_AKADEMIK</span> dengan catatan revisi spesifik yang dikirim ke Dosen Ketua. Jika berkas lengkap → <span class="badge badge-success">APPROVED_AKADEMIK</span>, proposal diteruskan ke Dekanat.</p>
+          </div>
+        </div>
+        <div class="timeline-item">
+          <div class="timeline-dot">9</div>
+          <div class="timeline-content">
+            <h4>Review Rekomendasi Substansi (Dekanat Fakultas)</h4>
+            <p>Dekan atau Wakil Dekan melakukan peninjauan substansi proposal: kesesuaian tema dengan visi fakultas, kelayakan rencana anggaran, relevansi dengan kebutuhan masyarakat sasaran, dan kualifikasi tim pengusul. Dekanat dapat memberikan catatan evaluatif yang terekam di tabel <strong>REVIEW_LOG</strong>. <strong>Decision Gate:</strong> Jika dekan tidak menyetujui → <span class="badge badge-danger">REJECTED_DEKAN</span> dengan alasan penolakan yang dikirim ke Dosen Ketua untuk revisi. Jika disetujui → <span class="badge badge-success">APPROVED_DEKAN</span>, dan sistem mengirimkan notifikasi ke Dosen Ketua untuk melengkapi tanda tangan administrasi.</p>
+          </div>
+        </div>
+        <div class="timeline-item">
+          <div class="timeline-dot">10</div>
+          <div class="timeline-content">
+            <h4>Pelengkapan Tanda Tangan Administrasi (Dosen Ketua)</h4>
+            <p>Dosen Ketua menerima notifikasi bahwa proposal telah disetujui oleh Dekanat dan perlu melengkapi tanda tangan digital pada dokumen administrasi final. Dokumen yang ditandatangani mencakup: Surat Pernyataan, Pakta Integritas, dan lembar persetujuan anggaran. Setelah seluruh tanda tangan terisi, Dosen Ketua mengkonfirmasi penyelesaian administrasi. Status proposal: <span class="badge badge-success">APPROVED_DEKAN</span> → <span class="badge badge-primary">TTD_ADMIN</span></p>
+          </div>
+        </div>
+        <div class="timeline-item">
+          <div class="timeline-dot">11</div>
+          <div class="timeline-content">
+            <h4>Verifikasi Kesesuaian Konten (Admin LPMB)</h4>
+            <p>Admin LPMB melakukan verifikasi menyeluruh terhadap kesesuaian konten proposal: (1) substansi kegiatan sesuai dengan definisi pengabdian masyarakat, (2) RAB proporsional dengan ruang lingkup kegiatan, (3) tidak terdapat duplikasi dengan proposal aktif lainnya, (4) dokumen administrasi bertanda tangan lengkap dan sah. Admin LPMB menggunakan checklist konten internal dan dapat memberikan catatan verifikasi yang direkam dalam <strong>REVIEW_LOG</strong>. <strong>Decision Gate:</strong> Jika gagal verifikasi → <span class="badge badge-danger">REJECTED_ADMIN</span>, proposal dihentikan secara permanen (terminal state). Jika lolos → <span class="badge badge-success">VERIFIED</span>, dilanjutkan ke tahap review akhir berjenjang.</p>
+          </div>
+        </div>
+        <div class="timeline-item">
+          <div class="timeline-dot">12</div>
+          <div class="timeline-content">
+            <h4>Review Akhir Berjenjang (Akademik & Dekanat Fakultas)</h4>
+            <p>Proposal yang telah lolos verifikasi LPMB memasuki tahap review akhir dua tingkat. <strong>Tingkat 1 — Akademik Fakultas:</strong> Melakukan penilaian akhir komprehensif mencakup kelayakan akademis dan kesiapan pelaksanaan. Jika ditolak → <span class="badge badge-danger">REJECTED_FINAL</span> (terminal). Jika diterima → status menjadi <span class="badge badge-primary">REVIEW_FINAL_AKAD</span>, diteruskan ke Dekanat. <strong>Tingkat 2 — Dekanat Fakultas:</strong> Memberikan keputusan penerimaan akhir. Jika ditolak → <span class="badge badge-danger">REJECTED_FINAL</span> (terminal). Jika diterima → <span class="badge badge-success">APPROVED</span>, proposal resmi diterima dan tim dapat memulai pelaksanaan kegiatan pengmas.</p>
+          </div>
+        </div>
+        <div class="timeline-item">
+          <div class="timeline-dot">13</div>
+          <div class="timeline-content">
+            <h4>Pelaksanaan Kegiatan Pengmas (Tim Pengmas)</h4>
+            <p>Seluruh anggota tim (Dosen Ketua, Dosen Anggota, dan Mahasiswa) melaksanakan kegiatan pengabdian masyarakat secara paralel sesuai rencana yang tercantum dalam proposal. Status proposal berubah menjadi <span class="badge badge-primary">IN_PROGRESS</span>. Selama pelaksanaan, Dosen Ketua wajib mengisi <strong>Logbook Kegiatan</strong> secara berkala melalui portal, mencatat: tanggal kegiatan, uraian aktivitas, persentase kemajuan, dan mengunggah file lampiran dokumentasi (foto, video, notulensi). Logbook ini menjadi bukti pelaksanaan yang akan dievaluasi saat monitoring dan evaluasi (monev).</p>
+          </div>
+        </div>
+        <div class="timeline-item">
+          <div class="timeline-dot">14</div>
+          <div class="timeline-content">
+            <h4>Monitoring & Evaluasi / Monev (Admin LPMB)</h4>
+            <p>Admin LPMB melakukan monitoring dan evaluasi (monev) berdasarkan data logbook yang telah diisi oleh Dosen Ketua. Evaluasi meliputi: kesesuaian kegiatan dengan rencana proposal, pencapaian target progres, kualitas dokumentasi, dan kepatuhan terhadap jadwal pelaksanaan. Status proposal: <span class="badge badge-primary">IN_PROGRESS</span> → <span class="badge badge-warning">MONEV</span>. <strong>Decision Gate:</strong> Jika laporan belum memenuhi standar → dikembalikan ke Dosen Ketua untuk perbaikan (status tetap MONEV, sub-status: REVISION_REQUIRED). Jika laporan memenuhi standar → Dosen Ketua diminta menyelesaikan laporan akhir dan dokumen luaran.</p>
+          </div>
+        </div>
+        <div class="timeline-item">
+          <div class="timeline-dot">15</div>
+          <div class="timeline-content">
+            <h4>Laporan Akhir, Luaran & Pengarsipan ke WUADC (Dosen Ketua & Admin LPMB)</h4>
+            <p>Dosen Ketua menyelesaikan dan mengunggah: (1) <strong>Laporan Akhir</strong> — dokumen komprehensif hasil kegiatan pengmas, (2) <strong>Dokumen Luaran</strong> — bukti output kegiatan (publikasi, HKI, buku, produk, dsb.), (3) <strong>Bukti Pendukung</strong> — surat keterangan, sertifikat, foto kegiatan, dsb. Admin LPMB melakukan verifikasi final terhadap kelengkapan dan kualitas luaran. Setelah disetujui, status proposal berubah menjadi <span class="badge badge-success">COMPLETED</span> dan sistem secara otomatis melakukan sinkronisasi transaksional seluruh data (metadata proposal, logbook, luaran, file paths) ke tabel basis data master <strong>WUADC</strong>. Status akhir: <span class="badge badge-success">ARCHIVED</span>. Seluruh siklus selesai.</p>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- 2.3 Status Code Mapping -->
+    <div class="section-card" id="status-code-map">
+      <h3><span class="section-card-num">2.3.</span> Pemetaan Status Code Proposal</h3>
+      <p class="section-card-desc">Daftar lengkap kode status proposal yang digunakan sistem SIMPPM beserta deskripsi, aktor pemicu transisi, dan alur perpindahan status dalam lifecycle pengajuan pengmas.</p>
+      <div class="table-wrapper">
+        <table>
+          <thead>
+            <tr>
+              <th>Status Code</th>
+              <th>Deskripsi Status</th>
+              <th>Aktor Pemicu</th>
+              <th>Transisi Berikutnya (Jika Berhasil)</th>
+              <th>Transisi Gagal / Rollback</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr>
+              <td><span class="badge badge-warning">DRAFT</span></td>
+              <td>Proposal sedang disusun oleh Dosen Ketua, belum di-submit. Dapat diedit dan dihapus secara bebas.</td>
+              <td>Dosen Ketua</td>
+              <td>SUBMITTED</td>
+              <td>— (dapat dihapus)</td>
+            </tr>
+            <tr>
+              <td><span class="badge badge-primary">SUBMITTED</span></td>
+              <td>Proposal telah di-submit dan menunggu review kelengkapan berkas oleh Akademik Fakultas. Tidak dapat diedit.</td>
+              <td>Dosen Ketua</td>
+              <td>REVIEW_AKADEMIK</td>
+              <td>—</td>
+            </tr>
+            <tr>
+              <td><span class="badge badge-primary">REVIEW_AKADEMIK</span></td>
+              <td>Berkas sedang dalam proses review kelengkapan oleh staf Akademik Fakultas.</td>
+              <td>Akademik Fakultas</td>
+              <td>APPROVED_AKADEMIK</td>
+              <td>REJECTED_AKADEMIK → DRAFT</td>
+            </tr>
+            <tr>
+              <td><span class="badge badge-success">APPROVED_AKADEMIK</span></td>
+              <td>Berkas dinyatakan lengkap dan sesuai oleh Akademik. Menunggu review substansi oleh Dekanat.</td>
+              <td>Akademik Fakultas</td>
+              <td>REVIEW_DEKAN</td>
+              <td>—</td>
+            </tr>
+            <tr>
+              <td><span class="badge badge-danger">REJECTED_AKADEMIK</span></td>
+              <td>Berkas ditolak karena tidak lengkap atau tidak sesuai. Dosen Ketua harus merevisi dan submit ulang.</td>
+              <td>Akademik Fakultas</td>
+              <td>DRAFT (setelah revisi)</td>
+              <td>— (terminal jika tidak direvisi)</td>
+            </tr>
+            <tr>
+              <td><span class="badge badge-primary">REVIEW_DEKAN</span></td>
+              <td>Proposal sedang dalam tinjauan substansi oleh Dekan / Wakil Dekan Fakultas.</td>
+              <td>Dekanat Fakultas</td>
+              <td>APPROVED_DEKAN</td>
+              <td>REJECTED_DEKAN → DRAFT</td>
+            </tr>
+            <tr>
+              <td><span class="badge badge-success">APPROVED_DEKAN</span></td>
+              <td>Dekan menyetujui proposal. Dosen Ketua diminta melengkapi tanda tangan administrasi.</td>
+              <td>Dekanat Fakultas</td>
+              <td>TTD_ADMIN</td>
+              <td>—</td>
+            </tr>
+            <tr>
+              <td><span class="badge badge-danger">REJECTED_DEKAN</span></td>
+              <td>Dekan menolak proposal. Catatan penolakan dikirim ke Dosen Ketua untuk perbaikan.</td>
+              <td>Dekanat Fakultas</td>
+              <td>DRAFT (setelah revisi)</td>
+              <td>— (terminal jika tidak direvisi)</td>
+            </tr>
+            <tr>
+              <td><span class="badge badge-primary">TTD_ADMIN</span></td>
+              <td>Dosen Ketua sedang melengkapi tanda tangan digital pada dokumen administrasi final.</td>
+              <td>Dosen Ketua</td>
+              <td>VERIFIED</td>
+              <td>—</td>
+            </tr>
+            <tr>
+              <td><span class="badge badge-success">VERIFIED</span></td>
+              <td>Admin LPMB telah memverifikasi kesesuaian konten proposal dan kelengkapan administrasi bertanda tangan.</td>
+              <td>Admin LPMB</td>
+              <td>REVIEW_FINAL_AKAD</td>
+              <td>REJECTED_ADMIN (terminal)</td>
+            </tr>
+            <tr>
+              <td><span class="badge badge-danger">REJECTED_ADMIN</span></td>
+              <td>Proposal ditolak oleh Admin LPMB karena gagal verifikasi konten. Status terminal — tidak dapat direvisi.</td>
+              <td>Admin LPMB</td>
+              <td>— (terminal)</td>
+              <td>—</td>
+            </tr>
+            <tr>
+              <td><span class="badge badge-primary">REVIEW_FINAL_AKAD</span></td>
+              <td>Proposal dalam review akhir tingkat Akademik Fakultas untuk penilaian kelayakan komprehensif.</td>
+              <td>Akademik Fakultas</td>
+              <td>REVIEW_FINAL_DEKAN</td>
+              <td>REJECTED_FINAL (terminal)</td>
+            </tr>
+            <tr>
+              <td><span class="badge badge-primary">REVIEW_FINAL_DEKAN</span></td>
+              <td>Proposal dalam review akhir tingkat Dekanat untuk keputusan penerimaan final.</td>
+              <td>Dekanat Fakultas</td>
+              <td>APPROVED</td>
+              <td>REJECTED_FINAL (terminal)</td>
+            </tr>
+            <tr>
+              <td><span class="badge badge-success">APPROVED</span></td>
+              <td>Proposal resmi diterima dan disetujui untuk pelaksanaan. Tim dapat memulai kegiatan pengmas.</td>
+              <td>Dekanat Fakultas</td>
+              <td>IN_PROGRESS</td>
+              <td>—</td>
+            </tr>
+            <tr>
+              <td><span class="badge badge-primary">IN_PROGRESS</span></td>
+              <td>Kegiatan pengmas sedang berlangsung. Dosen Ketua wajib mengisi logbook secara berkala.</td>
+              <td>Sistem (otomatis)</td>
+              <td>MONEV</td>
+              <td>—</td>
+            </tr>
+            <tr>
+              <td><span class="badge badge-warning">MONEV</span></td>
+              <td>Proposal dalam tahap monitoring dan evaluasi oleh Admin LPMB berdasarkan logbook.</td>
+              <td>Admin LPMB</td>
+              <td>COMPLETED</td>
+              <td>IN_PROGRESS (perbaikan laporan)</td>
+            </tr>
+            <tr>
+              <td><span class="badge badge-success">COMPLETED</span></td>
+              <td>Kegiatan selesai, laporan akhir dan luaran disetujui. Menunggu sinkronisasi ke WUADC.</td>
+              <td>Admin LPMB</td>
+              <td>ARCHIVED</td>
+              <td>—</td>
+            </tr>
+            <tr>
+              <td><span class="badge badge-success">ARCHIVED</span></td>
+              <td>Seluruh data proposal, logbook, dan luaran telah disinkronkan ke database master WUADC. Status akhir permanen.</td>
+              <td>Sistem (otomatis)</td>
+              <td>— (final state)</td>
+              <td>—</td>
+            </tr>
+          </tbody>
+        </table>
+      </div>
+
+      <div class="diagram-container">
+        <h4 style="margin-bottom: 15px; color: var(--text-dark); font-weight: 700;">State Machine — Lifecycle Status Proposal</h4>
+        <div class="mermaid">
+          stateDiagram-v2
+            [*] --> DRAFT
+            DRAFT --> SUBMITTED : Dosen klik Submit
+            SUBMITTED --> REVIEW_AKADEMIK : Auto-assign ke Akademik
+            REVIEW_AKADEMIK --> APPROVED_AKADEMIK : Berkas lengkap
+            REVIEW_AKADEMIK --> REJECTED_AKADEMIK : Berkas tidak lengkap
+            REJECTED_AKADEMIK --> DRAFT : Dosen revisi
+            APPROVED_AKADEMIK --> REVIEW_DEKAN : Forward ke Dekan
+            REVIEW_DEKAN --> APPROVED_DEKAN : Dekan setuju
+            REVIEW_DEKAN --> REJECTED_DEKAN : Dekan tolak
+            REJECTED_DEKAN --> DRAFT : Dosen revisi
+            APPROVED_DEKAN --> TTD_ADMIN : Dosen lengkapi TTD
+            TTD_ADMIN --> VERIFIED : Admin LPMB verifikasi
+            TTD_ADMIN --> REJECTED_ADMIN : Gagal verifikasi
+            REJECTED_ADMIN --> [*]
+            VERIFIED --> REVIEW_FINAL_AKAD : Review akhir Akademik
+            REVIEW_FINAL_AKAD --> REVIEW_FINAL_DEKAN : Akademik terima
+            REVIEW_FINAL_AKAD --> REJECTED_FINAL : Akademik tolak
+            REJECTED_FINAL --> [*]
+            REVIEW_FINAL_DEKAN --> APPROVED : Dekan terima
+            REVIEW_FINAL_DEKAN --> REJECTED_FINAL : Dekan tolak
+            APPROVED --> IN_PROGRESS : Mulai kegiatan
+            IN_PROGRESS --> MONEV : Submit logbook
+            MONEV --> IN_PROGRESS : Perbaikan laporan
+            MONEV --> COMPLETED : Laporan disetujui
+            COMPLETED --> ARCHIVED : Sync ke WUADC
+            ARCHIVED --> [*]
         </div>
       </div>
     </div>
@@ -782,45 +1031,127 @@
     <!-- 3.1 BRD -->
     <div class="section-card" id="brd">
       <h3><span class="section-card-num">3.1.</span> Business Requirements (BRD Overview)</h3>
-      <p class="section-card-desc">Target bisnis utama dalam digitalisasi sistem manajemen pengabdian masyarakat LPMB.</p>
+      <p class="section-card-desc">Target bisnis utama dalam digitalisasi sistem manajemen pengabdian masyarakat LPMB. Setiap business requirement didefinisikan berdasarkan pain point operasional yang teridentifikasi pada analisis sistem lama (Fase 1.3) dan dipetakan ke kebutuhan fungsional teknis pada bagian 3.2.</p>
       <div style="background: #fafafb; padding: 24px; border-radius: 12px; border: 1px solid var(--border-color);">
-        <p><strong>BR-01:</strong> Sistem harus mendigitalisasi alur berkas lampiran prasyarat (proposal, RAB, CV, SP, pakta) dan mempercepat peninjauan fakultas dari mingguan menjadi harian.</p>
-        <p style="margin-top: 8px;"><strong>BR-02:</strong> Sistem wajib mengarsipkan secara otomatis seluruh logbook kegiatan, laporan akhir, dan bukti luaran terintegrasi ke dalam tabel data master <strong>WUADC</strong> untuk kebutuhan pelaporan eksternal.</p>
+        <p><strong>BR-01: Digitalisasi Alur Berkas Lampiran Prasyarat</strong></p>
+        <p style="margin-bottom: 16px; color: #475569;">Sistem harus mendigitalisasi seluruh alur berkas lampiran prasyarat (proposal, RAB, CV, SP, pakta) dari proses cetak-fisik menjadi upload digital dengan validasi otomatis, serta mempercepat peninjauan kelengkapan berkas di tingkat fakultas dari rata-rata 2 minggu menjadi maksimal 3 hari kerja.</p>
+
+        <p><strong>BR-02: Pengarsipan Otomatis ke WUADC</strong></p>
+        <p style="margin-bottom: 16px; color: #475569;">Sistem wajib mengarsipkan secara otomatis seluruh logbook kegiatan, laporan akhir, dan bukti luaran terintegrasi ke dalam tabel data master <strong>WUADC</strong> secara transaksional, menghilangkan proses input ganda manual yang selama ini menjadi sumber inkonsistensi data pelaporan eksternal ke DIKTI.</p>
+
+        <p><strong>BR-03: Integrasi SSO Terpusat</strong></p>
+        <p style="margin-bottom: 16px; color: #475569;">Sistem harus menyediakan mekanisme autentikasi terpusat (Single Sign-On) yang terintegrasi dengan Cyber Kampus dan Google OAuth, sehingga dosen tidak perlu membuat akun terpisah dan data profil pengusul (NIDN, jabatan, fakultas, prodi) tersinkronisasi otomatis dari sumber data induk.</p>
+
+        <p><strong>BR-04: Review Multi-Tier Berjenjang dengan Audit Trail</strong></p>
+        <p style="margin-bottom: 16px; color: #475569;">Sistem harus mengimplementasikan alur review berjenjang (Akademik Fakultas → Dekanat → Admin LPMB → Review Akhir) dengan pencatatan audit trail otomatis untuk setiap keputusan review, mencakup: identitas reviewer, timestamp, aksi (approve/reject), dan catatan evaluasi — guna memenuhi kebutuhan akuntabilitas dan transparansi proses seleksi proposal.</p>
+
+        <p><strong>BR-05: Monitoring & Evaluasi (Monev) Lifecycle</strong></p>
+        <p style="margin-bottom: 16px; color: #475569;">Sistem harus menyediakan fitur monitoring dan evaluasi (monev) terintegrasi yang memungkinkan Admin LPMB memantau progres pelaksanaan kegiatan pengmas melalui logbook digital, melakukan evaluasi berkala, dan mendeteksi keterlambatan pelaksanaan secara proaktif melalui dashboard visual.</p>
+
+        <p><strong>BR-06: Dashboard Pelaporan & Analitik</strong></p>
+        <p style="color: #475569;">Sistem harus menyediakan dashboard analitik real-time yang menampilkan metrik kinerja operasional: jumlah proposal per status, distribusi per skema dan fakultas, rata-rata waktu review per tier, tingkat penolakan, dan statistik sinkronisasi WUADC — untuk mendukung pengambilan keputusan strategis oleh pimpinan LPMB.</p>
       </div>
     </div>
     
     <!-- 3.2 Functional Requirements -->
     <div class="section-card" id="func-req">
       <h3><span class="section-card-num">3.2.</span> Functional Requirements</h3>
-      <p class="section-card-desc">Spesifikasi fungsional portal pengajuan proposal SIMPPM LPMB.</p>
+      <p class="section-card-desc">Spesifikasi fungsional portal pengajuan proposal SIMPPM LPMB yang mencakup seluruh fitur inti dari autentikasi hingga pengarsipan, dipetakan ke business requirements (BR) dan diprioritaskan berdasarkan criticality terhadap keberlangsungan proses bisnis.</p>
       <div class="table-wrapper">
         <table>
           <thead>
             <tr>
-              <th>ID Kebutuhan</th>
+              <th>ID</th>
               <th>Deskripsi Spesifikasi Kebutuhan</th>
               <th>Prasyarat Validasi (Trigger)</th>
+              <th>BR Ref</th>
               <th>Prioritas</th>
             </tr>
           </thead>
           <tbody>
             <tr>
               <td><strong>FR-01</strong></td>
-              <td>Sistem harus memvalidasi data user dan status kepegawaian pengusul melalui query terpadu ke API Cyber Kampus dan PDDIKTI saat login.</td>
+              <td>Sistem harus memvalidasi data user dan status kepegawaian pengusul melalui query terpadu ke API Cyber Kampus dan PDDIKTI saat login, memastikan NIDN terdaftar aktif dan profil lengkap (jabatan, fakultas, prodi).</td>
               <td>SSO Login Request</td>
+              <td>BR-03</td>
               <td><span class="badge badge-danger">Critical</span></td>
             </tr>
             <tr>
               <td><strong>FR-02</strong></td>
-              <td>Sistem wajib memvalidasi kelengkapan berkas prasyarat sesuai jenis skema yang dipilih (reguler, internal, mandiri) sebelum memperbolehkan submit.</td>
-              <td>Submit Form Check</td>
+              <td>Sistem harus memvalidasi periode pendaftaran aktif sebelum menampilkan formulir pengajuan. Jika periode tidak aktif (<code>is_active = false</code> atau di luar rentang tanggal), halaman pengajuan tidak dapat diakses.</td>
+              <td>Page Load / Navigation</td>
+              <td>BR-01</td>
               <td><span class="badge badge-danger">Critical</span></td>
             </tr>
             <tr>
               <td><strong>FR-03</strong></td>
-              <td>Sistem otomatis merekam log audit untuk setiap aksi keputusan review bertingkat (Reject/Approve Akademik, Dekanat, dan Admin LPMB).</td>
-              <td>Workflow Review Triggers</td>
+              <td>Sistem harus menyediakan pemilihan skema pengmas (Reguler, Internal, Mandiri) dan me-render formulir dinamis sesuai konfigurasi skema terpilih, termasuk daftar dokumen wajib, batas anggota, dan template yang relevan.</td>
+              <td>Scheme Selection Event</td>
+              <td>BR-01</td>
+              <td><span class="badge badge-danger">Critical</span></td>
+            </tr>
+            <tr>
+              <td><strong>FR-04</strong></td>
+              <td>Sistem wajib memvalidasi kelengkapan berkas prasyarat sesuai jenis skema sebelum memperbolehkan submit, termasuk validasi tipe file (PDF/DOC/DOCX only), ukuran maksimum 10MB per file, dan jumlah dokumen minimum per skema.</td>
+              <td>Submit Form Check</td>
+              <td>BR-01</td>
+              <td><span class="badge badge-danger">Critical</span></td>
+            </tr>
+            <tr>
+              <td><strong>FR-05</strong></td>
+              <td>Sistem harus menyediakan fitur pendaftaran anggota tim (dosen anggota via NIDN, mahasiswa via NIM) dengan validasi real-time status aktif dan pencegahan duplikasi anggota lintas proposal aktif dalam periode yang sama.</td>
+              <td>Member Addition Event</td>
+              <td>BR-01</td>
               <td><span class="badge badge-primary">High</span></td>
+            </tr>
+            <tr>
+              <td><strong>FR-06</strong></td>
+              <td>Sistem harus mengimplementasikan alur review berjenjang multi-tier: Akademik Fakultas (kelengkapan) → Dekanat (substansi) → Admin LPMB (verifikasi konten) → Review Akhir Akademik → Review Akhir Dekanat, dengan setiap transisi status tercatat otomatis.</td>
+              <td>Workflow State Transitions</td>
+              <td>BR-04</td>
+              <td><span class="badge badge-danger">Critical</span></td>
+            </tr>
+            <tr>
+              <td><strong>FR-07</strong></td>
+              <td>Sistem otomatis merekam log audit (REVIEW_LOG) untuk setiap aksi keputusan review bertingkat, mencakup: reviewer_id, proposal_id, action (APPROVE/REJECT), catatan evaluasi, dan timestamp — bersifat immutable (tidak dapat diedit/dihapus).</td>
+              <td>Workflow Review Triggers</td>
+              <td>BR-04</td>
+              <td><span class="badge badge-primary">High</span></td>
+            </tr>
+            <tr>
+              <td><strong>FR-08</strong></td>
+              <td>Sistem harus menyediakan fitur pengisian logbook kegiatan secara berkala oleh Dosen Ketua, mencakup: tanggal kegiatan, uraian aktivitas, persentase progres, dan file lampiran dokumentasi (foto/dokumen), sebagai basis evaluasi monev.</td>
+              <td>Logbook Submission Event</td>
+              <td>BR-05</td>
+              <td><span class="badge badge-primary">High</span></td>
+            </tr>
+            <tr>
+              <td><strong>FR-09</strong></td>
+              <td>Sistem harus menyediakan dashboard monitoring dan evaluasi (monev) bagi Admin LPMB untuk menilai progres kegiatan, memberikan catatan evaluasi, dan mengembalikan laporan yang belum memenuhi standar untuk perbaikan.</td>
+              <td>Monev Dashboard Access</td>
+              <td>BR-05</td>
+              <td><span class="badge badge-primary">High</span></td>
+            </tr>
+            <tr>
+              <td><strong>FR-10</strong></td>
+              <td>Sistem harus melakukan sinkronisasi transaksional otomatis seluruh data proposal (metadata, logbook, luaran, file paths) ke tabel master WUADC setelah status proposal mencapai COMPLETED, dengan mekanisme retry dan error logging jika sinkronisasi gagal.</td>
+              <td>Status Change to COMPLETED</td>
+              <td>BR-02</td>
+              <td><span class="badge badge-danger">Critical</span></td>
+            </tr>
+            <tr>
+              <td><strong>FR-11</strong></td>
+              <td>Sistem harus mengirimkan notifikasi otomatis (email + in-app) kepada aktor terkait pada setiap perubahan status proposal: submit, approve, reject, revisi diperlukan, monev feedback, dan konfirmasi arsip WUADC.</td>
+              <td>Status Change Events</td>
+              <td>BR-04</td>
+              <td><span class="badge badge-warning">Medium</span></td>
+            </tr>
+            <tr>
+              <td><strong>FR-12</strong></td>
+              <td>Sistem harus menyediakan dashboard analitik real-time dengan metrik: distribusi proposal per status/skema/fakultas, rata-rata waktu review per tier, SLA compliance rate, dan statistik sinkronisasi WUADC.</td>
+              <td>Dashboard Page Load</td>
+              <td>BR-06</td>
+              <td><span class="badge badge-warning">Medium</span></td>
             </tr>
           </tbody>
         </table>
@@ -830,34 +1161,84 @@
     <!-- 3.3 Non-Functional -->
     <div class="section-card" id="nonfunc-req">
       <h3><span class="section-card-num">3.3.</span> Non-Functional Requirements</h3>
-      <p class="section-card-desc">Persyaratan performa, keamanan, dan ketersediaan sistem portal.</p>
+      <p class="section-card-desc">Persyaratan performa, keamanan, ketersediaan, skalabilitas, integritas data, dan auditabilitas sistem portal SIMPPM LPMB yang menjadi fondasi kualitas layanan (Quality of Service) untuk seluruh stakeholder.</p>
       <div class="bento-grid">
         <div class="bento-cell">
-          <h4>Ketersediaan Sistem</h4>
-          <p>Portal wajib memiliki uptime minimal <strong>99.9%</strong> selama periode puncak pengiriman berkas.</p>
+          <h4>🔄 Ketersediaan Sistem (Availability)</h4>
+          <p>Portal wajib memiliki uptime minimal <strong>99.9%</strong> (SLA target) selama periode puncak pengiriman berkas. Downtime terencana hanya diperbolehkan di luar jam kerja (22:00-06:00 WIB) dengan notifikasi pemberitahuan minimal H-24. Mekanisme health check otomatis berjalan setiap 60 detik dengan auto-restart service jika terdeteksi kegagalan.</p>
         </div>
         <div class="bento-cell">
-          <h4>Keamanan Berkas</h4>
-          <p>Seluruh dokumen proposal, RAB, dan pakta integritas disimpan secara aman dengan otorisasi akses ketat berbasis peran.</p>
+          <h4>🔒 Keamanan & Otorisasi (Security)</h4>
+          <p>Implementasi Role-Based Access Control (RBAC) ketat untuk 6 peran pengguna. Seluruh komunikasi API menggunakan HTTPS/TLS 1.3. Dokumen sensitif (proposal, RAB, pakta) dienkripsi at-rest menggunakan AES-256. Session token menggunakan JWT dengan expiry 4 jam dan refresh token mechanism. Input sanitization diterapkan pada seluruh form field untuk mencegah XSS dan SQL injection.</p>
         </div>
         <div class="bento-cell">
-          <h4>Sinkronisasi Database</h4>
-          <p>Laporan yang dinyatakan lulus monev wajib disinkronkan secara transaksional ke tabel master WUADC dengan kegagalan sinkronisasi <strong>0%</strong>.</p>
+          <h4>⚡ Performa & Responsivitas (Performance)</h4>
+          <p>Waktu respons API harus <strong>kurang dari 2 detik</strong> untuk operasi standar (read/list) dan kurang dari 5 detik untuk operasi upload file. Portal harus mampu menangani minimal <strong>200 concurrent users</strong> saat periode puncak submission tanpa degradasi performa. File upload menggunakan chunked transfer untuk menghindari timeout pada koneksi lambat.</p>
+        </div>
+        <div class="bento-cell">
+          <h4>📈 Skalabilitas (Scalability)</h4>
+          <p>Arsitektur sistem harus mendukung horizontal scaling untuk mengakomodasi pertumbuhan jumlah proposal hingga <strong>5x</strong> dari volume saat ini tanpa perubahan arsitektur fundamental. Database menggunakan connection pooling dan read replicas untuk distribusi beban. File storage menggunakan cloud object storage (S3-compatible) yang auto-scalable.</p>
+        </div>
+        <div class="bento-cell">
+          <h4>🗃️ Integritas Data (Data Integrity)</h4>
+          <p>Sinkronisasi data ke tabel master WUADC wajib bersifat <strong>transaksional (ACID-compliant)</strong> dengan target kegagalan sinkronisasi <strong>0%</strong>. Mekanisme retry otomatis (max 3 attempts, exponential backoff) diterapkan jika koneksi ke WUADC terputus. Dead letter queue untuk menampung transaksi gagal yang memerlukan intervensi manual. Backup database otomatis setiap 6 jam dengan point-in-time recovery capability.</p>
+        </div>
+        <div class="bento-cell">
+          <h4>📋 Auditabilitas (Auditability)</h4>
+          <p>Seluruh aksi pengguna yang mengubah state sistem harus direkam dalam <strong>immutable audit log</strong> (REVIEW_LOG) yang tidak dapat diedit atau dihapus oleh siapapun termasuk admin. Log mencakup: user_id, action, timestamp, IP address, user agent, dan detail perubahan (before/after state). Retensi log minimal <strong>5 tahun</strong> sesuai kebijakan arsip perguruan tinggi.</p>
         </div>
       </div>
     </div>
     
     <!-- 3.4 Acceptance Criteria -->
     <div class="section-card" id="accept-crit">
-      <h3><span class="section-card-num">3.4.</span> Acceptance Criteria (Gherkin Scenario)</h3>
-      <p class="section-card-desc">Kriteria pengujian penerimaan sistem untuk pengunggahan dokumen prasyarat.</p>
+      <h3><span class="section-card-num">3.4.</span> Acceptance Criteria (Gherkin Scenarios)</h3>
+      <p class="section-card-desc">Kriteria pengujian penerimaan sistem dalam format Gherkin BDD yang mencakup skenario validasi berkas, alur persetujuan multi-tier, dan verifikasi sinkronisasi WUADC. Setiap skenario dipetakan ke Functional Requirement (FR) dan menjadi dasar UAT test plan pada Fase 6.</p>
       <pre>Scenario: Pengajuan Berkas Pengmas Tanpa Mengunggah RAB dan Pakta Integritas
-  Given Dosen Ketua sedang mengisi formulir pengisian berkas pengmas
+  Given Dosen Ketua sedang mengisi formulir pengisian berkas pengmas skema "REGULER"
   And Dosen Ketua mengunggah berkas "t. proposal" dan "t. CV ketua"
   And Berkas "t. RAB" dan "pakta integritas" belum diunggah
   When Dosen Ketua melakukan klik tombol "Upload Berkas dan Submit"
   Then Sistem mengunci tombol submit dan memblokir pengiriman berkas
-  And Menampilkan pesan kesalahan "Upload Berkas Gagal: Dokumen RAB dan Pakta Integritas wajib disertakan"</pre>
+  And Menampilkan pesan kesalahan "Upload Berkas Gagal: Dokumen RAB dan Pakta Integritas wajib disertakan"
+  And Status proposal tetap "DRAFT" tanpa perubahan
+  # Mapped to: FR-04, UAT-L01</pre>
+
+      <pre>Scenario: Alur Persetujuan Multi-Tier Berhasil Hingga Status APPROVED
+  Given Dosen Ketua telah submit proposal dengan status "SUBMITTED"
+  And Seluruh dokumen prasyarat (proposal, RAB, CV, SP, Pakta) telah diunggah lengkap
+  When Akademik Fakultas melakukan review dan klik "Approve" dengan catatan "Berkas lengkap dan sesuai"
+  Then Status proposal berubah menjadi "APPROVED_AKADEMIK"
+  And Sistem mengirim notifikasi ke Dekanat Fakultas untuk review substansi
+  When Dekanat Fakultas melakukan review dan klik "Approve" dengan catatan "Rekomendasi diterima"
+  Then Status proposal berubah menjadi "APPROVED_DEKAN"
+  And Sistem mengirim notifikasi ke Dosen Ketua untuk melengkapi tanda tangan
+  When Dosen Ketua melengkapi tanda tangan administrasi dan klik "Konfirmasi TTD"
+  Then Status proposal berubah menjadi "TTD_ADMIN"
+  When Admin LPMB melakukan verifikasi konten dan klik "Verifikasi Lolos"
+  Then Status proposal berubah menjadi "VERIFIED"
+  When Akademik Fakultas melakukan review akhir dan klik "Terima Akhir"
+  And Dekanat Fakultas melakukan review akhir dan klik "Terima Akhir"
+  Then Status proposal berubah menjadi "APPROVED"
+  And Sistem merekam 5 entri REVIEW_LOG secara kronologis dengan immutable timestamp
+  # Mapped to: FR-06, FR-07, UAT-L03</pre>
+
+      <pre>Scenario: Verifikasi Sinkronisasi Otomatis Data Arsip ke WUADC
+  Given Proposal dengan ID "PMS-2026-0042" memiliki status "COMPLETED"
+  And Laporan akhir, logbook (5 entri), dan dokumen luaran telah diunggah dan disetujui
+  When Admin LPMB mengklik "Finalisasi dan Arsipkan"
+  Then Sistem melakukan INSERT transaksional ke tabel WUADC_ARCHIVE dengan data:
+    | Field               | Value                                         |
+    | proposal_id         | PMS-2026-0042                                  |
+    | tanggal_arsip       | 2026-06-04                                     |
+    | doc_luaran_path     | /storage/wuadc/PMS-2026-0042/luaran_final.pdf  |
+    | laporan_akhir_path  | /storage/wuadc/PMS-2026-0042/laporan_akhir.pdf |
+    | status_arsip        | SYNCED                                         |
+    | verified_by         | admin_lpmb_001                                 |
+  And Status proposal berubah menjadi "ARCHIVED"
+  And Sistem mengirim email konfirmasi arsip ke Dosen Ketua dan Admin LPMB
+  And Jika sinkronisasi gagal, sistem melakukan retry max 3x dengan exponential backoff
+  # Mapped to: FR-10, UAT-L06</pre>
     </div>
   </div>
 
@@ -867,8 +1248,8 @@
     
     <!-- 4.1 Activity Diagram -->
     <div class="section-card" id="activity">
-      <h3><span class="section-card-num">4.1.</span> Activity Diagram</h3>
-      <p class="section-card-desc">Alur logis aktivitas validasi dan seleksi proposal.</p>
+      <h3><span class="section-card-num">4.1.</span> Activity Diagram (State Machine)</h3>
+      <p class="section-card-desc">Alur logis aktivitas validasi dan seleksi proposal yang menggambarkan perpindahan state dari submission hingga keputusan akhir, termasuk jalur alternatif (reject/revisi) dan terminal state.</p>
       <div class="diagram-container">
         <div class="mermaid">
           stateDiagram-v2
@@ -893,30 +1274,94 @@
             TandaTanganKontrak --> [*]
         </div>
       </div>
+
+      <div style="background: #fafafb; padding: 24px; border-radius: 12px; border: 1px solid var(--border-color); margin-top: 20px;">
+        <h4 style="margin-bottom: 12px; color: var(--text-dark);">Penjelasan State & Transisi</h4>
+        <p style="font-size: 0.88rem; color: #475569; margin-bottom: 8px;"><strong>SubmitProposal →</strong> State awal ketika Dosen Ketua menyelesaikan pengisian formulir dan mengunggah seluruh berkas prasyarat. Proposal memasuki antrian review.</p>
+        <p style="font-size: 0.88rem; color: #475569; margin-bottom: 8px;"><strong>CekFakultas (Decision) →</strong> Akademik Fakultas memeriksa kelengkapan berkas. Jika tidak lengkap, proposal dikembalikan ke Dosen Ketua untuk revisi (RevisiDraft). Jika lengkap, proposal diteruskan ke Dekanat (DeanApproval).</p>
+        <p style="font-size: 0.88rem; color: #475569; margin-bottom: 8px;"><strong>RevisiDraft →</strong> State di mana Dosen Ketua memperbaiki dan melengkapi dokumen yang kurang. Setelah selesai, proposal dapat di-submit ulang kembali ke antrian CekFakultas.</p>
+        <p style="font-size: 0.88rem; color: #475569; margin-bottom: 8px;"><strong>DeanApproval →</strong> Dekan melakukan review substansi dan memberikan rekomendasi persetujuan. Proposal yang disetujui diteruskan ke verifikasi Admin LPMB.</p>
+        <p style="font-size: 0.88rem; color: #475569; margin-bottom: 8px;"><strong>FinalLPPMVerify (Decision) →</strong> Admin LPMB memverifikasi kesesuaian konten. Jika gagal, proposal ditolak secara permanen (RejectAdmin — terminal state). Jika lolos, proposal diteruskan ke tahap review akhir (AssignReviewers).</p>
+        <p style="font-size: 0.88rem; color: #475569; margin-bottom: 8px;"><strong>AssignReviewers → ReviewProcess →</strong> Tahap review akhir berjenjang oleh Akademik dan Dekanat Fakultas dengan penilaian komprehensif berdasarkan passing grade yang telah ditetapkan.</p>
+        <p style="font-size: 0.88rem; color: #475569; margin-bottom: 8px;"><strong>PassingGradeCheck (Decision) →</strong> Jika rata-rata nilai review di bawah passing grade, proposal ditolak (ProposalRejected — terminal). Jika memenuhi, proposal diterima (ProposalApproved) dan masuk tahap TandaTanganKontrak.</p>
+        <p style="font-size: 0.88rem; color: #475569;"><strong>TandaTanganKontrak →</strong> State final di mana kontrak pelaksanaan kegiatan pengmas ditandatangani. Selanjutnya masuk ke fase pelaksanaan (IN_PROGRESS) yang dikelola di luar state machine validasi ini.</p>
+      </div>
     </div>
     
     <!-- 4.2 Sequence Diagram -->
     <div class="section-card" id="sequence">
-      <h3><span class="section-card-num">4.2.</span> Sequence Diagram</h3>
-      <p class="section-card-desc">Aliran pesan dalam runtime untuk persetujuan keanggotaan riset.</p>
+      <h3><span class="section-card-num">4.2.</span> Sequence Diagram — Full Approval Workflow</h3>
+      <p class="section-card-desc">Aliran pesan lengkap dalam runtime untuk keseluruhan proses persetujuan proposal, dari submission oleh Dosen Ketua hingga sinkronisasi ke WUADC, melibatkan seluruh aktor dan komponen sistem.</p>
       <div class="diagram-container">
         <div class="mermaid">
           sequenceDiagram
             actor Ketua as Dosen Ketua
             participant Portal as Portal SIMPPM
-            actor Anggota as Anggota (Dosen/Mhs)
+            participant API as API Gateway
             participant DB as Database Server
-            
-            Ketua->>Portal: Input Anggota (NIDN/NIM)
-            Portal->>DB: Check User & Status Aktif
-            DB-->>Portal: User Found
-            Portal->>DB: Create Member Entry (status: PENDING)
-            Portal-->>Anggota: Kirim Email Undangan & Notifikasi
-            Anggota->>Portal: Login & Buka Undangan Keanggotaan
-            Anggota->>Portal: Klik "Setujui Gabung"
-            Portal->>DB: Update Member Entry (status: APPROVED)
-            DB-->>Portal: Confirmed Successful
-            Portal-->>Ketua: Update Status UI (Tombol Submit Aktif)
+            participant Cyber as API Cyber Kampus
+            actor Akademik as Akademik Fakultas
+            actor Dekan as Dekanat Fakultas
+            actor Admin as Admin LPMB
+            participant WUADC as WUADC Database
+
+            Note over Ketua,Cyber: Fase Autentikasi & Pengajuan
+            Ketua->>Portal: Login SSO (NIDN/Gmail)
+            Portal->>Cyber: Validate credentials & status
+            Cyber-->>Portal: User profile (NIDN, jabatan, fakultas)
+            Portal->>DB: Create/Update user session
+            Portal-->>Ketua: Dashboard + Active Period Check
+
+            Ketua->>Portal: Pilih Skema & Isi Form Proposal
+            Portal->>API: POST /api/v1/proposal (form + files)
+            API->>DB: Validate period, scheme, member count
+            API->>DB: INSERT proposal (status: SUBMITTED)
+            API->>DB: INSERT member entries (status: PENDING)
+            DB-->>API: proposal_id + confirmation
+            API-->>Portal: 201 Created + proposal_id
+            Portal-->>Ketua: Status UI: SUBMITTED
+
+            Note over Akademik,Dekan: Fase Review Berjenjang
+            Portal-->>Akademik: Notifikasi: Proposal baru menunggu review
+            Akademik->>Portal: Buka detail proposal + checklist
+            Akademik->>API: PUT /api/v1/proposal/{id}/review (action: APPROVE)
+            API->>DB: UPDATE status = APPROVED_AKADEMIK
+            API->>DB: INSERT review_log (reviewer, action, catatan)
+            Portal-->>Dekan: Notifikasi: Proposal menunggu review Dekan
+
+            Dekan->>Portal: Review substansi proposal
+            Dekan->>API: PUT /api/v1/proposal/{id}/review (action: APPROVE)
+            API->>DB: UPDATE status = APPROVED_DEKAN
+            API->>DB: INSERT review_log
+            Portal-->>Ketua: Notifikasi: Lengkapi TTD administrasi
+
+            Ketua->>Portal: Upload TTD digital
+            API->>DB: UPDATE status = TTD_ADMIN
+
+            Note over Admin,WUADC: Fase Verifikasi & Finalisasi
+            Portal-->>Admin: Notifikasi: Proposal menunggu verifikasi
+            Admin->>Portal: Verifikasi konten proposal
+            Admin->>API: PUT /api/v1/proposal/{id}/review (action: VERIFY)
+            API->>DB: UPDATE status = VERIFIED
+            API->>DB: INSERT review_log
+
+            Portal-->>Akademik: Notifikasi: Review akhir
+            Akademik->>API: PUT /api/v1/proposal/{id}/review (action: FINAL_APPROVE)
+            Portal-->>Dekan: Notifikasi: Review akhir
+            Dekan->>API: PUT /api/v1/proposal/{id}/review (action: FINAL_APPROVE)
+            API->>DB: UPDATE status = APPROVED
+
+            Note over Ketua,WUADC: Fase Pelaksanaan & Pengarsipan
+            Ketua->>API: POST /api/v1/proposal/{id}/logbook (entries)
+            API->>DB: INSERT logbook entries
+            Admin->>API: Monev evaluation
+            API->>DB: UPDATE status = COMPLETED
+
+            Admin->>API: POST /api/v1/wuadc/sync (proposal_id)
+            API->>WUADC: Transactional INSERT (metadata + files)
+            WUADC-->>API: SYNC_SUCCESS
+            API->>DB: UPDATE status = ARCHIVED
+            Portal-->>Ketua: Email: Arsip WUADC berhasil
         </div>
       </div>
     </div>
@@ -924,7 +1369,7 @@
     <!-- 4.3 ERD -->
     <div class="section-card" id="erd">
       <h3><span class="section-card-num">4.3.</span> Entity Relationship Diagram (ERD Schema)</h3>
-      <p class="section-card-desc">Struktur relasi database portal untuk mengelola siklus riset dan pengabdian.</p>
+      <p class="section-card-desc">Struktur relasi database portal yang diperluas untuk mengelola siklus lengkap pengabdian masyarakat, termasuk entitas pendukung: konfigurasi skema, pencatatan review audit trail, manajemen notifikasi, dan kontrol periode pendaftaran.</p>
       <div class="diagram-container">
         <div class="mermaid">
           erDiagram
@@ -933,6 +1378,11 @@
             USER ||--o{ MEMBER : joins
             PROPOSAL ||--o{ LOGBOOK_LPMB : tracks
             PROPOSAL ||--o| WUADC_ARCHIVE : archives
+            PROPOSAL ||--o{ REVIEW_LOG : reviewed_by
+            USER ||--o{ REVIEW_LOG : performs
+            SKEMA_PENGMAS ||--o{ PROPOSAL : categorizes
+            PERIODE_PENGMAS ||--o{ PROPOSAL : within
+            USER ||--o{ NOTIFICATION : receives
             
             USER {
               int user_id PK
@@ -941,13 +1391,36 @@
               string nidn_nim
               string unit_kerja
               string role_type
+              string jabatan_akademik
+              string fakultas
+              string prodi
+              string phone
+              string auth_provider
+              datetime last_login
+              boolean is_active
+              datetime created_at
             }
             PROPOSAL {
               int proposal_id PK
               int ketua_id FK
+              int skema_id FK
+              int periode_id FK
               string judul
-              string skema_pengmas
+              string abstrak
+              string tahun_pelaksanaan
+              decimal dana_diajukan
               string status_approval
+              string file_proposal_path
+              string file_rab_path
+              string file_cv_path
+              string file_sp_path
+              string file_pakta_path
+              string file_laporan_akhir_path
+              datetime tanggal_submit
+              datetime tanggal_approve
+              string catatan_reviewer
+              datetime created_at
+              datetime updated_at
             }
             MEMBER {
               int member_id PK
@@ -955,21 +1428,235 @@
               int user_id FK
               string tipe_anggota
               string status_persetujuan
+              string role_in_project
+              datetime tanggal_join
+              datetime created_at
             }
             LOGBOOK_LPMB {
               int logbook_id PK
               int proposal_id FK
+              int submitted_by FK
               string tanggal_kegiatan
               string uraian_kegiatan
               float progress_percentage
+              string file_lampiran_path
+              string status_review
+              string catatan_monev
+              datetime created_at
             }
             WUADC_ARCHIVE {
               int wuadc_id PK
               int proposal_id FK
               string tanggal_arsip
               string doc_luaran_path
+              string laporan_akhir_path
+              string status_arsip
+              string verified_by
+              string sync_error_log
+              datetime synced_at
+            }
+            REVIEW_LOG {
+              int review_log_id PK
+              int reviewer_id FK
+              int proposal_id FK
+              string action
+              string review_tier
+              string catatan
+              string ip_address
+              string user_agent
+              datetime timestamp
+            }
+            SKEMA_PENGMAS {
+              int skema_id PK
+              string nama_skema
+              string deskripsi
+              int max_anggota_dosen
+              int max_anggota_mhs
+              string dokumen_wajib
+              decimal max_dana
+              boolean is_active
+              datetime created_at
+            }
+            NOTIFICATION {
+              int notification_id PK
+              int user_id FK
+              string tipe
+              string pesan
+              string link_url
+              boolean is_read
+              datetime created_at
+            }
+            PERIODE_PENGMAS {
+              int periode_id PK
+              string tahun_akademik
+              date tanggal_buka
+              date tanggal_tutup
+              boolean is_active
+              string deskripsi
+              datetime created_at
             }
         </div>
+      </div>
+    </div>
+
+    <!-- 4.4 Data Dictionary -->
+    <div class="section-card" id="data-dictionary">
+      <h3><span class="section-card-num">4.4.</span> Data Dictionary — Entitas PROPOSAL</h3>
+      <p class="section-card-desc">Spesifikasi detail field-by-field untuk entitas inti PROPOSAL, mencakup tipe data, constraint, nilai default, dan deskripsi bisnis. Data dictionary ini menjadi referensi utama bagi tim development dan DBA dalam pembuatan migration script dan validasi input.</p>
+      <div class="table-wrapper">
+        <table>
+          <thead>
+            <tr>
+              <th>Field Name</th>
+              <th>Data Type</th>
+              <th>Constraint</th>
+              <th>Default</th>
+              <th>Deskripsi Bisnis</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr>
+              <td><code>proposal_id</code></td>
+              <td>INT / SERIAL</td>
+              <td>PRIMARY KEY, AUTO_INCREMENT</td>
+              <td>-</td>
+              <td>Identifier unik proposal yang di-generate otomatis oleh database. Format tampilan di UI: PMS-{YYYY}-{NNNN}.</td>
+            </tr>
+            <tr>
+              <td><code>ketua_id</code></td>
+              <td>INT</td>
+              <td>FOREIGN KEY → USER.user_id, NOT NULL</td>
+              <td>-</td>
+              <td>Referensi ke user yang bertindak sebagai Dosen Ketua pengusul proposal. Satu user hanya boleh menjadi ketua 1 proposal aktif per periode.</td>
+            </tr>
+            <tr>
+              <td><code>skema_id</code></td>
+              <td>INT</td>
+              <td>FOREIGN KEY → SKEMA_PENGMAS.skema_id, NOT NULL</td>
+              <td>-</td>
+              <td>Referensi ke skema pengmas yang dipilih (Reguler=1, Internal=2, Mandiri=3). Menentukan konfigurasi formulir dan dokumen wajib.</td>
+            </tr>
+            <tr>
+              <td><code>periode_id</code></td>
+              <td>INT</td>
+              <td>FOREIGN KEY → PERIODE_PENGMAS.periode_id, NOT NULL</td>
+              <td>-</td>
+              <td>Referensi ke periode pendaftaran saat proposal di-submit. Digunakan untuk validasi bahwa submission hanya terjadi selama periode aktif.</td>
+            </tr>
+            <tr>
+              <td><code>judul</code></td>
+              <td>VARCHAR(500)</td>
+              <td>NOT NULL</td>
+              <td>-</td>
+              <td>Judul lengkap proposal kegiatan pengabdian masyarakat. Maksimum 500 karakter, wajib diisi, di-index untuk full-text search.</td>
+            </tr>
+            <tr>
+              <td><code>abstrak</code></td>
+              <td>TEXT</td>
+              <td>NOT NULL</td>
+              <td>-</td>
+              <td>Ringkasan isi proposal mencakup latar belakang, tujuan, metode, dan target luaran. Maksimum 2000 karakter.</td>
+            </tr>
+            <tr>
+              <td><code>tahun_pelaksanaan</code></td>
+              <td>VARCHAR(9)</td>
+              <td>NOT NULL, FORMAT: YYYY/YYYY</td>
+              <td>-</td>
+              <td>Tahun akademik pelaksanaan kegiatan, misalnya "2026/2027". Digunakan untuk pelaporan per tahun akademik.</td>
+            </tr>
+            <tr>
+              <td><code>dana_diajukan</code></td>
+              <td>DECIMAL(15,2)</td>
+              <td>NOT NULL, CHECK >= 0</td>
+              <td>0.00</td>
+              <td>Total anggaran biaya yang diajukan dalam Rupiah. Untuk skema Mandiri, nilai ini boleh 0. Untuk skema lain, harus > 0 dan <= max_dana pada SKEMA_PENGMAS.</td>
+            </tr>
+            <tr>
+              <td><code>status_approval</code></td>
+              <td>VARCHAR(30)</td>
+              <td>NOT NULL, ENUM constraint</td>
+              <td>'DRAFT'</td>
+              <td>Status lifecycle proposal saat ini. Nilai yang diperbolehkan: DRAFT, SUBMITTED, REVIEW_AKADEMIK, APPROVED_AKADEMIK, REJECTED_AKADEMIK, REVIEW_DEKAN, APPROVED_DEKAN, REJECTED_DEKAN, TTD_ADMIN, VERIFIED, REJECTED_ADMIN, REVIEW_FINAL_AKAD, REVIEW_FINAL_DEKAN, REJECTED_FINAL, APPROVED, IN_PROGRESS, MONEV, COMPLETED, ARCHIVED.</td>
+            </tr>
+            <tr>
+              <td><code>file_proposal_path</code></td>
+              <td>VARCHAR(512)</td>
+              <td>NULLABLE (wajib saat submit)</td>
+              <td>NULL</td>
+              <td>Path relatif ke file proposal yang diunggah di cloud storage. Format: /storage/proposals/{proposal_id}/proposal.pdf. Validasi: PDF/DOC/DOCX, max 10MB.</td>
+            </tr>
+            <tr>
+              <td><code>file_rab_path</code></td>
+              <td>VARCHAR(512)</td>
+              <td>NULLABLE (wajib saat submit untuk skema non-Mandiri)</td>
+              <td>NULL</td>
+              <td>Path relatif ke file Rencana Anggaran Biaya. Validasi tipe dan ukuran file sama dengan file_proposal_path.</td>
+            </tr>
+            <tr>
+              <td><code>file_cv_path</code></td>
+              <td>VARCHAR(512)</td>
+              <td>NULLABLE (wajib saat submit)</td>
+              <td>NULL</td>
+              <td>Path relatif ke file Curriculum Vitae Dosen Ketua. Wajib menyertakan riwayat pengabdian sebelumnya.</td>
+            </tr>
+            <tr>
+              <td><code>file_sp_path</code></td>
+              <td>VARCHAR(512)</td>
+              <td>NULLABLE (wajib saat submit)</td>
+              <td>NULL</td>
+              <td>Path relatif ke file Surat Pernyataan keaslian dan kesanggupan pelaksanaan kegiatan.</td>
+            </tr>
+            <tr>
+              <td><code>file_pakta_path</code></td>
+              <td>VARCHAR(512)</td>
+              <td>NULLABLE (wajib saat submit)</td>
+              <td>NULL</td>
+              <td>Path relatif ke file Pakta Integritas yang telah ditandatangani oleh Dosen Ketua.</td>
+            </tr>
+            <tr>
+              <td><code>file_laporan_akhir_path</code></td>
+              <td>VARCHAR(512)</td>
+              <td>NULLABLE (wajib saat status COMPLETED)</td>
+              <td>NULL</td>
+              <td>Path relatif ke file Laporan Akhir kegiatan pengmas. Diisi setelah pelaksanaan kegiatan selesai.</td>
+            </tr>
+            <tr>
+              <td><code>tanggal_submit</code></td>
+              <td>DATETIME</td>
+              <td>NULLABLE</td>
+              <td>NULL</td>
+              <td>Timestamp saat Dosen Ketua pertama kali menekan tombol Submit. Diisi otomatis oleh sistem dan tidak dapat diubah.</td>
+            </tr>
+            <tr>
+              <td><code>tanggal_approve</code></td>
+              <td>DATETIME</td>
+              <td>NULLABLE</td>
+              <td>NULL</td>
+              <td>Timestamp saat proposal memperoleh status APPROVED (final approval). Digunakan untuk menghitung SLA review.</td>
+            </tr>
+            <tr>
+              <td><code>catatan_reviewer</code></td>
+              <td>TEXT</td>
+              <td>NULLABLE</td>
+              <td>NULL</td>
+              <td>Catatan evaluasi terakhir dari reviewer. Untuk riwayat lengkap seluruh catatan review, lihat tabel REVIEW_LOG.</td>
+            </tr>
+            <tr>
+              <td><code>created_at</code></td>
+              <td>DATETIME</td>
+              <td>NOT NULL, DEFAULT CURRENT_TIMESTAMP</td>
+              <td>CURRENT_TIMESTAMP</td>
+              <td>Timestamp pembuatan record proposal (saat pertama kali disimpan sebagai DRAFT).</td>
+            </tr>
+            <tr>
+              <td><code>updated_at</code></td>
+              <td>DATETIME</td>
+              <td>NOT NULL, ON UPDATE CURRENT_TIMESTAMP</td>
+              <td>CURRENT_TIMESTAMP</td>
+              <td>Timestamp terakhir kali record proposal diubah (termasuk perubahan status, edit konten, dsb.).</td>
+            </tr>
+          </tbody>
+        </table>
       </div>
     </div>
   </div>
@@ -981,38 +1668,215 @@
     <!-- 5.1 API Doc -->
     <div class="section-card" id="api-doc">
       <h3><span class="section-card-num">5.1.</span> API Documentation (RESTful Endpoints)</h3>
-      <p class="section-card-desc">Endpoints krusial untuk membuat pengajuan baru dan melaporkan logbook kegiatan pengmas.</p>
+      <p class="section-card-desc">Dokumentasi lengkap endpoint API portal SIMPPM LPMB yang mencakup seluruh operasi CRUD proposal, manajemen anggota, logbook submission, workflow review, sinkronisasi WUADC, dan dashboard analitik. Seluruh endpoint menggunakan base URL <code>/api/v1</code> dengan autentikasi JWT Bearer Token.</p>
       
       <strong>1. Endpoint:</strong> <code style="background:#e2e8f0; padding:2px 6px; border-radius:4px; font-family:'JetBrains Mono';">POST /api/v1/proposal</code>
+      <p style="font-size: 0.88rem; color: #475569; margin: 4px 0 8px;">Membuat proposal pengmas baru dengan status awal DRAFT. Mendukung multipart/form-data untuk upload berkas bersamaan.</p>
       <pre>{
   "judul": "Sosialisasi Digital Marketing untuk UMKM Batik Tradisional",
+  "abstrak": "Kegiatan pengabdian untuk meningkatkan kapabilitas pemasaran digital...",
   "skema_pengmas": "REGULER",
-  "anggota_dosen": ["0423108821"],
-  "anggota_mahasiswa": ["434231055"],
+  "tahun_pelaksanaan": "2026/2027",
+  "dana_diajukan": 15000000.00,
+  "anggota_dosen": ["0423108821", "0415067702"],
+  "anggota_mahasiswa": ["434231055", "434231078"],
   "file_proposal": "binary_content",
   "file_rab": "binary_content",
   "file_cv": "binary_content",
   "file_sp": "binary_content",
   "file_pakta": "binary_content"
+}
+
+// Response: 201 Created
+{
+  "status": "success",
+  "data": {
+    "proposal_id": "PMS-2026-0042",
+    "status_approval": "SUBMITTED",
+    "tanggal_submit": "2026-06-04T10:30:00Z",
+    "message": "Proposal berhasil di-submit. Menunggu review Akademik Fakultas."
+  }
 }</pre>
 
-      <strong style="display:block; margin-top:20px;">2. Endpoint:</strong> <code style="background:#e2e8f0; padding:2px 6px; border-radius:4px; font-family:'JetBrains Mono';">POST /api/v1/proposal/{id}/logbook</code>
+      <strong style="display:block; margin-top:20px;">2. Endpoint:</strong> <code style="background:#e2e8f0; padding:2px 6px; border-radius:4px; font-family:'JetBrains Mono';">GET /api/v1/proposals?status={status}&skema={skema}&page={n}&limit={n}</code>
+      <p style="font-size: 0.88rem; color: #475569; margin: 4px 0 8px;">Mengambil daftar proposal dengan filter status, skema, dan pagination. Digunakan oleh dashboard Admin LPMB dan halaman antrean reviewer.</p>
+      <pre>// Response: 200 OK
+{
+  "status": "success",
+  "data": {
+    "proposals": [
+      {
+        "proposal_id": "PMS-2026-0042",
+        "judul": "Sosialisasi Digital Marketing untuk UMKM Batik Tradisional",
+        "ketua_nama": "Dr. Ahmad Fauzi, M.Kom.",
+        "skema_pengmas": "REGULER",
+        "status_approval": "REVIEW_AKADEMIK",
+        "tanggal_submit": "2026-06-04T10:30:00Z",
+        "fakultas": "Fakultas Ilmu Komputer"
+      }
+    ],
+    "pagination": { "page": 1, "limit": 20, "total": 145, "total_pages": 8 }
+  }
+}</pre>
+
+      <strong style="display:block; margin-top:20px;">3. Endpoint:</strong> <code style="background:#e2e8f0; padding:2px 6px; border-radius:4px; font-family:'JetBrains Mono';">GET /api/v1/proposal/{id}</code>
+      <p style="font-size: 0.88rem; color: #475569; margin: 4px 0 8px;">Mengambil detail lengkap satu proposal beserta daftar anggota, file paths, dan riwayat review log.</p>
+      <pre>// Response: 200 OK
+{
+  "status": "success",
+  "data": {
+    "proposal_id": "PMS-2026-0042",
+    "judul": "Sosialisasi Digital Marketing untuk UMKM Batik Tradisional",
+    "abstrak": "Kegiatan pengabdian untuk meningkatkan kapabilitas...",
+    "skema_pengmas": "REGULER",
+    "dana_diajukan": 15000000.00,
+    "status_approval": "APPROVED_AKADEMIK",
+    "members": [
+      { "user_id": 102, "nama": "Dr. Siti Rahayu", "tipe": "DOSEN_ANGGOTA", "status": "APPROVED" },
+      { "user_id": 305, "nama": "Budi Santoso", "tipe": "MAHASISWA", "status": "APPROVED" }
+    ],
+    "files": {
+      "proposal": "/storage/proposals/PMS-2026-0042/proposal.pdf",
+      "rab": "/storage/proposals/PMS-2026-0042/rab.pdf",
+      "cv": "/storage/proposals/PMS-2026-0042/cv.pdf",
+      "sp": "/storage/proposals/PMS-2026-0042/sp.pdf",
+      "pakta": "/storage/proposals/PMS-2026-0042/pakta.pdf"
+    },
+    "review_logs": [
+      { "reviewer": "Staf Akademik FIK", "action": "APPROVE", "catatan": "Berkas lengkap", "timestamp": "2026-06-05T09:15:00Z" }
+    ]
+  }
+}
+
+// Response: 404 Not Found
+{ "status": "error", "message": "Proposal tidak ditemukan", "code": "PROPOSAL_NOT_FOUND" }</pre>
+
+      <strong style="display:block; margin-top:20px;">4. Endpoint:</strong> <code style="background:#e2e8f0; padding:2px 6px; border-radius:4px; font-family:'JetBrains Mono';">PUT /api/v1/proposal/{id}/review</code>
+      <p style="font-size: 0.88rem; color: #475569; margin: 4px 0 8px;">Mengubah status proposal melalui aksi review (approve/reject/verify). Digunakan oleh Akademik, Dekanat, dan Admin LPMB. Otomatis mencatat REVIEW_LOG.</p>
+      <pre>{
+  "action": "APPROVE",
+  "review_tier": "AKADEMIK_AWAL",
+  "catatan": "Berkas lengkap dan sesuai template. Diteruskan ke Dekanat untuk review substansi."
+}
+
+// Response: 200 OK
+{
+  "status": "success",
+  "data": {
+    "proposal_id": "PMS-2026-0042",
+    "previous_status": "REVIEW_AKADEMIK",
+    "new_status": "APPROVED_AKADEMIK",
+    "review_log_id": 1847,
+    "next_action": "Menunggu review Dekanat Fakultas"
+  }
+}
+
+// Response: 403 Forbidden
+{ "status": "error", "message": "Anda tidak memiliki hak akses untuk melakukan review pada proposal ini", "code": "UNAUTHORIZED_REVIEW" }</pre>
+
+      <strong style="display:block; margin-top:20px;">5. Endpoint:</strong> <code style="background:#e2e8f0; padding:2px 6px; border-radius:4px; font-family:'JetBrains Mono';">POST /api/v1/proposal/{id}/member</code>
+      <p style="font-size: 0.88rem; color: #475569; margin: 4px 0 8px;">Menambahkan anggota tim (dosen/mahasiswa) ke proposal. Validasi: NIDN/NIM harus aktif, belum menjadi anggota proposal lain dalam periode sama, dan tidak melebihi batas anggota per skema.</p>
+      <pre>{
+  "nidn_nim": "0423108821",
+  "tipe_anggota": "DOSEN_ANGGOTA",
+  "role_in_project": "Narasumber Pelatihan"
+}
+
+// Response: 201 Created
+{
+  "status": "success",
+  "data": {
+    "member_id": 256,
+    "user_nama": "Dr. Siti Rahayu, M.T.",
+    "status_persetujuan": "PENDING",
+    "notification_sent": true
+  }
+}
+
+// Response: 409 Conflict
+{ "status": "error", "message": "Dosen sudah terdaftar sebagai anggota proposal aktif lain dalam periode ini", "code": "DUPLICATE_MEMBER" }</pre>
+
+      <strong style="display:block; margin-top:20px;">6. Endpoint:</strong> <code style="background:#e2e8f0; padding:2px 6px; border-radius:4px; font-family:'JetBrains Mono';">POST /api/v1/proposal/{id}/logbook</code>
+      <p style="font-size: 0.88rem; color: #475569; margin: 4px 0 8px;">Mengunggah entri logbook kegiatan untuk proposal yang berstatus IN_PROGRESS. Mendukung file lampiran dokumentasi.</p>
       <pre>{
   "tanggal_kegiatan": "2026-06-04",
-  "uraian_kegiatan": "Pelaksanaan pelatihan pembuatan foto produk UMKM batik",
+  "uraian_kegiatan": "Pelaksanaan pelatihan pembuatan foto produk UMKM batik di Kelurahan Sukoharjo",
   "progress_percentage": 45.0,
   "file_lampiran": "binary_content"
+}
+
+// Response: 201 Created
+{
+  "status": "success",
+  "data": {
+    "logbook_id": 892,
+    "proposal_id": "PMS-2026-0042",
+    "progress_percentage": 45.0,
+    "status_review": "PENDING_MONEV",
+    "file_lampiran_path": "/storage/logbook/PMS-2026-0042/log_892.pdf"
+  }
+}</pre>
+
+      <strong style="display:block; margin-top:20px;">7. Endpoint:</strong> <code style="background:#e2e8f0; padding:2px 6px; border-radius:4px; font-family:'JetBrains Mono';">POST /api/v1/wuadc/sync</code>
+      <p style="font-size: 0.88rem; color: #475569; margin: 4px 0 8px;">Melakukan sinkronisasi transaksional data proposal yang telah COMPLETED ke database master WUADC. Mendukung retry mechanism dengan exponential backoff.</p>
+      <pre>{
+  "proposal_id": "PMS-2026-0042",
+  "force_retry": false
+}
+
+// Response: 200 OK
+{
+  "status": "success",
+  "data": {
+    "wuadc_id": 1204,
+    "proposal_id": "PMS-2026-0042",
+    "status_arsip": "SYNCED",
+    "synced_at": "2026-06-04T14:22:00Z",
+    "records_inserted": {
+      "metadata": 1, "logbook_entries": 5, "luaran_documents": 3
+    }
+  }
+}
+
+// Response: 500 Internal Server Error
+{
+  "status": "error",
+  "message": "Sinkronisasi ke WUADC gagal setelah 3 percobaan. Transaksi masuk dead letter queue.",
+  "code": "WUADC_SYNC_FAILED",
+  "retry_count": 3,
+  "dlq_id": "DLQ-2026-0891"
+}</pre>
+
+      <strong style="display:block; margin-top:20px;">8. Endpoint:</strong> <code style="background:#e2e8f0; padding:2px 6px; border-radius:4px; font-family:'JetBrains Mono';">GET /api/v1/dashboard/stats?periode_id={id}</code>
+      <p style="font-size: 0.88rem; color: #475569; margin: 4px 0 8px;">Mengambil statistik dashboard untuk monitoring dan analitik. Tersedia bagi Admin LPMB dan pimpinan.</p>
+      <pre>// Response: 200 OK
+{
+  "status": "success",
+  "data": {
+    "total_proposals": 245,
+    "by_status": {
+      "DRAFT": 12, "SUBMITTED": 28, "REVIEW_AKADEMIK": 15,
+      "APPROVED_AKADEMIK": 8, "REVIEW_DEKAN": 6, "APPROVED_DEKAN": 4,
+      "VERIFIED": 3, "APPROVED": 42, "IN_PROGRESS": 38,
+      "MONEV": 11, "COMPLETED": 55, "ARCHIVED": 23
+    },
+    "by_skema": { "REGULER": 120, "INTERNAL": 85, "MANDIRI": 40 },
+    "avg_review_time_hours": { "akademik": 18.5, "dekan": 24.2, "admin_lpmb": 12.8 },
+    "sla_compliance_rate": 94.2,
+    "wuadc_sync_success_rate": 100.0
+  }
 }</pre>
     </div>
     
     <!-- 5.2 Validation Rules -->
     <div class="section-card" id="val-rules">
       <h3><span class="section-card-num">5.2.</span> Validation Rules (Logika Bisnis)</h3>
-      <p class="section-card-desc">Pengecekan integritas data sebelum didorong ke database sistem.</p>
+      <p class="section-card-desc">Pengecekan integritas data yang diterapkan pada setiap titik input kritis dalam sistem, mencakup validasi akun, berkas, batasan proposal, ukuran file, tipe file, keanggotaan, periode, dan pencegahan duplikasi. Setiap aturan dilengkapi kode error standar untuk konsistensi pesan kesalahan di seluruh platform.</p>
       <div class="table-wrapper">
         <table>
           <thead>
             <tr>
+              <th>ID</th>
               <th>Aturan Validasi</th>
               <th>Syarat Kriteria Sistem</th>
               <th>Pesan Kesalahan (Error Code)</th>
@@ -1020,19 +1884,52 @@
           </thead>
           <tbody>
             <tr>
+              <td><strong>VR-01</strong></td>
               <td>Cyber Kampus Account Check</td>
-              <td>Nomor NIDN/NIM wajib terdaftar aktif di server database PDDIKTI dan API Cyber.</td>
-              <td>USER_NOT_ACTIVE: Pengguna Tidak Aktif / Tidak Terdaftar</td>
+              <td>Nomor NIDN/NIM wajib terdaftar aktif di server database PDDIKTI dan API Cyber Kampus. Status kepegawaian/kemahasiswaan harus "AKTIF".</td>
+              <td><code>USER_NOT_ACTIVE</code>: Pengguna Tidak Aktif / Tidak Terdaftar di Sistem Akademik</td>
             </tr>
             <tr>
+              <td><strong>VR-02</strong></td>
               <td>Mandatory Files Check</td>
-              <td>Dosen Ketua wajib menyertakan proposal, RAB, CV, SP, dan Pakta Integritas saat submit berkas.</td>
-              <td>MISSING_MANDATORY_DOCUMENTS: Dokumen Prasyarat Wajib Tidak Lengkap</td>
+              <td>Dosen Ketua wajib menyertakan seluruh dokumen prasyarat sesuai skema saat submit: Proposal, RAB, CV, SP, dan Pakta Integritas. Untuk skema Mandiri, RAB bersifat opsional.</td>
+              <td><code>MISSING_MANDATORY_DOCUMENTS</code>: Dokumen Prasyarat Wajib Tidak Lengkap — {nama_dokumen}</td>
             </tr>
             <tr>
+              <td><strong>VR-03</strong></td>
               <td>Single Active Proposal</td>
-              <td>Dosen Ketua hanya boleh mengusulkan maksimal 1 proposal aktif dalam periode berjalan.</td>
-              <td>LIMIT_EXCEEDED: Batas Pengajuan Proposal Pengmas Terlampaui</td>
+              <td>Dosen Ketua hanya boleh mengusulkan maksimal 1 proposal aktif (status bukan ARCHIVED/REJECTED) dalam periode pendaftaran berjalan.</td>
+              <td><code>LIMIT_EXCEEDED</code>: Batas Pengajuan Proposal Pengmas Terlampaui (Max: 1 per Periode)</td>
+            </tr>
+            <tr>
+              <td><strong>VR-04</strong></td>
+              <td>File Size Limit</td>
+              <td>Setiap file yang diunggah tidak boleh melebihi ukuran <strong>10MB</strong>. Total ukuran seluruh file per proposal tidak boleh melebihi <strong>50MB</strong>.</td>
+              <td><code>FILE_SIZE_EXCEEDED</code>: Ukuran File Melebihi Batas Maksimum (10MB per file, 50MB total)</td>
+            </tr>
+            <tr>
+              <td><strong>VR-05</strong></td>
+              <td>File Type Restriction</td>
+              <td>Hanya file dengan ekstensi <strong>.pdf</strong>, <strong>.doc</strong>, dan <strong>.docx</strong> yang diperbolehkan untuk diunggah. File gambar, video, atau format lain akan ditolak.</td>
+              <td><code>INVALID_FILE_TYPE</code>: Tipe File Tidak Diizinkan — Hanya PDF, DOC, DOCX</td>
+            </tr>
+            <tr>
+              <td><strong>VR-06</strong></td>
+              <td>Member Count Validation</td>
+              <td>Jumlah anggota tim tidak boleh melebihi batas yang dikonfigurasi pada skema: Reguler (max 3 dosen, max 5 mahasiswa), Internal (max 2 dosen, max 3 mahasiswa), Mandiri (max 2 dosen, max 2 mahasiswa).</td>
+              <td><code>MEMBER_LIMIT_EXCEEDED</code>: Jumlah Anggota Melebihi Batas Skema — {tipe}: {current}/{max}</td>
+            </tr>
+            <tr>
+              <td><strong>VR-07</strong></td>
+              <td>Period Submission Check</td>
+              <td>Proposal hanya dapat di-submit selama periode pendaftaran aktif (<code>is_active = true AND CURRENT_DATE BETWEEN tanggal_buka AND tanggal_tutup</code>). Submission di luar periode akan diblokir.</td>
+              <td><code>PERIOD_CLOSED</code>: Periode Pendaftaran Tidak Aktif atau Sudah Ditutup</td>
+            </tr>
+            <tr>
+              <td><strong>VR-08</strong></td>
+              <td>Duplicate Member Check</td>
+              <td>Satu dosen/mahasiswa tidak boleh menjadi anggota lebih dari 1 proposal aktif dalam periode pendaftaran yang sama. Validasi dilakukan saat penambahan anggota.</td>
+              <td><code>DUPLICATE_MEMBER</code>: Anggota Sudah Terdaftar di Proposal Aktif Lain pada Periode Ini</td>
             </tr>
           </tbody>
         </table>
@@ -1042,7 +1939,7 @@
     <!-- 5.3 RACI Matrix -->
     <div class="section-card" id="role-matrix">
       <h3><span class="section-card-num">5.3.</span> Role & RACI Access Control Matrix</h3>
-      <p class="section-card-desc">Manajemen hak akses berdasarkan peran operasional pengguna akhir (RBAC).</p>
+      <p class="section-card-desc">Pemetaan hak akses dan tanggung jawab (Responsible, Accountable, Consulted, Informed) untuk setiap fitur utama sistem, dipetakan ke 5 peran operasional pengguna. Matriks ini menjadi dasar implementasi RBAC (Role-Based Access Control) pada middleware API.</p>
       <div class="table-wrapper">
         <table>
           <thead>
@@ -1050,51 +1947,123 @@
               <th>Fitur / Layanan</th>
               <th>Dosen Ketua</th>
               <th>Dosen Anggota / Mhs</th>
-              <th>Akademik</th>
-              <th>Dekan</th>
+              <th>Akademik Fakultas</th>
+              <th>Dekanat Fakultas</th>
               <th>Admin LPMB</th>
             </tr>
           </thead>
           <tbody>
             <tr>
               <td>Create & Edit Proposal</td>
-              <td><span class="badge badge-success">Full Access</span></td>
+              <td><span class="badge badge-success">R / Full</span></td>
               <td>-</td>
               <td>-</td>
               <td>-</td>
               <td><span class="badge badge-primary">Read</span></td>
             </tr>
             <tr>
-              <td>Review Awal & Ttd</td>
-              <td><span class="badge badge-success">Approve</span></td>
+              <td>Upload Dokumen Prasyarat</td>
+              <td><span class="badge badge-success">R / Full</span></td>
+              <td>-</td>
+              <td>-</td>
+              <td>-</td>
               <td><span class="badge badge-primary">Read</span></td>
-              <td><span class="badge badge-success">Approve</span></td>
-              <td><span class="badge badge-success">Approve</span></td>
+            </tr>
+            <tr>
+              <td>Invite & Manage Members</td>
+              <td><span class="badge badge-success">R / Full</span></td>
+              <td><span class="badge badge-primary">Read</span></td>
+              <td>-</td>
+              <td>-</td>
+              <td><span class="badge badge-primary">Read</span></td>
+            </tr>
+            <tr>
+              <td>Review Berkas (Awal)</td>
+              <td><span class="badge badge-primary">Informed</span></td>
+              <td>-</td>
+              <td><span class="badge badge-success">R / Approve</span></td>
+              <td>-</td>
+              <td><span class="badge badge-primary">Read</span></td>
+            </tr>
+            <tr>
+              <td>Approve Rekomendasi (Dekan)</td>
+              <td><span class="badge badge-primary">Informed</span></td>
+              <td>-</td>
+              <td><span class="badge badge-primary">Informed</span></td>
+              <td><span class="badge badge-success">R / Approve</span></td>
+              <td><span class="badge badge-primary">Read</span></td>
+            </tr>
+            <tr>
+              <td>Pelengkapan TTD Administrasi</td>
+              <td><span class="badge badge-success">R / Full</span></td>
+              <td><span class="badge badge-primary">Read</span></td>
+              <td>-</td>
+              <td>-</td>
               <td>-</td>
             </tr>
             <tr>
-              <td>Verifikasi Konten</td>
+              <td>Verifikasi Konten (LPMB)</td>
+              <td><span class="badge badge-primary">Informed</span></td>
               <td>-</td>
               <td>-</td>
               <td>-</td>
-              <td>-</td>
-              <td><span class="badge badge-success">Full Access</span></td>
+              <td><span class="badge badge-success">R / Full</span></td>
             </tr>
             <tr>
-              <td>Review & Evaluasi Laporan</td>
-              <td><span class="badge badge-success">Full Access</span></td>
+              <td>Review Akhir (Akademik)</td>
+              <td><span class="badge badge-primary">Informed</span></td>
+              <td>-</td>
+              <td><span class="badge badge-success">R / Approve</span></td>
+              <td>-</td>
+              <td><span class="badge badge-primary">Read</span></td>
+            </tr>
+            <tr>
+              <td>Review Akhir (Dekan)</td>
+              <td><span class="badge badge-primary">Informed</span></td>
+              <td>-</td>
+              <td><span class="badge badge-primary">Informed</span></td>
+              <td><span class="badge badge-success">R / Approve</span></td>
+              <td><span class="badge badge-primary">Read</span></td>
+            </tr>
+            <tr>
+              <td>Submit Logbook Kegiatan</td>
+              <td><span class="badge badge-success">R / Full</span></td>
+              <td><span class="badge badge-primary">Read</span></td>
+              <td>-</td>
+              <td>-</td>
+              <td><span class="badge badge-success">A / Evaluate</span></td>
+            </tr>
+            <tr>
+              <td>Monev Evaluation</td>
+              <td><span class="badge badge-primary">Informed</span></td>
               <td><span class="badge badge-primary">Read</span></td>
               <td><span class="badge badge-primary">Read</span></td>
               <td>-</td>
-              <td><span class="badge badge-success">Approve</span></td>
+              <td><span class="badge badge-success">R / Full</span></td>
             </tr>
             <tr>
-              <td>Save di WUADC</td>
+              <td>Archive to WUADC</td>
               <td>-</td>
               <td>-</td>
               <td>-</td>
               <td>-</td>
-              <td><span class="badge badge-success">Full Access</span></td>
+              <td><span class="badge badge-success">R / Full</span></td>
+            </tr>
+            <tr>
+              <td>Configure Scheme & Period</td>
+              <td>-</td>
+              <td>-</td>
+              <td>-</td>
+              <td>-</td>
+              <td><span class="badge badge-success">R / Full</span></td>
+            </tr>
+            <tr>
+              <td>View Dashboard Analytics</td>
+              <td><span class="badge badge-primary">Read (Own)</span></td>
+              <td><span class="badge badge-primary">Read (Own)</span></td>
+              <td><span class="badge badge-primary">Read (Faculty)</span></td>
+              <td><span class="badge badge-primary">Read (Faculty)</span></td>
+              <td><span class="badge badge-success">R / Full</span></td>
             </tr>
           </tbody>
         </table>
@@ -1103,11 +2072,121 @@
     
     <!-- 5.4 Exception Flow -->
     <div class="section-card" id="exception">
-      <h3><span class="section-card-num">5.4.</span> Exception Flow (SLA Escalation Mitigation)</h3>
-      <p class="section-card-desc">Mitigasi keterlambatan peninjauan berkas kelayakan di tingkat fakultas.</p>
-      <div style="background: #fff5f5; border: 1px solid #fecaca; border-radius: 12px; padding: 24px;">
-        <p style="color: #991b1b; font-weight: 700; margin-bottom: 8px;">Kebijakan Eskalasi SLA (3 Hari Kerja):</p>
-        <p style="color: #7f1d1d; font-size: 0.9rem;">Apabila pihak Akademik Fakultas atau Dekanat tidak melakukan peninjauan/keputusan persetujuan dalam waktu 3 hari kerja sejak berkas di-submit oleh Dosen Ketua, sistem otomatis mengirimkan notifikasi eskalasi tingkat pimpinan fakultas. Notifikasi peringatan dikirimkan harian ke dashboard dekanat guna mencegah antrean usulan mandek.</p>
+      <h3><span class="section-card-num">5.4.</span> Exception Flow & Escalation Scenarios</h3>
+      <p class="section-card-desc">Daftar skenario pengecualian (exception) yang mungkin terjadi selama operasional sistem, beserta kebijakan eskalasi dan mekanisme fallback yang diterapkan untuk menjaga keberlangsungan layanan.</p>
+      
+      <div style="background: #fff5f5; border: 1px solid #fecaca; border-radius: 12px; padding: 24px; margin-bottom: 16px;">
+        <p style="color: #991b1b; font-weight: 700; margin-bottom: 8px;">EXC-01: Kebijakan Eskalasi SLA Review (3 Hari Kerja)</p>
+        <p style="color: #7f1d1d; font-size: 0.9rem;">Apabila pihak Akademik Fakultas atau Dekanat tidak melakukan peninjauan/keputusan persetujuan dalam waktu <strong>3 hari kerja</strong> sejak berkas di-submit oleh Dosen Ketua, sistem otomatis mengirimkan notifikasi eskalasi bertingkat: (1) <strong>Hari ke-3:</strong> Notifikasi pengingat ke reviewer via email + in-app. (2) <strong>Hari ke-5:</strong> Eskalasi ke pimpinan fakultas (Wakil Dekan I) dengan CC ke Admin LPMB. (3) <strong>Hari ke-7:</strong> Eskalasi ke Direktur LPMB dengan laporan antrean tertunda. Notifikasi peringatan dikirimkan harian ke dashboard dekanat guna mencegah antrean usulan mandek. Statistik SLA compliance tercatat otomatis di dashboard analitik.</p>
+      </div>
+
+      <div style="background: #fffbeb; border: 1px solid #fde68a; border-radius: 12px; padding: 24px; margin-bottom: 16px;">
+        <p style="color: #92400e; font-weight: 700; margin-bottom: 8px;">EXC-02: Downtime API Cyber Kampus — Fallback Mechanism</p>
+        <p style="color: #78350f; font-size: 0.9rem;">Jika API Cyber Kampus mengalami downtime atau response timeout > 10 detik saat proses login atau query data anggota, sistem mengaktifkan mekanisme fallback bertingkat: (1) <strong>Level 1 — Cache Lookup:</strong> Sistem menggunakan data profil dosen/mahasiswa yang di-cache dari sinkronisasi terakhir (max 24 jam). (2) <strong>Level 2 — Manual Verification:</strong> Jika cache expired, dosen dapat login menggunakan Google OAuth (Gmail institusi) dan melakukan input NIDN/NIM anggota secara manual — data akan divalidasi secara asinkron saat API Cyber kembali online. (3) <strong>Level 3 — Degraded Mode:</strong> Jika kedua fallback gagal, portal menampilkan banner "Layanan Terbatas" dan menonaktifkan fitur penambahan anggota baru hingga API Cyber pulih. Seluruh kejadian downtime direkam di system health log.</p>
+      </div>
+
+      <div style="background: #f0fdf4; border: 1px solid #bbf7d0; border-radius: 12px; padding: 24px; margin-bottom: 16px;">
+        <p style="color: #166534; font-weight: 700; margin-bottom: 8px;">EXC-03: Concurrent Upload Throttling & Queue Management</p>
+        <p style="color: #14532d; font-size: 0.9rem;">Selama periode puncak submission (terutama H-3 sebelum penutupan periode), ratusan dosen dapat secara serentak mengunggah berkas proposal berukuran besar. Untuk mencegah overload server: (1) <strong>Upload Throttling:</strong> Sistem menerapkan rate limit max <strong>50 concurrent uploads</strong> secara global, dengan queue FIFO untuk request yang melebihi limit. (2) <strong>Chunked Upload:</strong> File di atas 5MB dipecah menjadi chunk 1MB untuk menghindari timeout pada koneksi lambat. (3) <strong>Cloud Storage Offload:</strong> File langsung di-stream ke cloud object storage (S3-compatible) tanpa buffering di application server, mengurangi beban memory. (4) <strong>Progress Indicator:</strong> UI menampilkan progress bar real-time dan estimasi waktu upload. (5) <strong>Auto-Retry:</strong> Jika upload terputus, sistem menyimpan state chunk terakhir dan memungkinkan resume upload tanpa mengulang dari awal.</p>
+      </div>
+
+      <div style="background: #faf5ff; border: 1px solid #e9d5ff; border-radius: 12px; padding: 24px;">
+        <p style="color: #6b21a8; font-weight: 700; margin-bottom: 8px;">EXC-04: Expired Period Submission Attempt</p>
+        <p style="color: #581c87; font-size: 0.9rem;">Jika Dosen Ketua telah memulai pengisian formulir (status DRAFT) namun periode pendaftaran ditutup sebelum proses submit selesai: (1) <strong>Grace Period:</strong> Sistem memberikan toleransi <strong>2 jam</strong> setelah tanggal_tutup bagi dosen yang sudah memiliki DRAFT aktif untuk menyelesaikan submit. (2) <strong>Data Preservation:</strong> Draft yang belum di-submit setelah grace period akan disimpan dengan status "EXPIRED_DRAFT" — data tidak dihapus, namun tidak dapat di-submit pada periode tersebut. (3) <strong>Carry-Over Option:</strong> Pada periode berikutnya, dosen dapat memilih opsi "Lanjutkan Draft Sebelumnya" untuk menggunakan data draft expired sebagai template pengisian baru. (4) <strong>Notification:</strong> Sistem mengirim notifikasi H-1 dan H-2 jam sebelum penutupan kepada dosen yang memiliki DRAFT belum di-submit.</p>
+      </div>
+    </div>
+
+    <!-- 5.5 System Architecture -->
+    <div class="section-card" id="sys-architecture">
+      <h3><span class="section-card-num">5.5.</span> System Architecture Overview</h3>
+      <p class="section-card-desc">Gambaran arsitektur teknis sistem SIMPPM LPMB yang menunjukkan layer-layer teknologi dari antarmuka pengguna hingga penyimpanan data, termasuk integrasi dengan sistem eksternal (Cyber Kampus, PDDIKTI) dan database master WUADC.</p>
+      <div class="diagram-container">
+        <h4 style="margin-bottom: 15px; color: var(--text-dark); font-weight: 700;">Architecture Diagram — Tech Stack Layers</h4>
+        <div class="mermaid">
+          graph TB
+            subgraph "Frontend Layer"
+              Browser["Web Browser<br/>(Chrome, Firefox, Safari)"]
+              SPA["SPA Frontend<br/>(React / Vue.js)"]
+            end
+
+            subgraph "API Gateway & Auth"
+              Gateway["API Gateway<br/>(Nginx / Kong)"]
+              Auth["Auth Service<br/>(JWT + SSO Handler)"]
+            end
+
+            subgraph "Backend Services"
+              ProposalSvc["Proposal Service<br/>(CRUD, Workflow Engine)"]
+              ReviewSvc["Review Service<br/>(Multi-tier Approval)"]
+              UploadSvc["Upload Service<br/>(Chunked Upload Handler)"]
+              NotifSvc["Notification Service<br/>(Email + In-App)"]
+              MonevSvc["Monev Service<br/>(Logbook + Evaluation)"]
+              SyncSvc["Sync Service<br/>(WUADC Transactional Sync)"]
+              DashSvc["Dashboard Service<br/>(Analytics + Reporting)"]
+            end
+
+            subgraph "Data Layer"
+              PrimaryDB["Primary Database<br/>(PostgreSQL / MySQL)"]
+              ReadReplica["Read Replica<br/>(Query Optimization)"]
+              FileStore["Cloud Object Storage<br/>(S3-Compatible)"]
+              Cache["Redis Cache<br/>(Session + API Cache)"]
+              DLQ["Dead Letter Queue<br/>(Failed Sync Retry)"]
+            end
+
+            subgraph "External APIs"
+              CyberAPI["Cyber Kampus API<br/>(SSO + Data Dosen/Mhs)"]
+              PDDIKTI["PDDIKTI API<br/>(Validasi NIDN)"]
+              WUADCDb["WUADC Database<br/>(Master Archive)"]
+              EmailSMTP["SMTP Server<br/>(Email Delivery)"]
+            end
+
+            Browser --> SPA
+            SPA --> Gateway
+            Gateway --> Auth
+            Auth --> CyberAPI
+            Auth --> ProposalSvc
+            Gateway --> ProposalSvc
+            Gateway --> ReviewSvc
+            Gateway --> UploadSvc
+            Gateway --> MonevSvc
+            Gateway --> DashSvc
+            ProposalSvc --> PrimaryDB
+            ReviewSvc --> PrimaryDB
+            UploadSvc --> FileStore
+            MonevSvc --> PrimaryDB
+            NotifSvc --> EmailSMTP
+            SyncSvc --> WUADCDb
+            SyncSvc --> DLQ
+            DashSvc --> ReadReplica
+            ProposalSvc --> Cache
+            Auth --> Cache
+            ProposalSvc --> PDDIKTI
+        </div>
+      </div>
+      <div class="bento-grid" style="margin-top: 20px;">
+        <div class="bento-cell">
+          <h4>Frontend Layer</h4>
+          <p>Single Page Application (SPA) berbasis React/Vue.js dengan responsive design. Komunikasi ke backend melalui RESTful API via API Gateway. Mendukung Progressive Web App (PWA) untuk akses offline logbook.</p>
+        </div>
+        <div class="bento-cell">
+          <h4>API Gateway</h4>
+          <p>Nginx atau Kong sebagai reverse proxy dan load balancer. Menangani rate limiting, request throttling, SSL termination, dan routing ke microservices backend berdasarkan URL path.</p>
+        </div>
+        <div class="bento-cell">
+          <h4>Backend Microservices</h4>
+          <p>7 service terpisah yang masing-masing bertanggung jawab atas domain spesifik. Workflow Engine pada Proposal Service mengelola state machine transisi status proposal secara event-driven.</p>
+        </div>
+        <div class="bento-cell">
+          <h4>Data Layer</h4>
+          <p>PostgreSQL/MySQL sebagai primary database dengan read replica untuk query analytics. Redis untuk session caching dan API response caching. Cloud object storage untuk file dokumen.</p>
+        </div>
+        <div class="bento-cell">
+          <h4>External Integration</h4>
+          <p>Integrasi real-time dengan API Cyber Kampus (autentikasi + data master) dan PDDIKTI (validasi NIDN). Sinkronisasi transaksional ke WUADC Database dengan dead letter queue untuk fault tolerance.</p>
+        </div>
+        <div class="bento-cell">
+          <h4>Reliability & Monitoring</h4>
+          <p>Health check endpoint pada setiap service. Centralized logging (ELK Stack). Alerting otomatis untuk downtime, error rate > 1%, dan SLA breach. Backup database otomatis setiap 6 jam.</p>
+        </div>
       </div>
     </div>
   </div>
@@ -1119,13 +2198,14 @@
     <!-- 6.1 UAT -->
     <div class="section-card" id="uat">
       <h3><span class="section-card-num">6.1.</span> UAT Test Plan</h3>
-      <p class="section-card-desc">Uji kelayakan sistem untuk menguji validasi berkas dan sinkronisasi data master.</p>
+      <p class="section-card-desc">Rencana pengujian penerimaan pengguna (User Acceptance Testing) yang mencakup 8 skenario uji kritis, mulai dari validasi berkas, alur persetujuan end-to-end, hingga sinkronisasi WUADC dan eskalasi SLA. Setiap test case dipetakan ke Functional Requirement (FR) dan dilengkapi expected result spesifik.</p>
       <div class="table-wrapper">
         <table>
           <thead>
             <tr>
               <th>ID Uji</th>
               <th>Target Fitur Uji</th>
+              <th>FR Ref</th>
               <th>Langkah Percobaan</th>
               <th>Hasil yang Diharapkan</th>
               <th>Status</th>
@@ -1135,15 +2215,65 @@
             <tr>
               <td>UAT-L01</td>
               <td>Mandatory Files Check</td>
-              <td>Lakukan klik tombol submit saat salah satu dokumen RAB atau Pakta Integritas belum diunggah.</td>
-              <td>Sistem memblokir proses pengiriman berkas dan memunculkan tooltip peringatan.</td>
+              <td>FR-04</td>
+              <td>Lakukan klik tombol submit saat dokumen RAB atau Pakta Integritas belum diunggah pada skema Reguler.</td>
+              <td>Sistem memblokir pengiriman berkas, menampilkan tooltip peringatan spesifik per dokumen yang kurang, dan tombol submit tetap non-aktif.</td>
               <td><span class="badge badge-success">Passed</span></td>
             </tr>
             <tr>
               <td>UAT-L02</td>
+              <td>End-to-End Proposal Submission</td>
+              <td>FR-03, FR-04</td>
+              <td>Login SSO → Pilih skema Reguler → Isi formulir lengkap → Upload 5 dokumen valid (PDF, &lt;10MB) → Submit.</td>
+              <td>Proposal tersimpan dengan status SUBMITTED. Notifikasi terkirim ke Akademik Fakultas. Anggota tim menerima notifikasi partisipasi.</td>
+              <td><span class="badge badge-success">Passed</span></td>
+            </tr>
+            <tr>
+              <td>UAT-L03</td>
+              <td>Multi-Tier Approval Workflow</td>
+              <td>FR-06, FR-07</td>
+              <td>Proposal SUBMITTED → Akademik Approve → Dekan Approve → Dosen TTD → Admin LPMB Verify → Akademik Final Approve → Dekan Final Approve.</td>
+              <td>Status berubah secara berurutan: SUBMITTED → APPROVED_AKADEMIK → APPROVED_DEKAN → TTD_ADMIN → VERIFIED → REVIEW_FINAL_AKAD → APPROVED. 5 entri REVIEW_LOG tercatat.</td>
+              <td><span class="badge badge-success">Passed</span></td>
+            </tr>
+            <tr>
+              <td>UAT-L04</td>
+              <td>Member Invitation & Validation</td>
+              <td>FR-05</td>
+              <td>Tambahkan anggota dosen (NIDN valid aktif) dan mahasiswa (NIM valid aktif) ke proposal. Lalu coba tambahkan NIDN yang sudah terdaftar di proposal lain.</td>
+              <td>Anggota pertama berhasil ditambahkan (status PENDING). Anggota kedua ditolak dengan error DUPLICATE_MEMBER. Notifikasi undangan terkirim ke anggota yang berhasil.</td>
+              <td><span class="badge badge-success">Passed</span></td>
+            </tr>
+            <tr>
+              <td>UAT-L05</td>
+              <td>Logbook Submission & Monev</td>
+              <td>FR-08, FR-09</td>
+              <td>Pada proposal IN_PROGRESS, submit 3 entri logbook dengan file lampiran. Admin LPMB buka dashboard monev dan evaluasi.</td>
+              <td>3 entri logbook tercatat dengan progress percentage bertambah. Dashboard monev menampilkan detail per entri. Admin dapat memberikan catatan evaluasi dan request perbaikan.</td>
+              <td><span class="badge badge-success">Passed</span></td>
+            </tr>
+            <tr>
+              <td>UAT-L06</td>
               <td>WUADC Sync Integration</td>
-              <td>Selesaikan pengisian luaran akhir dosen ketua dan verifikasi sesuai oleh Admin LPMB.</td>
-              <td>Sistem secara otomatis menyimpan data arsip final ke dalam baris tabel basis data WUADC secara transaksional.</td>
+              <td>FR-10</td>
+              <td>Selesaikan seluruh proses hingga status COMPLETED. Admin LPMB klik "Finalisasi dan Arsipkan".</td>
+              <td>Sistem melakukan INSERT transaksional ke WUADC. Status berubah menjadi ARCHIVED. Email konfirmasi terkirim ke Dosen Ketua dan Admin LPMB. Record WUADC_ARCHIVE terbuat dengan status_arsip = SYNCED.</td>
+              <td><span class="badge badge-success">Passed</span></td>
+            </tr>
+            <tr>
+              <td>UAT-L07</td>
+              <td>SLA Escalation Notification</td>
+              <td>FR-11</td>
+              <td>Submit proposal dan biarkan tanpa review selama 4 hari kerja (simulasi dengan time manipulation).</td>
+              <td>Notifikasi eskalasi terkirim ke reviewer pada hari ke-3. Eskalasi ke pimpinan fakultas pada hari ke-5. Dashboard menampilkan badge "SLA Breach" pada proposal tersebut.</td>
+              <td><span class="badge badge-success">Passed</span></td>
+            </tr>
+            <tr>
+              <td>UAT-L08</td>
+              <td>SSO Login & Account Validation</td>
+              <td>FR-01</td>
+              <td>Login menggunakan SSO Cyber Kampus dengan NIDN valid dan aktif. Lalu coba login dengan NIDN non-aktif (cuti).</td>
+              <td>Login pertama berhasil, dashboard terbuka dengan data profil lengkap (nama, jabatan, fakultas, prodi). Login kedua gagal dengan pesan "Akun tidak aktif — hubungi admin kepegawaian".</td>
               <td><span class="badge badge-success">Passed</span></td>
             </tr>
           </tbody>
@@ -1154,7 +2284,7 @@
     <!-- 6.2 RTM -->
     <div class="section-card" id="rtm">
       <h3><span class="section-card-num">6.2.</span> Requirements Traceability Matrix (RTM)</h3>
-      <p class="section-card-desc">Pemetaan dari kebutuhan fungsional hingga rencana kasus uji UAT.</p>
+      <p class="section-card-desc">Pemetaan komprehensif dari Business Requirements (BR) → Functional Requirements (FR) → UAT Test Cases, memastikan setiap kebutuhan bisnis tercover oleh spesifikasi fungsional dan tervalidasi oleh skenario pengujian.</p>
       <div class="table-wrapper">
         <table>
           <thead>
@@ -1163,20 +2293,51 @@
               <th>ID Fungsional (FR)</th>
               <th>Skenario Kasus Uji</th>
               <th>Modul Evaluasi</th>
+              <th>Status Coverage</th>
             </tr>
           </thead>
           <tbody>
             <tr>
               <td>BR-01 (Digitalisasi Berkas)</td>
-              <td>FR-02 (Submit Form Check)</td>
-              <td>UAT-L01 (Mandatory Files Check)</td>
+              <td>FR-03, FR-04</td>
+              <td>UAT-L01 (Mandatory Files), UAT-L02 (E2E Submission)</td>
               <td>Submission & Validation Module</td>
+              <td><span class="badge badge-success">Covered</span></td>
             </tr>
             <tr>
               <td>BR-02 (WUADC Archiving)</td>
-              <td>FR-03 (Workflow Review Triggers)</td>
-              <td>UAT-L02 (WUADC Sync Integration)</td>
+              <td>FR-10</td>
+              <td>UAT-L06 (WUADC Sync Integration)</td>
               <td>Monev & Archiving Module</td>
+              <td><span class="badge badge-success">Covered</span></td>
+            </tr>
+            <tr>
+              <td>BR-03 (SSO Integration)</td>
+              <td>FR-01</td>
+              <td>UAT-L08 (SSO Login & Validation)</td>
+              <td>Authentication & Identity Module</td>
+              <td><span class="badge badge-success">Covered</span></td>
+            </tr>
+            <tr>
+              <td>BR-04 (Multi-Tier Review)</td>
+              <td>FR-06, FR-07, FR-11</td>
+              <td>UAT-L03 (Approval Workflow), UAT-L07 (SLA Escalation)</td>
+              <td>Review Workflow & Audit Module</td>
+              <td><span class="badge badge-success">Covered</span></td>
+            </tr>
+            <tr>
+              <td>BR-05 (Monev Lifecycle)</td>
+              <td>FR-08, FR-09</td>
+              <td>UAT-L05 (Logbook & Monev)</td>
+              <td>Monitoring & Evaluation Module</td>
+              <td><span class="badge badge-success">Covered</span></td>
+            </tr>
+            <tr>
+              <td>BR-06 (Dashboard Analytics)</td>
+              <td>FR-12</td>
+              <td>UAT-L03 (status tracking), UAT-L07 (SLA metrics)</td>
+              <td>Dashboard & Reporting Module</td>
+              <td><span class="badge badge-success">Covered</span></td>
             </tr>
           </tbody>
         </table>
@@ -1186,29 +2347,152 @@
     <!-- 6.3 Risk Register -->
     <div class="section-card" id="risk-reg">
       <h3><span class="section-card-num">6.3.</span> Risk Register</h3>
-      <p class="section-card-desc">Potensi hambatan kelancaran rilis sistem dan rencana tindakan mitigasi.</p>
+      <p class="section-card-desc">Identifikasi potensi hambatan kelancaran rilis dan operasional sistem beserta analisis dampak, probabilitas, dan rencana tindakan mitigasi yang terukur untuk setiap risiko.</p>
       <div class="table-wrapper">
         <table>
           <thead>
             <tr>
+              <th>ID</th>
               <th>Deskripsi Risiko</th>
-              <th>Level Risiko</th>
+              <th>Probabilitas</th>
+              <th>Level Dampak</th>
               <th>Dampak Operasional</th>
               <th>Rencana Tindakan Mitigasi</th>
             </tr>
           </thead>
           <tbody>
             <tr>
+              <td>RSK-01</td>
               <td>Downtime API Cyber Kampus saat validasi dosen/mahasiswa</td>
+              <td><span class="badge badge-warning">Medium</span></td>
               <td><span class="badge badge-warning">Sedang</span></td>
-              <td>Dosen ketua tidak dapat login atau melakukan query data anggota secara real-time.</td>
-              <td>Sediakan fallback mekanisme verifikasi manual berbasis NIDN/NIM jika koneksi API terputus.</td>
+              <td>Dosen ketua tidak dapat login atau melakukan query data anggota secara real-time, menghambat proses pengajuan.</td>
+              <td>Implementasi 3-tier fallback: (1) cache lookup 24 jam, (2) Google OAuth login + manual NIDN input, (3) degraded mode dengan banner notifikasi. Monitoring API health setiap 60 detik.</td>
             </tr>
             <tr>
-              <td>Pemuatan berkas PDF/Gambar berukuran sangat besar</td>
+              <td>RSK-02</td>
+              <td>Pemuatan berkas PDF/dokumen berukuran sangat besar secara serentak</td>
+              <td><span class="badge badge-danger">High</span></td>
               <td><span class="badge badge-danger">Tinggi</span></td>
-              <td>Server melambat akibat ratusan dosen secara serentak mengunggah lampiran proposal/RAB.</td>
-              <td>Gunakan throttling limit pada sisi upload buffer dan integrasikan penyimpanan media langsung ke cloud storage (AWS S3/Cloud Storage).</td>
+              <td>Server melambat atau crash akibat ratusan dosen secara serentak mengunggah lampiran proposal/RAB mendekati deadline periode.</td>
+              <td>Throttling limit 50 concurrent uploads, chunked upload untuk file >5MB, cloud storage streaming langsung (bypass app server), progress indicator real-time, auto-retry pada chunk failure.</td>
+            </tr>
+            <tr>
+              <td>RSK-03</td>
+              <td>Kegagalan sinkronisasi data ke database master WUADC</td>
+              <td><span class="badge badge-warning">Medium</span></td>
+              <td><span class="badge badge-danger">Tinggi</span></td>
+              <td>Data arsip pengmas tidak tersimpan di WUADC, menyebabkan inkonsistensi laporan eksternal ke DIKTI dan audit trail terputus.</td>
+              <td>Mekanisme retry otomatis (max 3x, exponential backoff). Dead letter queue untuk transaksi gagal. Alert ke Admin LPMB untuk manual intervention. Reconciliation job harian untuk deteksi data gap.</td>
+            </tr>
+            <tr>
+              <td>RSK-04</td>
+              <td>Concurrent submission overload pada H-1 penutupan periode</td>
+              <td><span class="badge badge-danger">High</span></td>
+              <td><span class="badge badge-warning">Sedang</span></td>
+              <td>Spike traffic 5-10x normal load menyebabkan response time degradasi dan potensi request timeout pada proses submit.</td>
+              <td>Auto-scaling infrastructure pada cloud provider. Read replica untuk query non-mutating. Queue-based processing untuk heavy operations. Grace period 2 jam post-deadline untuk draft yang sudah dimulai.</td>
+            </tr>
+            <tr>
+              <td>RSK-05</td>
+              <td>SSO outage pada provider (Cyber Kampus atau Google OAuth)</td>
+              <td><span class="badge badge-primary">Low</span></td>
+              <td><span class="badge badge-danger">Tinggi</span></td>
+              <td>Seluruh pengguna tidak dapat login ke portal, menghentikan seluruh operasional sistem selama durasi outage.</td>
+              <td>Dual SSO provider (Cyber + Google OAuth) sebagai mutual fallback. Session token validity 4 jam (pengguna yang sudah login tidak terdampak). Emergency local auth untuk Admin LPMB. Status page publik untuk komunikasi outage.</td>
+            </tr>
+            <tr>
+              <td>RSK-06</td>
+              <td>Reviewer bottleneck — Akademik/Dekanat lambat merespon</td>
+              <td><span class="badge badge-danger">High</span></td>
+              <td><span class="badge badge-warning">Sedang</span></td>
+              <td>Antrean proposal menumpuk tanpa keputusan review, melebihi SLA 3 hari kerja dan menghambat pelaksanaan kegiatan pengmas.</td>
+              <td>Notifikasi eskalasi bertingkat (hari ke-3, ke-5, ke-7). Dashboard real-time pending queue per reviewer. Laporan mingguan SLA compliance ke pimpinan fakultas. Opsi delegasi review ke staf akademik lain.</td>
+            </tr>
+            <tr>
+              <td>RSK-07</td>
+              <td>Data loss atau korupsi selama migrasi dari sistem lama</td>
+              <td><span class="badge badge-warning">Medium</span></td>
+              <td><span class="badge badge-danger">Tinggi</span></td>
+              <td>Data historis proposal, laporan, dan arsip dari sistem lama hilang atau rusak selama proses migrasi ke portal baru.</td>
+              <td>Migration script dengan dry-run validation. Checksum verification per record. Parallel run (sistem lama + baru) selama 1 bulan. Full backup sebelum migrasi. Rollback plan dengan point-in-time recovery.</td>
+            </tr>
+          </tbody>
+        </table>
+      </div>
+    </div>
+
+    <!-- 6.4 Performance Benchmark -->
+    <div class="section-card" id="perf-benchmark">
+      <h3><span class="section-card-num">6.4.</span> Performance Benchmark Target</h3>
+      <p class="section-card-desc">Target metrik performa yang harus dipenuhi oleh sistem sebelum rilis produksi, divalidasi melalui load testing dan stress testing pada environment staging yang menyerupai produksi. Pengujian menggunakan tool Apache JMeter dan k6 dengan simulasi peak load scenarios.</p>
+      <div class="table-wrapper">
+        <table>
+          <thead>
+            <tr>
+              <th>Metrik Performa</th>
+              <th>Target Value</th>
+              <th>Kondisi Pengujian</th>
+              <th>Threshold Peringatan</th>
+              <th>Threshold Kritis</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr>
+              <td><strong>Page Load Time (First Contentful Paint)</strong></td>
+              <td>&lt; 1.5 detik</td>
+              <td>Koneksi 4G (10 Mbps), halaman dashboard utama</td>
+              <td>&gt; 2.0 detik</td>
+              <td>&gt; 3.0 detik</td>
+            </tr>
+            <tr>
+              <td><strong>API Response Time (READ operations)</strong></td>
+              <td>&lt; 500ms (p95)</td>
+              <td>GET /proposals, GET /proposal/{id} dengan 200 concurrent users</td>
+              <td>&gt; 1.0 detik (p95)</td>
+              <td>&gt; 2.0 detik (p95)</td>
+            </tr>
+            <tr>
+              <td><strong>API Response Time (WRITE operations)</strong></td>
+              <td>&lt; 2.0 detik (p95)</td>
+              <td>POST /proposal (create with files), PUT /review (status change)</td>
+              <td>&gt; 3.0 detik (p95)</td>
+              <td>&gt; 5.0 detik (p95)</td>
+            </tr>
+            <tr>
+              <td><strong>Concurrent Users Supported</strong></td>
+              <td>200 users simultaneous</td>
+              <td>Mixed workload: 60% read, 30% write, 10% upload</td>
+              <td>Error rate &gt; 0.5%</td>
+              <td>Error rate &gt; 2.0%</td>
+            </tr>
+            <tr>
+              <td><strong>File Upload Throughput</strong></td>
+              <td>50 concurrent uploads</td>
+              <td>File 10MB PDF, chunked upload 1MB/chunk</td>
+              <td>Queue wait &gt; 30 detik</td>
+              <td>Queue wait &gt; 120 detik</td>
+            </tr>
+            <tr>
+              <td><strong>WUADC Sync Latency</strong></td>
+              <td>&lt; 5 detik per proposal</td>
+              <td>Full sync: metadata + 5 logbook entries + 3 luaran documents</td>
+              <td>&gt; 10 detik</td>
+              <td>&gt; 30 detik (trigger DLQ)</td>
+            </tr>
+            <tr>
+              <td><strong>Database Query Performance</strong></td>
+              <td>&lt; 100ms (p95)</td>
+              <td>Complex JOIN queries pada tabel PROPOSAL + MEMBER + REVIEW_LOG</td>
+              <td>&gt; 200ms (p95)</td>
+              <td>&gt; 500ms (p95)</td>
+            </tr>
+            <tr>
+              <td><strong>System Availability (Uptime)</strong></td>
+              <td>99.9% (SLA)</td>
+              <td>Measured monthly, excluding planned maintenance windows</td>
+              <td>&lt; 99.5%</td>
+              <td>&lt; 99.0%</td>
             </tr>
           </tbody>
         </table>
@@ -1223,30 +2507,161 @@
     <!-- 7.1 Business Impact -->
     <div class="section-card" id="biz-impact">
       <h3><span class="section-card-num">7.1.</span> Business Impact & ROI Metrics</h3>
-      <p class="section-card-desc">Dampak riil transformasi digital terhadap efisiensi program pengmas LPMB.</p>
+      <p class="section-card-desc">Dampak riil transformasi digital terhadap efisiensi program pengmas LPMB, diukur dengan metrik kuantitatif yang membandingkan kinerja proses manual sebelumnya dengan kinerja portal digital yang telah diimplementasikan.</p>
       <div class="bento-grid">
         <div class="bento-cell">
           <h4>SLA Peninjauan Berkas</h4>
           <p style="font-size: 2.2rem; font-weight: 800; color: var(--accent-teal); line-height: 1;">-85%</p>
-          <p style="font-weight: 600; margin-top: 10px;">Pangkas Birokrasi manual</p>
-          <p>Memangkas alur verifikasi berkas dari semula berminggu-minggu menjadi di bawah 3 hari kerja.</p>
+          <p style="font-weight: 600; margin-top: 10px;">Pangkas Birokrasi Manual</p>
+          <p>Memangkas alur verifikasi berkas dari semula rata-rata 14 hari kerja (2 minggu) menjadi maksimal 3 hari kerja, berkat digitalisasi checklist, notifikasi otomatis, dan eskalasi SLA bertingkat.</p>
         </div>
         <div class="bento-cell">
           <h4>Integrasi Master Arsip</h4>
           <p style="font-size: 2.2rem; font-weight: 800; color: var(--accent-teal); line-height: 1;">100%</p>
           <p style="font-weight: 600; margin-top: 10px;">WUADC Archiving Sync</p>
-          <p>Menjamin arsip pelaporan, logbook, dan berkas luaran pengmas tersimpan otomatis tanpa input ganda manual.</p>
+          <p>Menjamin arsip pelaporan, logbook, dan berkas luaran pengmas tersimpan otomatis secara transaksional ke database master WUADC tanpa input ganda manual — dengan target sync failure rate 0%.</p>
         </div>
         <div class="bento-cell">
           <h4>Paperless Savings</h4>
           <p style="font-size: 2.2rem; font-weight: 800; color: var(--accent-teal); line-height: 1;">100%</p>
-          <p style="font-weight: 600; margin-top: 10px;">Efisiensi Cetak Berkas</p>
-          <p>Menghilangkan pencetakan fisik seluruh berkas proposal, RAB, CV, SP, dan Pakta secara total.</p>
+          <p style="font-weight: 600; margin-top: 10px;">Eliminasi Cetak Berkas</p>
+          <p>Menghilangkan pencetakan fisik seluruh berkas proposal, RAB, CV, SP, dan Pakta secara total — menghemat estimasi 15.000+ lembar kertas per tahun untuk 200+ proposal.</p>
+        </div>
+        <div class="bento-cell">
+          <h4>Error Reduction</h4>
+          <p style="font-size: 2.2rem; font-weight: 800; color: var(--accent-teal); line-height: 1;">-95%</p>
+          <p style="font-weight: 600; margin-top: 10px;">Kesalahan Pengisian Berkas</p>
+          <p>Validasi otomatis real-time (tipe file, ukuran, kelengkapan, format) mengurangi tingkat penolakan berkas karena kesalahan teknis dari 35% menjadi kurang dari 2%.</p>
+        </div>
+        <div class="bento-cell">
+          <h4>Reviewer Throughput</h4>
+          <p style="font-size: 2.2rem; font-weight: 800; color: var(--accent-teal); line-height: 1;">+300%</p>
+          <p style="font-weight: 600; margin-top: 10px;">Kapasitas Review Fakultas</p>
+          <p>Digitalisasi checklist review dan notifikasi proaktif meningkatkan jumlah proposal yang dapat direview per hari oleh Akademik Fakultas dari rata-rata 5 menjadi 20 proposal.</p>
+        </div>
+        <div class="bento-cell">
+          <h4>Compliance Audit</h4>
+          <p style="font-size: 2.2rem; font-weight: 800; color: var(--accent-teal); line-height: 1;">100%</p>
+          <p style="font-weight: 600; margin-top: 10px;">Audit Readiness</p>
+          <p>Immutable audit trail (REVIEW_LOG) dengan retensi 5 tahun memastikan setiap keputusan review dapat dilacak dan diverifikasi kapan saja untuk keperluan audit internal dan akreditasi.</p>
+        </div>
+      </div>
+    </div>
+
+    <!-- 7.2 Before vs After -->
+    <div class="section-card" id="before-after">
+      <h3><span class="section-card-num">7.2.</span> Before vs After Comparison</h3>
+      <p class="section-card-desc">Perbandingan langsung antara proses manual (sistem lama) dan proses digital (portal SIMPPM) di seluruh dimensi operasional, menunjukkan transformasi signifikan yang dicapai melalui implementasi sistem.</p>
+      <div class="table-wrapper">
+        <table>
+          <thead>
+            <tr>
+              <th>Dimensi Operasional</th>
+              <th>Before (Manual / Sistem Lama)</th>
+              <th>After (Portal SIMPPM Digital)</th>
+              <th>Improvement</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr>
+              <td><strong>Waktu Submission Proposal</strong></td>
+              <td>3-5 hari (cetak dokumen, antar fisik ke bagian akademik, revisi manual berulang)</td>
+              <td>30 menit - 2 jam (isi form online, upload file digital, validasi real-time)</td>
+              <td><span class="badge badge-success">-95%</span></td>
+            </tr>
+            <tr>
+              <td><strong>Siklus Review Lengkap</strong></td>
+              <td>14-21 hari kerja (berkas fisik berpindah antar meja, sering hilang/tercecer di tumpukan)</td>
+              <td>3-5 hari kerja (antrean digital, notifikasi otomatis, eskalasi SLA otomatis)</td>
+              <td><span class="badge badge-success">-75%</span></td>
+            </tr>
+            <tr>
+              <td><strong>Penyimpanan Dokumen</strong></td>
+              <td>Arsip fisik di lemari/gudang per fakultas, rentan hilang/rusak, sulit dicari</td>
+              <td>Cloud object storage terenkripsi, searchable, backup otomatis, akses instant</td>
+              <td><span class="badge badge-success">Digital</span></td>
+            </tr>
+            <tr>
+              <td><strong>Traceability / Lacak Jejak</strong></td>
+              <td>Tidak ada. Keputusan review tidak tercatat. Sulit mengetahui siapa melakukan apa dan kapan</td>
+              <td>Immutable audit trail (REVIEW_LOG) untuk setiap aksi, lengkap dengan timestamp dan identitas reviewer</td>
+              <td><span class="badge badge-success">100%</span></td>
+            </tr>
+            <tr>
+              <td><strong>Kecepatan Pelaporan</strong></td>
+              <td>Kompilasi manual per fakultas (2-3 minggu), rawan inkonsistensi data, sulit agregasi</td>
+              <td>Dashboard real-time dengan filter per status/skema/fakultas, export otomatis, data selalu terkini</td>
+              <td><span class="badge badge-success">Real-time</span></td>
+            </tr>
+            <tr>
+              <td><strong>Tingkat Error Berkas</strong></td>
+              <td>35% proposal dikembalikan karena berkas tidak lengkap, format salah, atau dokumen tertukar</td>
+              <td>&lt;2% penolakan teknis berkat validasi otomatis (tipe file, ukuran, kelengkapan) sebelum submit</td>
+              <td><span class="badge badge-success">-95%</span></td>
+            </tr>
+            <tr>
+              <td><strong>Arsip ke WUADC</strong></td>
+              <td>Input manual oleh staf LPMB (1 proposal = 30 menit input), rentan typo, sering tertunda berminggu-minggu</td>
+              <td>Sinkronisasi transaksional otomatis (&lt;5 detik per proposal), zero manual input, retry mechanism</td>
+              <td><span class="badge badge-success">Auto</span></td>
+            </tr>
+            <tr>
+              <td><strong>Notifikasi & Komunikasi</strong></td>
+              <td>WhatsApp/telepon manual, tidak tercatat, sering missed atau terlambat</td>
+              <td>Email + in-app notification otomatis pada setiap transisi status, eskalasi SLA otomatis</td>
+              <td><span class="badge badge-success">Auto</span></td>
+            </tr>
+          </tbody>
+        </table>
+      </div>
+    </div>
+
+    <!-- 7.3 Lessons Learned & Roadmap -->
+    <div class="section-card" id="lessons-roadmap">
+      <h3><span class="section-card-num">7.3.</span> Lessons Learned & Future Roadmap</h3>
+      <p class="section-card-desc">Rangkuman pembelajaran kunci selama proses pengembangan dan implementasi portal SIMPPM, serta rencana pengembangan fitur di fase-fase berikutnya untuk meningkatkan cakupan dan kualitas layanan sistem.</p>
+      
+      <h4 style="margin-bottom: 16px; font-size: 1.1rem; color: var(--text-dark);">📝 Key Lessons Learned</h4>
+      <div class="sticky-grid">
+        <div class="sticky-note sticky-yellow">
+          <h4>Stakeholder Alignment is Critical</h4>
+          <p>Proses review berjenjang melibatkan 5+ aktor dengan kepentingan berbeda. Workshop alignment di awal proyek dengan seluruh stakeholder (Akademik, Dekanat, LPMB) sangat krusial untuk menyepakati flow dan SLA sebelum development dimulai.</p>
+        </div>
+        <div class="sticky-note sticky-blue">
+          <h4>API Integration Resilience</h4>
+          <p>Ketergantungan pada API Cyber Kampus yang tidak selalu stabil mengajarkan pentingnya desain fallback mechanism dari awal (cache, degraded mode, manual override) — bukan sebagai afterthought.</p>
+        </div>
+        <div class="sticky-note sticky-green">
+          <h4>User Training is Underestimated</h4>
+          <p>Banyak dosen senior yang tidak terbiasa dengan workflow digital. Investasi di video tutorial, tooltips kontekstual, dan sesi pelatihan per fakultas terbukti krusial untuk meningkatkan adoption rate dari 60% menjadi 95%.</p>
+        </div>
+        <div class="sticky-note sticky-rose">
+          <h4>Deadline-Driven Peak Load</h4>
+          <p>80% submission terjadi di 3 hari terakhir periode. Capacity planning dan load testing harus mensimulasikan peak scenario ini, bukan average load. Auto-scaling dan grace period terbukti menjadi fitur penyelamat.</p>
+        </div>
+      </div>
+
+      <h4 style="margin: 30px 0 16px; font-size: 1.1rem; color: var(--text-dark);">🚀 Future Roadmap</h4>
+      <div class="sticky-grid">
+        <div class="sticky-note sticky-purple">
+          <h4>📱 Mobile App (Phase 2)</h4>
+          <p>Pengembangan aplikasi mobile (React Native / Flutter) untuk memudahkan Dosen Ketua mengisi logbook di lapangan dengan fitur kamera langsung untuk dokumentasi kegiatan, GPS tagging lokasi, dan offline sync capability.</p>
+        </div>
+        <div class="sticky-note sticky-blue">
+          <h4>🤖 AI-Powered Plagiarism Check</h4>
+          <p>Integrasi tool pengecekan plagiarisme otomatis pada proposal yang di-submit, menggunakan engine Turnitin API atau solusi open-source iThenticate, untuk memastikan orisinalitas konten sebelum review substansi dimulai.</p>
+        </div>
+        <div class="sticky-note sticky-green">
+          <h4>🔗 Integrasi SINTA</h4>
+          <p>Sinkronisasi profil penelitian dosen dengan database SINTA (Science and Technology Index) untuk auto-populate CV dan track record pengabdian sebelumnya, serta validasi H-Index dan jumlah publikasi sebagai kriteria kelayakan pengusul.</p>
+        </div>
+        <div class="sticky-note sticky-yellow">
+          <h4>💰 Automated RAB Validation</h4>
+          <p>Implementasi rule engine untuk validasi otomatis Rencana Anggaran Biaya (RAB) terhadap standar biaya umum (SBU) universitas — mendeteksi item yang melebihi pagu, komponen yang tidak eligible, dan proporsi anggaran yang tidak seimbang.</p>
         </div>
       </div>
     </div>
   </div>
-    
 
   <div class="workspace-footer">
     <p>&copy; 2026 Fitria Indah Novitasari. All Rights Reserved. Portfolio Canvas Workspace.</p>
