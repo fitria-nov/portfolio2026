@@ -1239,6 +1239,38 @@
   And Sistem mengirim email konfirmasi arsip ke Dosen Ketua dan Admin LPMB
   And Jika sinkronisasi gagal, sistem melakukan retry max 3x dengan exponential backoff
   # Mapped to: FR-10, UAT-L06</pre>
+
+    <div style="margin-top: 30px; border-top: 1px dashed var(--border-color); padding-top: 25px;">
+      <h4 style="font-size: 1.1rem; color: var(--accent-amber); margin-bottom: 12px; display: flex; align-items: center; gap: 8px;">
+        <svg style="width: 20px; height: 20px; fill: currentColor;" viewBox="0 0 24 24"><path d="M11.5 2C17.3 2 22 6.7 22 12.5S17.3 23 11.5 23 1 18.3 1 12.5 5.7 2 11.5 2m0 2C6.8 4 3 7.8 3 12.5S6.8 21 11.5 21 20 17.2 20 12.5 16.2 4 11.5 4m-1 5h2v6h-2V9m0 8h2v2h-2v-2z"/></svg>
+        Jira User Story Representation (Agile Framework)
+      </h4>
+      <p class="section-card-desc" style="margin-bottom: 15px;">Representasi pemecahan kebutuhan bisnis menjadi tiket Jira User Story formal dengan standar industri yang siap dikerjakan oleh tim pengembang (Sprint-ready).</p>
+      <div style="background: #f8fafc; border: 1px solid var(--border-color); border-radius: 12px; padding: 24px; font-size: 0.9rem;">
+        <div style="display: grid; grid-template-columns: 150px 1fr; gap: 10px; margin-bottom: 15px;">
+          <div><strong>Ticket Key:</strong></div>
+          <div><code style="background: #fef3c7; color: #b45309; padding: 2px 6px; border-radius: 4px; font-weight: bold; font-family: 'JetBrains Mono';">SIM-1042</code></div>
+          <div><strong>Summary:</strong></div>
+          <div style="font-weight: 600; color: var(--text-dark);">Implementasi Validasi Kelengkapan Dokumen Prasyarat Pengajuan Proposal di SIMPPM Portal</div>
+          <div><strong>Epic Link:</strong></div>
+          <div><code style="background: #f1f5f9; padding: 2px 6px; border-radius: 4px; font-family: 'JetBrains Mono';">Proposal Submission Lifecycle (SIM-EPIC-01)</code></div>
+          <div><strong>User Story:</strong></div>
+          <div style="font-style: italic; color: #475569; background: #ffffff; border-left: 4px solid var(--accent-amber); padding: 8px 12px; border-radius: 0 8px 8px 0;">
+            "Sebagai Dosen Ketua Pengusul, saya ingin sistem memvalidasi kelengkapan berkas prasyarat (Proposal, RAB, CV, SP, dan Pakta) secara real-time sebelum saya men-submit proposal, sehingga saya dapat mengoreksi berkas yang kurang sebelum masuk ke antrean review fakultas dan menghindari penolakan administratif langsung."
+          </div>
+        </div>
+        
+        <div style="margin-top: 15px;">
+          <strong style="display: block; margin-bottom: 8px; color: var(--text-dark);">Acceptance Criteria (Jira AC):</strong>
+          <ol style="padding-left: 20px; line-height: 1.6; color: var(--text-muted); display: flex; flex-direction: column; gap: 6px;">
+            <li><strong>AC 1 - Deteksi Berkas Wajib:</strong> Tombol "Upload Berkas dan Submit" harus terkunci (disabled) secara otomatis selama salah satu dari 5 dokumen wajib (kecuali RAB untuk skema Mandiri) belum terunggah dengan sempurna.</li>
+            <li><strong>AC 2 - Validasi Format & Ukuran:</strong> Sistem hanya boleh menerima ekstensi berkas (.pdf, .doc, .docx) dengan batas ukuran maksimum masing-masing berkas adalah 10 MB.</li>
+            <li><strong>AC 3 - Feedback Validasi:</strong> Jika dosen mencoba mengeklik tombol kirim saat berkas tidak lengkap, sistem harus memicu in-app tooltip berwarna kuning yang menyoroti komponen berkas spesifik mana yang masih kosong.</li>
+            <li><strong>AC 4 - State Persistensi:</strong> Jika kondisi validasi gagal, status usulan proposal harus dipastikan tetap berada di state <code>DRAFT</code> di database lokal, tanpa memicu alur workflow persetujuan berjenjang fakultas.</li>
+          </ol>
+        </div>
+      </div>
+    </div>
     </div>
   </div>
 

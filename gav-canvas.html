@@ -1128,6 +1128,38 @@
   And Sistem berhasil memperbarui jumlah stok material di SAP MM menjadi 7 unit
   And Sistem merilis status logistik PO menjadi COMPLETED</pre>
         </div>
+
+        <div style="margin-top: 30px; border-top: 1px dashed var(--border-color); padding-top: 25px;">
+          <h4 style="font-size: 1.1rem; color: var(--accent-indigo); margin-bottom: 12px; display: flex; align-items: center; gap: 8px;">
+            <svg style="width: 20px; height: 20px; fill: currentColor;" viewBox="0 0 24 24"><path d="M11.5 2C17.3 2 22 6.7 22 12.5S17.3 23 11.5 23 1 18.3 1 12.5 5.7 2 11.5 2m0 2C6.8 4 3 7.8 3 12.5S6.8 21 11.5 21 20 17.2 20 12.5 16.2 4 11.5 4m-1 5h2v6h-2V9m0 8h2v2h-2v-2z"/></svg>
+            Jira User Story Representation (Agile Framework)
+          </h4>
+          <p class="section-card-desc" style="margin-bottom: 15px;">Representasi pemecahan kebutuhan bisnis menjadi tiket Jira User Story formal dengan standar industri yang siap dikerjakan oleh tim pengembang (Sprint-ready).</p>
+          <div style="background: #f8fafc; border: 1px solid var(--border-color); border-radius: 12px; padding: 24px; font-size: 0.9rem;">
+            <div style="display: grid; grid-template-columns: 150px 1fr; gap: 10px; margin-bottom: 15px;">
+              <div><strong>Ticket Key:</strong></div>
+              <div><code style="background: #e0e7ff; color: #4338ca; padding: 2px 6px; border-radius: 4px; font-weight: bold; font-family: 'JetBrains Mono';">SP-2401</code></div>
+              <div><strong>Summary:</strong></div>
+              <div style="font-weight: 600; color: var(--text-dark);">Implementasi Hard-Block Pengecekan Budget Real-time via SAP FI-FM di Portal SmartProcure</div>
+              <div><strong>Epic Link:</strong></div>
+              <div><code style="background: #f1f5f9; padding: 2px 6px; border-radius: 4px; font-family: 'JetBrains Mono';">MRO Budget Integration (SP-EPIC-03)</code></div>
+              <div><strong>User Story:</strong></div>
+              <div style="font-style: italic; color: #475569; background: #ffffff; border-left: 4px solid var(--accent-indigo); padding: 8px 12px; border-radius: 0 8px 8px 0;">
+                "Sebagai Mekanik Hangar, saya ingin sistem secara otomatis mengunci dan memvalidasi anggaran Purchase Requisition (PR) terhadap sisa budget di SAP FI-FM saat mengirim formulir pengajuan, sehingga saya dapat segera mengetahui kelayakan pengajuan MRO tanpa menunggu kompilasi mingguan tim finance."
+              </div>
+            </div>
+            
+            <div style="margin-top: 15px;">
+              <strong style="display: block; margin-bottom: 8px; color: var(--text-dark);">Acceptance Criteria (Jira AC):</strong>
+              <ol style="padding-left: 20px; line-height: 1.6; color: var(--text-muted); display: flex; flex-direction: column; gap: 6px;">
+                <li><strong>AC 1 - Autentikasi & Konektivitas:</strong> Sistem harus mendeteksi NIDN/NIM dan login SSO mekanik, lalu mengirim request payload validasi budget ke endpoint Kong API Gateway <code>POST /api/v1/budget/check</code>.</li>
+                <li><strong>AC 2 - Validasi Ambang Batas (Limit):</strong> Apabila nominal draf PR melebihi sisa pagu anggaran Cost Center yang dikembalikan oleh fungsi SAP RFC <code>RFC_READ_FM_BUDGET</code>, sistem wajib mengunci tombol "Kirim Pengajuan" (disable submit).</li>
+                <li><strong>AC 3 - Umpan Balik Pengguna (Feedback):</strong> Sistem harus menampilkan modal popup merah dengan pesan: <em>"Transaksi Dihentikan: Anggaran Kurang Sebesar [Selisih_Nilai]"</em> lengkap dengan tombol opsi "Kembali ke Draft" atau "Minta Revisi Anggaran".</li>
+                <li><strong>AC 4 - State Persistensi:</strong> Status transaksi PR di database portal lokal harus langsung disetel ke <code>BUDGET_REJECTED</code> dan entri log audit dicatat ke tabel <code>APPROVAL_LOGS</code> secara immutable.</li>
+              </ol>
+            </div>
+          </div>
+        </div>
       </div>
     </div>
   </div>
